@@ -1,0 +1,29 @@
+name: Weekly HTML security scout
+
+on:
+  schedule:
+    - cron: "17 13 * * 1"
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: Days of reviewed advisories to inspect
+        required: false
+        default: "30"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Find new HTML security candidates and open a triage issue
+        run: node scripts/security-scout.mjs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          LOOKBACK_DAYS: ${{ inputs.lookback_days || '30' }}
