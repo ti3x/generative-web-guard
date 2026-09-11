@@ -1,0 +1,18 @@
+name = "guard"
+defaultTargets = ["guard"]
+
+[[lean_lib]]
+name = "Guard"
+
+# Compile-time and executable checks. Not a default target, so `lake build`
+# and `lake build Guard` (Docker, Wasm) are unaffected.
+[[lean_lib]]
+name = "Tests"
+
+[[lean_exe]]
+name = "guard"
+root = "Main"
+
+[[lean_exe]]
+name = "guard-tests"
+root = "Tests.Main"
