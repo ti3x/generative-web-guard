@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "RT-EXEC-001",
+      "title": "mixed-case script URL and event handler",
+      "source": { "kind": "OWASP", "url": "https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html", "reviewedAt": "2026-09-11" },
+      "rules": ["R-EXEC-SCRIPT", "R-EXEC-HANDLER", "R-RES-URL-ATTR"],
+      "html": "<p onmouseover=alert(1)>kept</p><IMG SRC=JaVaScRiPt:alert(1)><script>alert(1)</script>",
+      "mustKeepText": ["kept"]
+    },
+    {
+      "id": "RT-NS-001",
+      "title": "MathML and nested form namespace mutation",
+      "source": { "kind": "CVE", "url": "https://github.com/advisories/GHSA-63q7-h895-m982", "reviewedAt": "2026-09-11" },
+      "cves": ["CVE-2020-26870"],
+      "rules": ["R-NS-MATHML", "R-NAV-FORM"],
+      "html": "<p>before</p><form><math><mtext></form><form><mglyph><style></math><img src=x onerror=alert(1)>",
+      "mustKeepText": ["before"]
+    },
+    {
+      "id": "RT-NS-002",
+      "title": "SVG foreignObject integration point",
+      "source": { "kind": "research", "url": "https://html.spec.whatwg.org/multipage/parsing.html#tree-construction", "reviewedAt": "2026-09-11" },
+      "rules": ["R-NS-POSITION", "R-RES-ELEMENT", "R-EXEC-HANDLER"],
+      "html": "<svg><foreignObject><img src=https://attacker.invalid/x onerror=alert(1)></foreignObject><text>safe</text></svg>",
+      "mustKeepText": ["safe"]
+    },
+    {
+      "id": "RT-RCDATA-001",
+      "title": "noscript attribute-boundary reconstruction",
+      "source": { "kind": "regression", "url": "https://github.com/cure53/DOMPurify/security/advisories", "reviewedAt": "2026-09-11" },
+      "rules": ["R-RCDATA-RAWTEXT", "R-RCDATA-NO-REPARSE"],
+      "html": "<noscript><p title=\"</noscript><img src=x onerror=alert(1)>\">ignored</p><p>visible</p>",
+      "mustKeepText": ["visible"]
+    },
+    {
+      "id": "RT-SVG-001",
+      "title": "SVG animation and external references",
+      "source": { "kind": "OWASP", "url": "https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html", "reviewedAt": "2026-09-11" },
+      "rules": ["R-RES-SVG-REF", "R-EXEC-HANDLER"],
+      "html": "<svg onload=alert(1)><use href=https://attacker.invalid/a.svg#x></use><animate onbegin=alert(1) attributeName=x></animate><text>chart</text></svg>",
+      "mustKeepText": ["chart"]
+    },
+    {
+      "id": "RT-CLOBBER-001",
+      "title": "DOM clobbering and prototype-shaped attributes",
+      "source": { "kind": "CVE", "url": "https://github.com/advisories/GHSA-p3vf-v8qc-cwcr", "reviewedAt": "2026-09-11" },
+      "cves": ["CVE-2024-48910"],
+      "rules": ["R-CLOBBER-ID-PREFIX", "R-CLOBBER-ATTR-KEYS"],
+      "html": "<div id=__proto__ name=constructor constructor=x prototype=y>content</div>",
+      "mustKeepText": ["content"]
+    },
+    {
+      "id": "RT-STYLE-001",
+      "title": "CSS URL and expression surfaces",
+      "source": { "kind": "OWASP", "url": "https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html", "reviewedAt": "2026-09-11" },
+      "rules": ["R-STYLE-ELEMENT", "R-STYLE-INLINE", "R-VAL-COLOR"],
+      "html": "<style>@import 'https://attacker.invalid/x'</style><div style=\"background:url(https://attacker.invalid/x)\">safe</div><svg><rect fill=\"url(#x)\" stroke=\"expression(alert(1))\"></rect></svg>",
+      "mustKeepText": ["safe"]
+    },
+    {
+      "id": "RT-NAV-001",
+      "title": "credential form and top-level navigation",
+      "source": { "kind": "threat-model", "url": "https://html.spec.whatwg.org/multipage/forms.html", "reviewedAt": "2026-09-11" },
+      "rules": ["R-NAV-ANCHOR", "R-NAV-FORM", "R-CTRL-INPUT-TYPE", "R-CTRL-AUTOCOMPLETE"],
+      "html": "<a href=https://attacker.invalid target=_top>continue</a><form action=https://attacker.invalid><input type=password autocomplete=current-password><button formaction=https://attacker.invalid>submit</button></form>",
+      "mustKeepText": ["continue", "submit"]
+    },
+    {
+      "id": "RT-TEMPLATE-001",
+      "title": "template content containing active markup",
+      "source": { "kind": "CVE", "url": "https://github.com/advisories/GHSA-vhxf-7vqr-mrjg", "reviewedAt": "2026-09-11" },
+      "cves": ["CVE-2025-26791"],
+      "rules": ["R-RCDATA-TEMPLATE", "R-EXEC-SCRIPT"],
+      "html": "<template><script>alert(1)</script><img src=x onerror=alert(1)></template><p>outside</p>",
+      "mustKeepText": ["outside"]
+    },
+    {
+      "id": "RT-MALFORMED-001",
+      "title": "misnested tags and breakout-looking text",
+      "source": { "kind": "parser-regression", "url": "https://html.spec.whatwg.org/multipage/parsing.html", "reviewedAt": "2026-09-11" },
+      "rules": ["R-RCDATA-NO-REPARSE", "R-EXEC-SCRIPT"],
+      "html": "<p><b>one</p></b><div title=\"</div><script>alert(1)</script>\">two</div>",
+      "mustKeepText": ["one", "two"]
+    }
+  ]
+}

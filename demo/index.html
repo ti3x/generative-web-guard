@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Generative Web Guard demo</title>
+<link rel="stylesheet" href="/demo/host.css">
+</head>
+<body>
+<header class="host-bar">
+  <strong>Trusted host</strong>
+  <a href="/demo/showcase.html">Attack showcase</a>
+  <span id="status" class="status" role="status">idle</span>
+  <span id="requests" class="status">network requests attributable to content: 0 (see devtools)</span>
+</header>
+<main class="layout">
+  <section class="inputs">
+    <label for="html">Generated HTML (initial document)</label>
+    <textarea id="html" spellcheck="false"></textarea>
+    <label for="js">Generated JavaScript (initialState / update / view)</label>
+    <textarea id="js" spellcheck="false"></textarea>
+    <div class="controls">
+      <button id="run" type="button">Validate and run</button>
+      <button id="attack" type="button">Load attack sample</button>
+      <button id="benign" type="button">Load benign sample</button>
+    </div>
+    <details open>
+      <summary>Validation report</summary>
+      <pre id="report"></pre>
+    </details>
+  </section>
+  <section class="output">
+    <div class="frame-label">Sandboxed null-origin frame (allow-scripts only, CSP default-src 'none')</div>
+    <div id="frame-container" class="frame-container"></div>
+  </section>
+</main>
+<script type="module" src="/dist/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generative Web Guard attack showcase</title>
+<link rel="stylesheet" href="/demo/showcase.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <p class="eyebrow">Generative Web Guard</p>
+    <h1>Attack showcase</h1>
+    <p class="lede">Hostile markup goes through the tree policy, then only the reconstructed tree reaches a null-origin sandbox.</p>
+  </div>
+  <a href="/">Open the editor demo</a>
+</header>
+
+<main>
+  <nav id="cases" class="case-list" aria-label="Attack scenarios"></nav>
+
+  <section class="workspace">
+    <div class="scenario-heading">
+      <div>
+        <p id="case-category" class="eyebrow"></p>
+        <h2 id="case-title"></h2>
+        <p id="case-summary"></p>
+      </div>
+      <div id="verdict" class="verdict" role="status">Waiting</div>
+    </div>
+
+    <div class="comparison">
+      <article class="panel source-panel">
+        <div class="panel-heading">
+          <h3>Untrusted model output</h3>
+          <span>never rendered directly</span>
+        </div>
+        <pre id="source"></pre>
+      </article>
+
+      <article class="panel result-panel">
+        <div class="panel-heading">
+          <h3>Guarded result</h3>
+          <span>null-origin iframe</span>
+        </div>
+        <div id="frame-container" class="frame-container"></div>
+      </article>
+    </div>
+
+    <article class="panel report-panel">
+      <div class="panel-heading">
+        <h3>Policy decisions</h3>
+        <span id="change-count"></span>
+      </div>
+      <ol id="report"></ol>
+    </article>
+
+    <article class="panel filtered-panel">
+      <div class="panel-heading">
+        <h3>Filtered HTML</h3>
+        <span>serialized for inspection only; rendering uses the tree above</span>
+      </div>
+      <pre id="filtered-html"></pre>
+    </article>
+  </section>
+</main>
+
+<script type="module" src="/dist/showcase.js"></script>
+</body>
+</html>

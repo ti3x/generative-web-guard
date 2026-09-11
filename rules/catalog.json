@@ -1,0 +1,1186 @@
+{
+  "version": 1,
+  "description": "Single source of truth for the security rules enforced by the policy (JavaScript and Lean), the runtime, the frame and the renderer. scripts/gen-rules.mjs generates src/rules.js and lean/Guard/Rules.lean from this file. Every change record the checkers emit cites one of these ids; every BDD scenario is tagged with at least one.",
+  "classes": {
+    "execution": "Generated content cannot execute script in any browser realm",
+    "resource-load": "Generated content cannot cause a network request",
+    "navigation": "Generated content cannot navigate or submit",
+    "namespace": "Foreign content (SVG, MathML) cannot change how markup is interpreted",
+    "rcdata": "Raw-text and template contexts cannot smuggle markup; nothing is re-parsed",
+    "attribute": "Only allowlisted attribute names survive",
+    "style": "No generated CSS reaches the browser",
+    "clobbering": "Generated names cannot shadow host or frame identifiers, or pollute prototypes",
+    "limits": "Structural limits reject rather than truncate",
+    "controls": "Form controls cannot steal focus or trigger browser autofill",
+    "text": "Text cannot carry control or bidi characters",
+    "values": "Attribute values conform to closed grammars",
+    "structure": "Only allowlisted elements survive; non-element nodes are dropped",
+    "runtime": "Generated JavaScript runs isolated with bounded resources",
+    "gate": "Unsupported programs are rejected with diagnostics before execution",
+    "frame": "The rendering frame accepts only validated trees and well-typed messages",
+    "renderer": "The renderer builds DOM from the tree with constructors only"
+  },
+  "rules": [
+    {
+      "id": "R-EXEC-SCRIPT",
+      "class": "execution",
+      "severity": "critical",
+      "title": "Script and SVG animation elements are removed with their content",
+      "statement": "Given a script, animate, set, animateTransform, animateMotion or discard element in any namespace, the element and its subtree are absent from the validated tree.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop",
+        "csp:script-src",
+        "frame:sinks"
+      ],
+      "cites": [
+        "src/policy.js#HTML_DROP_RULES",
+        "src/policy.js#SVG_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlDropRules",
+        "lean/Guard/Policy/Tables/Svg.lean#svgDropRules"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2022-32209",
+          "url": "https://github.com/advisories/GHSA-pg8v-g4xq-hww9",
+          "note": "rails-html-sanitizer < 1.4.3: allowing both select and style lets script through",
+          "config": "select and style allowed",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-EXEC-HANDLER",
+      "class": "execution",
+      "severity": "critical",
+      "title": "Event handler attributes are removed",
+      "statement": "Given any attribute whose name starts with \"on\", the attribute is absent from the validated tree.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "csp:script-src",
+        "renderer:refuse"
+      ],
+      "cites": [
+        "src/policy.js#dropRuleFor",
+        "lean/Guard/Policy/Tables/Attrs.lean#dropRuleFor",
+        "src/render.js#REFUSED_ATTR_RE"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "writeup",
+          "url": "https://cheatsheetseries.owasp.org/cheatsheets/XSS_Filter_Evasion_Cheat_Sheet.html",
+          "note": "OWASP XSS filter evasion: onerror, onload, onmouseover, ontoggle, onfocus vectors"
+        }
+      ]
+    },
+    {
+      "id": "R-RES-ELEMENT",
+      "class": "resource-load",
+      "severity": "high",
+      "title": "Elements that load or embed external resources are removed",
+      "statement": "Given iframe, frame, frameset, object, embed, applet, portal, link, meta, base, img, picture, source, video, audio or track, the element and its subtree are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop",
+        "csp:default-src",
+        "frame:sandbox"
+      ],
+      "cites": [
+        "src/policy.js#HTML_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlDropRules"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RES-SVG-REF",
+      "class": "resource-load",
+      "severity": "high",
+      "title": "SVG elements that reference resources are removed",
+      "statement": "Given image, use, feImage, textPath, pattern, filter, mask, marker, clipPath, linearGradient or radialGradient inside SVG, the element and its subtree are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop",
+        "csp:default-src"
+      ],
+      "cites": [
+        "src/policy.js#SVG_DROP_RULES",
+        "lean/Guard/Policy/Tables/Svg.lean#svgDropRules"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RES-URL-ATTR",
+      "class": "resource-load",
+      "severity": "critical",
+      "title": "URL-valued attributes are removed",
+      "statement": "Given src, srcset, href, xlink:href, poster, data, code, background, ping, formaction, action, content, http-equiv, longdesc, cite or manifest on any element, the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "csp:default-src",
+        "renderer:refuse"
+      ],
+      "cites": [
+        "src/policy.js#ATTR_DROP_RULES",
+        "lean/Guard/Policy/Tables/Attrs.lean#attrDropRules",
+        "src/render.js#REFUSED_ATTR_RE"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2018-8048",
+          "url": "https://github.com/advisories/GHSA-x7rv-cr6v-4vm4",
+          "note": "Loofah < 2.2.1: non-allowlisted attributes survived crafted fragments because libxml2 failed to escape comments inside attributes on re-serialization",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-NAV-ANCHOR",
+      "class": "navigation",
+      "severity": "high",
+      "title": "Anchors are unwrapped in HTML and removed in SVG",
+      "statement": "Given an a element, in HTML its children are kept and the element removed; in SVG the element and its subtree are removed. No href survives anywhere.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-unwrap",
+        "policy:element-drop",
+        "frame:sandbox"
+      ],
+      "cites": [
+        "src/policy.js#HTML_UNWRAP",
+        "src/policy.js#SVG_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlUnwrap",
+        "lean/Guard/Policy/Tables/Svg.lean#svgDropRules"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-NAV-FORM",
+      "class": "navigation",
+      "severity": "high",
+      "title": "Forms are unwrapped",
+      "statement": "Given a form element, its children are kept and the element removed; action, method and target are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-unwrap",
+        "csp:form-action",
+        "frame:sandbox"
+      ],
+      "cites": [
+        "src/policy.js#HTML_UNWRAP",
+        "lean/Guard/Policy/Tables/Html.lean#htmlUnwrap"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2020-26870",
+          "url": "https://github.com/advisories/GHSA-63q7-h895-m982",
+          "note": "DOMPurify < 2.0.17: serialize-parse roundtrip changed namespace from HTML to MathML, demonstrated with nested form elements",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-NS-MATHML",
+      "class": "namespace",
+      "severity": "critical",
+      "title": "MathML and unknown namespaces are removed with their content",
+      "statement": "Given an element whose namespace is neither HTML nor SVG, the element and its subtree are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:namespace"
+      ],
+      "cites": [
+        "src/policy.js#checkChildren",
+        "lean/Guard/Policy/Check.lean#checkChildren"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2020-26870",
+          "url": "https://github.com/advisories/GHSA-63q7-h895-m982",
+          "note": "DOMPurify < 2.0.17 mutation XSS via HTML to MathML namespace change",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2021-23980",
+          "url": "https://github.com/advisories/GHSA-vv2x-vrpj-qqpq",
+          "note": "bleach < 3.3.0: p or br plus svg or math plus an RCDATA tag with strip_comments=False",
+          "config": "p/br, svg/math and an RCDATA tag allowed; strip_comments=False",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-53988",
+          "url": "https://github.com/advisories/GHSA-cfjx-w229-hgx5",
+          "note": "rails-html-sanitizer 1.6.0 with Rails >= 7.1: math, mtext, table and style allowed plus mglyph or malignmark",
+          "verified": "2026-09-09",
+          "config": "math, mtext, table, style and mglyph or malignmark allowed"
+        }
+      ]
+    },
+    {
+      "id": "R-NS-POSITION",
+      "class": "namespace",
+      "severity": "critical",
+      "title": "Elements out of namespace position are removed",
+      "statement": "Given HTML inside SVG (integration points desc, title, foreignObject), SVG outside an svg root, or any element under title or desc, the offending element and its subtree are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:namespace",
+        "policy:text-only-context",
+        "policy:element-drop"
+      ],
+      "cites": [
+        "src/policy.js#checkChildren",
+        "lean/Guard/Policy/Check.lean#checkChildren",
+        "src/policy.js#SVG_DROP_RULES"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2019-16728",
+          "url": "https://github.com/advisories/GHSA-chqj-j4fh-rw7m",
+          "note": "DOMPurify < 2.0.1: innerHTML mutation XSS for an SVG or MATH element",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2020-6816",
+          "url": "https://github.com/advisories/GHSA-m6xf-fq7q-8743",
+          "note": "bleach < 3.1.2: svg or math plus an RCDATA tag allowed with strip=False",
+          "config": "svg/math and an RCDATA tag allowed; strip=False",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-53985",
+          "url": "https://github.com/advisories/GHSA-w8gc-x259-rc7x",
+          "note": "rails-html-sanitizer 1.6.0 with Rails >= 7.1 and older Nokogiri: math+style or svg+style allowed",
+          "verified": "2026-09-09",
+          "config": "math and style, or svg and style, allowed"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-53986",
+          "url": "https://github.com/advisories/GHSA-638j-pmjw-jq48",
+          "note": "rails-html-sanitizer 1.6.0 with Rails >= 7.1: math and style both allowed",
+          "verified": "2026-09-09",
+          "config": "math and style allowed"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-53987",
+          "url": "https://github.com/advisories/GHSA-2x5m-9ch4-qgrr",
+          "note": "rails-html-sanitizer 1.6.0 with Rails >= 7.1: style allowed while svg or math is not",
+          "verified": "2026-09-09",
+          "config": "style allowed; svg or math not allowed"
+        }
+      ]
+    },
+    {
+      "id": "R-RCDATA-RAWTEXT",
+      "class": "rcdata",
+      "severity": "critical",
+      "title": "Raw-text elements are removed with their content",
+      "statement": "Given noscript, xmp, noembed, noframes, plaintext or an HTML title element, the element and its content are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop"
+      ],
+      "cites": [
+        "src/policy.js#HTML_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlDropRules"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2020-6802",
+          "url": "https://github.com/advisories/GHSA-q65m-pv3f-wr5r",
+          "note": "bleach < 3.1.1: noscript plus a raw-text tag in the allowed tags",
+          "config": "noscript and a raw-text tag allowed",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-53989",
+          "url": "https://github.com/advisories/GHSA-rxv5-gxqc-xx8g",
+          "note": "rails-html-sanitizer 1.6.0 with Rails >= 7.1: noscript explicitly allowed",
+          "verified": "2026-09-09",
+          "config": "noscript allowed"
+        }
+      ]
+    },
+    {
+      "id": "R-RCDATA-TEMPLATE",
+      "class": "rcdata",
+      "severity": "high",
+      "title": "Template elements and their content are removed",
+      "statement": "Given a template element, the parser adapter surfaces its content and the policy drops the element and everything inside it.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "adapter:template-content",
+        "policy:element-drop"
+      ],
+      "cites": [
+        "src/adapters/parse5.js",
+        "src/adapters/dom.js",
+        "src/policy.js#HTML_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlDropRules"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2025-26791",
+          "url": "https://github.com/advisories/GHSA-vhxf-7vqr-mrjg",
+          "note": "DOMPurify < 3.2.4: incorrect template-literal regular expression leading to mXSS",
+          "config": "SAFE_FOR_TEMPLATES",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-RCDATA-NO-REPARSE",
+      "class": "rcdata",
+      "severity": "critical",
+      "title": "Validated output is never serialized and re-parsed",
+      "statement": "Given content in textarea, title or desc, it becomes text nodes in the structured tree; the renderer builds DOM from the tree with constructors, so no serialize-parse round trip exists.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "tree:structured",
+        "renderer:constructors"
+      ],
+      "cites": [],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2019-16728",
+          "url": "https://github.com/advisories/GHSA-chqj-j4fh-rw7m",
+          "note": "DOMPurify < 2.0.1 mXSS: <svg></p><style><a id=\"</style><img src=1 onerror=alert(1)>\">",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2018-8048",
+          "url": "https://github.com/advisories/GHSA-x7rv-cr6v-4vm4",
+          "note": "Loofah < 2.2.1: re-serialization by libxml2 left comments unescaped inside attributes",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-ATTR-ALLOWLIST",
+      "class": "attribute",
+      "severity": "high",
+      "title": "Attributes not in the element or global table are removed",
+      "statement": "Given an attribute whose name is not in the element's table or the namespace's global table, the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop"
+      ],
+      "cites": [
+        "src/policy.js#checkAttrs",
+        "lean/Guard/Policy/Check.lean#checkAttrs"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-ATTR-NAMESPACED",
+      "class": "attribute",
+      "severity": "high",
+      "title": "Namespaced attributes are removed",
+      "statement": "Given an attribute whose name contains a colon, such as xlink:href or xmlns:x, the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "renderer:refuse"
+      ],
+      "cites": [
+        "src/policy.js#dropRuleFor",
+        "lean/Guard/Policy/Tables/Attrs.lean#dropRuleFor"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-STYLE-ELEMENT",
+      "class": "style",
+      "severity": "critical",
+      "title": "Style elements are removed with their content",
+      "statement": "Given a style element in HTML or SVG, the element and its content are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop",
+        "csp:style-src"
+      ],
+      "cites": [
+        "src/policy.js#HTML_DROP_RULES",
+        "src/policy.js#SVG_DROP_RULES",
+        "lean/Guard/Policy/Tables/Html.lean#htmlDropRules",
+        "lean/Guard/Policy/Tables/Svg.lean#svgDropRules"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2022-32209",
+          "url": "https://github.com/advisories/GHSA-pg8v-g4xq-hww9",
+          "note": "rails-html-sanitizer < 1.4.3: select + style",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2019-16728",
+          "url": "https://github.com/advisories/GHSA-chqj-j4fh-rw7m",
+          "note": "DOMPurify < 2.0.1: style inside svg used as mXSS pivot",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-STYLE-INLINE",
+      "class": "style",
+      "severity": "high",
+      "title": "Style attributes are removed and never parsed",
+      "statement": "Given a style attribute on any element, the attribute is absent; the policy never parses CSS.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "csp:style-src",
+        "renderer:refuse"
+      ],
+      "cites": [
+        "src/policy.js#ATTR_DROP_RULES",
+        "lean/Guard/Policy/Tables/Attrs.lean#attrDropRules",
+        "src/render.js#REFUSED_ATTR_RE"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2020-6817",
+          "url": "https://github.com/advisories/GHSA-vqhp-cxgc-6wmm",
+          "note": "bleach < 3.1.4: regular expression denial of service in style attribute parsing; this policy never parses style",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-STYLE-CLASS",
+      "class": "style",
+      "severity": "medium",
+      "title": "Class names are restricted to the bundled stylesheet",
+      "statement": "Given a class attribute, only tokens present in the bundled stylesheet's class list survive; an attribute with no surviving token is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value",
+        "build:class-allowlist"
+      ],
+      "cites": [
+        "src/policy.js#classValue",
+        "lean/Guard/Validators/Ident.lean#classValue",
+        "scripts/build.mjs"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-CLOBBER-ID-PREFIX",
+      "class": "clobbering",
+      "severity": "high",
+      "title": "Ids are identifier-shaped and prefixed",
+      "statement": "Given an id, for, headers or aria reference attribute, each id must be identifier-shaped and is emitted with the g- prefix; validation of an emitted id returns it unchanged.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#idValue",
+        "lean/Guard/Validators/Ident.lean#idValueChars"
+      ],
+      "proofs": [
+        "Guard.Props.idValueChars_prefixed",
+        "Guard.Props.idValueChars_idem"
+      ],
+      "references": [
+        {
+          "type": "writeup",
+          "url": "https://portswigger.net/web-security/dom-based/dom-clobbering",
+          "note": "DOM clobbering: ids and names shadowing document and window properties"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-48910",
+          "url": "https://github.com/advisories/GHSA-p3vf-v8qc-cwcr",
+          "note": "DOMPurify < 2.4.2: prototype pollution",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-CLOBBER-NAME",
+      "class": "clobbering",
+      "severity": "high",
+      "title": "Name attributes are removed",
+      "statement": "Given a name attribute on any element, the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop"
+      ],
+      "cites": [
+        "src/policy.js#ATTR_DROP_RULES",
+        "lean/Guard/Policy/Tables/Attrs.lean#attrDropRules"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "writeup",
+          "url": "https://portswigger.net/web-security/dom-based/dom-clobbering",
+          "note": "img name= and form name= clobbering"
+        }
+      ]
+    },
+    {
+      "id": "R-CLOBBER-ATTR-KEYS",
+      "class": "clobbering",
+      "severity": "high",
+      "title": "Prototype-named attributes are removed and attributes never become object keys",
+      "statement": "Given attributes named __proto__, constructor or prototype, they are absent; attributes are carried as name/value pairs so no attribute name is ever an object key.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "tree:pairs"
+      ],
+      "cites": [
+        "src/policy.js#ATTR_DROP_RULES",
+        "lean/Guard/Policy/Tables/Attrs.lean#attrDropRules",
+        "src/tree.js"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2024-48910",
+          "url": "https://github.com/advisories/GHSA-p3vf-v8qc-cwcr",
+          "note": "DOMPurify < 2.4.2: prototype pollution",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-45801",
+          "url": "https://github.com/advisories/GHSA-mmhx-hmjr-r674",
+          "note": "DOMPurify < 2.5.4 / 3.1.3: special nesting bypassed the depth check, and prototype pollution weakened it",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-LIMIT-TREE",
+      "class": "limits",
+      "severity": "high",
+      "title": "Depth, node count and text length limits reject the document",
+      "statement": "Given a tree deeper than 32, more than 5000 nodes, a text node over 20000 UTF-16 units or more than 200000 in total, the whole document is rejected rather than truncated.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:reject"
+      ],
+      "cites": [
+        "src/policy.js#checkChildren",
+        "lean/Guard/Policy/Check.lean#checkChildren",
+        "src/tree.js#LIMITS",
+        "lean/Guard/Core/Limits.lean"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2024-47875",
+          "url": "https://github.com/advisories/GHSA-gx9m-whjm-85jf",
+          "note": "DOMPurify < 2.5.0 / 3.1.3: nesting-based mXSS",
+          "verified": "2026-09-09"
+        },
+        {
+          "type": "cve",
+          "id": "CVE-2024-45801",
+          "url": "https://github.com/advisories/GHSA-mmhx-hmjr-r674",
+          "note": "DOMPurify < 2.5.4 / 3.1.3: special nesting bypassed the depth check, and prototype pollution weakened it",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-LIMIT-ATTRS",
+      "class": "limits",
+      "severity": "medium",
+      "title": "Attribute count and value length are bounded",
+      "statement": "Given more than 24 attributes on an element, the extra ones are absent; given a value longer than 20000 UTF-16 units, the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop"
+      ],
+      "cites": [
+        "src/policy.js#checkAttrs",
+        "lean/Guard/Policy/Check.lean#checkAttrs"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-CTRL-INPUT-TYPE",
+      "class": "controls",
+      "severity": "high",
+      "title": "Input types are restricted",
+      "statement": "Given an input, only types text, number, range, checkbox, radio and search survive; password, hidden, file, image, submit and unknown types become text.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value",
+        "policy:default"
+      ],
+      "cites": [
+        "src/policy.js#HTML_ELEMENTS",
+        "lean/Guard/Policy/Tables/Html.lean#htmlElements"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "writeup",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete",
+          "note": "Browser autofill fills credentials only into password-type fields and their associated username fields"
+        }
+      ]
+    },
+    {
+      "id": "R-CTRL-AUTOCOMPLETE",
+      "class": "controls",
+      "severity": "high",
+      "title": "Autocomplete is forced off",
+      "statement": "Given an input, select or textarea, autocomplete is off regardless of the requested value, so browser autofill of credentials or payment data cannot be triggered.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:forced-attribute"
+      ],
+      "cites": [
+        "src/policy.js#HTML_FORCED",
+        "lean/Guard/Policy/Tables/Html.lean#htmlForced"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-CTRL-BUTTON-TYPE",
+      "class": "controls",
+      "severity": "medium",
+      "title": "Buttons are always type=button",
+      "statement": "Given a button, its type is button regardless of the requested value, so it can never submit.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:forced-attribute"
+      ],
+      "cites": [
+        "src/policy.js#HTML_FORCED",
+        "lean/Guard/Policy/Tables/Html.lean#htmlForced"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-CTRL-FOCUS",
+      "class": "controls",
+      "severity": "medium",
+      "title": "Focus-stealing attributes are removed",
+      "statement": "Given autofocus, accesskey, contenteditable or draggable, the attribute is absent; tabindex survives only as 0 or -1.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:attribute-drop",
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#ATTR_DROP_RULES",
+        "lean/Guard/Policy/Tables/Attrs.lean#attrDropRules"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-TEXT-CONTROL-BIDI",
+      "class": "text",
+      "severity": "low",
+      "title": "Control and bidi characters are stripped",
+      "statement": "Given text or a text-valued attribute containing C0 controls, DEL, or Unicode bidi override and isolate characters, those characters are absent from the output.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:text-clean",
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#cleanText",
+        "lean/Guard/Core/ListUtil.lean#cleanText"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "writeup",
+          "url": "https://trojansource.codes/",
+          "note": "Bidi override characters used to make displayed text misleading"
+        }
+      ]
+    },
+    {
+      "id": "R-VAL-NUMBER",
+      "class": "values",
+      "severity": "medium",
+      "title": "Numeric attributes are canonical bounded decimals",
+      "statement": "Given a numeric attribute, its value matches -?(digits+|digits*.digits+), has magnitude at most 1e6, and is re-emitted canonically; exponents, NaN, infinities and anything else are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#boundedNumber",
+        "lean/Guard/Validators/Number.lean#canonicalNumberChars"
+      ],
+      "proofs": [
+        "Guard.Props.canonicalNumberChars_ok",
+        "Guard.Props.numberListChars_ok"
+      ],
+      "references": []
+    },
+    {
+      "id": "R-VAL-COLOR",
+      "class": "values",
+      "severity": "high",
+      "title": "Paint values are solid colors only",
+      "statement": "Given fill or stroke, the value is a named color, a hex color, or an rgb()/rgba() form; url(), expressions and anything else are absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#color",
+        "lean/Guard/Validators/Color.lean#colorChars"
+      ],
+      "proofs": [
+        "Guard.Props.colorChars_ok"
+      ],
+      "references": []
+    },
+    {
+      "id": "R-VAL-PATH",
+      "class": "values",
+      "severity": "medium",
+      "title": "Path data is commands and bounded numbers only",
+      "statement": "Given a d attribute, every token is a command letter or a canonical number, the first is M or m, there are at most 4000 numbers, and any other character rejects the value.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#pathData",
+        "lean/Guard/Validators/Path.lean#pathTokens"
+      ],
+      "proofs": [
+        "Guard.Props.pathDataChars_ok"
+      ],
+      "references": []
+    },
+    {
+      "id": "R-VAL-TRANSFORM",
+      "class": "values",
+      "severity": "medium",
+      "title": "Transforms are known functions with numeric arguments",
+      "statement": "Given a transform attribute, it is at most 8 groups of translate, scale, rotate, skewX, skewY or matrix with the right arity of canonical numbers; anything else rejects the value.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#transform",
+        "lean/Guard/Validators/Transform.lean#transformGroup"
+      ],
+      "proofs": [
+        "Guard.Props.transformChars_ok"
+      ],
+      "references": []
+    },
+    {
+      "id": "R-VAL-KEYWORD",
+      "class": "values",
+      "severity": "medium",
+      "title": "Enumerated and identifier attributes are closed sets",
+      "statement": "Given an enumerated attribute (dir, role, aria states, type, scope), an identifier attribute (data-action) or lang, the value is in the closed set or matches the fixed shape; otherwise the attribute is absent.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:value"
+      ],
+      "cites": [
+        "src/policy.js#oneOf",
+        "lean/Guard/Validators/Text.lean#oneOf",
+        "lean/Guard/Validators/Ident.lean#ident"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-STRUCT-NON-ELEMENT",
+      "class": "structure",
+      "severity": "low",
+      "title": "Comments, doctypes and unknown nodes are removed",
+      "statement": "Given a comment, doctype or unknown node kind, it is absent from the validated tree.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:node-drop"
+      ],
+      "cites": [
+        "src/policy.js#checkChildren",
+        "lean/Guard/Policy/Check.lean#checkChildren"
+      ],
+      "proofs": [],
+      "references": [
+        {
+          "type": "cve",
+          "id": "CVE-2021-23980",
+          "url": "https://github.com/advisories/GHSA-vv2x-vrpj-qqpq",
+          "note": "bleach < 3.3.0: comments kept (strip_comments=False) enabled the mutation",
+          "verified": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "id": "R-STRUCT-ELEMENT-ALLOWLIST",
+      "class": "structure",
+      "severity": "high",
+      "title": "Elements not in the allowlist are removed or unwrapped",
+      "statement": "Given an element not in the element table, it is removed with its subtree, except presentational and sectioning legacy elements (font, center, big, tt, strike, address, hgroup, ins, del, q, cite, dfn, var, samp, bdi, bdo, wbr, data, html, head, body) whose children are kept.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:element-drop",
+        "policy:element-unwrap"
+      ],
+      "cites": [
+        "src/policy.js#HTML_ELEMENTS",
+        "src/policy.js#HTML_UNWRAP",
+        "lean/Guard/Policy/Tables/Html.lean#htmlElements",
+        "lean/Guard/Policy/Tables/Html.lean#htmlUnwrap"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RT-ISOLATION",
+      "class": "runtime",
+      "severity": "critical",
+      "title": "The runtime exposes no host capabilities",
+      "statement": "Given the generated program, fetch, XMLHttpRequest, WebSocket, timers, importScripts, require, process, window, document, storage and worker globals are undefined inside QuickJS; state crosses only as JSON text.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "runtime:quickjs",
+        "runtime:json-boundary",
+        "worker:csp"
+      ],
+      "cites": [
+        "src/runtime/core.js",
+        "src/runtime/worker.js"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RT-LIMITS",
+      "class": "runtime",
+      "severity": "high",
+      "title": "Runtime resources are bounded",
+      "statement": "Given a program that loops, allocates or recurses without bound, or returns an oversized or non-string view, the step fails, the runtime is marked dead, and the last validated view is retained; the event queue is bounded.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "runtime:interrupt",
+        "runtime:memory",
+        "runtime:stack",
+        "controller:watchdog",
+        "controller:queue"
+      ],
+      "cites": [
+        "src/runtime/core.js#DEFAULT_LIMITS",
+        "src/runtime/controller.js"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RT-FROZEN-DATA",
+      "class": "runtime",
+      "severity": "medium",
+      "title": "Host data is a frozen global",
+      "statement": "Given host-supplied data, the program reads it as a deep-frozen global named data and cannot change it; without host data the global is null; oversized data is refused.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "runtime:prelude"
+      ],
+      "cites": [
+        "src/runtime/core.js#dataPrelude"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-GATE-INTERFACE",
+      "class": "gate",
+      "severity": "medium",
+      "title": "Unsupported programs are rejected with diagnostics",
+      "statement": "Given a program with imports, dynamic import, async, generators, eval, Function, denied globals, or missing initialState/update/view, the gate returns diagnostics with locations and nothing executes.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "gate:ast"
+      ],
+      "cites": [
+        "src/gate.js"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-FRAME-FIXED-POINT",
+      "class": "frame",
+      "severity": "critical",
+      "title": "Only policy fixed points are rendered",
+      "statement": "Given any tree sent to the frame or the host renderer, it is re-validated and rendered only if the policy returns it unchanged with no changes; forged, stale or tampered trees are refused.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "frame:revalidate",
+        "host:revalidate"
+      ],
+      "cites": [
+        "src/frame.js",
+        "src/host.js",
+        "src/policy.js#isValidated"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-FRAME-MESSAGE-SCHEMA",
+      "class": "frame",
+      "severity": "high",
+      "title": "Frame messages are source-checked and schema-checked",
+      "statement": "Given a message, the host acts only if it comes from the frame window with a null origin and its event has known, well-typed own fields; the frame acts only on messages from its parent.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "host:source-check",
+        "host:schema",
+        "frame:source-check"
+      ],
+      "cites": [
+        "src/host.js#sanitizeEvent",
+        "src/frame.js"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-FRAME-CSP-SINKS",
+      "class": "frame",
+      "severity": "critical",
+      "title": "The frame is sandboxed, CSP-pinned and sink-hardened",
+      "statement": "Given the frame document, it is sandboxed with allow-scripts only, carries default-src 'none' with script and style pinned by hash and Trusted Types enforced, and its HTML sinks throw.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "frame:sandbox",
+        "frame:csp",
+        "frame:sinks"
+      ],
+      "cites": [
+        "src/host.js#buildFrameDocument",
+        "src/frame.js#hardenSinks"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-RENDER-CONSTRUCTORS-ONLY",
+      "class": "renderer",
+      "severity": "critical",
+      "title": "The renderer never parses markup",
+      "statement": "Given a validated tree, elements are created with createElementNS in the declared namespace, attributes set only for allowlisted names, text set as data; the renderer refuses non-allowlisted elements and dangerous attribute names even if handed to it directly.",
+      "engines": [
+        "js"
+      ],
+      "mechanisms": [
+        "renderer:constructors",
+        "renderer:refuse"
+      ],
+      "cites": [
+        "src/render.js"
+      ],
+      "proofs": [],
+      "references": []
+    },
+    {
+      "id": "R-CHECK-ACCEPTANCE",
+      "class": "structure",
+      "severity": "critical",
+      "title": "Accepted output satisfies the structural policy and is a fixed point",
+      "statement": "Given any raw tree, every accepted output satisfies the explicit output predicate (allowed elements, canonical attribute values, namespace nesting, text and structural bounds), and checking that output again returns the identical tree with no changes. Candidates failing either postcondition are rejected.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "policy:output-postcondition",
+        "policy:canonical-recheck"
+      ],
+      "cites": [
+        "src/policy.js#checkTree",
+        "lean/Guard/Policy/Accept.lean#policyOk",
+        "lean/Guard/Policy/Check.lean#checkTree"
+      ],
+      "proofs": [
+        "Guard.Props.accepted_policy",
+        "Guard.Props.accepted_idempotent",
+        "Guard.Props.accepted_structure",
+        "Guard.Props.accepted_node_bound",
+        "Guard.Props.accepted_text_bound",
+        "Guard.Props.nodesPolicyOk_member",
+        "Guard.Props.allowed_element",
+        "Guard.Props.attribute_has_no_handler_or_prefix",
+        "Guard.Props.accepted_descendant",
+        "Guard.Props.accepted_element_allowed",
+        "Guard.Props.accepted_no_script",
+        "Guard.Props.accepted_no_handler"
+      ],
+      "proofScope": "Theorems cover the postcondition-guarded Lean checker over Raw/Node values. They do not prove normalization always succeeds, JS equivalence, parsing, serialization, rendering, runtime isolation, or browser semantics.",
+      "references": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+/* Bundled stylesheet for generated content. Every class selector here becomes
+   a permitted class name. Rules deliberately contain content: nothing here may
+   position fixed, escape the root, raise z-index or reference a URL. */
+
+:root {
+  color-scheme: light dark;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: CanvasText;
+  background: Canvas;
+}
+html, body { margin: 0; }
+body { padding: 12px; overflow: auto; }
+#root { contain: layout paint; overflow: hidden; }
+* { box-sizing: border-box; max-width: 100%; }
+img, iframe, object, embed, video, audio, canvas, form { display: none !important; }
+svg { max-width: 100%; height: auto; }
+
+.stack { display: flex; flex-direction: column; gap: 8px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.grow { flex: 1 1 auto; }
+.card { border: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); border-radius: 8px; padding: 12px; }
+.title { font-weight: 600; font-size: 16px; margin: 0; }
+.muted { opacity: 0.7; }
+.small { font-size: 12px; }
+.mono { font-family: ui-monospace, monospace; }
+.right { text-align: right; }
+.center { text-align: center; }
+.hidden { display: none; }
+
+.btn {
+  font: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit;
+}
+.btn:hover { background: color-mix(in srgb, CanvasText 8%, Canvas); }
+.btn-primary { background: #2a6ef0; color: white; border-color: #2a6ef0; }
+.btn-active { outline: 2px solid #2a6ef0; outline-offset: 1px; }
+.input { font: inherit; padding: 4px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit; }
+
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); }
+.tab { padding: 6px 10px; border: 0; background: none; font: inherit; cursor: pointer; color: inherit; border-bottom: 2px solid transparent; }
+.tab-active { border-bottom-color: #2a6ef0; font-weight: 600; }
+
+.table { border-collapse: collapse; width: 100%; }
+.table th, .table td { padding: 4px 8px; border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, Canvas); text-align: left; }
+.table th { cursor: pointer; user-select: none; }
+
+.chart { display: block; width: 100%; height: auto; }
+.bar { fill: #2a6ef0; }
+.bar:hover { fill: #1b4fb8; }
+.bar-alt { fill: #8bb4ff; }
+.axis { stroke: color-mix(in srgb, CanvasText 40%, Canvas); stroke-width: 1; }
+.label { fill: CanvasText; font-size: 11px; }
+.tooltip { border-radius: 6px; padding: 4px 8px; background: color-mix(in srgb, CanvasText 90%, Canvas); color: Canvas; display: inline-block; }
