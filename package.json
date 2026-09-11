@@ -1,0 +1,64 @@
+{
+  "name": "generative-web-guard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Policy guard for LLM-generated HTML, SVG and JavaScript",
+  "module": "./cdn/generative-web-guard.js",
+  "browser": "./cdn/generative-web-guard.js",
+  "unpkg": "./cdn/generative-web-guard.full.min.js",
+  "jsdelivr": "./cdn/generative-web-guard.full.min.js",
+  "exports": {
+    ".": "./cdn/generative-web-guard.js",
+    "./full": "./cdn/generative-web-guard.full.min.js",
+    "./worker": "./cdn/worker.min.js"
+  },
+  "files": [
+    "cdn/",
+    "src/",
+    "rules/",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:cdn": "node scripts/check-cdn.mjs",
+    "security:scout": "node scripts/security-scout.mjs",
+    "test": "node scripts/verify.mjs",
+    "test:js": "node scripts/verify.mjs --js-only",
+    "setup:verification": "docker build --target toolchain -t guard-lean-toolchain lean/ && docker build --target wasm -t guard-lean-wasm lean/",
+    "check:proofs": "node scripts/check-proofs.mjs",
+    "check:properties": "node scripts/check-policy-properties.mjs",
+    "gen:policy": "node scripts/gen-policy.mjs",
+    "check:policy": "node scripts/gen-policy.mjs --check",
+    "serve": "node scripts/serve.mjs",
+    "demo": "npm run build && npm run serve",
+    "check:browser": "node scripts/browser-check.mjs",
+    "lean:build": "docker build --target checker -t guard-lean lean/",
+    "check:lean": "node scripts/lean-differential.mjs",
+    "wasm:build": "docker build --target wasm -t guard-lean-wasm lean/ && docker run --rm -v \"$PWD/lean:/guard\" guard-lean-wasm",
+    "check:wasm": "node scripts/wasm-check.mjs",
+    "gen:rules": "node scripts/gen-rules.mjs",
+    "check:rules": "node scripts/gen-rules.mjs --check",
+    "lean:test": "docker run --rm -v \"$PWD/lean:/guard\" guard-lean-toolchain sh -c \"lake build Tests guard-tests && lake exe guard-tests\"",
+    "test:unit": "node --test test/*.test.js",
+    "test:bdd": "cucumber-js",
+    "test:coverage": "node scripts/rule-coverage.mjs"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@jitl/quickjs-singlefile-browser-release-sync": "0.31.0",
+    "acorn": "8.14.1",
+    "esbuild": "0.25.5",
+    "jsdom": "26.1.0",
+    "parse5": "8.0.0",
+    "playwright-core": "^1.55.0",
+    "quickjs-emscripten": "0.31.0",
+    "quickjs-emscripten-core": "0.31.0",
+    "@cucumber/gherkin": "30.0.4",
+    "@cucumber/messages": "27.2.0"
+  },
+  "overrides": {
+    "@cucumber/messages": "27.2.0",
+    "@cucumber/gherkin": "30.0.4"
+  }
+}
