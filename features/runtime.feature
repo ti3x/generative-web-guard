@@ -261,3 +261,114 @@ Feature: Generated JavaScript runs isolated with bounded resources
       """
     When the runtime loads the program
     Then loading fails with "update must be a function"
+
+  @rule:R-RT-LIMITS
+  Scenario: A prototype toJSON hook cannot replace the result packet
+    Given a view size limit of 400000 characters
+    And the program:
+      """
+      Array.prototype.toJSON = function () { return ["x".repeat(600000), "y".repeat(900000)]; };
+      const initialState = { n: 1 };
+      function update(s, e) { return s; }
+      function view(s) { return "<p>ok</p>"; }
+      """
+    When the runtime initializes
+    Then the view is "<p>ok</p>"
+
+  @rule:R-RT-LIMITS
+  Scenario: An oversized initial state is refused outside the guest
+    Given a state size limit of 1000 characters
+    And the program:
+      """
+      const initialState = { big: "x".repeat(50000) };
+      function update(s, e) { return s; }
+      function view(s) { return "<p>ok</p>"; }
+      """
+    When the runtime initializes
+    Then the step fails with "initialState too large: 50010 > 1000"
+
+  @rule:R-RT-LIMITS
+  Scenario: A hostile error getter cannot outrun the evaluation budget
+    Given a runtime step budget of 20 ms
+    And the program:
+      """
+      const initialState = {};
+      function update(s) {
+        throw { name: "Hostile", get message() { const t = Date.now(); while (Date.now() - t < 250) {} return "slow"; } };
+      }
+      function view(s) { return "<p>ok</p>"; }
+      """
+    When the runtime initializes
+    And the runtime steps with event "go"
+    Then the step fails with "interrupted: guest execution exceeded 20ms"
+    And the step failed within 150 ms
+
+  @rule:R-RT-LIMITS
+  Scenario: A hostile toString hook never builds the host's error message
+    Given the program:
+      """
+      const initialState = {};
+      function update(s) {
+        throw { name: "Hostile", message: "short", toString() { return "x".repeat(5000000); } };
+      }
+      function view(s) { return "<p>ok</p>"; }
+      """
+    When the runtime initializes
+    And the runtime steps with event "go"
+    Then the step fails with "Hostile: short"
+
+  @rule:R-RT-LIMITS
+  Scenario: An oversized diagnostic is dropped for a generic error
+    Given the program:
+      """
+      const initialState = {};
+      function update(s) { throw { name: "E", message: "x".repeat(1000000) }; }
+      function view(s) { return "<p>ok</p>"; }
+      """
+    When the runtime initializes
+    And the runtime steps with event "go"
+    Then the step fails with "guest execution failed"
+
+  @rule:R-RT-LIMITS
+  Scenario Outline: The controller refuses a malformed reply and settles the job
+    Given the program:
+      """
+      const initialState = { count: 0 };
+      function update(state, event) { return { count: state.count + 1 }; }
+      function view(state) { return "Count: " + state.count; }
+      """
+    When the controller loads the program on a worker whose init reply has "<defect>"
+    Then loading fails with "<message>"
+    And the runtime is dead with reason matching "protocol"
+    And the worker was terminated
+
+    Examples:
+      | defect              | message                            |
+      | an extra field      | unexpected field                   |
+      | no result           | missing field                      |
+      | an oversized view   | view too large: 500001 > 400000    |
+      | a mismatched id     | does not match outstanding request |
+
+  @rule:R-RT-LIMITS
+  Scenario: A step issued before load fails without killing the controller
+    Given the program:
+      """
+      const initialState = { count: 0 };
+      function update(state, event) { return { count: state.count + 1 }; }
+      function view(state) { return "Count: " + state.count; }
+      """
+    When the controller steps before loading the program
+    Then stepping fails with "runtime is not loaded"
+    And the runtime is not dead
+
+  @rule:R-RT-LIMITS
+  Scenario: Disposal settles every outstanding event
+    Given the program:
+      """
+      const initialState = { count: 0 };
+      function update(state, event) { return { count: state.count + 1 }; }
+      function view(state) { return "Count: " + state.count; }
+      """
+    When the controller is disposed with 4 events outstanding on a worker that never answers steps
+    Then all 4 outstanding events were rejected with "disposed"
+    And the worker was terminated

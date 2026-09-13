@@ -3,3 +3,4 @@ dist/
 lean/.lake/
 lean/wasm/dist/
 generated-page-security-plan.docx
+.DS_Store
