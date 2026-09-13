@@ -1,0 +1,55 @@
+{
+  "manifestVersion": 1,
+  "note": "sha256 of each shipped artifact. These bind build CONTENTS and detect a stale or mismatched artifact. They do not prove provenance: nothing here is signed, and a hash says nothing about which toolchain or which sources produced the input. Deterministic by construction -- sorted keys, no timestamps.",
+  "checker": {
+    "wasmBytes": 1707724,
+    "wasmSha256": "853b2bec7bf05d278b047bc99a7a8bd27d8766bbb7295fbdee0b766e9ddf1202",
+    "base64Chars": 2276968,
+    "embeddedIn": [
+      "cdn/policy-worker.min.js",
+      "cdn/generative-web-guard.full.min.js"
+    ],
+    "fetched": false
+  },
+  "frame": {
+    "scriptBytes": 65290,
+    "scriptHash": "XlwTjqgkMscAV8ahiJZ1ZGFBU1Xg7Uw7S139Dk/RgVI=",
+    "cssBytes": 2689,
+    "cssHash": "Krlr2KhFjDPgFQ2Ffw87pI93sYzNjgUfAteJBYhgzCM=",
+    "classes": 25
+  },
+  "assets": {
+    "cdn/generative-web-guard.full.min.js": {
+      "bytes": 3709558,
+      "sha256": "b6b36ed7beb44f345cbf6e984acf0b01f70f41c6c5292607fdcfa6d8c5c64f03"
+    },
+    "cdn/generative-web-guard.js": {
+      "bytes": 500663,
+      "sha256": "ac3d4a6a0523c22c6c9f1f40db3a4c17ad65e8da33ee2245ca384632b39eefd9"
+    },
+    "cdn/generative-web-guard.lint.js": {
+      "bytes": 201855,
+      "sha256": "0f0e81561503eabdbd593dc09b9f85259d60286d58435e2424bcc6d322513004"
+    },
+    "cdn/generative-web-guard.min.js": {
+      "bytes": 316046,
+      "sha256": "db0b6528108f62fb634d53cb70f9c87f46f93a159e782019adbe263644391668"
+    },
+    "cdn/policy-worker.min.js": {
+      "bytes": 2628310,
+      "sha256": "a604862fdf4030a0d03f7c987a76bebf639a19c5d756dc2b72b9de992457974d"
+    },
+    "cdn/worker.min.js": {
+      "bytes": 752247,
+      "sha256": "84ba4a558082f9f2d6b7d8e450f34936c1ec6db64ecacb0ff20e461c81e5f78a"
+    },
+    "lean/wasm/dist/guard.mjs": {
+      "bytes": 73680,
+      "sha256": "54bb04beb83493613f61185301d92fcbaffaded3849378ea55370a6bb836199e"
+    },
+    "lean/wasm/dist/guard.wasm": {
+      "bytes": 1707724,
+      "sha256": "853b2bec7bf05d278b047bc99a7a8bd27d8766bbb7295fbdee0b766e9ddf1202"
+    }
+  }
+}

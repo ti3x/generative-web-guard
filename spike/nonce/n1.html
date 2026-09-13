@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>n1: script loading under nonce / strict-dynamic</title>
+<script src="/collector.js" nonce="{NONCE}"></script>
+</head>
+<body>
+<h1>n1</h1>
+<!-- Parser-inserted CDN classic script, WITH the page nonce. -->
+<script src="{CDN}/cdn-tag-nonced.js" {NONCE_ATTR_CDN}></script>
+<!-- Parser-inserted CDN classic script, NO nonce: tests whether the {CDN}
+     host-source in script-src is still honoured under 'strict-dynamic'. -->
+<script src="{CDN}/cdn-tag-plain.js"></script>
+<!-- Parser-inserted CDN ES MODULE with the page nonce: the shape a consumer
+     would use for this library. -->
+<script type="module" src="{CDN}/cdn-module-nonced.js" {NONCE_ATTR_CDN}></script>
+<!-- No-nonce discriminators. Under 'strict-dynamic' none of these has a
+     source expression that can match, so any of them running means the engine
+     is not applying 'strict-dynamic' to that script kind. -->
+<script src="/host-tag-plain.js"></script>
+<script type="module" src="/host-module-plain.js"></script>
+<script type="module" src="{CDN}/cdn-module-plain.js"></script>
+<!-- The host's own bootstrap module. ?hostNonce=0 strips its nonce, which is
+     how the currently documented Profile A markup looks. -->
+<script type="module" src="/n1.js" {NONCE_ATTR_HOST}></script>
+<pre id="out">running</pre>
+</body></html>

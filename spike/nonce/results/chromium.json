@@ -1,0 +1,2349 @@
+{
+ "engine": "chromium",
+ "version": "140.0.7339.186",
+ "revision": "1193",
+ "executable": "/Users/txia/Library/Caches/ms-playwright/chromium-1193/chrome-mac/Chromium.app/Contents/MacOS/Chromium",
+ "when": "2026-09-12T21:27:07.750Z",
+ "n1": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "eXldnwyoPqOCSC8NG0mVzw",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=eXldnwyoPqOCSC8NG0mVzw&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=eXldnwyoPqOCSC8NG0mVzw&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "eXldnwyoPqOCSC8NG0mVzw",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'wasm-u",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'wasm-u",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  },
+  "profile-a-control/no-host-nonce": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "n8DmugQGoJ2Ies7Lh0q5mg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=n8DmugQGoJ2Ies7Lh0q5mg&hostNonce=0",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=n8DmugQGoJ2Ies7Lh0q5mg&hostNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "n8DmugQGoJ2Ies7Lh0q5mg",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'wasm-u",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'wasm-u",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  },
+  "nonce-sd-bare": {
+   "cspName": "nonce-sd-bare",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "ZRbOFvzhpJGSEmazK3Fr5Q",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'strict-dynamic'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'strict-dynamic'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'strict-dynamic'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'strict-dynamic'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=ZRbOFvzhpJGSEmazK3Fr5Q&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "ZRbOFvzhpJGSEmazK3Fr5Q",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'stri",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'stri",
+     "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'non",
+     "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src"
+    }
+   }
+  },
+  "nonce-sd-with-cdn-and-self": {
+   "cspName": "nonce-sd-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "NZZL4xS8Qxna0l8W2x5Yig",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-NZZL4xS8Qxna0l8W2x5Yig' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is dis"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-NZZL4xS8Qxna0l8W2x5Yig' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is di"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-NZZL4xS8Qxna0l8W2x5Yig' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-NZZL4xS8Qxna0l8W2x5Yig' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is "
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=NZZL4xS8Qxna0l8W2x5Yig&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "NZZL4xS8Qxna0l8W2x5Yig",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-",
+     "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'sel",
+     "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src"
+    }
+   }
+  },
+  "nonce-sd-with-cdn-and-self/no-host-nonce": {
+   "cspName": "nonce-sd-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "rNzcZec9UxHdEM-w1LIcvw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-rNzcZec9UxHdEM-w1LIcvw' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is dis"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-rNzcZec9UxHdEM-w1LIcvw' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is di"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-rNzcZec9UxHdEM-w1LIcvw' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-rNzcZec9UxHdEM-w1LIcvw' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is "
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+     "text": "Refused to load the script 'http://localhost:8098/n1.js' because it violates the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-rNzcZec9UxHdEM-w1LIcvw' 'strict-dynamic'\". Note that 'strict-dynamic' is present, so host-based allowlisting is disabled. Note"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=rNzcZec9UxHdEM-w1LIcvw&hostNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/n1.js",
+      "sample": "",
+      "sourceFile": ""
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "rNzcZec9UxHdEM-w1LIcvw",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok"
+    },
+    "steps": {
+     "bootstrapNeverRan": true
+    },
+    "timedOutByCollector": "bootstrap-never-ran"
+   }
+  },
+  "nonce-only-with-cdn-and-self": {
+   "cspName": "nonce-only-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "QAazmlpwJbN58sDzRfxaJg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfSc7IHN0eWxlLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=QAazmlpwJbN58sDzRfxaJg&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfSc7IHN0eWxlLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=QAazmlpwJbN58sDzRfxaJg&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "QAazmlpwJbN58sDzRfxaJg",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'self' http://127.0.0.1:8099 'nonce-",
+     "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'sel",
+     "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src"
+    }
+   }
+  },
+  "nonce-only-bare": {
+   "cspName": "nonce-only-bare",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "sVKCAi070vj9lL4aIRwWmQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-inserted.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-dep.js?from=inserted-module' because it violates the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=sVKCAi070vj9lL4aIRwWmQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-inserted.js",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-dep.js?from=inserted-module",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "sVKCAi070vj9lL4aIRwWmQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "error",
+     "programmaticInsertModule": "error",
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\".\n",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'\".\n",
+     "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'non",
+     "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src"
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "uqOCfM4VrkOu9itAvts5YQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'strict-dynamic' is present, so host-based allowlisting is dis"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'strict-dynamic' is present, so host-based allowlisting is di"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'strict-dynamic' is present, so host-based allowlisting is"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'strict-dynamic' is present, so host-based allowlisting is "
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/favicon.ico",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=uqOCfM4VrkOu9itAvts5YQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "uqOCfM4VrkOu9itAvts5YQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "nonceRecoveryFromModule": {
+      "currentScript": "null",
+      "selectorMatched": true,
+      "idl": "uqOCfM4VrkOu9itAvts5YQ",
+      "attribute": "",
+      "src": "http://localhost:8098/collector.js",
+      "ownTagIdl": "uqOCfM4VrkOu9itAvts5YQ"
+     },
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'stri",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'stri",
+     "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'non",
+     "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src"
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "FHxTry7MEztr3frhWSNuBQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='\". Note that 'script-src-elem' "
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-tag-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='\". Note that 'script-src-elem'"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+     "text": "Refused to load the script 'http://localhost:8098/host-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='\". Note that 'script-src-el"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+     "text": "Refused to load the script 'http://127.0.0.1:8099/cdn-module-plain.js' because it violates the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='\". Note that 'script-src-ele"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=FHxTry7MEztr3frhWSNuBQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "FHxTry7MEztr3frhWSNuBQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "nonceRecoveryFromModule": {
+      "currentScript": "null",
+      "selectorMatched": true,
+      "idl": "FHxTry7MEztr3frhWSNuBQ",
+      "attribute": "",
+      "src": "http://localhost:8098/collector.js",
+      "ownTagIdl": "FHxTry7MEztr3frhWSNuBQ"
+     },
+     "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'stri",
+     "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'stri",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  }
+ },
+ "n2": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "o4GdmiXOwFhphYT0_1cLyA",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=o4GdmiXOwFhphYT0_1cLyA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=o4GdmiXOwFhphYT0_1cLyA",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "o4GdmiXOwFhphYT0_1cLyA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/bdd3a437-e250-4657-9d2d-503aa2dcff78"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/8146b8a5-931c-46a7-a1ef-f6cd7c50295f",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "o4GdmiXO..."
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "KuMTa_qLj4In_tyWwAewmg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=KuMTa_qLj4In_tyWwAewmg",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=KuMTa_qLj4In_tyWwAewmg",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "KuMTa_qLj4In_tyWwAewmg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/8e5a7d18-0f67-4ccd-a286-e69a9e1ba4fb"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/a12764b1-5f2d-466f-a711-8557e51ae8a9",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "KuMTa_qL..."
+    }
+   }
+  },
+  "nonce-sd-no-wasm-token": {
+   "cspName": "nonce-sd-no-wasm-token",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "HhMMY5d3dwuP8pzm3GzHmg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICdzaGEyNTYte1NDUklQVF9IQVNIfSc7IHN0eWxlLXNyYyAnc2VsZicgJ3NoYTI1Ni17Q1NTX0hBU0h9Jzsgd29ya2VyLXNyYyAnc2VsZicgYmxvYjo7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=HhMMY5d3dwuP8pzm3GzHmg",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICdzaGEyNTYte1NDUklQVF9IQVNIfSc7IHN0eWxlLXNyYyAnc2VsZicgJ3NoYTI1Ni17Q1NTX0hBU0h9Jzsgd29ya2VyLXNyYyAnc2VsZicgYmxvYjo7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=HhMMY5d3dwuP8pzm3GzHmg",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "HhMMY5d3dwuP8pzm3GzHmg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Sec",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "CompileError: WebAssembly.compile(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Se",
+       "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Conten",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/b12803c5-ee39-4e31-9a42-ea9bfbb4869e"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/c0a2f24a-379c-4fb5-8f29-ac7652dfb1f5",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "HhMMY5d3..."
+    }
+   }
+  },
+  "nonce-sd-worker-src-self-only": {
+   "cspName": "nonce-sd-worker-src-self-only",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "dRLlshybVTBkKUmT3NBjTw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.js",
+     "text": "Refused to create a worker from 'blob:http://localhost:8098/597ed229-9216-4c9a-a77b-9979aa715460' because it violates the following Content Security Policy directive: \"worker-src 'self'\".\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.js",
+     "text": "Refused to create a worker from 'blob:http://localhost:8098/9d23279a-2b38-4dc9-8abc-fa384acd362b' because it violates the following Content Security Policy directive: \"worker-src 'self'\".\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=dRLlshybVTBkKUmT3NBjTw",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=dRLlshybVTBkKUmT3NBjTw",
+    "violations": [
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n2.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "dRLlshybVTBkKUmT3NBjTw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "dRLlshyb..."
+    }
+   }
+  },
+  "nonce-sd-worker-src-strict-dynamic": {
+   "cspName": "nonce-sd-worker-src-strict-dynamic",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'nonce-{NONCE}' 'strict-dynamic' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "r8A5SRhhIhFtRI4hwGak8g",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=r8A5SRhhIhFtRI4hwGak8g",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=r8A5SRhhIhFtRI4hwGak8g",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "r8A5SRhhIhFtRI4hwGak8g",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/707a4b33-f6f4-4097-9622-bb6d600569b4"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/4768d064-6a76-424a-abfd-1842856faa7d",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "r8A5SRhh..."
+    }
+   }
+  },
+  "nonce-sd-no-worker-src-blob-in-script-src": {
+   "cspName": "nonce-sd-no-worker-src-blob-in-script-src",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' blob: 'wasm-unsafe-eval'; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "ID8kK0QGKL3Nag6m2mFCEQ",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=ID8kK0QGKL3Nag6m2mFCEQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=ID8kK0QGKL3Nag6m2mFCEQ",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "ID8kK0QGKL3Nag6m2mFCEQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/907f0d54-5216-41ad-892f-6635edb15d1a"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/91d1c4cc-f7c8-48ea-bee4-ec7e48c8c352",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "ID8kK0QG..."
+    }
+   }
+  },
+  "nonce-sd-child-src-blob": {
+   "cspName": "nonce-sd-child-src-blob",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; child-src 'self' blob:; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "jid4BevR_sPs-cSS0h2rDA",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgY2hpbGQtc3JjICdzZWxmJyBibG9iOjsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=jid4BevR_sPs-cSS0h2rDA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgY2hpbGQtc3JjICdzZWxmJyBibG9iOjsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=jid4BevR_sPs-cSS0h2rDA",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "jid4BevR_sPs-cSS0h2rDA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/c4fd3841-ded7-4c91-8f12-b6da0c443e7f"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/67906ee4-8d4d-4a49-b167-9d6e3dadfe09",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "jid4BevR..."
+    }
+   }
+  },
+  "nonce-sd-default-src-blob": {
+   "cspName": "nonce-sd-default-src-blob",
+   "csp": "default-src blob:; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "CWkEFKnJbxed5r_3AxUdTQ",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgYmxvYjo7IHNjcmlwdC1zcmMgJ25vbmNlLXtOT05DRX0nICdzdHJpY3QtZHluYW1pYycgJ3dhc20tdW5zYWZlLWV2YWwnOyBzdHlsZS1zcmMgJ3NlbGYnOyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=CWkEFKnJbxed5r_3AxUdTQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgYmxvYjo7IHNjcmlwdC1zcmMgJ25vbmNlLXtOT05DRX0nICdzdHJpY3QtZHluYW1pYycgJ3dhc20tdW5zYWZlLWV2YWwnOyBzdHlsZS1zcmMgJ3NlbGYnOyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=CWkEFKnJbxed5r_3AxUdTQ",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "CWkEFKnJbxed5r_3AxUdTQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/413a84d8-5c2d-4a04-a7cb-e8dcd47ee51a"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/413eb138-3d8f-4c0a-9a6a-abf7cc9a18b7",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "CWkEFKnJ..."
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "CaQc6BrWdvrG_BjDumwX6w",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/favicon.ico",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=CaQc6BrWdvrG_BjDumwX6w",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=CaQc6BrWdvrG_BjDumwX6w",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "CaQc6BrWdvrG_BjDumwX6w",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Sec",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "CompileError: WebAssembly.compile(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Se",
+       "wasmInstantiate": "CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Conten",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/91446dd8-eaf8-487e-a05e-04526de3e5dd"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/0541c88b-1bad-43a2-8d49-6d4d73636000",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "CaQc6BrW..."
+    }
+   }
+  },
+  "nonce-only-worker-blob": {
+   "cspName": "nonce-only-worker-blob",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "aaDyjoFoQS_ywO35H_KQqg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnd2FzbS11bnNhZmUtZXZhbCc7IHN0eWxlLXNyYyAnc2VsZic7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aaDyjoFoQS_ywO35H_KQqg",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnd2FzbS11bnNhZmUtZXZhbCc7IHN0eWxlLXNyYyAnc2VsZic7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aaDyjoFoQS_ywO35H_KQqg",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "aaDyjoFoQS_ywO35H_KQqg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"script-",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/d1c33cc4-2cba-46ad-8965-a4def2089286"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:8099/worker-payload.js"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/53e120a6-5cb8-4609-a89f-3be89079ec9e"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "aaDyjoFo..."
+    }
+   }
+  },
+  "profile-a-worker-src-self-only": {
+   "cspName": "profile-a-worker-src-self-only",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "51dG8gY2H_HsnTFK-sAiWQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.js",
+     "text": "Refused to create a worker from 'blob:http://localhost:8098/c8f6743b-d321-4326-9c96-a278719a7b1f' because it violates the following Content Security Policy directive: \"worker-src 'self'\".\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.js",
+     "text": "Refused to create a worker from 'blob:http://localhost:8098/0795ef06-9677-4875-921c-0bacc2776d58' because it violates the following Content Security Policy directive: \"worker-src 'self'\".\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=51dG8gY2H_HsnTFK-sAiWQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=51dG8gY2H_HsnTFK-sAiWQ",
+    "violations": [
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n2.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "51dG8gY2H_HsnTFK-sAiWQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "51dG8gY2..."
+    }
+   }
+  }
+ },
+ "n3": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "h7msPq9-mSdddxeZMEH7Mw",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=h7msPq9-mSdddxeZMEH7Mw&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=h7msPq9-mSdddxeZMEH7Mw&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "h7msPq9-mSdddxeZMEH7Mw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "j6tmQI87bc9H4CYgSIfZmw",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=j6tmQI87bc9H4CYgSIfZmw&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=j6tmQI87bc9H4CYgSIfZmw&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "j6tmQI87bc9H4CYgSIfZmw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate/frame-nonce": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "Z0hqBmOsWNEHb18N513NiA",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=Z0hqBmOsWNEHb18N513NiA&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=Z0hqBmOsWNEHb18N513NiA&frameNonce=1",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "Z0hqBmOsWNEHb18N513NiA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-Z0hqBmOsWNEHb18N513NiA'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-no-frame-script-hash": {
+   "cspName": "nonce-sd-no-frame-script-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "lIn89r7yHeK4k4G3hPrXoA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to execute inline script because it violates the following Content Security Policy directive: \"script-src 'nonce-lIn89r7yHeK4k4G3hPrXoA' 'strict-dynamic' 'wasm-unsafe-eval'\". Either the 'unsafe-inline' keyword, a hash ('sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='), or a nonce ('nonc"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=lIn89r7yHeK4k4G3hPrXoA&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=lIn89r7yHeK4k4G3hPrXoA&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "lIn89r7yHeK4k4G3hPrXoA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "timeout": "frame-alive"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "timeout": "frame-ready"
+     },
+     "committed": {
+      "timeout": "committed"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  },
+  "nonce-sd-no-frame-script-hash/frame-nonce": {
+   "cspName": "nonce-sd-no-frame-script-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "CBjCPl1wtMqmt23tB4Fd1Q",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=CBjCPl1wtMqmt23tB4Fd1Q&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=CBjCPl1wtMqmt23tB4Fd1Q&frameNonce=1",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "CBjCPl1wtMqmt23tB4Fd1Q",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-CBjCPl1wtMqmt23tB4Fd1Q'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-no-frame-style-hash": {
+   "cspName": "nonce-sd-no-frame-style-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "SO3w_dsqD4i0wg3QBqgc9A",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to apply inline style because it violates the following Content Security Policy directive: \"style-src 'self'\". Either the 'unsafe-inline' keyword, a hash ('sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='), or a nonce ('nonce-...') is required to enable inline execution.\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=SO3w_dsqD4i0wg3QBqgc9A&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=SO3w_dsqD4i0wg3QBqgc9A&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "SO3w_dsqD4i0wg3QBqgc9A",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(0, 0, 0)",
+    "rootFont": "16px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-only-with-hashes": {
+   "cspName": "nonce-only-with-hashes",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "z1EsfXlBugQFFGt5UxVSjg",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=z1EsfXlBugQFFGt5UxVSjg&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=z1EsfXlBugQFFGt5UxVSjg&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "z1EsfXlBugQFFGt5UxVSjg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "FfMMIYsZrzhRyW12V_c15w",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to execute inline script because it violates the following Content Security Policy directive: \"script-src 'nonce-FfMMIYsZrzhRyW12V_c15w' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'unsafe-inline' is ignored if either a hash or nonce value is present in the source list.\n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/favicon.ico",
+     "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=FfMMIYsZrzhRyW12V_c15w&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=FfMMIYsZrzhRyW12V_c15w&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "FfMMIYsZrzhRyW12V_c15w",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "timeout": "frame-alive"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "timeout": "frame-ready"
+     },
+     "committed": {
+      "timeout": "committed"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  },
+  "google-recommended/frame-nonce": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "eRwbVJtiiIx_jIKPv9_FwQ",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=eRwbVJtiiIx_jIKPv9_FwQ&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=eRwbVJtiiIx_jIKPv9_FwQ&frameNonce=1",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "eRwbVJtiiIx_jIKPv9_FwQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-eRwbVJtiiIx_jIKPv9_FwQ'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  }
+ },
+ "n4": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "S7V_6k-9yEupa5cm0EQUjQ",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=S7V_6k-9yEupa5cm0EQUjQ",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=S7V_6k-9yEupa5cm0EQUjQ",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "S7V_6k-9yEupa5cm0EQUjQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "nonce-end-to-end-accepted",
+        "matched": true,
+        "ms": 1
+       },
+       "renderMs": 26,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "trustedTypesSupported": true,
+         "notes": []
+        }
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-end-to-end-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 1,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "e2e-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "aUklAci7xjgdcOD3PYfxIA",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aUklAci7xjgdcOD3PYfxIA",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aUklAci7xjgdcOD3PYfxIA",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "aUklAci7xjgdcOD3PYfxIA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "nonce-end-to-end-accepted",
+        "matched": true,
+        "ms": 0
+       },
+       "renderMs": 26,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "trustedTypesSupported": true,
+         "notes": []
+        }
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-end-to-end-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 1,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "e2e-1",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "JP73E4msWuz0nDcy49ZTpA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to execute inline script because it violates the following Content Security Policy directive: \"script-src 'nonce-JP73E4msWuz0nDcy49ZTpA' 'strict-dynamic' https: http: 'unsafe-inline'\". Note that 'unsafe-inline' is ignored if either a hash or nonce value is present in the source list.\n"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=JP73E4msWuz0nDcy49ZTpA",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=JP73E4msWuz0nDcy49ZTpA",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "JP73E4msWuz0nDcy49ZTpA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "timeout": "frame-alive"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "timeout": "frame-ready-seen"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Sec",
+        "wasmAsync": "CompileError: WebAssembly.compile(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Se"
+       },
+       "render": {
+        "timeout": "render ack"
+       },
+       "renderMs": 8014,
+       "frameStats": {
+        "timeout": "frame stats"
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "wasm-probe"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  }
+ }
+}

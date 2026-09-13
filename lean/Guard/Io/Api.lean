@@ -35,8 +35,16 @@ def processRequest (input : String) : String :=
     let results := (j.getArr "inputs").map fun raw => resultToJson (checkTree ctx (rawRootChildren raw))
     (Json.arr results).compress
 
-/-- C symbol for the WebAssembly build. See `lean/wasm/shim.c`. -/
-@[export guard_check]
-def guardCheck (input : String) : String := processRequest input
+/-!
+There is deliberately NO `@[export]` here any more.
+
+This batch interface is permissive by design: it takes a caller-supplied class
+list, a list of documents, and decodes each with the lenient
+`Guard.rawFromJson`. That shape is right for a differential-testing tool and
+wrong for an authority, so the WebAssembly module exports only the versioned
+single-document ABI in `Guard/Io/Abi.lean`. `Main.lean` calls
+`processRequest` directly, so the native executable used by
+`scripts/lean-differential.mjs` is unaffected.
+-/
 
 end Guard

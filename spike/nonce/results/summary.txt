@@ -1,0 +1,205 @@
+### versions
+chromium: 140.0.7339.186 (revision 1193) @ 2026-09-12T21:27:07.750Z
+firefox: 141.0 (revision 1490) @ 2026-09-12T21:27:09.215Z
+webkit: 26.0 (revision 2203) @ 2026-09-12T21:27:10.909Z
+
+### n1: which script loads ran (ran / -)
+
+-- profile-a-control
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http://127.0.0.1:8099 'wasm-u
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http:
+
+-- profile-a-control/no-host-nonce
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http://127.0.0.1:8099 'wasm-u
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http:
+
+-- nonce-sd-bare
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-ZRbOFvzhpJGSEmazK3Fr5Q' 'stri
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=- hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-gf3hu
+
+-- nonce-sd-with-cdn-and-self
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http://127.0.0.1:8099 'nonce-
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=- hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http:
+
+-- nonce-sd-with-cdn-and-self/no-host-nonce
+   chromium  hostModule=- cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=- cdnModuleNoncedChainImport=Y dynImport=- insert=- insertModule=- eval=-
+   firefox   hostModule=- cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=- cdnModuleNoncedChainImport=Y dynImport=- insert=- insertModule=- eval=-
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=- hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http:
+
+-- nonce-only-with-cdn-and-self
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http://127.0.0.1:8099 'nonce-
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=Y cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=Y hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'self' http:
+
+-- nonce-only-bare
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=- cdnModuleNoncedChainImport=Y dynImport=Y insert=error insertModule=error eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-sVKCAi070vj9lL4aIRwWmQ'".
+
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=- cdnModuleNoncedChainImport=Y dynImport=Y insert=error insertModule=error eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=- cdnModuleNoncedChainImport=Y dynImport=Y insert=error insertModule=error eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-hJNHW
+
+-- google-recommended
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-uqOCfM4VrkOu9itAvts5YQ' 'stri
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=- hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-5HAla
+
+-- nonce-sd-candidate
+   chromium  hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-FHxTry7MEztr3frhWSNuBQ' 'stri
+   firefox   hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=- hostTagPlain=- hostModulePlain=- cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: call to eval() blocked by CSP
+   webkit    hostModule=Y cdnTagNonced=Y cdnTagPlain=- cdnModuleNonced=Y cdnModulePlain=Y hostTagPlain=- hostModulePlain=Y cdnProgrammaticInsert=Y cdnModuleNoncedChainImport=Y dynImport=Y insert=load insertModule=load eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Policy directive: "script-src 'nonce-ynRuu
+
+### n2: blob: Workers
+
+-- profile-a-control
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-candidate
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-no-wasm-token
+   chromium  created=ok topLevel=Y err=- wasmSync=CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Sec wasmInstantiate=CompileError: WebAssembly.instantiate(): eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=CompileError: call to WebAssembly.Module() blocked by CSP wasmInstantiate=CompileError: call to WebAssembly.instan eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=CompileError: Refused to create a WebAss eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-worker-src-self-only
+   chromium  created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"}]
+   firefox   created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":""},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":""}]
+   webkit    created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"}]
+
+-- nonce-sd-worker-src-strict-dynamic
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-no-worker-src-blob-in-script-src
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-child-src-blob
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-sd-default-src-blob
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- google-recommended
+   chromium  created=ok topLevel=Y err=- wasmSync=CompileError: WebAssembly.Module(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script in the following Content Sec wasmInstantiate=CompileError: WebAssembly.instantiate(): eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=CompileError: call to WebAssembly.Module() blocked by CSP wasmInstantiate=CompileError: call to WebAssembly.instan eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=CompileError: Refused to create a WebAss eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=ok | violations=[]
+
+-- nonce-only-worker-blob
+   chromium  created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: "script- fetch=status 200 nested=ok | module top=Y dynImport=TypeError: Failed to fetch dynamically imported module: http | violations=[]
+   firefox   created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: call to eval() blocked by CSP newFunction=EvalError: call to Function() blocked by CSP fetch=status 200 nested=ok | module top=Y dynImport=TypeError: error loading dynamically imported module: http:/ | violations=[{"effectiveDirective":"script-src-elem","blockedURI":"http://127.0.0.1:8099/worker-payload.js","sample":"","sourceFile":""}]
+   webkit    created=ok topLevel=Y err=- wasmSync=ok wasmInstantiate=ok eval=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po newFunction=EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po fetch=status 200 nested=ok | module top=Y dynImport=TypeError: Importing a module script failed. | violations=[]
+
+-- profile-a-worker-src-self-only
+   chromium  created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"}]
+   firefox   created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":""},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":""}]
+   webkit    created=ok topLevel=- err=error wasmSync=- wasmInstantiate=- eval=- newFunction=- fetch=- nested=- | module top=- dynImport=- | violations=[{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"},{"effectiveDirective":"worker-src","blockedURI":"blob","sample":"","sourceFile":"http://localhost:8098/n2.js"}]
+
+### n3: hash-pinned srcdoc frame
+
+-- profile-a-control
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+-- nonce-sd-candidate
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+-- nonce-sd-candidate/frame-nonce
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+-- nonce-sd-no-frame-script-hash
+   chromium  frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+   firefox   frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+
+-- nonce-sd-no-frame-script-hash/frame-nonce
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+-- nonce-sd-no-frame-style-hash
+   chromium  frameScriptRan=Y origin=null committed=Y font=16px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   firefox   frameScriptRan=Y origin=null committed=Y font=16px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=16px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+
+-- nonce-only-with-hashes
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+-- google-recommended
+   chromium  frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+   firefox   frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=- origin=null committed=- font=13px root="" hostViolations=[] frameConsole="yes"
+
+-- google-recommended/frame-nonce
+   chromium  frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+   firefox   frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="yes"
+   webkit    frameScriptRan=Y origin=null committed=Y font=13px root="nonce-render-accepted" hostViolations=[] frameConsole="no"
+
+### n4: end to end
+
+-- profile-a-control
+   chromium  import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=26 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+   firefox   import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=27 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+   webkit    import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=26 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+
+-- nonce-sd-candidate
+   chromium  import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=26 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+   firefox   import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=30 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+   webkit    import=true frameAlive=Y worker=ok port=port-installed wasm=ok render=committed ms=27 frameRoot="nonce-end-to-end-accepted" hostInjectRefused=1
+
+-- google-recommended
+   chromium  import=true frameAlive=- worker=ok port=port-installed wasm=CompileError: WebAssembly.Modu render={"timeout":"render ack"} ms=8014 frameRoot="" hostInjectRefused=-
+   firefox   import=true frameAlive=- worker=ok port=port-installed wasm=CompileError: call to WebAssem render={"timeout":"render ack"} ms=8017 frameRoot="" hostInjectRefused=-
+   webkit    import=true frameAlive=- worker=ok port=port-installed wasm=ok render={"timeout":"render ack"} ms=8026 frameRoot="" hostInjectRefused=-
+
+### question 7: what code would src/startup.js report for each observed failure
+chromium  blob: Worker refused (worker-src 'self')                     -> null
+          observed: async error event: error
+chromium  wasm refused (no 'wasm-unsafe-eval')                         -> csp-wasm-unsafe-eval
+          observed: CompileError: WebAssembly.instantiate(): Refused to compile or instantiate WebAssembly module because 'unsafe-eval' is not an allowed source of script
+chromium  worker dynamic import refused (no 'strict-dynamic', no cdn)  -> csp-cdn-script-src
+          observed: TypeError: Failed to fetch dynamically imported module: http://127.0.0.1:8099/worker-payload.js
+chromium  host bootstrap module refused (no nonce on the tag)          -> (nothing to classify)
+          observed: no error object reachable: the module never ran
+chromium  frame script refused (no hash in host policy)                -> (nothing to classify)
+          observed: no error, no securitypolicyviolation: bootstrap timeout only
+firefox   blob: Worker refused (worker-src 'self')                     -> null
+          observed: async error event: error
+firefox   wasm refused (no 'wasm-unsafe-eval')                         -> csp-wasm-unsafe-eval
+          observed: CompileError: call to WebAssembly.instantiate() blocked by CSP
+firefox   worker dynamic import refused (no 'strict-dynamic', no cdn)  -> csp-cdn-script-src
+          observed: TypeError: error loading dynamically imported module: http://127.0.0.1:8099/worker-payload.js
+firefox   host bootstrap module refused (no nonce on the tag)          -> (nothing to classify)
+          observed: no error object reachable: the module never ran
+firefox   frame script refused (no hash in host policy)                -> (nothing to classify)
+          observed: no error, no securitypolicyviolation: bootstrap timeout only
+webkit    blob: Worker refused (worker-src 'self')                     -> null
+          observed: async error event: error
+webkit    wasm refused (no 'wasm-unsafe-eval')                         -> csp-wasm-unsafe-eval
+          observed: CompileError: Refused to create a WebAssembly object because 'unsafe-eval' or 'wasm-unsafe-eval' is not an allowed source of script in the following C
+webkit    worker dynamic import refused (no 'strict-dynamic', no cdn)  -> null
+          observed: TypeError: Importing a module script failed.
+webkit    host bootstrap module refused (no nonce on the tag)          -> null
+          observed: RAN (not a failure on this engine)
+webkit    frame script refused (no hash in host policy)                -> (nothing to classify)
+          observed: no error, no securitypolicyviolation: bootstrap timeout only

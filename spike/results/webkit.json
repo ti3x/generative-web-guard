@@ -1,0 +1,5238 @@
+{
+ "engine": "webkit",
+ "version": "26.0",
+ "when": "2026-09-12T17:11:47.202Z",
+ "q1": {
+  "no-csp": {
+   "cspName": "no-csp",
+   "csp": "",
+   "consoleMsgs": [],
+   "pageErrors": [
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag.",
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag."
+   ],
+   "result": {
+    "question": "q1",
+    "scriptHash": "TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=",
+    "cssHash": "ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=",
+    "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+    "steps": {
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "frameMessages": [
+      {
+       "origin": "null",
+       "type": "frame-alive"
+      }
+     ],
+     "policyWorkerCreate": "ok",
+     "portInstalled": {
+      "type": "port-installed",
+      "hasPort": true
+     },
+     "bootstrapPostMessage": "ok",
+     "frameReadySeen": {
+      "type": "frame-ready-seen",
+      "origin": "null"
+     },
+     "render1": {
+      "type": "render-settled",
+      "requestId": "r1",
+      "outcome": "committed",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "accepted-tree-1",
+      "matched": true,
+      "ms": 2
+     },
+     "parentDirectRender": {
+      "hostReadOfFrameDom": null,
+      "frameStats": {
+       "type": "frame-stats",
+       "stats": {
+        "bootstrapAccepted": 1,
+        "bootstrapRejected": 0,
+        "portInstalled": true,
+        "parentMessagesAfterBootstrap": 1,
+        "parentRenderAttemptsAfterBootstrap": 1,
+        "parentMessagesBeforeBootstrap": 0,
+        "portRenders": 1,
+        "portStale": 0,
+        "acks": 1,
+        "lastGeneration": 1,
+        "lastRequestId": "r1",
+        "trustedTypesSupported": true,
+        "notes": []
+       }
+      }
+     },
+     "secondBootstrap": {
+      "secondPortReplies": []
+     },
+     "render2": {
+      "type": "render-settled",
+      "requestId": "r2",
+      "outcome": "committed",
+      "generation": 2,
+      "nodeCount": 1,
+      "domText": "accepted-tree-2",
+      "matched": true,
+      "ms": 2
+     },
+     "renderStale": {
+      "type": "render-settled",
+      "requestId": "r3-stale",
+      "outcome": "stale",
+      "generation": 1,
+      "matched": true,
+      "ms": 1
+     },
+     "workerWasm": {
+      "type": "wasm-probe",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "finalFrameStats": {
+      "type": "frame-stats",
+      "stats": {
+       "bootstrapAccepted": 1,
+       "bootstrapRejected": 1,
+       "portInstalled": true,
+       "parentMessagesAfterBootstrap": 2,
+       "parentRenderAttemptsAfterBootstrap": 1,
+       "parentMessagesBeforeBootstrap": 0,
+       "portRenders": 2,
+       "portStale": 1,
+       "acks": 2,
+       "lastGeneration": 2,
+       "lastRequestId": "r2",
+       "trustedTypesSupported": true,
+       "notes": []
+      }
+     },
+     "frameRefusalsSeenOverPort": [
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "render",
+       "hadPorts": false
+      },
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "bootstrap",
+       "hadPorts": true
+      }
+     ],
+     "workerEventTypes": [
+      "port-installed",
+      "frame-ready-seen",
+      "render-settled",
+      "port-observed",
+      "frame-stats",
+      "port-observed",
+      "render-settled",
+      "render-settled",
+      "wasm-probe",
+      "frame-stats"
+     ],
+     "finalDomText": null
+    },
+    "violations": []
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "accepted-tree-2",
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 1,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 2,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 2,
+     "portStale": 1,
+     "acks": 2,
+     "lastGeneration": 2,
+     "lastRequestId": "r2",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "demo-current": {
+   "cspName": "demo-current",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src 'none'; img-src 'none'; frame-src 'self' about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [],
+   "pageErrors": [
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag.",
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag."
+   ],
+   "result": {
+    "question": "q1",
+    "scriptHash": "TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=",
+    "cssHash": "ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=",
+    "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+    "steps": {
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "frameMessages": [
+      {
+       "origin": "null",
+       "type": "frame-alive"
+      }
+     ],
+     "policyWorkerCreate": "ok",
+     "portInstalled": {
+      "type": "port-installed",
+      "hasPort": true
+     },
+     "bootstrapPostMessage": "ok",
+     "frameReadySeen": {
+      "type": "frame-ready-seen",
+      "origin": "null"
+     },
+     "render1": {
+      "type": "render-settled",
+      "requestId": "r1",
+      "outcome": "committed",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "accepted-tree-1",
+      "matched": true,
+      "ms": 1
+     },
+     "parentDirectRender": {
+      "hostReadOfFrameDom": null,
+      "frameStats": {
+       "type": "frame-stats",
+       "stats": {
+        "bootstrapAccepted": 1,
+        "bootstrapRejected": 0,
+        "portInstalled": true,
+        "parentMessagesAfterBootstrap": 1,
+        "parentRenderAttemptsAfterBootstrap": 1,
+        "parentMessagesBeforeBootstrap": 0,
+        "portRenders": 1,
+        "portStale": 0,
+        "acks": 1,
+        "lastGeneration": 1,
+        "lastRequestId": "r1",
+        "trustedTypesSupported": true,
+        "notes": []
+       }
+      }
+     },
+     "secondBootstrap": {
+      "secondPortReplies": []
+     },
+     "render2": {
+      "type": "render-settled",
+      "requestId": "r2",
+      "outcome": "committed",
+      "generation": 2,
+      "nodeCount": 1,
+      "domText": "accepted-tree-2",
+      "matched": true,
+      "ms": 1
+     },
+     "renderStale": {
+      "type": "render-settled",
+      "requestId": "r3-stale",
+      "outcome": "stale",
+      "generation": 1,
+      "matched": true,
+      "ms": 1
+     },
+     "workerWasm": {
+      "type": "wasm-probe",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "finalFrameStats": {
+      "type": "frame-stats",
+      "stats": {
+       "bootstrapAccepted": 1,
+       "bootstrapRejected": 1,
+       "portInstalled": true,
+       "parentMessagesAfterBootstrap": 2,
+       "parentRenderAttemptsAfterBootstrap": 1,
+       "parentMessagesBeforeBootstrap": 0,
+       "portRenders": 2,
+       "portStale": 1,
+       "acks": 2,
+       "lastGeneration": 2,
+       "lastRequestId": "r2",
+       "trustedTypesSupported": true,
+       "notes": []
+      }
+     },
+     "frameRefusalsSeenOverPort": [
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "render",
+       "hadPorts": false
+      },
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "bootstrap",
+       "hadPorts": true
+      }
+     ],
+     "workerEventTypes": [
+      "port-installed",
+      "frame-ready-seen",
+      "render-settled",
+      "port-observed",
+      "frame-stats",
+      "port-observed",
+      "render-settled",
+      "render-settled",
+      "wasm-probe",
+      "frame-stats"
+     ],
+     "finalDomText": null
+    },
+    "violations": []
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "accepted-tree-2",
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 1,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 2,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 2,
+     "portStale": 1,
+     "acks": 2,
+     "lastGeneration": 2,
+     "lastRequestId": "r2",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "demo-without-frame-script-hash": {
+   "cspName": "demo-without-frame-script-hash",
+   "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to execute a script because its hash, its nonce, or 'unsafe-inline' does not appear in the script-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag.",
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag."
+   ],
+   "result": {
+    "question": "q1",
+    "scriptHash": "TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=",
+    "cssHash": "ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=",
+    "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+    "steps": {
+     "frameAlive": {
+      "timeout": "frame-alive"
+     },
+     "frameMessages": [],
+     "policyWorkerCreate": "ok",
+     "portInstalled": {
+      "type": "port-installed",
+      "hasPort": true
+     },
+     "bootstrapPostMessage": "ok",
+     "frameReadySeen": {
+      "timeout": "frame-ready-seen"
+     },
+     "render1": {
+      "timeout": "render r1 ack"
+     },
+     "parentDirectRender": {
+      "hostReadOfFrameDom": null,
+      "frameStats": {
+       "timeout": "frame stats"
+      }
+     },
+     "secondBootstrap": {
+      "secondPortReplies": []
+     },
+     "render2": {
+      "timeout": "render r2 ack"
+     },
+     "renderStale": {
+      "timeout": "stale settle"
+     },
+     "workerWasm": {
+      "type": "wasm-probe",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "finalFrameStats": null,
+     "frameRefusalsSeenOverPort": [],
+     "workerEventTypes": [
+      "port-installed",
+      "wasm-probe"
+     ],
+     "finalDomText": null
+    },
+    "violations": []
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "stats": null
+   }
+  },
+  "demo-without-frame-style-hash": {
+   "cspName": "demo-without-frame-style-hash",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self'; worker-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag.",
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag."
+   ],
+   "result": {
+    "question": "q1",
+    "scriptHash": "TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=",
+    "cssHash": "ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=",
+    "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+    "steps": {
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "frameMessages": [
+      {
+       "origin": "null",
+       "type": "frame-alive"
+      }
+     ],
+     "policyWorkerCreate": "ok",
+     "portInstalled": {
+      "type": "port-installed",
+      "hasPort": true
+     },
+     "bootstrapPostMessage": "ok",
+     "frameReadySeen": {
+      "type": "frame-ready-seen",
+      "origin": "null"
+     },
+     "render1": {
+      "type": "render-settled",
+      "requestId": "r1",
+      "outcome": "committed",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "accepted-tree-1",
+      "matched": true,
+      "ms": 0
+     },
+     "parentDirectRender": {
+      "hostReadOfFrameDom": null,
+      "frameStats": {
+       "type": "frame-stats",
+       "stats": {
+        "bootstrapAccepted": 1,
+        "bootstrapRejected": 0,
+        "portInstalled": true,
+        "parentMessagesAfterBootstrap": 1,
+        "parentRenderAttemptsAfterBootstrap": 1,
+        "parentMessagesBeforeBootstrap": 0,
+        "portRenders": 1,
+        "portStale": 0,
+        "acks": 1,
+        "lastGeneration": 1,
+        "lastRequestId": "r1",
+        "trustedTypesSupported": true,
+        "notes": []
+       }
+      }
+     },
+     "secondBootstrap": {
+      "secondPortReplies": []
+     },
+     "render2": {
+      "type": "render-settled",
+      "requestId": "r2",
+      "outcome": "committed",
+      "generation": 2,
+      "nodeCount": 1,
+      "domText": "accepted-tree-2",
+      "matched": true,
+      "ms": 1
+     },
+     "renderStale": {
+      "type": "render-settled",
+      "requestId": "r3-stale",
+      "outcome": "stale",
+      "generation": 1,
+      "matched": true,
+      "ms": 0
+     },
+     "workerWasm": {
+      "type": "wasm-probe",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "finalFrameStats": {
+      "type": "frame-stats",
+      "stats": {
+       "bootstrapAccepted": 1,
+       "bootstrapRejected": 1,
+       "portInstalled": true,
+       "parentMessagesAfterBootstrap": 2,
+       "parentRenderAttemptsAfterBootstrap": 1,
+       "parentMessagesBeforeBootstrap": 0,
+       "portRenders": 2,
+       "portStale": 1,
+       "acks": 2,
+       "lastGeneration": 2,
+       "lastRequestId": "r2",
+       "trustedTypesSupported": true,
+       "notes": []
+      }
+     },
+     "frameRefusalsSeenOverPort": [
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "render",
+       "hadPorts": false
+      },
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "bootstrap",
+       "hadPorts": true
+      }
+     ],
+     "workerEventTypes": [
+      "port-installed",
+      "frame-ready-seen",
+      "render-settled",
+      "port-observed",
+      "frame-stats",
+      "port-observed",
+      "render-settled",
+      "render-settled",
+      "wasm-probe",
+      "frame-stats"
+     ],
+     "finalDomText": null
+    },
+    "violations": []
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "accepted-tree-2",
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 1,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 2,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 2,
+     "portStale": 1,
+     "acks": 2,
+     "lastGeneration": 2,
+     "lastRequestId": "r2",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  },
+  "frame-src-none": {
+   "cspName": "frame-src-none",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; frame-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [],
+   "pageErrors": [
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag.",
+    "Blocked a frame at \"http://localhost:8094\" from accessing a frame at \"null\".  The frame being accessed is sandboxed and lacks the \"allow-same-origin\" flag."
+   ],
+   "result": {
+    "question": "q1",
+    "scriptHash": "TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=",
+    "cssHash": "ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=",
+    "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+    "steps": {
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "frameMessages": [
+      {
+       "origin": "null",
+       "type": "frame-alive"
+      }
+     ],
+     "policyWorkerCreate": "ok",
+     "portInstalled": {
+      "type": "port-installed",
+      "hasPort": true
+     },
+     "bootstrapPostMessage": "ok",
+     "frameReadySeen": {
+      "type": "frame-ready-seen",
+      "origin": "null"
+     },
+     "render1": {
+      "type": "render-settled",
+      "requestId": "r1",
+      "outcome": "committed",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "accepted-tree-1",
+      "matched": true,
+      "ms": 2
+     },
+     "parentDirectRender": {
+      "hostReadOfFrameDom": null,
+      "frameStats": {
+       "type": "frame-stats",
+       "stats": {
+        "bootstrapAccepted": 1,
+        "bootstrapRejected": 0,
+        "portInstalled": true,
+        "parentMessagesAfterBootstrap": 1,
+        "parentRenderAttemptsAfterBootstrap": 1,
+        "parentMessagesBeforeBootstrap": 0,
+        "portRenders": 1,
+        "portStale": 0,
+        "acks": 1,
+        "lastGeneration": 1,
+        "lastRequestId": "r1",
+        "trustedTypesSupported": true,
+        "notes": []
+       }
+      }
+     },
+     "secondBootstrap": {
+      "secondPortReplies": []
+     },
+     "render2": {
+      "type": "render-settled",
+      "requestId": "r2",
+      "outcome": "committed",
+      "generation": 2,
+      "nodeCount": 1,
+      "domText": "accepted-tree-2",
+      "matched": true,
+      "ms": 2
+     },
+     "renderStale": {
+      "type": "render-settled",
+      "requestId": "r3-stale",
+      "outcome": "stale",
+      "generation": 1,
+      "matched": true,
+      "ms": 1
+     },
+     "workerWasm": {
+      "type": "wasm-probe",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "finalFrameStats": {
+      "type": "frame-stats",
+      "stats": {
+       "bootstrapAccepted": 1,
+       "bootstrapRejected": 1,
+       "portInstalled": true,
+       "parentMessagesAfterBootstrap": 2,
+       "parentRenderAttemptsAfterBootstrap": 1,
+       "parentMessagesBeforeBootstrap": 0,
+       "portRenders": 2,
+       "portStale": 1,
+       "acks": 2,
+       "lastGeneration": 2,
+       "lastRequestId": "r2",
+       "trustedTypesSupported": true,
+       "notes": []
+      }
+     },
+     "frameRefusalsSeenOverPort": [
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "render",
+       "hadPorts": false
+      },
+      {
+       "type": "parent-message-refused",
+       "v": 1,
+       "kind": "bootstrap",
+       "hadPorts": true
+      }
+     ],
+     "workerEventTypes": [
+      "port-installed",
+      "frame-ready-seen",
+      "render-settled",
+      "port-observed",
+      "frame-stats",
+      "port-observed",
+      "render-settled",
+      "render-settled",
+      "wasm-probe",
+      "frame-stats"
+     ],
+     "finalDomText": null
+    },
+    "violations": []
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "accepted-tree-2",
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 1,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 2,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 2,
+     "portStale": 1,
+     "acks": 2,
+     "lastGeneration": 2,
+     "lastRequestId": "r2",
+     "trustedTypesSupported": true,
+     "notes": []
+    }
+   }
+  }
+ },
+ "q2": {
+  "no-csp": {
+   "cspName": "no-csp",
+   "csp": "",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Not allowed to load local resource: blob:null/d971cc8f-9dc4-45a7-85a4-48108bc917af"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Cannot load blob:null/d971cc8f-9dc4-45a7-85a4-48108bc917af due to access control checks."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/a117d144-2355-4aab-8228-baf2383494c6 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/3bb949fd-d420-40c3-8601-0a31d5687c50 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/7bd8128b-4269-49d1-bc1e-96bcae7ea477 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/c23b8523-84e4-41a6-8fb7-4ad988e2a243 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "ok"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/6e0e0db4-061d-4b87-bb60-492fe2ac2085",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/3f12b702-2cc6-4581-a24e-7829b1a47308",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/976a1334-893c-41ba-b495-76f3bf9902b5",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/895e446a-314b-48cd-a07f-8982dd6ac420",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/b9f2c4ba-6f91-4c46-831b-4aa9c819a85c",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%",
+        "origin": "null",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "demo-current": {
+   "cspName": "demo-current",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src 'none'; img-src 'none'; frame-src 'self' about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/44d2fbf8-9d36-4d4e-ac96-2f7f3c471b97 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/cdn-boot.js because it does not appear in the script-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://localhost:8094/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8095/cdn-boot.js",
+      "sourceFile": "http://localhost:8094/q2.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": false,
+      "error": "TypeError: Importing a module script failed."
+     }
+    }
+   }
+  },
+  "demo-plus-cdn-script-src": {
+   "cspName": "demo-plus-cdn-script-src",
+   "csp": "default-src 'self'; script-src 'self' {CDN}; style-src 'self'; worker-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/aa680848-1e73-4e26-a741-a7ecd9b79a06 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/0a7a9d10-b551-4c43-80ce-931309b482f2 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/89a9b395-ff7c-4b2b-bf17-d643c1092eeb because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/dec1967c-8cac-4022-a071-86e4235174de because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/bf608077-db8b-4d18-97f9-20e4ece46f32 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/5fe1ece7-4a05-4b63-95aa-d5f5a3bded2b because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/f7d8e5a7-2193-4ec0-9e25-92f6bbbac3f7 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/44553bf4-43d0-48af-8b72-349ae2ffbdcf because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/9e885545-1fbd-4ef0-8abd-8264e29a1219 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://localhost:8094/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "cdn-script-src-plus-blob-worker-src": {
+   "cspName": "cdn-script-src-plus-blob-worker-src",
+   "csp": "default-src 'self'; script-src 'self' {CDN}; style-src 'self'; worker-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/c59c1f85-86ab-49d5-9cb0-dbdc453754ee because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/58890052-3fbb-4b6e-96f4-6d006381a290 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/75393856-7047-421e-a420-ccf6848a6887 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/3b1a6d8a-4d6b-4cd4-b560-e28478883f77 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/74fe4f04-ed80-4b9e-a111-e13fce4e2b88",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/22e7c428-7975-4200-a60a-50149ab05d36",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/79f0b20c-e7e1-4439-bc7e-600ec6cc8d9c",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/4c0d305f-763f-4c23-a653-746b90025db9",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "cdn-script-src-blob-worker-plus-wasm": {
+   "cspName": "cdn-script-src-blob-worker-plus-wasm",
+   "csp": "default-src 'self'; script-src 'self' {CDN} 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/4ac61358-fcb1-4039-95c4-da1c377b976b because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/7fa6a001-54a4-4148-8f49-3996ead96085 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/90be4c40-e304-49ff-ad98-d1a2c1fc8931 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/a3cb8f14-1bc0-4d16-8571-cf4b7226835e because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/4842e79c-05cb-4d36-9056-ac9b3b05155f",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/211cbe76-5016-4c4c-9817-dd07904f67a6",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/4fbbd9f5-f04c-4d4e-80fa-e7e8a4152ed9",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/45e57ffd-4a9b-4e93-9fc8-8c767f2024a0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "wasmAsync": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "candidate-production": {
+   "cspName": "candidate-production",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; frame-src about: blob:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/844c930a-0d92-4427-b9d4-ff380cfbd670 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/7652d46c-65bc-4884-89a4-819fa4761d79 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/04a3b000-0230-4e71-ad25-864e5ecc293d because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/107fa1b5-df3c-4e1b-bc4f-3a2d0c42b302 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/1fdb3184-822f-42ed-b6c4-9d2a270cd4de",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/9a15946d-bee9-4472-b095-aa36ade6c929",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/8a360ff6-fd4f-4c12-aa7d-f6fc94d00c2b",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/bfb9362e-ebc9-4140-ab3a-d4ab21e73416",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "no-worker-src-script-src-fallback": {
+   "cspName": "no-worker-src-script-src-fallback",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval'; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/7b45d152-afdc-4369-8b95-be14bec6f4cc because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/ffd7ec15-3c32-4dd1-9998-bf99fd6d4426 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/c70abbe0-4379-4d46-a503-68b97f6d6e69 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/4b65d415-0a77-4238-a707-3a86d69dbdd0 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/ab7c6ba4-4561-4f92-a7c7-ce2d2434be64 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/a8028a6e-ed10-4b14-82e9-854ea62a8d60 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/97e75d85-ad6d-4ecd-b3a2-1560defca16b because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/5fbbed76-5d77-4352-ae8e-383f877c6c89 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/71dde296-d753-406a-8a16-1cd9bb310ba3 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://localhost:8094/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "child-src-fallback": {
+   "cspName": "child-src-fallback",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval'; child-src 'self' blob:; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/0cdabe95-8416-41c1-bc9d-c65cf513e652 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/420531f3-0c0a-4e6b-ac9b-71ffeb6f5add because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/40a8d0ee-2b3d-4f59-ae05-6b11e1d08463 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/4ddea850-02df-475a-847d-2ed32f7a12d5 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/ce99cf7c-1f06-4945-96f7-00083ab1c880",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/b79a3ea3-a8fa-44c6-bfab-a65b8635efe3",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/cdf4066d-3fe6-4397-b680-6df6fb6f756b",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/189c1db5-fe00-4224-a15c-4dbeb142995e",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "default-src-only-fallback": {
+   "cspName": "default-src-only-fallback",
+   "csp": "default-src 'self' {CDN} blob: 'wasm-unsafe-eval'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/5a6473a3-c02f-4723-9192-59823e986c03 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/2f90e4d1-8a7e-4d1c-b2cb-0959e381762f because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/763fc810-c6d6-4735-a33b-8cdcb91746d6 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/6218d14b-1929-412f-bc7c-bf64439c711f because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/90840f7a-8002-4e4c-a1a0-29f3d3eaf240",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/59f64c1b-856b-4514-a9e1-a166775a78a6",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/9d7bad1c-7e7d-41a0-a5ae-56434eee5fc8",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/f8a81d37-91d3-4ea6-8858-81fa696c77aa",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/c770ad96-c9cc-4ddb-8557-049e70e0bb80",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "unsafe-eval-instead-of-wasm-unsafe-eval": {
+   "cspName": "unsafe-eval-instead-of-wasm-unsafe-eval",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/ab152f5b-eb33-42f6-98fa-e96b02333638 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/19564d1b-b21d-4867-b6ed-bef9bbebea13 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/50084a56-446a-4fc3-97bd-37efaa3d45c8 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/ceace0d2-bdc0-4e60-a201-772a0cdf23f7 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "ok"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/acd4da8d-1509-4aa9-b134-8d1505e371a6",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/2e60fe95-6f85-43db-b54f-851695ff30d8",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/3ef8f5ad-c991-4d43-9fbb-ddc400db9764",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/863645c5-8a72-487e-8945-3d501c746e3c",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  },
+  "candidate-production-plus-blob-script-src": {
+   "cspName": "candidate-production-plus-blob-script-src",
+   "csp": "default-src 'none'; script-src 'self' {CDN} blob: 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; frame-src about: blob:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/worker-probe.js because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load data:text/javascript,%2F%2F%20Capability%20probe%20that%20runs%20unchanged%20as%20a%20classic%20worker%2C%20a%20module%20worker%2C%20a%0A%2F%2F%20blob%20worker%2C%20a%20data%3A%20worker%2C%20or%20imported%20by%20a%20shim%20worker.%20The%20CDN%20origin%20is%0A%2F%2F%20passed%20in%20th"
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to connect to http://127.0.0.1:8095/tiny.wasm because it does not appear in the connect-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/4c1609e5-62cb-494f-bd74-0957452e751a because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/5547d34d-39d0-4d1b-909c-e40eeb9d0b52 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/a203785f-aa21-4602-920b-c233c21bea4c because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/709371f6-e0e1-4922-a383-2df058c9e303 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [
+    "Importing a module script failed."
+   ],
+   "result": {
+    "question": "q2",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sourceFile": "http://localhost:8094/q2.js"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "data",
+      "sourceFile": "http://127.0.0.1:8095/worker-cases.js"
+     }
+    ],
+    "steps": {
+     "pageCapabilities": {
+      "wasmSync": "ok",
+      "wasmAsync": "ok",
+      "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following Content Security Po"
+     },
+     "hostDrivenControl": {
+      "__moduleUrl": "http://localhost:8094/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "nestedBlobWorker": "ok",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/b8bc651c-31ab-4e6a-a972-8e376ea90b53",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     },
+     "cdnModuleImport": {
+      "ok": true,
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js"
+     },
+     "cdnModuleCapabilities": {
+      "where": "cdn-module-on-host-document",
+      "moduleUrl": "http://127.0.0.1:8095/cdn-boot.js",
+      "wasmSync": "ok",
+      "wasmAsync": "ok"
+     },
+     "cdnDrivenCases": {
+      "__moduleUrl": "http://127.0.0.1:8095/worker-cases.js",
+      "classic-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-relative-to-document": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "module-abs-same-origin": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "classic-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "module-cross-origin-url": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "blob-inline-source": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/23c1d928-adaa-4013-869c-60945be2fc48",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-importscripts-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/0e4db1e8-f732-4c14-ad0d-f9e98911e141",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-dynamic-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/15978771-9d12-476b-ab3d-2dd0af8f9d89",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "blob-module-static-import-cdn": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "shim-module-import-cdn": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "data-url-worker": {
+       "create": "ok",
+       "gotResult": false,
+       "errors": [
+        "error"
+       ],
+       "messages": 0,
+       "outcome": "error"
+      },
+      "worker-own-csp-strict": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25lJzsgY29ubmVjdC1zcmMgJ25vbmUn",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "fetchCdnWasm": "TypeError: Load failed",
+        "compileStreamingCdn": "TypeError: Load failed",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-no-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfTsgY29ubmVjdC1zcmMge0NETn0",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "worker-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-probe.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      },
+      "shim-own-csp-wasm": {
+       "create": "ok",
+       "gotResult": true,
+       "errors": [],
+       "messages": 1,
+       "probe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/shim-worker.js?wcsp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCc7IGNvbm5lY3Qtc3JjIHtDRE59",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "nestedBlobWorker": "error: error",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok"
+       },
+       "outcome": "probe-result"
+      }
+     }
+    }
+   }
+  }
+ },
+ "q3": {
+  "candidate-production/blob": {
+   "cspName": "candidate-production",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; frame-src about: blob:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "blob",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8095/cdn-guard.js"
+     },
+     "e2e": {
+      "mode": "blob",
+      "guardModuleUrl": "http://127.0.0.1:8095/cdn-guard.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "execWorkerCreate": "ok",
+       "policyWorkerCreate": "ok",
+       "execWorkerReady": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/5b8969fb-3a4d-4fae-99e8-08df445f62ae",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "end-to-end-accepted",
+        "matched": true,
+        "ms": 1
+       },
+       "renderMs": 25,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "notes": []
+        }
+       },
+       "execWorkerProbe": {
+        "type": "probe-result",
+        "href": "blob:http://localhost:8094/5b8969fb-3a4d-4fae-99e8-08df445f62ae",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "evalResult": "EvalError: Refused to evaluate a string as JavaScript because 'unsafe-eval' or 'trusted-types-eval' is not an allowed source of script in the following",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ],
+       "execEventTypes": [
+        "probe-result"
+       ]
+      }
+     }
+    }
+   }
+  },
+  "candidate-production/shim": {
+   "cspName": "candidate-production",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; frame-src about: blob:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "shim",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8095/cdn-guard.js"
+     },
+     "e2e": {
+      "mode": "shim",
+      "guardModuleUrl": "http://127.0.0.1:8095/cdn-guard.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "execWorkerCreate": "ok",
+       "policyWorkerCreate": "ok",
+       "execWorkerReady": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-shim.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "end-to-end-accepted",
+        "matched": true,
+        "ms": 1
+       },
+       "renderMs": 26,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "notes": []
+        }
+       },
+       "execWorkerProbe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-shim.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ],
+       "execEventTypes": [
+        "probe-result"
+       ]
+      }
+     }
+    }
+   }
+  },
+  "candidate-production-no-blob/blob": {
+   "cspName": "candidate-production-no-blob",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src {CDN}; frame-src about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/9d720e9e-1c0f-498b-b280-f27d00d8b6d5 because it does not appear in the worker-src directive of the Content Security Policy."
+    },
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load blob:http://localhost:8094/cfaf9428-3443-4b09-93c0-be4e61508854 because it does not appear in the worker-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "blob",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob"
+     }
+    ],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8095/cdn-guard.js"
+     },
+     "e2e": {
+      "mode": "blob",
+      "guardModuleUrl": "http://127.0.0.1:8095/cdn-guard.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "execWorkerCreate": "ok",
+       "policyWorkerCreate": "ok",
+       "execWorkerReady": {
+        "type": "worker-error",
+        "message": "error"
+       },
+       "portInstalled": {
+        "type": "worker-error",
+        "message": "error"
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "timeout": "frame-ready-seen"
+       },
+       "policyWorkerWasm": {
+        "timeout": "policy worker wasm"
+       },
+       "render": {
+        "timeout": "render ack"
+       },
+       "renderMs": 8014,
+       "frameStats": {
+        "timeout": "frame stats"
+       },
+       "execWorkerProbe": null,
+       "policyEventTypes": [
+        "worker-error"
+       ],
+       "execEventTypes": [
+        "worker-error"
+       ]
+      }
+     }
+    }
+   }
+  },
+  "candidate-production-no-blob/shim": {
+   "cspName": "candidate-production-no-blob",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src {CDN}; frame-src about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "shim",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8095/cdn-guard.js"
+     },
+     "e2e": {
+      "mode": "shim",
+      "guardModuleUrl": "http://127.0.0.1:8095/cdn-guard.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "execWorkerCreate": "ok",
+       "policyWorkerCreate": "ok",
+       "execWorkerReady": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-shim.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "end-to-end-accepted",
+        "matched": true,
+        "ms": 1
+       },
+       "renderMs": 26,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "notes": []
+        }
+       },
+       "execWorkerProbe": {
+        "type": "probe-result",
+        "href": "http://localhost:8094/worker-shim.js",
+        "origin": "http://localhost:8094",
+        "isWorker": true,
+        "cdn": "http://127.0.0.1:8095",
+        "wasmSync": "ok",
+        "newFunction": "ok",
+        "evalResult": "2",
+        "wasmAsync": "ok",
+        "fetchCdnWasm": "status 200",
+        "compileStreamingCdn": "ok",
+        "nestedBlobWorker": "ok"
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ],
+       "execEventTypes": [
+        "probe-result"
+       ]
+      }
+     }
+    }
+   }
+  },
+  "demo-current/blob": {
+   "cspName": "demo-current",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src 'none'; img-src 'none'; frame-src 'self' about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/cdn-guard.js because it does not appear in the script-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "blob",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8095/cdn-guard.js"
+     }
+    ],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": false,
+      "error": "TypeError: Importing a module script failed."
+     }
+    }
+   }
+  },
+  "demo-current/shim": {
+   "cspName": "demo-current",
+   "csp": "default-src 'self'; script-src 'self' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src 'none'; img-src 'none'; frame-src 'self' about:; object-src 'none'; base-uri 'none'",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "",
+     "text": "Refused to load http://127.0.0.1:8095/cdn-guard.js because it does not appear in the script-src directive of the Content Security Policy."
+    }
+   ],
+   "pageErrors": [],
+   "result": {
+    "question": "q3",
+    "mode": "shim",
+    "cdn": "http://127.0.0.1:8095",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8095/cdn-guard.js"
+     }
+    ],
+    "steps": {
+     "cdnGuardImport": {
+      "ok": false,
+      "error": "TypeError: Importing a module script failed."
+     }
+    }
+   }
+  }
+ }
+}

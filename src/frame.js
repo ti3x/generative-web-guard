@@ -1,7 +1,10 @@
 // Code that runs INSIDE the sandboxed, null-origin iframe. It is fixed
 // application code; generated content never executes here. Its job:
 //
-//   1. Receive structured trees from the parent over postMessage.
+//   1. Receive structured trees over the private port from the policy Worker
+//      (src/frame-protocol.js). Until the parent has bootstrapped that port
+//      -- the legacy low-level path -- trees may also arrive from the parent
+//      over postMessage; once bound, a parent `render` is refused.
 //   2. Refuse anything that is not a fixed point of the policy (a tree the
 //      policy would change is not a validated tree, whoever sent it).
 //   3. Render with the structured renderer. No HTML string is ever parsed.
@@ -16,6 +19,8 @@
 import { isTreeShaped } from "./tree.js";
 import { isValidated, setClassAllowlist } from "./policy.js";
 import { createRenderer } from "./render.js";
+import { createFrameReceiver } from "./frame-channel.js";
+import { FRAME_PROTOCOL_VERSION } from "./frame-protocol.js";
 
 // Injected at build time from the bundled stylesheet.
 // eslint-disable-next-line no-undef
@@ -67,23 +72,51 @@ export function startFrame(win) {
   const parent = win.parent;
   const post = (msg) => parent.postMessage(msg, "*"); // null origin: parent verifies source
 
+  // Commit one tree, whichever route delivered it: the same re-validation and
+  // the same atomic clear-on-failure for both.
+  function commit(tree) {
+    if (!isTreeShaped(tree) || !isValidated(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
+    try {
+      renderer.render(tree);
+      return { ok: true };
+    } catch (err) {
+      renderer.clear();
+      return { ok: false, reason: String(err && err.message) };
+    }
+  }
+
+  // The private port to the policy Worker (src/frame-protocol.js). Once the
+  // parent has bootstrapped it, trees arrive ONLY over it and a `render` from
+  // the parent is refused: the parent can wire the channel, it cannot supply a
+  // tree. A later bootstrap replaces the port (the policy Worker was replaced)
+  // and never reopens the parent route.
+  let receiver = null;
+  let bound = null;
+
+  function bootstrap(msg, ports) {
+    const port = ports && ports[0];
+    if (!port || msg.protocol !== FRAME_PROTOCOL_VERSION) return;
+    if (typeof msg.instanceId !== "string" || typeof msg.sessionId !== "string") return;
+    if (receiver) receiver.dispose();
+    bound = { instanceId: msg.instanceId, sessionId: msg.sessionId };
+    receiver = createFrameReceiver(port, { ...bound, onRender: commit });
+    post({ type: "bound", instanceId: bound.instanceId, sessionId: bound.sessionId });
+  }
+
   win.addEventListener("message", (e) => {
     if (e.source !== parent) return;
     const msg = e.data;
     if (!msg || typeof msg !== "object") return;
-    if (msg.type === "render") {
+    if (msg.type === "bootstrap") {
+      bootstrap(msg, e.ports);
+    } else if (msg.type === "render") {
       const seq = typeof msg.seq === "number" ? msg.seq : -1;
-      if (!isTreeShaped(msg.tree) || !isValidated(msg.tree)) {
-        post({ type: "refused", seq, reason: "tree is not a validated fixed point" });
+      if (bound) {
+        post({ type: "refused", seq, reason: "frame is bound to the policy port; the parent cannot supply a tree" });
         return;
       }
-      try {
-        renderer.render(msg.tree);
-        post({ type: "rendered", seq });
-      } catch (err) {
-        renderer.clear();
-        post({ type: "refused", seq, reason: String(err && err.message) });
-      }
+      const result = commit(msg.tree);
+      post(result.ok ? { type: "rendered", seq } : { type: "refused", seq, reason: result.reason });
     } else if (msg.type === "clear") {
       renderer.clear();
     }
@@ -167,7 +200,17 @@ export function startFrame(win) {
     }, true);
   }
 
-  post({ type: "ready" });
+  // The frame's own CSP violations are not visible to the host: they belong to
+  // this document, and if the script hash were missing this line would never
+  // run at all. What the frame CAN do is report facts about itself that the
+  // host would otherwise have to guess. `styleSheets: 0` means the host's
+  // style-src is missing this build's style hash, which degrades appearance
+  // and nothing else, so the host warns instead of failing.
+  post({
+    type: "ready",
+    styleSheets: doc.styleSheets ? doc.styleSheets.length : -1,
+    trustedTypes: typeof win.trustedTypes !== "undefined",
+  });
 }
 
 if (typeof window !== "undefined" && window.parent !== window) {

@@ -1,0 +1,3328 @@
+{
+ "engine": "firefox",
+ "version": "141.0",
+ "revision": "1490",
+ "executable": "/Users/txia/Library/Caches/ms-playwright/firefox-1490/firefox/Nightly.app/Contents/MacOS/firefox",
+ "when": "2026-09-12T21:27:09.215Z",
+ "n1": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "uH6rRjK4jEbRqNf5xak5CQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=uH6rRjK4jEbRqNf5xak5CQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=uH6rRjK4jEbRqNf5xak5CQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "uH6rRjK4jEbRqNf5xak5CQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  },
+  "profile-a-control/no-host-nonce": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "ehRoLBmkm4jb5D0xh6pSfw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=ehRoLBmkm4jb5D0xh6pSfw&hostNonce=0",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=ehRoLBmkm4jb5D0xh6pSfw&hostNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "ehRoLBmkm4jb5D0xh6pSfw",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  },
+  "nonce-sd-bare": {
+   "cspName": "nonce-sd-bare",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "K0nHbHLYGQmwQNTFDdoj7w",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cm"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11c"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cm"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'”\" {file: \"http://localhost:8098/n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'”\" {file: \"http://localhost:8098/"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'”\" {file: \"http://localhost:80"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'”\" {file: \"http://localhost:809"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 46"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 47"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://localhost:8098"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-K0nHbHLYGQmwQNTFDdoj7w' 'strict-dynamic'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://localhost:8098"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnOyBzdHlsZS1zcmMgJ3NlbGYnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=K0nHbHLYGQmwQNTFDdoj7w&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "K0nHbHLYGQmwQNTFDdoj7w",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+     "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP"
+    }
+   }
+  },
+  "nonce-sd-with-cdn-and-self": {
+   "cspName": "nonce-sd-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "HYgR2Tyz9RkAaqIiGn29BQ",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'self'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http://127.0.0.1:8099” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnb"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'”\" {f"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'”\" {"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'”"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'”\""
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'” (Missing 'unsafe-eval')\" {file: \"http://l"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'” (Missing 'unsafe-eval')\" {file: \"http://l"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-HYgR2Tyz9RkAaqIiGn29BQ' 'strict-dynamic'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=HYgR2Tyz9RkAaqIiGn29BQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "HYgR2Tyz9RkAaqIiGn29BQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+     "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP"
+    }
+   }
+  },
+  "nonce-sd-with-cdn-and-self/no-host-nonce": {
+   "cspName": "nonce-sd-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}' 'strict-dynamic'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "_sYXW1WJ_MRPdX37ufmY_A",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'self'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http://127.0.0.1:8099” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnb"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/n1.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2Ut"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-_sYXW1WJ_MRPdX37ufmY_A' 'strict-dynamic'”\" {f"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-_sYXW1WJ_MRPdX37ufmY_A' 'strict-dynamic'”\" {"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-_sYXW1WJ_MRPdX37ufmY_A' 'strict-dynamic'”"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-_sYXW1WJ_MRPdX37ufmY_A' 'strict-dynamic'”\""
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/n1.js from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-_sYXW1WJ_MRPdX37ufmY_A' 'strict-dynamic'”\" {file: \"http:"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=_sYXW1WJ_MRPdX37ufmY_A&hostNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/n1.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "_sYXW1WJ_MRPdX37ufmY_A",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok"
+    },
+    "steps": {
+     "bootstrapNeverRan": true
+    },
+    "timedOutByCollector": "bootstrap-never-ran"
+   }
+  },
+  "nonce-only-with-cdn-and-self": {
+   "cspName": "nonce-only-with-cdn-and-self",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'nonce-{NONCE}'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "OSIJA8vjUF9VmAz8tiX7og",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-OSIJA8vjUF9VmAz8tiX7og'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1."
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-OSIJA8vjUF9VmAz8tiX7og'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1."
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-OSIJA8vjUF9VmAz8tiX7og'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://lo"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'nonce-OSIJA8vjUF9VmAz8tiX7og'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://lo"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfSc7IHN0eWxlLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=OSIJA8vjUF9VmAz8tiX7og&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnbm9uY2Ute05PTkNFfSc7IHN0eWxlLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=OSIJA8vjUF9VmAz8tiX7og&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "OSIJA8vjUF9VmAz8tiX7og",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnTagPlain": "ran",
+     "hostTagPlain": "ran",
+     "cdnModuleNonced": "ran",
+     "hostModulePlain": "ran",
+     "cdnModulePlain": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+     "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP"
+    }
+   }
+  },
+  "nonce-only-bare": {
+   "cspName": "nonce-only-bare",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "aVsAR1G-5lK58T3WEE5ekQ",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3R"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8098/n1.html?csp64=ZGVm"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8098/n1.html?csp64=ZGV"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8098/n1.html?csp64="
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8098/n1.html?csp64=Z"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-inserted.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rp"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-inserted.js from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8098/n1.js\" line: 30}]"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-dep.js?from=inserted-module”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICd"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-dep.js?from=inserted-module from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'”\" {file: \"http://localhost:8"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 46}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'” (Missing 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 47}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 51}"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-aVsAR1G-5lK58T3WEE5ekQ'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" {file: \"http://localhost:8098/n1.js\" line: 52}"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9Jzsgc3R5bGUtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=aVsAR1G-5lK58T3WEE5ekQ&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-inserted.js",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-dep.js?from=inserted-module",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "aVsAR1G-5lK58T3WEE5ekQ",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "error",
+     "programmaticInsertModule": "error",
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+     "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP"
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "zah5KtKndOsKDRf0GEHGSA",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsg"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&no"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&n"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&n"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'”\" {f"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'”\" {"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'”"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'”\""
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'unsafe-eval')\" {file: \"http://l"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'unsafe-eval')\" {file: \"http://l"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-zah5KtKndOsKDRf0GEHGSA' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=zah5KtKndOsKDRf0GEHGSA&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "wasm-eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "zah5KtKndOsKDRf0GEHGSA",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "nonceRecoveryFromModule": {
+      "currentScript": "null",
+      "selectorMatched": true,
+      "idl": "zah5KtKndOsKDRf0GEHGSA",
+      "attribute": "",
+      "src": "http://localhost:8098/collector.js",
+      "ownTagIdl": "zah5KtKndOsKDRf0GEHGSA"
+     },
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+     "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP"
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "bLQd7bEQryNgSakHjCqkvg",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://127.0.0.1:8099/cdn-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHl"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the <script> with source “http://localhost:8098/host-tag-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdH"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://localhost:8098/host-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzd"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Warning: \"Loading failed for the module with source “http://127.0.0.1:8099/cdn-module-plain.js”.\" {file: \"http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdH"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1F"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-tag-plain.js from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://localhost:8098/host-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TP"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/cdn-module-plain.js from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPr"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo="
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n1.js",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-bLQd7bEQryNgSakHjCqkvg' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo="
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n1.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+   "result": {
+    "page": "/n1.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=bLQd7bEQryNgSakHjCqkvg&hostNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-tag-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://localhost:8098/host-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/cdn-module-plain.js",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     },
+     {
+      "effectiveDirective": "script-src",
+      "blockedURI": "eval",
+      "sample": "",
+      "sourceFile": "http://localhost:8098/n1.js"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "bLQd7bEQryNgSakHjCqkvg",
+    "nonceViaAttribute": "",
+    "tags": {
+     "cdnTagNonced": "ran",
+     "cdnModuleNonced": "ran",
+     "cdnModuleDep": "ran",
+     "cdnModuleNoncedChainImport": "ok",
+     "cdnProgrammaticInsert": "ran"
+    },
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "hostModuleHadNonceAttr": "tag-present",
+     "dynamicImportFromHostModule": {
+      "ok": true,
+      "keys": 0
+     },
+     "programmaticInsert": "load",
+     "programmaticInsertModule": "load",
+     "nonceRecoveryFromModule": {
+      "currentScript": "null",
+      "selectorMatched": true,
+      "idl": "bLQd7bEQryNgSakHjCqkvg",
+      "attribute": "",
+      "src": "http://localhost:8098/collector.js",
+      "ownTagIdl": "bLQd7bEQryNgSakHjCqkvg"
+     },
+     "evalResult": "EvalError: call to eval() blocked by CSP",
+     "newFunction": "EvalError: call to Function() blocked by CSP",
+     "wasmSync": "ok",
+     "wasmInstantiate": "ok"
+    }
+   }
+  }
+ },
+ "n2": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "d4ia66brXzeg0ejejif4Kw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/247e41b6-6c64-45b2-b054-f957b77cc53d",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/247e41b6-6c64-45b2-b054-f957b77cc53d",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'self' http://127.0.0.1:8099 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=d4ia66brXzeg0ejejif4Kw",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=d4ia66brXzeg0ejejif4Kw",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "d4ia66brXzeg0ejejif4Kw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/247e41b6-6c64-45b2-b054-f957b77cc53d"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/b39a45d2-5c14-456c-b3fd-d993be4ebcd1",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "d4ia66br..."
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "9vexXzWcxG1mM1I7IEviUA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/e66c85c6-7510-4f60-bb0b-a664a2c2274b",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-9vexXzWcxG1mM1I7IEviUA' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo="
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/e66c85c6-7510-4f60-bb0b-a664a2c2274b",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-9vexXzWcxG1mM1I7IEviUA' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo="
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=9vexXzWcxG1mM1I7IEviUA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=9vexXzWcxG1mM1I7IEviUA",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "9vexXzWcxG1mM1I7IEviUA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/e66c85c6-7510-4f60-bb0b-a664a2c2274b"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/d4761d9a-7b30-4d25-9e11-0cedda5e5286",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "9vexXzWc..."
+    }
+   }
+  },
+  "nonce-sd-no-wasm-token": {
+   "cspName": "nonce-sd-no-wasm-token",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "e-PGeS0JY_yllzs7ezOqog",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-e-PGeS0JY_yllzs7ezOqog' 'strict-dynamic' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'wasm-unsafe-"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-e-PGeS0JY_yllzs7ezOqog' 'strict-dynamic' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-e-PGeS0JY_yllzs7ezOqog' 'strict-dynamic' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'unsafe"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-e-PGeS0JY_yllzs7ezOqog' 'strict-dynamic' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'wasm-unsafe-"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-e-PGeS0JY_yllzs7ezOqog' 'strict-dynamic' 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='” (Missing 'wasm-unsafe-"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICdzaGEyNTYte1NDUklQVF9IQVNIfSc7IHN0eWxlLXNyYyAnc2VsZicgJ3NoYTI1Ni17Q1NTX0hBU0h9Jzsgd29ya2VyLXNyYyAnc2VsZicgYmxvYjo7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=e-PGeS0JY_yllzs7ezOqog",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICdzaGEyNTYte1NDUklQVF9IQVNIfSc7IHN0eWxlLXNyYyAnc2VsZicgJ3NoYTI1Ni17Q1NTX0hBU0h9Jzsgd29ya2VyLXNyYyAnc2VsZicgYmxvYjo7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=e-PGeS0JY_yllzs7ezOqog",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "e-PGeS0JY_yllzs7ezOqog",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "CompileError: call to WebAssembly.compile() blocked by CSP",
+       "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/8b280f79-a1df-45f3-a54c-19b2161d5808"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/ab220a74-ac7e-458d-9f05-ba2700761ab4",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "e-PGeS0J..."
+    }
+   }
+  },
+  "nonce-sd-worker-src-self-only": {
+   "cspName": "nonce-sd-worker-src-self-only",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "2t96IIeuHA9GQrOirC0MBw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=2t96IIeuHA9GQrOirC0MBw",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a worker script (worker-src) at blob:http://localhost:8098/c076311f-3ec0-4a41-a8b7-46146f88ce59 from being executed because it violates the following directive: “worker-src 'self'”\" {file: \"http://localhost:8098/n2.html?csp64=Z"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=2t96IIeuHA9GQrOirC0MBw",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a worker script (worker-src) at blob:http://localhost:8098/e200d8aa-042c-46f3-b66f-c4f7b822e76c from being executed because it violates the following directive: “worker-src 'self'”\" {file: \"http://localhost:8098/n2.html?csp64=Z"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=2t96IIeuHA9GQrOirC0MBw",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjIHtDRE59OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=2t96IIeuHA9GQrOirC0MBw",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": ""
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "2t96IIeuHA9GQrOirC0MBw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "2t96IIeu..."
+    }
+   }
+  },
+  "nonce-sd-worker-src-strict-dynamic": {
+   "cspName": "nonce-sd-worker-src-strict-dynamic",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'nonce-{NONCE}' 'strict-dynamic' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "lpQyIxxNvCBC9uNPqdCSCw",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=lpQyIxxNvCBC9uNPqdCSCw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring source “strict-dynamic” (Only supported within script-src).\" {file: \"http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=lpQyIxxNvCBC9uNPqdCSCw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “blob:” within worker-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyL"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/a5511f3e-af57-4dba-a414-30c7a982e7d7",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-lpQyIxxNvCBC9uNPqdCSCw' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/a5511f3e-af57-4dba-a414-30c7a982e7d7",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-lpQyIxxNvCBC9uNPqdCSCw' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=lpQyIxxNvCBC9uNPqdCSCw",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgd29ya2VyLXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=lpQyIxxNvCBC9uNPqdCSCw",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "lpQyIxxNvCBC9uNPqdCSCw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/a5511f3e-af57-4dba-a414-30c7a982e7d7"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/5c897419-483c-46ac-a367-e9cbdfc347f8",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "lpQyIxxN..."
+    }
+   }
+  },
+  "nonce-sd-no-worker-src-blob-in-script-src": {
+   "cspName": "nonce-sd-no-worker-src-blob-in-script-src",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' blob: 'wasm-unsafe-eval'; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "Zh6KkKhvWElWlFrWTKmYaQ",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=Zh6KkKhvWElWlFrWTKmYaQ",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “blob:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY"
+    },
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/5abe5e2f-221c-46f7-a317-31369327d778",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Zh6KkKhvWElWlFrWTKmYaQ' 'strict-dynamic' blob: 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/5abe5e2f-221c-46f7-a317-31369327d778",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Zh6KkKhvWElWlFrWTKmYaQ' 'strict-dynamic' blob: 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=Zh6KkKhvWElWlFrWTKmYaQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnIGJsb2I6ICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=Zh6KkKhvWElWlFrWTKmYaQ",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "Zh6KkKhvWElWlFrWTKmYaQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/5abe5e2f-221c-46f7-a317-31369327d778"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/4d157a39-6b45-4701-a795-bb78a6b17265",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "Zh6KkKhv..."
+    }
+   }
+  },
+  "nonce-sd-child-src-blob": {
+   "cspName": "nonce-sd-child-src-blob",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; child-src 'self' blob:; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "Lz4vrT8yAVaBm_oBVptLQA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/97ad91e8-398b-485b-898f-7bbc2a799748",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Lz4vrT8yAVaBm_oBVptLQA' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/97ad91e8-398b-485b-898f-7bbc2a799748",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Lz4vrT8yAVaBm_oBVptLQA' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgY2hpbGQtc3JjICdzZWxmJyBibG9iOjsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=Lz4vrT8yAVaBm_oBVptLQA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgY2hpbGQtc3JjICdzZWxmJyBibG9iOjsgc3R5bGUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=Lz4vrT8yAVaBm_oBVptLQA",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "Lz4vrT8yAVaBm_oBVptLQA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/97ad91e8-398b-485b-898f-7bbc2a799748"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/90721e1e-5f96-4f4d-84e7-3dd0fd18ca54",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "Lz4vrT8y..."
+    }
+   }
+  },
+  "nonce-sd-default-src-blob": {
+   "cspName": "nonce-sd-default-src-blob",
+   "csp": "default-src blob:; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "Xk9RrWQqDMsNuFhLNrHQSA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src blob:”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/565a3959-cc4d-4845-987b-23b706a260d4",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Xk9RrWQqDMsNuFhLNrHQSA' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/565a3959-cc4d-4845-987b-23b706a260d4",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-Xk9RrWQqDMsNuFhLNrHQSA' 'strict-dynamic' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localh"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgYmxvYjo7IHNjcmlwdC1zcmMgJ25vbmNlLXtOT05DRX0nICdzdHJpY3QtZHluYW1pYycgJ3dhc20tdW5zYWZlLWV2YWwnOyBzdHlsZS1zcmMgJ3NlbGYnOyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=Xk9RrWQqDMsNuFhLNrHQSA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgYmxvYjo7IHNjcmlwdC1zcmMgJ25vbmNlLXtOT05DRX0nICdzdHJpY3QtZHluYW1pYycgJ3dhc20tdW5zYWZlLWV2YWwnOyBzdHlsZS1zcmMgJ3NlbGYnOyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=Xk9RrWQqDMsNuFhLNrHQSA",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "Xk9RrWQqDMsNuFhLNrHQSA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/565a3959-cc4d-4845-987b-23b706a260d4"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/e83a3571-6b0f-4803-b728-62af337cead6",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "Xk9RrWQq..."
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "NT_viCCobfpu7teaEoSiwQ",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified\" {file: \"http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsg"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-NT_viCCobfpu7teaEoSiwQ' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-NT_viCCobfpu7teaEoSiwQ' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'unsafe-eval')\" {file: \"blob:htt"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-NT_viCCobfpu7teaEoSiwQ' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'unsafe-eval')\" {file: \"blob:htt"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-NT_viCCobfpu7teaEoSiwQ' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-NT_viCCobfpu7teaEoSiwQ' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=NT_viCCobfpu7teaEoSiwQ",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "NT_viCCobfpu7teaEoSiwQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "CompileError: call to WebAssembly.compile() blocked by CSP",
+       "wasmInstantiate": "CompileError: call to WebAssembly.instantiate() blocked by CSP",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/6daacaf4-9b6f-438d-961a-782dadab388f"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "payload-imported",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/0ebb882a-b8aa-4a04-8db7-20737fc9e0c7",
+      "payloadImported": true
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "NT_viCCo..."
+    }
+   }
+  },
+  "nonce-only-worker-blob": {
+   "cspName": "nonce-only-worker-blob",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "AzzjoUYxG-DEZduq2PDWmA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/2d43156b-de0c-4e6b-8ccc-7767cc81021d",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-AzzjoUYxG-DEZduq2PDWmA' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localhost:8098/2d43156b"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/2d43156b-de0c-4e6b-8ccc-7767cc81021d",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a JavaScript eval (script-src) from being executed because it violates the following directive: “script-src 'nonce-AzzjoUYxG-DEZduq2PDWmA' 'wasm-unsafe-eval'” (Missing 'unsafe-eval')\" {file: \"blob:http://localhost:8098/2d43156b"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnd2FzbS11bnNhZmUtZXZhbCc7IHN0eWxlLXNyYyAnc2VsZic7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=AzzjoUYxG-DEZduq2PDWmA",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a script (script-src-elem) at http://127.0.0.1:8099/worker-payload.js from being executed because it violates the following directive: “script-src 'nonce-AzzjoUYxG-DEZduq2PDWmA' 'wasm-unsafe-eval'”\" {file: \"http://localhost:809"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnd2FzbS11bnNhZmUtZXZhbCc7IHN0eWxlLXNyYyAnc2VsZic7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=AzzjoUYxG-DEZduq2PDWmA",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnd2FzbS11bnNhZmUtZXZhbCc7IHN0eWxlLXNyYyAnc2VsZic7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=AzzjoUYxG-DEZduq2PDWmA",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "script-src-elem",
+      "blockedURI": "http://127.0.0.1:8099/worker-payload.js",
+      "sample": "",
+      "sourceFile": ""
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "AzzjoUYxG-DEZduq2PDWmA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "wasmSync": "ok",
+       "newFunction": "EvalError: call to Function() blocked by CSP",
+       "evalResult": "EvalError: call to eval() blocked by CSP",
+       "wasmCompile": "ok",
+       "wasmInstantiate": "ok",
+       "fetchCdn": "status 200",
+       "nestedBlobWorker": "ok"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/2d43156b-de0c-4e6b-8ccc-7767cc81021d"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [
+       "top-level",
+       "probe"
+      ],
+      "topLevelRan": true,
+      "probe": {
+       "type": "probe",
+       "dynamicImport": "TypeError: error loading dynamically imported module: http://127.0.0.1:8099/worker-payload.js"
+      },
+      "errorEvent": null,
+      "href": "blob:http://localhost:8098/adf070c2-dd21-47d9-b64b-8493764a5492"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "AzzjoUYx..."
+    }
+   }
+  },
+  "profile-a-worker-src-self-only": {
+   "cspName": "profile-a-worker-src-self-only",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self'; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "b76WCt1nGQB9MeSFMNBcTQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=b76WCt1nGQB9MeSFMNBcTQ",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a worker script (worker-src) at blob:http://localhost:8098/ce0cff2d-792c-48f3-96a5-4856d33e1293 from being executed because it violates the following directive: “worker-src 'self'”\" {file: \"http://localhost:8098/n2.html?csp64=Z"
+    },
+    {
+     "type": "error",
+     "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=b76WCt1nGQB9MeSFMNBcTQ",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked a worker script (worker-src) at blob:http://localhost:8098/d5a6cef9-20a8-4ed5-af57-c5e68b871aa0 from being executed because it violates the following directive: “worker-src 'self'”\" {file: \"http://localhost:8098/n2.html?csp64=Z"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n2.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=b76WCt1nGQB9MeSFMNBcTQ",
+   "result": {
+    "page": "/n2.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJzsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=b76WCt1nGQB9MeSFMNBcTQ",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": ""
+     },
+     {
+      "effectiveDirective": "worker-src",
+      "blockedURI": "blob",
+      "sample": "",
+      "sourceFile": ""
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "b76WCt1nGQB9MeSFMNBcTQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "blobClassic": {
+      "label": "blob-classic",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "blobModule": {
+      "label": "blob-module",
+      "created": "ok",
+      "events": [],
+      "topLevelRan": false,
+      "probe": null,
+      "errorEvent": "error"
+     },
+     "workerNonceApi": "no nonce option on Worker",
+     "nonceReadable": "b76WCt1n..."
+    }
+   }
+  }
+ },
+ "n3": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "96tq0C2inH0BDNBjDnlvoA",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=96tq0C2inH0BDNBjDnlvoA&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=96tq0C2inH0BDNBjDnlvoA&frameNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "96tq0C2inH0BDNBjDnlvoA",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "3f1LARTndiFm8AQLys1Psw",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=3f1LARTndiFm8AQLys1Psw&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=3f1LARTndiFm8AQLys1Psw&frameNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "3f1LARTndiFm8AQLys1Psw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate/frame-nonce": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "ffrjhJ8K3EMQ6Temu44KvQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=ffrjhJ8K3EMQ6Temu44KvQ&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=ffrjhJ8K3EMQ6Temu44KvQ&frameNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "ffrjhJ8K3EMQ6Temu44KvQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-ffrjhJ8K3EMQ6Temu44KvQ'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-no-frame-script-hash": {
+   "cspName": "nonce-sd-no-frame-script-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "mtytnhbmp7u2wueNHOQYXg",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked an inline script (script-src-elem) from being executed because it violates the following directive: “script-src 'nonce-mtytnhbmp7u2wueNHOQYXg' 'strict-dynamic' 'wasm-unsafe-eval'”. Consider using a hash ('sha256-TPrE1FtNCgPJXlY"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=mtytnhbmp7u2wueNHOQYXg&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=mtytnhbmp7u2wueNHOQYXg&frameNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "mtytnhbmp7u2wueNHOQYXg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "timeout": "frame-alive"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "timeout": "frame-ready"
+     },
+     "committed": {
+      "timeout": "committed"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  },
+  "nonce-sd-no-frame-script-hash/frame-nonce": {
+   "cspName": "nonce-sd-no-frame-script-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "wl8XzBHPIa59JRGytBCb5Q",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=wl8XzBHPIa59JRGytBCb5Q&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=wl8XzBHPIa59JRGytBCb5Q&frameNonce=1",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "wl8XzBHPIa59JRGytBCb5Q",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-wl8XzBHPIa59JRGytBCb5Q'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-no-frame-style-hash": {
+   "cspName": "nonce-sd-no-frame-style-hash",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "OIFlr7FqRRDmjLG5GBq4Ew",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked an inline style (style-src-elem) from being applied because it violates the following directive: “style-src 'self'”. Consider using a hash ('sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis=', requires 'unsafe-hashes' for sty"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=OIFlr7FqRRDmjLG5GBq4Ew&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=OIFlr7FqRRDmjLG5GBq4Ew&frameNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "OIFlr7FqRRDmjLG5GBq4Ew",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(0, 0, 0)",
+    "rootFont": "16px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-only-with-hashes": {
+   "cspName": "nonce-only-with-hashes",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "MWzmMpYB_KgmjN2D94U5Gg",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=MWzmMpYB_KgmjN2D94U5Gg&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUnOyBmb3JtLWFjdGlvbiAnbm9uZSc&nonce=MWzmMpYB_KgmjN2D94U5Gg&frameNonce=0",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "MWzmMpYB_KgmjN2D94U5Gg",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "slYCxtUkYzwCH0RF_cbdvw",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsg"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked an inline script (script-src-elem) from being executed because it violates the following directive: “script-src 'nonce-slYCxtUkYzwCH0RF_cbdvw' 'strict-dynamic' https: http: 'unsafe-inline'”. Consider using a hash ('sha256-TPrE1"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=slYCxtUkYzwCH0RF_cbdvw&frameNonce=0",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "slYCxtUkYzwCH0RF_cbdvw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo='; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "timeout": "frame-alive"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "timeout": "frame-ready"
+     },
+     "committed": {
+      "timeout": "committed"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  },
+  "google-recommended/frame-nonce": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "xLZP-iZeztYa9Pi53Oga9Q",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified\" {file: \"http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsg"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n3.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+   "result": {
+    "page": "/n3.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=xLZP-iZeztYa9Pi53Oga9Q&frameNonce=1",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "xLZP-iZeztYa9Pi53Oga9Q",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "frameCsp": "default-src 'none'; script-src 'sha256-TPrE1FtNCgPJXlYZfBQ6VjPbEjcRngJsKfPyi3wqqUo=' 'nonce-xLZP-iZeztYa9Pi53Oga9Q'; style-src 'sha256-ajwy4ZHUh4JgWq5sGSeszbJvM04fxmqeSMEyv+sGYis='; require-trusted-types-for 'script'; trusted-types 'none'; base-uri 'none'; form-action 'none'",
+     "frameAlive": {
+      "type": "frame-alive",
+      "origin": "null"
+     },
+     "bootstrapPosted": "ok",
+     "frameReady": {
+      "type": "frame-ready",
+      "v": 1,
+      "origin": "null"
+     },
+     "committed": {
+      "type": "committed",
+      "v": 1,
+      "requestId": "n3-1",
+      "generation": 1,
+      "nodeCount": 1,
+      "domText": "nonce-render-accepted"
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-render-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 0,
+     "parentRenderAttemptsAfterBootstrap": 0,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "n3-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  }
+ },
+ "n4": {
+  "profile-a-control": {
+   "cspName": "profile-a-control",
+   "csp": "default-src 'none'; script-src 'self' {CDN} 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "7SKye2q7tM_l7XX1OotquQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=7SKye2q7tM_l7XX1OotquQ",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdzZWxmJyB7Q0ROfSAnd2FzbS11bnNhZmUtZXZhbCcgJ3NoYTI1Ni17U0NSSVBUX0hBU0h9Jzsgc3R5bGUtc3JjICdzZWxmJyAnc2hhMjU2LXtDU1NfSEFTSH0nOyB3b3JrZXItc3JjICdzZWxmJyBibG9iOjsgY29ubmVjdC1zcmMge0NETn07IG9iamVjdC1zcmMgJ25vbmUnOyBiYXNlLXVyaSAnbm9uZSc7IGZvcm0tYWN0aW9uICdub25lJw&nonce=7SKye2q7tM_l7XX1OotquQ",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "7SKye2q7tM_l7XX1OotquQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "nonce-end-to-end-accepted",
+        "matched": true,
+        "ms": 2
+       },
+       "renderMs": 27,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "trustedTypesSupported": false,
+         "notes": []
+        }
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-end-to-end-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 1,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "e2e-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "nonce-sd-candidate": {
+   "cspName": "nonce-sd-candidate",
+   "csp": "default-src 'none'; script-src 'nonce-{NONCE}' 'strict-dynamic' 'wasm-unsafe-eval' 'sha256-{SCRIPT_HASH}'; style-src 'self' 'sha256-{CSS_HASH}'; worker-src 'self' blob:; connect-src {CDN}; object-src 'none'; base-uri 'none'; form-action 'none'",
+   "nonce": "QsqOABOGSjv3N6Id4Y3WVQ",
+   "consoleMsgs": [
+    {
+     "type": "error",
+     "url": "resource:///modules/FaviconLoader.sys.mjs",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked the loading of a resource (img-src) at http://localhost:8098/favicon.ico because it violates the following directive: “default-src 'none'”\" {file: \"resource:///modules/FaviconLoader.sys.mjs\" line: 175}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=QsqOABOGSjv3N6Id4Y3WVQ",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=ZGVmYXVsdC1zcmMgJ25vbmUnOyBzY3JpcHQtc3JjICdub25jZS17Tk9OQ0V9JyAnc3RyaWN0LWR5bmFtaWMnICd3YXNtLXVuc2FmZS1ldmFsJyAnc2hhMjU2LXtTQ1JJUFRfSEFTSH0nOyBzdHlsZS1zcmMgJ3NlbGYnICdzaGEyNTYte0NTU19IQVNIfSc7IHdvcmtlci1zcmMgJ3NlbGYnIGJsb2I6OyBjb25uZWN0LXNyYyB7Q0ROfTsgb2JqZWN0LXNyYyAnbm9uZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUn&nonce=QsqOABOGSjv3N6Id4Y3WVQ",
+    "violations": [
+     {
+      "effectiveDirective": "img-src",
+      "blockedURI": "http://localhost:8098/favicon.ico",
+      "sample": "",
+      "sourceFile": "resource"
+     }
+    ],
+    "consoleNote": [],
+    "nonceViaIdl": "QsqOABOGSjv3N6Id4Y3WVQ",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "type": "frame-alive",
+        "origin": "null"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "type": "frame-ready-seen",
+        "origin": "null"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "ok",
+        "wasmAsync": "ok"
+       },
+       "render": {
+        "type": "render-settled",
+        "requestId": "e2e-1",
+        "outcome": "committed",
+        "generation": 1,
+        "nodeCount": 1,
+        "domText": "nonce-end-to-end-accepted",
+        "matched": true,
+        "ms": 1
+       },
+       "renderMs": 30,
+       "frameStats": {
+        "type": "frame-stats",
+        "stats": {
+         "bootstrapAccepted": 1,
+         "bootstrapRejected": 0,
+         "portInstalled": true,
+         "parentMessagesAfterBootstrap": 1,
+         "parentRenderAttemptsAfterBootstrap": 1,
+         "parentMessagesBeforeBootstrap": 0,
+         "portRenders": 1,
+         "portStale": 0,
+         "acks": 1,
+         "lastGeneration": 1,
+         "lastRequestId": "e2e-1",
+         "trustedTypesSupported": false,
+         "notes": []
+        }
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "frame-ready-seen",
+        "wasm-probe",
+        "render-settled",
+        "port-observed",
+        "frame-stats"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "nonce-end-to-end-accepted",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": true,
+    "stats": {
+     "bootstrapAccepted": 1,
+     "bootstrapRejected": 0,
+     "portInstalled": true,
+     "parentMessagesAfterBootstrap": 1,
+     "parentRenderAttemptsAfterBootstrap": 1,
+     "parentMessagesBeforeBootstrap": 0,
+     "portRenders": 1,
+     "portStale": 0,
+     "acks": 1,
+     "lastGeneration": 1,
+     "lastRequestId": "e2e-1",
+     "trustedTypesSupported": false,
+     "notes": []
+    }
+   }
+  },
+  "google-recommended": {
+   "cspName": "google-recommended",
+   "csp": "script-src 'nonce-{NONCE}' 'strict-dynamic' https: http: 'unsafe-inline'; object-src 'none'; base-uri 'none'",
+   "nonce": "F6dLpw39a5y2Lq9ZrjeFqw",
+   "consoleMsgs": [
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “https:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “http:” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: ‘strict-dynamic’ specified\" {file: \"http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmk"
+    },
+    {
+     "type": "warning",
+     "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Ignoring “'unsafe-inline'” within script-src: nonce-source or hash-source specified\" {file: \"http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsg"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘require-trusted-types-for’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "warning",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Warning: \"Content-Security-Policy: Couldn’t process unknown directive ‘trusted-types’\" {file: \"about:srcdoc\" line: 0}]"
+    },
+    {
+     "type": "error",
+     "url": "about:srcdoc",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked an inline script (script-src-elem) from being executed because it violates the following directive: “script-src 'nonce-F6dLpw39a5y2Lq9ZrjeFqw' 'strict-dynamic' https: http: 'unsafe-inline'”. Consider using a hash ('sha256-TPrE1"
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/f60c53bd-df12-4f14-8559-631d8364df64",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-F6dLpw39a5y2Lq9ZrjeFqw' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    },
+    {
+     "type": "error",
+     "url": "blob:http://localhost:8098/f60c53bd-df12-4f14-8559-631d8364df64",
+     "text": "[JavaScript Error: \"Content-Security-Policy: The page’s settings blocked WebAssembly (script-src) from being executed because it violates the following directive: “script-src 'nonce-F6dLpw39a5y2Lq9ZrjeFqw' 'strict-dynamic' https: http: 'unsafe-inline'” (Missing 'wasm-unsafe-eval' or 'unsafe-eval')\" "
+    }
+   ],
+   "pageErrors": [],
+   "url": "http://localhost:8098/n4.html?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+   "result": {
+    "page": "/n4.html",
+    "search": "?csp64=c2NyaXB0LXNyYyAnbm9uY2Ute05PTkNFfScgJ3N0cmljdC1keW5hbWljJyBodHRwczogaHR0cDogJ3Vuc2FmZS1pbmxpbmUnOyBvYmplY3Qtc3JjICdub25lJzsgYmFzZS11cmkgJ25vbmUn&nonce=F6dLpw39a5y2Lq9ZrjeFqw",
+    "violations": [],
+    "consoleNote": [],
+    "nonceViaIdl": "F6dLpw39a5y2Lq9ZrjeFqw",
+    "nonceViaAttribute": "",
+    "tags": {},
+    "steps": {
+     "bootstrapNeverRan": false,
+     "hostModuleRan": true,
+     "cdnGuardImport": {
+      "ok": true,
+      "url": "http://127.0.0.1:8099/cdn-guard-n.js"
+     },
+     "e2e": {
+      "guardModuleUrl": "http://127.0.0.1:8099/cdn-guard-n.js",
+      "steps": {
+       "frameAlive": {
+        "timeout": "frame-alive"
+       },
+       "policyWorkerCreate": "ok",
+       "portInstalled": {
+        "type": "port-installed",
+        "hasPort": true
+       },
+       "bootstrap": "ok",
+       "frameReadySeenByPolicyWorker": {
+        "timeout": "frame-ready-seen"
+       },
+       "policyWorkerWasm": {
+        "type": "wasm-probe",
+        "wasmSync": "CompileError: call to WebAssembly.Module() blocked by CSP",
+        "wasmAsync": "CompileError: call to WebAssembly.compile() blocked by CSP"
+       },
+       "render": {
+        "timeout": "render ack"
+       },
+       "renderMs": 8017,
+       "frameStats": {
+        "timeout": "frame stats"
+       },
+       "policyEventTypes": [
+        "port-installed",
+        "wasm-probe"
+       ]
+      }
+     }
+    }
+   },
+   "frameSeenByDriver": {
+    "origin": "null",
+    "rootText": "",
+    "rootColor": "rgb(17, 17, 17)",
+    "rootFont": "13px",
+    "scriptRan": false,
+    "stats": null
+   }
+  }
+ }
+}

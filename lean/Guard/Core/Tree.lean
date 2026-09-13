@@ -89,6 +89,31 @@ def nodesToRaw : List Node → List Raw
   | n :: ns => n.toRaw :: nodesToRaw ns
 end
 
+/--
+LENIENT decoder. Used only by the batch test interface (`Guard.processRequest`,
+native executable) and not by the production ABI.
+
+This is not a strict candidate decoder and must not be described as one. Its
+actual behaviour:
+
+* `partial` recursion, so it is not total and nothing is proved about it;
+* a missing or non-string `kind` becomes `""`, which falls into the catch-all
+  and yields `Raw.other ""`;
+* a missing or non-string `text`, `tag` or `ns` silently becomes the
+  `getStr` default (`""`, or `"other"` for `ns`);
+* an attribute entry that is not a two-element array of strings is silently
+  DROPPED by `filterMap`;
+* duplicate object keys resolve to the first occurrence (`List.lookup`);
+* duplicate attribute names are preserved and left to `checkAttrs`;
+* extra object fields are ignored;
+* there is no bound on node count, depth, attribute count or string length.
+
+Dropping malformed input is acceptable for a differential-testing tool, whose
+job is to feed the two implementations the same parser output. It is not
+acceptable for an authority, because "repair silently" and "decide" must not
+live in the same function. `Guard.Io.decodeDocument` is the strict, total,
+bounded decoder the shipped module uses; every deviation there is an error.
+-/
 partial def rawFromJson (j : Json) : Raw :=
   match j.getStr "kind" with
   | "text" => .text (j.getStr "text")
