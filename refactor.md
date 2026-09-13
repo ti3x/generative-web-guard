@@ -426,6 +426,8 @@ view uses the same acceptance path. Source APIs cannot accidentally bypass it.
 
 ### Phase 6 — Reduce duplicated policy enforcement
 
+A self-contained handoff for a focused session: [docs/phase-6-plan.md](docs/phase-6-plan.md).
+
 - [ ] Split JS candidate construction/diagnostics from acceptance. It may
   propose content but cannot declare a document safe for production rendering.
 - [ ] Implement the smaller Lean `acceptCandidate` checker with strict decoding
