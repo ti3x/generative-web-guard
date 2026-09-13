@@ -6,6 +6,9 @@ an allowlist policy, then renders it with DOM constructors inside a sandboxed
 null-origin iframe with a `default-src 'none'` CSP. Interaction code runs in
 QuickJS (WebAssembly) in a Web Worker with memory, stack and time limits.
 
+Read the [FAQ](docs/faq.md) for why we use Lean, how the scope differs from
+DOMPurify, and how we respond to new exploits and CVEs.
+
 ```
 npm install
 npm run setup:verification   # once: prepare Lean and Emscripten toolchain images
@@ -17,17 +20,44 @@ npm run gen:rules            # regenerate src/rules.js and lean/Guard/Rules.lean
 npm run gen:policy           # regenerate JS/Lean tables and limits from rules/policy.json
 npm run build                # dist/: frame bundle, worker, demo, CSP hashes
 npm run check:cdn            # smoke-test the self-contained CDN distribution
-PORT=8089 npm run serve      # http://localhost:8089/
-npm run check:browser        # end-to-end checks in a local Chromium
+PORT=8096 npm run serve      # host http://localhost:8096/ plus a second "CDN" origin on :8097
+npm run check:browser        # end-to-end checks on pinned Chromium, Firefox and WebKit builds
 npm run lean:build           # Lean 4 checker image (Docker; nothing installed on the host)
 npm run check:lean           # differential: Lean checker vs policy.js on corpus + random inputs
 ```
 
-The browser check needs a Chromium binary: set `CHROME_PATH`, or it finds a
-Playwright cached headless shell or Chrome Canary. `BROWSER=firefox` runs the
-same checks under a Playwright Firefox build (`FIREFOX_PATH` to override).
+The browser check runs Chromium, Firefox and WebKit and **pins** the exact
+Playwright builds it tests against: Chromium `140.0.7339.186`
+(`chromium-1193`), Firefox `141.0` (`firefox-1490`), WebKit `26.0`
+(`webkit-2203`). It asserts the launched build's reported version and fails on
+a mismatch rather than silently using a different cached build. Restrict with
+`ENGINES=webkit`; override a path with `CHROME_PATH` / `FIREFOX_PATH` /
+`WEBKIT_PATH` plus `EXPECT_PINNED_VERSIONS=0`. Serve first and pass the URL:
+
+```sh
+PORT=8096 npm run serve
+DEMO_URL=http://localhost:8096/ npm run check:browser
+```
+
+The supported browser matrix, the host CSP profiles, and the engine-specific
+gaps are in [docs/csp.md](docs/csp.md). Two gaps are load-bearing: **Trusted
+Types does not exist on Firefox 141**, and **WebKit 26 does not gate
+`new WebAssembly.Module()` with CSP**.
 
 ## Browser CDN
+
+The package ships two entry points, and the split is deliberate. The **integrated
+`createGuard` API and the mandatory Lean/Wasm authority live in the `./full`
+entry** (`cdn/generative-web-guard.full.min.js`, ~2.8 MB: it embeds both the
+Lean checker and the QuickJS Worker). The **default entry**
+(`cdn/generative-web-guard.js`, ~480 KB) is the low-level bundle:
+`guardHtml` (the JavaScript checker as a proposal, not an acceptance),
+`createPolicySession`, `createGuardFrame`, `checkTree` and the startup
+diagnostics, with no embedded Worker. Import from `./full` to render generated
+content safely; import the default only to compose the low-level pieces or to
+run `guardHtml` on your own thread. There is no small build of `createGuard`,
+because a secure render requires the embedded Lean authority.
+
 
 `npm run build` writes two kinds of output. `dist/` contains local demo assets
 and stays ignored; GitHub Actions uploads it as a workflow artifact. `cdn/` is
@@ -39,24 +69,72 @@ Pin a release tag or, for the strongest immutability, a commit SHA:
 
 ```html
 <script type="module">
-  import {
-    guardHtml,
-    createGuardFrame
-  } from "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.min.js";
+  import { createGuard }
+    from "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.full.min.js";
 
-  const result = guardHtml("<h1>Hello</h1><script>alert(1)</script>");
-  if (result.status === "validated") {
-    const frame = createGuardFrame({
-      container: document.querySelector("#generated-content")
-    });
-    await frame.render(result.tree);
-  }
+  // createGuard owns the whole boundary: the sandboxed frame, the policy
+  // Worker with its embedded Lean/Wasm authority, the private port that
+  // carries accepted trees straight from that Worker to the frame, and -- when
+  // a program is supplied -- the QuickJS Worker. It resolves only once all of
+  // that is ready, and rejects with a StartupError otherwise.
+  const guard = await createGuard({
+    container: document.querySelector("#generated-content"),
+    onStatus(status) { /* bounded, trusted UI diagnostics */ },
+  });
+
+  // A static document: validated by Lean and committed, or a rejected result.
+  await guard.render({ html: "<h1>Hello</h1><script>alert(1)</script>" });
+
+  // An interactive document: the program runs in QuickJS, every view it
+  // produces takes the same Lean acceptance path, and frame events route back
+  // to it automatically. `data` is host JSON the program can read.
+  const result = await guard.render({ program: generatedJs, data: hostDataset });
+  if (result.status === "rejected") console.log(result.reason);
+
+  await guard.clear();   // clears the display and stops interaction
+  guard.dispose();       // idempotent; releases frame, Workers and ports
 </script>
 <div id="generated-content"></div>
 ```
 
-The full bundle also embeds the QuickJS worker, avoiding cross-origin Worker
-URL restrictions:
+The integrated API never hands back a raw view or an accepted tree, exposes no
+way to mount into the frame, and takes no checker, renderer or skip-validation
+option: every rendered document has passed the same Lean/Wasm acceptance, and a
+`render` resolves `rendered` only after the frame acknowledged that exact
+request. `render` returns `rejected` (with a bounded reason) or `superseded`
+for expected failures, and throws only for API misuse or unavailable
+infrastructure.
+
+### The layer beneath
+
+`createGuard` is built from three exported pieces, available for hosts that
+need to compose them directly. The policy session owns the Worker that runs
+bounded parse5 preprocessing and the Lean/Wasm checker; it mints a **one-time
+acceptance record** next to Lean's verdict, and the frame commits that record,
+never a tree:
+
+```js
+import { createGuardPolicySession, createGuardFrame } from "…/generative-web-guard.full.min.js";
+const policy = createGuardPolicySession();
+await policy.start();                                  // rejects if the checker cannot start
+const frame = createGuardFrame({ container, policy }); // commits records issued by this authority
+const result = await policy.preprocess("<h1>Hello</h1><script>alert(1)</script>");
+if (result.status === "accepted") await frame.render(result.acceptance);  // the RECORD, not the tree
+```
+
+A record is one-time, so a replay renders nothing and a fabricated one is
+refused; `result.tree` is returned for host UI but passing it to
+`frame.render` is refused. `createGuardFrame` throws if given neither `policy`
+nor `claimAcceptance`, rather than producing a frame that would accept a bare
+tree.
+
+`guardHtml` is still exported and still synchronous, and it is still **only the
+JavaScript checker**: a proposal and a diagnostic, not an acceptance. It mints
+no record, so its output cannot be committed. Treat
+`status: "validated"` there as "the JavaScript checker had no objection".
+
+The full bundle also embeds the QuickJS worker and the Lean checker, avoiding
+cross-origin Worker URL restrictions and any runtime asset fetch:
 
 ```js
 import { createGuardRuntime } from
@@ -65,9 +143,69 @@ import { createGuardRuntime } from
 const runtime = createGuardRuntime();
 ```
 
-Pages using the full bundle need `worker-src blob:` in their CSP. Host pages
-with a restrictive CSP must also permit the jsDelivr script origin and the
-frame script/style hashes exposed by the exported `manifest`.
+Both Worker payloads are embedded in the full bundle **as source** and are
+created from `blob:` URLs. That is not an optimization: `new Worker` on a
+cross-origin URL fails on Chromium, Firefox and WebKit under *every* CSP
+including no CSP at all, because a dedicated worker's script is fetched
+same-origin. A `blob:` Worker also inherits the host document's policy, which a
+same-origin network Worker does not.
+
+So a host page using the full bundle needs the adopted profile
+([docs/csp.md](docs/csp.md)):
+
+```
+Content-Security-Policy: default-src 'none'; script-src 'self' <cdn> 'wasm-unsafe-eval' 'sha256-<frameScript>'; style-src 'self' 'sha256-<frameStyle>'; worker-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'
+```
+
+`<cdn>` is the bundle's origin (for jsDelivr, `https://cdn.jsdelivr.net`);
+`<frameScript>` and `<frameStyle>` are the hashes on the exported `manifest`.
+`connect-src 'none'` is sufficient because nothing is fetched at runtime: both
+QuickJS and the Lean checker are embedded in the Worker payloads, and
+`npm run check:browser` asserts on every engine that no request for a `.wasm`
+asset is made. `'wasm-unsafe-eval'` is **not** `'unsafe-eval'`: `eval` and
+`new Function` stay blocked, measured on all three engines. It is now required
+twice over — without it neither QuickJS nor the acceptance checker can start,
+and nothing renders at all. There is no `frame-src` token because `frame-src`
+is not enforced for a `srcdoc` frame on any engine.
+
+**If your host policy is nonce-based** (`'nonce-…' 'strict-dynamic'`, which is
+what CSP Evaluator and most framework generators recommend), the `'self'` and
+`<cdn>` tokens above are **ignored** and the library will half-start and hang.
+Use Profile C in [docs/csp.md](docs/csp.md#profile-c--nonce--strict-dynamic-hosts):
+the fix is a `nonce` attribute on the tag that loads the library, and the two
+hashes plus `'wasm-unsafe-eval'` plus `worker-src … blob:` are still required.
+
+If a startup stage fails, the library raises a `StartupError` with a stage and a
+code (`csp-worker-blob`, `csp-wasm-unsafe-eval`, `csp-cdn-script-src`,
+`frame-bootstrap-timeout`, ...) whose message names the directive to change.
+Per-stage codes exist because three of these failures produce **no**
+`securitypolicyviolation` report at all — in particular a missing frame script
+hash, which is invisible to the host and only shows up as a bootstrap timeout.
+`STARTUP_ERRORS`, `STARTUP_STAGES` and `STARTUP_TIMEOUTS` are exported from
+both bundles.
+
+Hosts that cannot allow `blob:` at all can use Profile B in
+[docs/csp.md](docs/csp.md). It is not the default, there is no automatic
+fallback to it, and it **removes CSP as a containment layer around both
+Workers** — a same-origin network Worker does not inherit the document policy,
+and was observed with working `eval`, working `new Function` and successful
+cross-origin `fetch` under a document policy of `connect-src 'none'`. Read that
+section before choosing it.
+
+The full bundle also embeds the policy Worker. `createGuardPolicySession()`
+returns a host-side session whose `preprocess(html)` parses and checks off the
+main thread and always settles with `accepted`, `rejected` or `superseded`;
+`guardHtml` remains available and synchronous for callers that accept doing
+that work on their own thread.
+
+The optional program linter is no longer exported by the default bundle
+(**breaking**: `gateProgram` moved out of `cdn/generative-web-guard.js`). It
+ships as its own entry point so Acorn is not in the default dependency path:
+
+```js
+import { gateProgram } from
+  "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.lint.js";
+```
 
 The GitHub workflow rebuilds and tests both distributions, rejects stale
 committed `cdn/` files, and uploads `dist/` plus `cdn/` for inspection. GitHub
@@ -81,16 +219,37 @@ the license for Generative Web Guard itself.
 ## Data flow
 
 ```
-generated HTML ──► non-executing parser ──► raw tree ──► policy ──► structured tree ─┐
-                                                                                     ├─► postMessage ─► frame re-validates ─► DOM
-generated JS ──► AST gate ──► QuickJS worker ──► view string ──► parser ─► policy ───┘        (null origin, CSP, Trusted Types)
-                    ▲                                                                                    │
-                    └────────────────────── plain-data events (schema-checked) ◄─────────────────────────┘
+generated HTML ─────────────────────────────┐
+                                            ├─► POLICY WORKER ─► parse5 ─► bounded raw tree ─► JS candidate ─┐
+generated JS ─► QuickJS worker ─► view string┘   (terminable; no generated JS ever runs here)                │
+       ▲                                                                    LEAN/WASM checkTree decides ◄─────┘
+       │                                                                                  │
+       │                                    accepted tree + one-time acceptance record ───┘
+       │                                            │
+       │                        frame.render(record) ─► frame re-validates ─► DOM
+       │                                                    (null origin, CSP, Trusted Types where the engine has it)
+       └────────────────────── plain-data events (schema-checked) ◄──────────────────────────────────────┘
 ```
 
-No HTML string exists after the policy runs. The frame accepts only trees that
-are a fixed point of the policy, so a forged or stale tree is refused whoever
-sent it.
+Preprocessing is bounded before the policy runs: the source length is checked
+before parse5 is invoked, and conversion is iterative under limits on raw node
+count, depth, attribute count and bytes, names, text, and candidate bytes.
+Exceeding a limit returns a structured rejection; exceeding the request budget
+terminates the policy Worker, which is the only way to interrupt the parser.
+
+There is no mandatory JavaScript AST denylist. QuickJS compiles the program
+under memory, stack and time limits and checks the synchronous
+`initialState`/`update`/`view` interface; the sandbox has no DOM, network,
+storage, timers, host objects or module loader, so computed access and built-in
+dynamic evaluation reach nothing (`test/confinement.test.js`). The optional
+linter is a development diagnostic, shipped separately.
+
+No HTML string exists after the policy runs. The frame accepts only **one-time
+acceptance records** issued by the policy session, and renders the exact tree
+that session recorded with the record — so the host cannot substitute a tree
+between acceptance and rendering, a replayed record renders nothing, and a
+fabricated one is refused. The frame's own fixed-point re-check still runs on
+top of that.
 
 ## Layout
 
@@ -104,13 +263,24 @@ sent it.
 | `red-team/corpus.json` | Reviewable hostile-input corpus with provenance, rule links, and preservation expectations |
 | `src/tree.js` | Tree format and structural limits |
 | `src/policy.js` | Validator algorithms, descriptor interpreter, normalizer, output checks, `checkTree`, `isValidated` |
-| `src/adapters/` | `DOMParser` and parse5 adapters producing raw trees |
+| `src/adapters/parse5.js` | Production HTML frontend: bounded, iterative parse5 to raw tree |
+| `src/adapters/dom.js` | `DOMParser` adapter, kept only for parser-differential compatibility tests |
+| `src/policy-protocol.js` | Policy-Worker protocol version, message envelope, and preprocessing limits (units named) |
+| `src/policy-core.js` | Worker-side preprocessing, candidate construction and Lean/Wasm acceptance; no path accepts a document without the authority |
+| `src/lean-abi.js` | The versioned single-document ABI: request builders, strict response validation, version and bounds constants |
+| `src/lean-checker.js` | One WebAssembly instance, sealed at startup; poisons itself on a trap and never falls back |
+| `src/lean-module.js` | The checker as a self-contained module: Emscripten factory plus the embedded binary |
+| `src/acceptance.js` | One-time acceptance records and the bounded registry that binds a verdict to a frame commit |
+| `src/policy-worker.js` | Policy Worker entry; never executes generated JavaScript |
+| `src/policy-client.js` | Host-side session: identity, generation, request ids, timeouts, termination |
 | `src/render.js` | DOM construction and patching from a validated tree |
 | `src/frame.js` | Code inside the sandboxed frame |
-| `src/host.js` | Sandboxed frame creation and event schema |
-| `src/gate.js` | AST gate for the interaction program |
+| `src/host.js` | Sandboxed frame creation, event schema, frame-bootstrap startup stage |
+| `src/startup.js` | Per-stage startup budgets, startup error codes, and `blob:` Worker creation |
+| `src/gate.js` | Optional development linter (diagnostic eligibility, never authorization); not on the execution path |
 | `src/runtime/` | QuickJS core, worker entry, host-side controller |
-| `scripts/build.mjs` | Bundles and CSP hash manifest |
+| `scripts/build.mjs` | Bundles, CSP hash manifest, embedded checker binary, and the deterministic asset manifest |
+| `scripts/wasm-audit.mjs` | Measures the checker's heap, linear stack and memory growth so the build's ceilings are evidence, not inheritance |
 | `scripts/browser-check.mjs` | End-to-end browser verification |
 | `scripts/lib/engines.mjs` | The three engines (JS, Lean in Docker, Wasm) behind the differential and Cucumber |
 | `scripts/lean-differential.mjs` | Lean checker vs policy.js differential fuzzer |
@@ -118,6 +288,7 @@ sent it.
 | `scripts/check-proofs.mjs` | Resolves advertised theorems in Lean and audits their transitive axioms |
 | `scripts/check-policy-properties.mjs` | Independent output assertions, positive examples, fixed points, and negative controls |
 | `scripts/security-scout.mjs` | Weekly GitHub Advisory Database filter and deduplicated triage issue report |
+| `docs/csp.md` | Host CSP profiles, tested browser matrix with pinned versions, startup error codes |
 | `docs/VERIFICATION.md` | Rule maintenance workflow, exact proof scope, and why Lean is useful |
 | `docs/RED_TEAMING.md` | Hostile-input intake, weekly advisory scout, and optional agent-review design |
 | `scripts/gen-rules.mjs` | Generates rule id files from the catalog; `--check` in `npm test` |
@@ -166,6 +337,20 @@ tree satisfies `policyOk`, its nodes and text are bounded, every nested element
 is allowlisted with canonical attributes, no script element or inline handler
 survives, and revalidation returns the identical tree with no changes.
 
+`Guard.Props.Profile` adds the capability-kernel properties. `rules/capabilities.json`
+is a separate reviewed kernel of closed element and attribute identities,
+context-appropriate value grammars, mandatory controls and absolute resource
+ceilings; a profile may only restrict it, and `npm run check:policy` rejects a
+profile that does not, from the profile data alone. `default_profile_valid`
+certifies the shipped profile against the generated inventory at build time.
+Independently of the profile table, every accepted tree is then proved free of
+the kernel's excluded identities (`src`, `href`, `style`, `name`, `iframe`,
+`img`, `form`, `use`, ...), its `fill`/`stroke` values are solid colors, and
+its ids carry the `g-` prefix. `restricts_permits` relates two profiles on
+permitted **output trees**; it does not claim that a tighter profile accepts
+fewer raw inputs. Widening the inventory is a kernel change, and neither the
+generator nor an arbitrarily edited inventory is proved safe.
+
 These are proofs about a **guarded acceptance function**. The total normalizer
 first creates a candidate; a separate structural predicate checks it, and a
 second normalization must leave it unchanged. Failed postconditions reject the
@@ -173,10 +358,20 @@ document. This adds runtime work and can reject a candidate that the earlier
 normalizer would have released. It does not prove the normalizer always produces
 acceptable output. Both JS and Lean implement these acceptance checks.
 
-The demo still uses the JavaScript checker. Lean proofs do not transfer to JS
-through differential tests; a formal JS equivalence proof is not present.
-Parsing, JSON conversion, renderer behavior, QuickJS, compilation, and browser
-semantics remain outside the whole-checker theorems. See [verification scope and
+**The demos and the CDN entry point now run the Lean checker compiled to
+WebAssembly as the acceptance authority.** The JavaScript checker still runs as
+a candidate builder and diagnostics source, and its candidate must equal Lean's
+accepted tree exactly or the document is refused; the tree that reaches the DOM
+is the one `checkTree` returned. Missing, failing, rejecting, malformed or
+timed-out Lean never falls back to JavaScript acceptance — it refuses to
+render, and `test/lean-authority.test.js` breaks the authority nine ways to
+demonstrate that rather than assert it.
+
+This is not a proof of JS equivalence, and differential tests never were one.
+What changed is which implementation the browser obeys. Parsing, JSON
+conversion, the C shim, the Emscripten runtime, the trusted glue, renderer
+behavior, QuickJS, compilation and browser semantics all remain outside the
+whole-checker theorems. See [verification scope and
 maintenance](docs/VERIFICATION.md).
 
 ### Differential testing
@@ -202,20 +397,38 @@ npm run wasm:build           # Emscripten SDK + Lean wasm32 runtime image, then 
 npm run check:wasm           # load lean/wasm/dist/guard.mjs in Node, compare to policy.js
 ```
 
-Measured on this machine:
+Measured on this machine, this checkout:
 
 | | |
 |---|---|
-| `guard.wasm` | 1.4 MiB (plus 70 KiB JS glue) |
-| Initialization | about 20 ms |
-| 2000 random cases | about 130 ms |
+| `guard.wasm` | 1,707,724 bytes (1.63 MiB), gzip 344,164 |
+| JS glue (`guard.mjs`) | 73,680 bytes |
+| Base64 of the binary, as embedded | 2,276,968 chars, gzip 487,455 |
+| 523 differential cases through the production ABI | about 88 ms including instantiation |
 | Mismatches against `policy.js` | 0 |
 
-Three things were needed to get there and are worth knowing:
+The binary is **embedded** in the Worker payloads rather than fetched, which is
+what keeps `connect-src 'none'` in the host policy and makes "the deployed
+bytes are the bytes that were built" one artifact to hash. The cost is size:
+
+| Artifact | Before | After | gzip before | gzip after |
+|---|---|---|---|---|
+| `cdn/policy-worker.min.js` | 210,128 | 2,620,458 | 57,546 | 584,383 |
+| `cdn/generative-web-guard.full.min.js` | 1,262,017 | 3,688,676 | 458,976 | 992,870 |
+| `cdn/generative-web-guard.js` (no checker) | 450,863 | 484,657 | 93,545 | 101,833 |
+
+A gzip-then-base64 embedding would cut that to about 459,000 embedded chars,
+and reducing the compiled checker is explicitly later work — this change is
+about correctness, and adding a `DecompressionStream` dependency to the trusted
+startup path was not worth it here. The numbers are recorded in
+`cdn/asset-manifest.json` on every build.
+
+Four things were needed to get there and are worth knowing:
 
 - Lean's runtime references four libuv functions for temp-file helpers. The wasm32 distribution ships no libuv, so `lean/wasm/shim.c` stubs them; the checker never touches the filesystem.
-- Initializing with `lean_initialize()` and linking `libLean` produced a 56 MB module. Using `lean_initialize_runtime_module()` and linking only `libInit` and `libleanrt` brought it to 1.4 MB. This is also why `Guard/Json.lean` exists instead of `Lean.Data.Json`.
-- Emscripten's default 64 KB stack is far below what Lean assumes. Requests of a few hundred inputs crashed with an out-of-bounds access until the stack was raised to 16 MB.
+- Initializing with `lean_initialize()` and linking `libLean` produced a 56 MB module. Using `lean_initialize_runtime_module()` and linking only `libInit` and `libleanrt` brought it to 1.4 MB. This is also why `Guard/Core/Json.lean` exists instead of `Lean.Data.Json`.
+- Emscripten's default 64 KB stack is far below what Lean assumes, but 16 MB turned out to be address space for nothing: `node scripts/wasm-audit.mjs` measures **104 bytes** of linear-memory stack for every case, because the recursion that matters compiles to wasm *call frames* on the engine's own stack, which `-sSTACK_SIZE` does not configure. The audited ceilings are now `INITIAL_MEMORY=80MB` (above the measured 53.6 MiB worst legal document, so growth never happens under load), `MAXIMUM_MEMORY=128MB` (a real ceiling: growth with no maximum is not one) and `STACK_SIZE=1MB` with `STACK_OVERFLOW_CHECK=1`.
+- The engine call stack is bounded by the *input* instead, and that bound is a per-engine measurement: WebKit 26 overflowed at 2,500 siblings where V8 managed 9,000. See [docs/csp.md](docs/csp.md#the-path-bound-is-an-engine-measurement).
 
 **Iterating on Lean sources** without rebuilding images:
 
@@ -305,7 +518,7 @@ Same shape, different altitude, different author.
 | Logic | Data bindings and a small expression language | Arbitrary synchronous JS in QuickJS with limits |
 | Design consistency | Guaranteed by the components | Bundled class allowlist; layout is model-composed |
 | Streaming | Progressive render of partial JSON | Whole view per update |
-| Isolation | Typically same origin, inside the host's React or Lit tree | Null-origin frame, CSP `default-src 'none'`, Trusted Types, Web Worker |
+| Isolation | Typically same origin, inside the host's React or Lit tree | Null-origin frame, CSP `default-src 'none'`, Trusted Types (Chromium/WebKit only; absent on Firefox 141), Web Worker |
 | Cost of a new capability | Write and maintain a component | Add allowlist rows |
 
 ### Where the catalog approach is better
@@ -367,7 +580,8 @@ in QuickJS with the full language and standard library: numbers, BigInt, Math,
 strings, regular expressions, arrays, Map and Set, Date, JSON, closures,
 classes and recursion. The restrictions are about reach, not computation:
 fetch, timers, DOM, storage and imports are absent from the runtime rather than
-blocked, and the AST gate reports them up front.
+blocked. The optional linter can report them up front for regeneration, but it
+is a diagnostic: confinement does not depend on it.
 
 Defaults: 200 ms interrupt per step, 32 MiB memory, 512 KiB stack, 400k
 character view. All are configurable in `src/runtime/core.js`.
@@ -396,4 +610,12 @@ Practical notes for writing or prompting this code:
 The host page's own CSP must include the frame bundle's script hash and the
 stylesheet hash from `dist/frame-manifest.json`, because a `srcdoc` frame
 inherits the embedding page's policy before applying its own. Everything else
-in the frame's policy is `'none'`.
+in the frame's policy is `'none'`. Verified negatively on all three pinned
+engines: remove the script hash and the frame never starts; remove the style
+hash and it starts unstyled.
+
+The full policy, the per-token justification, the tested browser matrix, the
+startup error codes and the `blob:`-free fallback profile are all in
+[docs/csp.md](docs/csp.md). `scripts/serve.mjs` emits the adopted profile for
+the demo, and `?cspOmit=<token>` there removes one required token so the
+corresponding startup error can be reproduced in a browser.

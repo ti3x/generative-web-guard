@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Generative Web Guard: cross-origin CDN check</title>
+<link rel="stylesheet" href="/demo/host.css">
+</head>
+<body>
+<header class="host-bar">
+  <strong>Cross-origin CDN load</strong>
+  <a href="/">Editor demo</a>
+  <span id="status" class="status" role="status">idle</span>
+</header>
+<main class="layout">
+  <section class="inputs">
+    <p class="status">
+      This page imports the shipped bundle from a <em>different origin</em> and
+      lets that module create both Workers from <code>blob:</code> URLs, the
+      sandboxed frame, and one acknowledged render. A cross-origin
+      <code>Worker</code> URL cannot work on any engine under any policy, so
+      the payload travels inside the module.
+    </p>
+    <details open>
+      <summary>Startup stages</summary>
+      <pre id="report"></pre>
+    </details>
+  </section>
+  <section class="output">
+    <div class="frame-label">Sandboxed null-origin frame, rendering content validated by the cross-origin bundle</div>
+    <div id="frame-container" class="frame-container"></div>
+  </section>
+</main>
+<script type="module" src="/dist/cdn.js"></script>
+</body>
+</html>

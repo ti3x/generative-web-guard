@@ -74,3 +74,36 @@ test("[R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA] host refuses to send a non-v
   frame.destroy();
   assert.equal(window.document.querySelector("iframe"), null);
 });
+
+test("[R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA] once bound to the policy port the host refuses to send any tree", async () => {
+  const dom = new JSDOM(`<!doctype html><body><div id="c"></div></body>`);
+  const { window } = dom;
+  const statuses = [];
+  const frame = createSandboxFrame({
+    container: window.document.getElementById("c"),
+    manifest: { script: "", css: "", scriptHash: "S", cssHash: "C" },
+    onStatus: (s) => statuses.push(s),
+  });
+  const iframe = frame.element;
+  const fromFrame = (data) => window.dispatchEvent(new window.MessageEvent("message", { data, source: iframe.contentWindow, origin: "null" }));
+
+  // Bootstrap requested before the frame is ready: held, not lost.
+  const channel = new MessageChannel();
+  const bound = frame.attachPort(channel.port2, { instanceId: "inst", sessionId: "sess" });
+  assert.equal(frame.portBound, false);
+  fromFrame({ type: "ready", styleSheets: 1, trustedTypes: true });
+  // jsdom cannot transfer a port; the host reports that rather than throwing,
+  // and the bootstrap settles false. The frame's `bound` report is what flips
+  // the host into port mode, so simulate the frame having installed a port.
+  fromFrame({ type: "bound", instanceId: "inst", sessionId: "sess" });
+  assert.equal(frame.portBound, true);
+  assert.ok(statuses.some((s) => s.kind === "bound" && s.detail.instanceId === "inst"));
+
+  const validated = { kind: "root", children: [] };
+  assert.equal(await frame.render(validated), false, "a validated tree is still refused: the host may not supply trees");
+  assert.match(statuses.at(-1).detail, /bound to the policy port/);
+  await bound;
+  frame.destroy();
+  channel.port1.close();
+  channel.port2.close();
+});

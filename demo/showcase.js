@@ -1,9 +1,27 @@
+// Attack showcase. Every scenario goes through the same production path as the
+// editor demo: the policy Worker parses with parse5 under the preprocessing
+// limits, builds a candidate, the LEAN/WASM CHECKER decides, and the host
+// commits the one-time acceptance record that verdict produced. The frame
+// takes records, not trees, so there is no way for this page to render
+// anything Lean did not accept. Nothing is parsed on this thread.
 import manifest from "../dist/frame-manifest.js";
-import { setClassAllowlist, checkTree } from "../src/policy.js";
-import { parseHtmlToRaw } from "../src/adapters/dom.js";
 import { createSandboxFrame } from "../src/host.js";
+import { createPolicySession } from "../src/policy-client.js";
+import { setClassAllowlist } from "../src/policy.js";
+// Embedded by scripts/build.mjs. The Worker is created from a blob: URL so it
+// inherits this document's CSP; a same-origin network Worker would not. See
+// docs/csp.md.
+import policyWorkerSource from "guard:policy-worker-source";
+import { createBlobWorker } from "../src/startup.js";
 
+// For src/host.js's own re-check of the tree it posts to the frame; the parse
+// and the policy decision itself happen in the Worker.
 setClassAllowlist(manifest.classes);
+
+const policy = createPolicySession({
+  createWorker: () => createBlobWorker(policyWorkerSource),
+  classes: manifest.classes,
+});
 
 const cases = [
   {
@@ -83,6 +101,14 @@ const cases = [
   <svg><desc><img src=x onerror="alert(2)"></desc><rect width="40" height="20">
 </div>`,
   },
+  {
+    id: "limits",
+    category: "Resource limits",
+    title: "Nesting deeper than the preprocessing limit",
+    summary: "Input work is bounded before the output policy runs: 5,000 nested elements are rejected by a limit in the policy Worker instead of overflowing a recursive adapter, and nothing is rendered.",
+    html: "<div>".repeat(5000) + "deep" + "</div>".repeat(5000),
+    expect: "rejected",
+  },
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -118,9 +144,18 @@ function serializeTree(node, depth = 0) {
 const frame = createSandboxFrame({
   container: $("frame-container"),
   manifest,
+  // Acceptance records only; see src/acceptance.js.
+  claimAcceptance: (token) => policy.claimAcceptance(token),
   onStatus: ({ kind, detail }) => {
     if (kind === "refused") setVerdict(`Frame refused: ${detail}`, true);
+    if (kind === "startup-failed") setVerdict(`Frame startup failed (${detail.code}): ${detail.hint}`, true);
   },
+});
+
+// The wasm-init stage. If the Lean authority does not start, nothing on this
+// page can be accepted, and the verdict says that rather than showing content.
+policy.whenCheckerReady().catch((error) => {
+  setVerdict(`Lean checker startup failed (${error.code ?? "unknown"}): nothing can be rendered`, true);
 });
 
 function setVerdict(text, rejected = false) {
@@ -147,33 +182,38 @@ async function show(entry) {
   $("case-category").textContent = entry.category;
   $("case-title").textContent = entry.title;
   $("case-summary").textContent = entry.summary;
-  $("source").textContent = entry.html;
+  // Keep the source panel bounded: one scenario is deliberately enormous.
+  $("source").textContent = entry.html.length > 4000
+    ? `${entry.html.slice(0, 4000)}\n… ${entry.html.length} characters total`
+    : entry.html;
   $("filtered-html").textContent = "";
   $("report").replaceChildren();
   setVerdict("Checking…");
 
-  let result;
-  try {
-    result = checkTree(parseHtmlToRaw(entry.html, DOMParser));
-  } catch (error) {
-    setVerdict(`Parser failed: ${error.message}`, true);
-    frame.clear();
-    return;
-  }
-  if (result.status !== "validated") {
-    setVerdict("Rejected by structural limits", true);
-    $("change-count").textContent = `${result.reasons.length} reason(s)`;
-    for (const reason of result.reasons) addReport(JSON.stringify(reason));
+  // A new scenario supersedes any in-flight work for the previous one.
+  policy.nextGeneration();
+  const result = await policy.preprocess(entry.html);
+  if (current !== entry.id) return; // a newer scenario took over while we waited
+
+  if (result.status !== "accepted") {
+    const reason = result.status === "superseded" ? { code: "superseded" } : result.reason;
+    setVerdict(`Rejected in the policy worker: ${reason.code}`, true);
+    $("change-count").textContent = "0 transformation(s)";
+    addReport(JSON.stringify(reason));
+    if (reason.limit) addReport(`limit ${reason.limit} = ${reason.limitValue}, observed ${reason.observed}`);
+    $("filtered-html").textContent = "(nothing was rendered)";
     frame.clear();
     return;
   }
 
   $("filtered-html").textContent = serializeTree(result.tree);
-  $("change-count").textContent = `${result.changes.length} transformation(s)`;
-  if (result.changes.length === 0) addReport("No unsafe constructs found.", true);
-  for (const change of result.changes) addReport(describe(change));
-  const rendered = await frame.render(result.tree);
-  setVerdict(rendered ? "Protected and rendered" : "Frame refused output", !rendered);
+  const { records, total, truncated } = result.diagnostics;
+  $("change-count").textContent = `${total} transformation(s)`;
+  if (total === 0) addReport("No unsafe constructs found.", true);
+  for (const change of records) addReport(describe(change));
+  if (truncated) addReport(`diagnostics truncated at ${records.length} of ${total}`);
+  const rendered = await frame.render(result.acceptance);
+  setVerdict(rendered ? `Protected and rendered (accepted by ${result.authority})` : "Frame refused output", !rendered);
 }
 
 function addReport(text, safe = false) {
