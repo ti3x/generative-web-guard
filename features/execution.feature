@@ -68,3 +68,21 @@ Feature: Generated content cannot execute script
       | <details open ontoggle=alert(1)>                            |
       | <input onfocus=alert(1) autofocus>                          |
       | <svg><a xlink:href="javascript:alert(1)"><text x=20 y=20>XSS</text></a> |
+
+  # Removing the JavaScript identifier denylist from the execution path does
+  # not change anything below: markup policy checks stay mandatory, and they
+  # now run behind the bounded parse5 frontend in the policy Worker.
+  @rule:R-EXEC-SCRIPT @rule:R-EXEC-HANDLER
+  Scenario: Executable surface is still removed when the document arrives through the bounded frontend
+    Given the generated HTML is preprocessed:
+      """
+      <div class="card"><script>alert(1)</script><p onclick="alert(2)">hi</p></div>
+      """
+    When the frontend preprocesses it
+    Then preprocessing accepts it
+    When the policy validates the preprocessed tree
+    Then no element "script" remains
+    And no attribute matching "^on" remains
+    And the elements remaining are "html:div html:p"
+    And the text "hi" is kept
+    And a change cites rule R-EXEC-SCRIPT
