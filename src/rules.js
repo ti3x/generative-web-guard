@@ -46,6 +46,9 @@ export const RULES = Object.freeze({
   FRAME_CSP_SINKS: "R-FRAME-CSP-SINKS",
   RENDER_CONSTRUCTORS_ONLY: "R-RENDER-CONSTRUCTORS-ONLY",
   CHECK_ACCEPTANCE: "R-CHECK-ACCEPTANCE",
+  CAP_INVENTORY: "R-CAP-INVENTORY",
+  CAP_CEILINGS: "R-CAP-CEILINGS",
+  CAP_CONTROLS: "R-CAP-CONTROLS",
 });
 
 export const RULE_IDS = Object.freeze(Object.values(RULES));
@@ -94,6 +97,9 @@ export const RULE_CLASSES = Object.freeze({
   "R-FRAME-CSP-SINKS": "frame",
   "R-RENDER-CONSTRUCTORS-ONLY": "renderer",
   "R-CHECK-ACCEPTANCE": "structure",
+  "R-CAP-INVENTORY": "capability",
+  "R-CAP-CEILINGS": "capability",
+  "R-CAP-CONTROLS": "capability",
 });
 
 export function isRule(id) {

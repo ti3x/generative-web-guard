@@ -5,6 +5,10 @@ import { parseHtmlToRaw as p5 } from "../src/adapters/parse5.js";
 import { parseHtmlToRaw as domParse } from "../src/adapters/dom.js";
 import { checkTree, isValidated, setClassAllowlist } from "../src/policy.js";
 import { LIMITS, isTreeShaped } from "../src/tree.js";
+import { readFileSync } from "node:fs";
+import { validatePolicy, loadCapabilities } from "../scripts/gen-policy.mjs";
+import { CAPABILITIES, CAPABILITY_VERSION, CAPABILITY_RULES } from "../src/capabilities-data.js";
+import { RULE_IDS } from "../src/rules.js";
 
 setClassAllowlist(["card", "muted", "bar", "btn"]);
 
@@ -180,8 +184,15 @@ test("[R-TEXT-CONTROL-BIDI] control and bidi characters are stripped from text a
 test("[R-LIMIT-TREE] structural limits reject rather than truncate", () => {
   const deep = "<div>".repeat(LIMITS.maxDepth + 2) + "x" + "</div>".repeat(LIMITS.maxDepth + 2);
   assert.equal(check(deep).status, "rejected");
-  const wide = "<p>a</p>".repeat(LIMITS.maxNodes + 1);
-  assert.equal(check(wide).status, "rejected");
+  // The policy's node limit, exercised on a raw tree built directly. It cannot
+  // be reached through the parser: the frontend's maxRawNodes equals the
+  // policy's maxNodes and a raw tree never has fewer nodes than its output, so
+  // preprocessing refuses a document this large first (covered in
+  // test/preprocess.test.js). Building the raw tree here keeps the POLICY
+  // limit itself under test.
+  const wideResult = checkTree({ kind: "root", children: Array.from({ length: LIMITS.maxNodes + 1 }, () => ({ kind: "el", ns: "html", tag: "p", attrs: [], children: [] })) });
+  assert.equal(wideResult.status, "rejected");
+  assert.deepEqual(wideResult.reasons.map((r) => r.code ?? r), ["too-many-nodes"]);
   const longText = "<p>" + "a".repeat(LIMITS.maxTextLength + 1) + "</p>";
   assert.equal(check(longText).status, "rejected");
 });
@@ -259,4 +270,146 @@ test("[R-EXEC-SCRIPT, R-EXEC-HANDLER, R-RES-URL-ATTR] owasp-style evasions produ
     for (const a of attrs) assert.ok(!/^on|src|href|data$|style|action/.test(a), `${html} -> ${a}`);
     assert.ok(!serialize(r.tree).toLowerCase().includes("javascript:"), html);
   }
+});
+
+// ---------------------------------------------------------------------------
+// R5: the capability kernel. These tests read rules/policy.json and
+// rules/capabilities.json only. They never touch the red-team corpus, the
+// parser or an engine, so an invalid configuration fails here whether or not a
+// matching exploit exists anywhere in the test inputs.
+
+const shippedProfile = () => JSON.parse(readFileSync(new URL("../rules/policy.json", import.meta.url), "utf8"));
+const caps = loadCapabilities();
+const validate = (mutate) => {
+  const profile = shippedProfile();
+  mutate(profile);
+  return validatePolicy(profile, caps);
+};
+const rejects = (mutate, fragment) =>
+  assert.throws(() => validate(mutate), (e) => {
+    assert.ok(e.message.includes(fragment), `${e.message} does not mention ${fragment}`);
+    return true;
+  });
+
+test("[R-CAP-INVENTORY] the shipped profile restricts the reviewed capability kernel", () => {
+  assert.equal(validate(() => {}), undefined);
+  assert.equal(CAPABILITY_VERSION, CAPABILITIES.capabilityVersion);
+  // The generated JS inventory and the reviewed source agree.
+  assert.deepEqual(CAPABILITIES, caps);
+  // The inventory's meaning is versioned and reviewed, not just its contents.
+  assert.ok(CAPABILITIES.meaning.length > 200);
+  assert.match(CAPABILITIES.reviewedAt, /^\d{4}-\d{2}-\d{2}$/);
+  for (const rule of CAPABILITY_RULES) assert.ok(RULE_IDS.includes(rule), rule);
+});
+
+test("[R-CAP-INVENTORY] unsafe elements cannot be added to a profile", () => {
+  rejects((p) => { p.htmlElements.iframe = null; }, "html element iframe is excluded by the capability kernel");
+  rejects((p) => { p.htmlElements.object = null; }, "html element object is excluded by the capability kernel");
+  rejects((p) => { p.svgElements.use = null; }, "svg element use is excluded by the capability kernel");
+  rejects((p) => { p.svgElements.foreignobject = null; }, "svg element foreignobject is excluded by the capability kernel");
+  // An element that is neither permitted nor explicitly excluded is still
+  // outside the closed inventory.
+  rejects((p) => { p.htmlElements.marquee = null; }, "html element marquee is excluded by the capability kernel");
+  rejects((p) => { p.htmlElements.dialog = null; }, "html element dialog is excluded by the capability kernel");
+  rejects((p) => { p.svgElements.tref = null; }, "svg element tref is not in the capability inventory");
+});
+
+test("[R-CAP-INVENTORY] URL-valued attributes cannot be introduced with a text grammar", () => {
+  rejects((p) => { p.htmlElements.div = { href: ["text"] }; }, "html div attribute href is excluded");
+  rejects((p) => { p.htmlElements.div = { src: ["text"] }; }, "html div attribute src is excluded");
+  rejects((p) => { p.sharedGlobal.action = ["text"]; }, "shared global attribute action is excluded");
+  rejects((p) => { p.svgGlobal["xlink:href"] = ["text"]; }, "invalid allowed attribute xlink:href");
+  rejects((p) => { p.htmlGlobal.style = ["text"]; }, "html global attribute style is excluded");
+  rejects((p) => { p.sharedGlobal.name = ["ident"]; }, "shared global attribute name is excluded");
+});
+
+test("[R-CAP-INVENTORY] SVG paint keeps restricted solid-paint validation", () => {
+  for (const paint of ["fill", "stroke"]) {
+    rejects((p) => { p.svgGlobal[paint] = ["text"]; }, `svg global attribute ${paint}: ["text"] does not restrict the kernel grammar ["color"]`);
+    rejects((p) => { p.svgGlobal[paint] = ["ident"]; }, `does not restrict the kernel grammar ["color"]`);
+    rejects((p) => { p.svgElements.rect[paint] = ["text"]; }, `svg rect attribute ${paint}: ["text"] does not restrict the kernel grammar ["color"]`);
+  }
+  // `title` may use plain text: identical grammars are a valid restriction.
+  assert.equal(validate((p) => { p.htmlGlobal.title = ["text"]; }), undefined);
+});
+
+test("[R-CAP-INVENTORY] value grammars can only be narrowed, never traded", () => {
+  rejects((p) => { p.svgGlobal["stroke-width"] = ["num"]; }, 'does not restrict the kernel grammar ["nonNeg"]');
+  rejects((p) => { p.svgElements.path.d = ["text"]; }, 'does not restrict the kernel grammar ["path"]');
+  rejects((p) => { p.sharedGlobal.id = ["text"]; }, 'does not restrict the kernel grammar ["id"]');
+  rejects((p) => { p.sharedGlobal.class = ["text"]; }, 'does not restrict the kernel grammar ["cls"]');
+  rejects((p) => { p.htmlGlobal.dir = ["oneOf", ["ltr", "rtl", "auto", "anything"]]; }, "does not restrict the kernel grammar");
+  rejects((p) => { p.sharedGlobal["aria-level"] = ["int", 1, 99]; }, "does not restrict the kernel grammar");
+  rejects((p) => { p.sharedGlobal["aria-level"] = ["int", 0, 6]; }, "does not restrict the kernel grammar");
+  rejects((p) => { p.svgGlobal["stroke-dasharray"] = ["numList", 4096]; }, "does not restrict the kernel grammar");
+  rejects((p) => { p.htmlElements.button.type = ["tagged", "R-CTRL-BUTTON-TYPE", ["fixed", "submit"]]; }, "does not restrict the kernel grammar");
+  rejects((p) => { p.sharedGlobal["data-secret"] = ["text"]; }, "shared global attribute data-secret is not in the capability inventory");
+  rejects((p) => { p.htmlUnwrap.push(["script", "R-EXEC-SCRIPT"]); }, "html script is not a reviewed unwrappable element");
+});
+
+test("[R-CAP-CEILINGS] hard limits cannot be raised above the kernel ceilings", () => {
+  for (const [key, ceiling] of Object.entries(caps.ceilings)) {
+    rejects((p) => { p.limits[key] = ceiling + 1; }, `limit ${key}=${ceiling + 1} exceeds the kernel ceiling ${ceiling}`);
+  }
+  // Lowering every limit is a restriction.
+  assert.equal(validate((p) => { for (const key of Object.keys(p.limits)) p.limits[key] = 1; }), undefined);
+});
+
+test("[R-CAP-CONTROLS] mandatory controls and text-only contexts cannot be weakened", () => {
+  rejects((p) => { delete p.htmlForced.button; }, "html button must force type");
+  rejects((p) => { p.htmlForced.button = [["type", "submit"]]; }, "html button must force type");
+  for (const tag of ["input", "select", "textarea"]) {
+    rejects((p) => { delete p.htmlForced[tag]; }, `html ${tag} must force autocomplete`);
+  }
+  rejects((p) => { delete p.htmlElements.input.type; }, "html input must keep the mandatory attribute type");
+  rejects((p) => { p.svgTextOnly = []; }, "svg title must remain a text-only context");
+  rejects((p) => { p.svgTextOnly = ["title"]; }, "svg desc must remain a text-only context");
+  // Dropping the element entirely is a restriction, not a weakening.
+  assert.equal(validate((p) => { delete p.htmlElements.button; delete p.htmlForced.button; }), undefined);
+});
+
+test("[R-CAP-INVENTORY, R-CAP-CEILINGS, R-CAP-CONTROLS] valid restrictions are accepted and benign capability is preserved", () => {
+  const restricted = shippedProfile();
+  restricted.htmlElements.input.type = ["tagged", "R-CTRL-INPUT-TYPE", ["oneOf", ["text"]]];
+  restricted.sharedGlobal["aria-level"] = ["int", 2, 3];
+  restricted.svgGlobal["stroke-dasharray"] = ["numList", 4];
+  restricted.svgTextOnly = ["title", "desc", "text"];
+  restricted.limits.maxNodes = 100;
+  delete restricted.htmlElements.meter;
+  validatePolicy(restricted, caps);
+  // The shipped profile itself still permits the benign constructs it always
+  // did; capability validation did not silently narrow the policy.
+  const benign = ok(`<div class="card" id="t"><h1>T</h1><svg viewBox="0 0 10 10"><path d="M0 0L5 5" fill="red"></path><text x="1" y="2">t</text></svg><button data-action="go">go</button></div>`);
+  const { tags, attrs } = collect(benign.tree);
+  assert.deepEqual(tags, ["html:div", "html:h1", "svg:svg", "svg:path", "svg:text", "html:button"]);
+  for (const expected of ["class", "id", "viewBox", "d", "fill", "x", "y", "data-action", "type"]) {
+    assert.ok(attrs.includes(expected), `benign attribute ${expected} was lost`);
+  }
+});
+
+test("[R-LIMIT-TREE] a deep chain of unwrapped elements is bounded, not a stack overflow", () => {
+  // Unwrapped elements do not increase output depth, so LIMITS.maxDepth cannot
+  // bound this. Only reachable by calling checkTree() with a hand-built raw
+  // tree: the HTML path bounds raw depth long before this.
+  const chain = (n) => {
+    let node = { kind: "text", text: "deep" };
+    for (let i = 0; i < n; i++) node = { kind: "el", ns: "html", tag: "q", attrs: [], children: [node] };
+    return { kind: "root", children: [node] };
+  };
+  const inside = checkTree(chain(LIMITS.maxTraversalDepth - 1));
+  assert.equal(inside.status, "validated");
+  assert.equal(inside.tree.children[0].text, "deep");
+  const beyond = checkTree(chain(LIMITS.maxTraversalDepth + 1));
+  assert.equal(beyond.status, "rejected");
+  assert.deepEqual(beyond.reasons.map((r) => r.code), ["traversal-depth"]);
+  // The shape that used to overflow the stack: 100,000 nested unwrapped
+  // elements now produce a bounded structured rejection.
+  const huge = checkTree(chain(100000));
+  assert.equal(huge.status, "rejected");
+  assert.deepEqual(huge.reasons.map((r) => r.code), ["traversal-depth"]);
+  // The same shape built from allowed elements is rejected by the depth limit
+  // rather than by the traversal ceiling.
+  let deep = { kind: "text", text: "x" };
+  for (let i = 0; i < LIMITS.maxDepth + 5; i++) deep = { kind: "el", ns: "html", tag: "div", attrs: [], children: [deep] };
+  assert.deepEqual(checkTree({ kind: "root", children: [deep] }).reasons.map((r) => r.code), ["too-deep"]);
 });

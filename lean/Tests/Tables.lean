@@ -50,6 +50,16 @@ def attrDropNotAllowed : Bool :=
 def svgCanonicalLower : Bool := svgCanonical.all fun p => isLowerAscii p.1
 #guard svgCanonicalLower
 
+-- The shipped profile stays inside the reviewed capability kernel, and the
+-- kernel contradicts none of its own exclusions. `Guard.Props.caps_consistent`
+-- and `Guard.Props.default_profile_valid` prove these; the checks here fail
+-- fast during `lake build Tests` when a table is regenerated.
+#guard capsConsistent caps
+#guard profileValid caps defaultProfile
+#guard profileRestricts defaultProfile defaultProfile
+def capabilityRulesKnown : Bool := capabilityRules.all R.isRule
+#guard capabilityRulesKnown
+
 -- Every generated rule id has the expected shape.
 #guard R.all.all fun id => id.startsWith "R-"
-#guard R.all.length == 43
+#guard R.all.length == 46

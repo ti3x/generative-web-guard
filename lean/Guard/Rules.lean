@@ -93,6 +93,12 @@ def FRAME_CSP_SINKS : String := "R-FRAME-CSP-SINKS"
 def RENDER_CONSTRUCTORS_ONLY : String := "R-RENDER-CONSTRUCTORS-ONLY"
 /-- Accepted output satisfies the structural policy and is a fixed point -/
 def CHECK_ACCEPTANCE : String := "R-CHECK-ACCEPTANCE"
+/-- Profiles cannot exceed the reviewed capability inventory -/
+def CAP_INVENTORY : String := "R-CAP-INVENTORY"
+/-- Profiles cannot raise a structural limit above the kernel ceiling -/
+def CAP_CEILINGS : String := "R-CAP-CEILINGS"
+/-- Profiles cannot weaken a mandatory control or text-only context -/
+def CAP_CONTROLS : String := "R-CAP-CONTROLS"
 
 /-- Every rule id, in catalog order. -/
 def all : List String :=
@@ -138,7 +144,10 @@ def all : List String :=
   , FRAME_MESSAGE_SCHEMA
   , FRAME_CSP_SINKS
   , RENDER_CONSTRUCTORS_ONLY
-  , CHECK_ACCEPTANCE ]
+  , CHECK_ACCEPTANCE
+  , CAP_INVENTORY
+  , CAP_CEILINGS
+  , CAP_CONTROLS ]
 
 def isRule (s : String) : Bool := all.contains s
 

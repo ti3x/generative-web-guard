@@ -156,3 +156,89 @@ Then("all engines agree", function () {
   }
   this.attach(`engines: ${ran.join(", ")}`);
 });
+
+// --- capability kernel (R-CAP-*) --------------------------------------------
+// Profile validation is a build-time check over rules/policy.json against the
+// reviewed kernel in rules/capabilities.json. It runs on the profile data
+// alone, so these scenarios do not depend on any corpus case, parser output or
+// engine being available.
+import { readFileSync } from "node:fs";
+import { validatePolicy, loadCapabilities } from "../../scripts/gen-policy.mjs";
+
+const shippedProfile = () =>
+  JSON.parse(readFileSync(new URL("../../rules/policy.json", import.meta.url), "utf8"));
+
+// Named profile edits. Each is a single realistic authoring mistake.
+const PROFILE_CHANGES = {
+  "allow the iframe element": (p) => { p.htmlElements.iframe = null; },
+  "allow the svg use element": (p) => { p.svgElements.use = null; },
+  "give div an href attribute validated as text": (p) => { p.htmlElements.div = { href: ["text"] }; },
+  "give svg a src attribute validated as text": (p) => { p.svgGlobal.src = ["text"]; },
+  "validate svg fill as plain text": (p) => { p.svgGlobal.fill = ["text"]; },
+  "validate svg stroke as plain text": (p) => { p.svgGlobal.stroke = ["text"]; },
+  "validate stroke-width as a signed number": (p) => { p.svgGlobal["stroke-width"] = ["num"]; },
+  "invent a data-secret attribute": (p) => { p.sharedGlobal["data-secret"] = ["text"]; },
+  "widen the dir enum": (p) => { p.htmlGlobal.dir = ["oneOf", ["ltr", "rtl", "auto", "anything"]]; },
+  "widen the aria-level range": (p) => { p.sharedGlobal["aria-level"] = ["int", 1, 99]; },
+  "widen the stroke-dasharray bound": (p) => { p.svgGlobal["stroke-dasharray"] = ["numList", 4096]; },
+  "unwrap script instead of dropping it": (p) => { p.htmlUnwrap.push(["script", "R-EXEC-SCRIPT"]); },
+  "raise the node limit": (p) => { p.limits.maxNodes = 500000; },
+  "raise the attribute value limit": (p) => { p.limits.maxAttrValueLength = 20000; },
+  "raise the traversal ceiling": (p) => { p.limits.maxTraversalDepth = 100000; },
+  "drop the forced button type": (p) => { delete p.htmlForced.button; },
+  "force button type submit": (p) => { p.htmlForced.button = [["type", "submit"]]; },
+  "drop the forced input autocomplete": (p) => { delete p.htmlForced.input; },
+  "drop the mandatory input type attribute": (p) => { delete p.htmlElements.input.type; },
+  "open the svg title text-only context": (p) => { p.svgTextOnly = p.svgTextOnly.filter((t) => t !== "title"); },
+  "narrow the input type enum": (p) => { p.htmlElements.input.type = ["tagged", "R-CTRL-INPUT-TYPE", ["oneOf", ["text", "number"]]]; },
+  "narrow the aria-level range": (p) => { p.sharedGlobal["aria-level"] = ["int", 2, 3]; },
+  "pin the dir attribute to one value": (p) => { p.htmlGlobal.dir = ["oneOf", ["ltr"]]; },
+  "drop the meter element": (p) => { delete p.htmlElements.meter; },
+  "drop the select element and its forced attributes": (p) => { delete p.htmlElements.select; delete p.htmlForced.select; },
+  "lower the node and depth limits": (p) => { p.limits.maxNodes = 10; p.limits.maxDepth = 4; },
+  "shrink the stroke-dasharray bound": (p) => { p.svgGlobal["stroke-dasharray"] = ["numList", 2]; },
+  "make svg text a text-only context": (p) => { p.svgTextOnly = [...p.svgTextOnly, "text"]; },
+};
+
+Given("the shipped profile", function () {
+  this.profile = shippedProfile();
+});
+
+Given("the shipped profile with the change {string}", function (name) {
+  const mutate = PROFILE_CHANGES[name];
+  assert.ok(mutate, `unknown profile change ${JSON.stringify(name)}`);
+  this.profile = shippedProfile();
+  mutate(this.profile);
+});
+
+When("the profile is checked against the capability kernel", function () {
+  assert.ok(this.profile, "no profile; add a Given step");
+  this.profileError = null;
+  try {
+    validatePolicy(this.profile, loadCapabilities());
+  } catch (error) {
+    this.profileError = error;
+  }
+});
+
+Then("the profile is accepted", function () {
+  assert.equal(this.profileError, null, `profile rejected: ${this.profileError?.message}`);
+});
+
+Then("the profile is rejected because it {string}", function (fragment) {
+  assert.ok(this.profileError, "profile was accepted");
+  assert.ok(
+    this.profileError.message.includes(fragment),
+    `rejection message ${JSON.stringify(this.profileError.message)} does not mention ${JSON.stringify(fragment)}`,
+  );
+});
+
+Then("the kernel grammar for {string} remains {string}", function (attribute, family) {
+  assert.ok(this.profileError, "profile was accepted");
+  const message = this.profileError.message;
+  assert.ok(message.includes(`attribute ${attribute}`), `rejection does not name ${attribute}: ${message}`);
+  assert.ok(
+    message.includes(`kernel grammar ["${family}"]`),
+    `rejection does not name the kernel grammar ${family}: ${message}`,
+  );
+});

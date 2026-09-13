@@ -364,94 +364,138 @@ export function checkTree(rawRoot) {
   return candidate;
 }
 
+// Traversal is iterative with an explicit work stack. A chain of unwrapped
+// elements does not increase output depth (LIMITS.maxDepth), so that guard
+// cannot bound traversal work; recursion here used to grow one JavaScript
+// frame per input level and a hand-built deep tree passed straight to
+// checkTree() could overflow the stack. Accept/reject decisions, emitted
+// trees and change records are unchanged.
+//
+// LIMITS.maxTraversalDepth is a separate structural ceiling that counts every
+// descent, including unwrapped elements, and rejects with "traversal-depth".
+// The Lean checker applies the identical ceiling at the identical point, so
+// the two engines still agree and the differential exercises it directly.
+// It is above the preprocessing raw-depth bound and far above the frame's
+// tree-shape bound, so no HTML-derived or frame-delivered tree can reach it;
+// it is reachable only by calling checkTree() directly with a hand-built raw
+// tree deeper than that.
 function checkChildren(rawChildren, parentNs, depth, path, changes, counters, reasons, textOnly) {
-  const out = [];
-  if (!Array.isArray(rawChildren)) return out;
-  rawChildren.forEach((raw, index) => {
-    const here = path.concat(index);
-    if (reasons.length) return;
-    if (raw == null || typeof raw !== "object") return;
+  const rootOut = [];
+  const stack = [{
+    list: Array.isArray(rawChildren) ? rawChildren : [],
+    parentNs, depth, sdepth: 0, path, textOnly, out: rootOut, index: 0, finish: null,
+  }];
+  // One descent into a child list, mirroring the former recursive call.
+  const descend = (frame, list, childNs, childDepth, here, childTextOnly, out, finish) => {
+    if (frame.sdepth + 1 > LIMITS.maxTraversalDepth) {
+      reasons.push({ code: "traversal-depth", path: here });
+      if (finish) finish(out);
+      return;
+    }
+    stack.push({
+      list: Array.isArray(list) ? list : [],
+      parentNs: childNs, depth: childDepth, sdepth: frame.sdepth + 1,
+      path: here, textOnly: childTextOnly, out, index: 0, finish,
+    });
+  };
+
+  while (stack.length) {
+    const frame = stack[stack.length - 1];
+    if (frame.index >= frame.list.length) {
+      stack.pop();
+      // The element wrapping this list is emitted when the list finishes,
+      // exactly where the recursive version pushed it.
+      if (frame.finish) frame.finish(frame.out);
+      continue;
+    }
+    const raw = frame.list[frame.index];
+    const here = frame.path.concat(frame.index);
+    frame.index++;
+    if (reasons.length) continue;
+    if (raw == null || typeof raw !== "object") continue;
 
     if (raw.kind === "text") {
       const s = typeof raw.text === "string" ? cleanText(raw.text) : "";
-      if (s.length === 0) return;
+      if (s.length === 0) continue;
       if (s.length > LIMITS.maxTextLength) {
         reasons.push({ code: "text-too-long", path: here });
-        return;
+        continue;
       }
       counters.totalText += s.length;
       if (counters.totalText > LIMITS.maxTotalText) {
         reasons.push({ code: "total-text-too-long", path: here });
-        return;
+        continue;
       }
       counters.nodes++;
       if (counters.nodes > LIMITS.maxNodes) {
         reasons.push({ code: "too-many-nodes", path: here });
-        return;
+        continue;
       }
-      out.push(text(s));
-      return;
+      frame.out.push(text(s));
+      continue;
     }
 
     if (raw.kind === "comment" || raw.kind === "doctype") {
       changes.push({ kind: "removed-node", what: raw.kind, path: here, rule: RULES.STRUCT_NON_ELEMENT });
-      return;
+      continue;
     }
 
     if (raw.kind !== "el" || typeof raw.tag !== "string") {
       changes.push({ kind: "removed-node", what: "unknown", path: here, rule: RULES.STRUCT_NON_ELEMENT });
-      return;
+      continue;
     }
 
-    if (textOnly) {
+    if (frame.textOnly) {
       changes.push({ kind: "removed-element", tag: raw.tag, path: here, why: "text-only-context", rule: RULES.NS_POSITION });
-      return;
+      continue;
     }
 
     const tag = asciiLower(raw.tag);
     const ns = raw.ns === "svg" ? "svg" : raw.ns === "html" ? "html" : "other";
 
-    if (depth + 1 > LIMITS.maxDepth) {
+    if (frame.depth + 1 > LIMITS.maxDepth) {
       reasons.push({ code: "too-deep", path: here });
-      return;
+      continue;
     }
 
     let table = null;
-    if (ns === "html" && parentNs === "html") {
+    if (ns === "html" && frame.parentNs === "html") {
       if (Object.prototype.hasOwnProperty.call(HTML_ELEMENTS, tag)) table = HTML_ELEMENTS[tag];
       else if (HTML_UNWRAP.has(tag)) {
         changes.push({ kind: "unwrapped-element", tag, path: here, rule: HTML_UNWRAP.get(tag) });
-        out.push(...checkChildren(raw.children, parentNs, depth, here, changes, counters, reasons, false));
-        return;
+        // The children take this element's place in the same output list.
+        descend(frame, raw.children, frame.parentNs, frame.depth, here, false, frame.out, null);
+        continue;
       } else {
         changes.push({ kind: "removed-element", tag, path: here, rule: HTML_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });
-        return;
+        continue;
       }
-    } else if (ns === "svg" && (tag === "svg" || parentNs === "svg")) {
+    } else if (ns === "svg" && (tag === "svg" || frame.parentNs === "svg")) {
       if (Object.prototype.hasOwnProperty.call(SVG_ELEMENTS, tag)) table = SVG_ELEMENTS[tag];
       else {
         changes.push({ kind: "removed-element", tag, ns, path: here, rule: SVG_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });
-        return;
+        continue;
       }
     } else {
       // Wrong namespace for this position (HTML inside SVG via an integration
       // point, MathML anywhere, SVG element outside an <svg> root).
       changes.push({ kind: "removed-element", tag, ns, path: here, why: "namespace", rule: ns === "other" ? RULES.NS_MATHML : RULES.NS_POSITION });
-      return;
+      continue;
     }
 
     counters.nodes++;
     if (counters.nodes > LIMITS.maxNodes) {
       reasons.push({ code: "too-many-nodes", path: here });
-      return;
+      continue;
     }
 
     const attrs = checkAttrs(raw.attrs, ns, tag, table, here, changes);
     const childTextOnly = ns === "svg" && SVG_TEXT_ONLY.has(tag);
-    const kids = checkChildren(raw.children, ns, depth + 1, here, changes, counters, reasons, childTextOnly);
-    out.push(el(ns, tag, attrs, kids));
-  });
-  return out;
+    const out = frame.out;
+    const kids = [];
+    descend(frame, raw.children, ns, frame.depth + 1, here, childTextOnly, kids, (k) => out.push(el(ns, tag, attrs, k)));
+  }
+  return rootOut;
 }
 
 function checkAttrs(rawAttrs, ns, tag, table, path, changes) {

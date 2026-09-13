@@ -18,7 +18,8 @@
     "runtime": "Generated JavaScript runs isolated with bounded resources",
     "gate": "Unsupported programs are rejected with diagnostics before execution",
     "frame": "The rendering frame accepts only validated trees and well-typed messages",
-    "renderer": "The renderer builds DOM from the tree with constructors only"
+    "renderer": "The renderer builds DOM from the tree with constructors only",
+    "capability": "Profiles can only restrict the reviewed capability kernel"
   },
   "rules": [
     {
@@ -1151,19 +1152,27 @@
       "class": "structure",
       "severity": "critical",
       "title": "Accepted output satisfies the structural policy and is a fixed point",
-      "statement": "Given any raw tree, every accepted output satisfies the explicit output predicate (allowed elements, canonical attribute values, namespace nesting, text and structural bounds), and checking that output again returns the identical tree with no changes. Candidates failing either postcondition are rejected.",
+      "statement": "Given any raw tree, every accepted output satisfies the explicit output predicate (allowed elements, canonical attribute values, namespace nesting, text and structural bounds), and checking that output again returns the identical tree with no changes. Candidates failing either postcondition are rejected. In production the checker that decides is the Lean implementation compiled to WebAssembly, reached through a versioned single-document ABI; the JavaScript candidate must equal the accepted tree, and a missing, failing, rejecting, malformed or timed-out checker refuses to render rather than falling back to JavaScript acceptance.",
       "engines": [
         "js",
         "lean"
       ],
       "mechanisms": [
         "policy:output-postcondition",
-        "policy:canonical-recheck"
+        "policy:canonical-recheck",
+        "policy:lean-wasm-authority",
+        "policy:acceptance-record"
       ],
       "cites": [
         "src/policy.js#checkTree",
+        "src/policy-core.js#createPolicyCore",
+        "src/lean-checker.js#createLeanChecker",
+        "src/lean-abi.js#readCheckResponse",
+        "src/acceptance.js#mintAcceptance",
         "lean/Guard/Policy/Accept.lean#policyOk",
-        "lean/Guard/Policy/Check.lean#checkTree"
+        "lean/Guard/Policy/Check.lean#checkTree",
+        "lean/Guard/Io/Abi.lean#checkDocument",
+        "lean/Guard/Io/Decode.lean#decodeDocument"
       ],
       "proofs": [
         "Guard.Props.accepted_policy",
@@ -1179,7 +1188,113 @@
         "Guard.Props.accepted_no_script",
         "Guard.Props.accepted_no_handler"
       ],
-      "proofScope": "Theorems cover the postcondition-guarded Lean checker over Raw/Node values. They do not prove normalization always succeeds, JS equivalence, parsing, serialization, rendering, runtime isolation, or browser semantics.",
+      "proofScope": "Theorems cover the postcondition-guarded Lean checker over Raw/Node values. They do not prove normalization always succeeds, JS equivalence, parsing, serialization, rendering, runtime isolation, or browser semantics. Making that checker the production authority does not extend the theorems to the Emscripten runtime, the C shim, the JSON codec on either side, the trusted glue or the transport; and the resource bounds that keep the checker inside an engine's call stack are measurements, not theorems.",
+      "references": []
+    },
+    {
+      "id": "R-CAP-INVENTORY",
+      "class": "capability",
+      "severity": "critical",
+      "title": "Profiles cannot exceed the reviewed capability inventory",
+      "statement": "Given a profile that names an element or attribute identity absent from rules/capabilities.json, or assigns an attribute a value grammar that is not a restriction of the reviewed grammar for that attribute in that context, the profile fails validation and no tables are generated. Enumerations may be restricted by set inclusion and integer ranges by interval inclusion; every other grammar requires exact identity. Validation is independent of whether any corpus case exercises the construct. If one profile restricts another, every output tree the first permits is permitted by the second; that is a statement about permitted output trees, not about how many raw inputs a tighter profile accepts.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "capability:closed-inventory",
+        "capability:grammar-restriction",
+        "capability:profile-restriction"
+      ],
+      "cites": [
+        "rules/capabilities.json",
+        "scripts/gen-policy.mjs#validateProfileCapabilities",
+        "src/capabilities-data.js",
+        "lean/Guard/Policy/Cap.lean#profileValid",
+        "lean/Guard/Policy/Capabilities.lean",
+        "lean/Guard/Props/Profile.lean#restricts_permits"
+      ],
+      "proofs": [
+        "Guard.Props.caps_consistent",
+        "Guard.Props.default_profile_valid",
+        "Guard.Props.valid_element_within",
+        "Guard.Props.valid_attr_within",
+        "Guard.Props.valid_excludes_attr",
+        "Guard.Props.valid_excludes_element",
+        "Guard.Props.restricts_apply",
+        "Guard.Props.accepted_no_excluded_element",
+        "Guard.Props.accepted_no_excluded_attribute",
+        "Guard.Props.accepted_no_resource_attribute",
+        "Guard.Props.accepted_no_active_html_element",
+        "Guard.Props.accepted_no_active_svg_element",
+        "Guard.Props.accepted_paint_is_solid_color",
+        "Guard.Props.accepted_paint_grammar",
+        "Guard.Props.accepted_id_is_prefixed",
+        "Guard.Props.restricts_permits",
+        "Guard.Props.nodes_restricts",
+        "Guard.Props.attrsCanonical_restricts",
+        "Guard.Props.attrCanonical_restricts",
+        "Guard.Props.restricts_element",
+        "Guard.Props.restricts_forced",
+        "Guard.Props.restricts_textOnly"
+      ],
+      "proofScope": "The certificate covers the shipped profile against the generated inventory; the exclusion and value contracts hold for every profile that certifies. They do not prove the generator, an arbitrarily edited inventory, the JavaScript validator, the parser, the renderer or the browser correct.",
+      "references": []
+    },
+    {
+      "id": "R-CAP-CEILINGS",
+      "class": "capability",
+      "severity": "high",
+      "title": "Profiles cannot raise a structural limit above the kernel ceiling",
+      "statement": "Given a profile whose structural limits exceed the absolute ceilings in rules/capabilities.json, the profile fails validation. A profile may lower a limit.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "capability:resource-ceilings"
+      ],
+      "cites": [
+        "rules/capabilities.json",
+        "scripts/gen-policy.mjs#validateProfileCapabilities",
+        "lean/Guard/Policy/Profile.lean#Limits.within"
+      ],
+      "proofs": [
+        "Guard.Props.valid_limits",
+        "Guard.Props.within_maxNodes",
+        "Guard.Props.within_maxDepth",
+        "Guard.Props.within_maxTextLength",
+        "Guard.Props.within_maxTotalText",
+        "Guard.Props.within_maxAttrs"
+      ],
+      "proofScope": "Ceilings bound the modeled structural counters only. They do not bound browser layout cost, parser resource use or wall-clock time.",
+      "references": []
+    },
+    {
+      "id": "R-CAP-CONTROLS",
+      "class": "capability",
+      "severity": "high",
+      "title": "Profiles cannot weaken a mandatory control or text-only context",
+      "statement": "Given a profile that keeps an element but removes or changes a forced control attribute the kernel requires, drops an attribute the checker must always emit, or removes a mandatory text-only SVG context, the profile fails validation. Dropping the element entirely is a permitted restriction.",
+      "engines": [
+        "js",
+        "lean"
+      ],
+      "mechanisms": [
+        "capability:forced-attributes",
+        "capability:text-only-context"
+      ],
+      "cites": [
+        "rules/capabilities.json",
+        "scripts/gen-policy.mjs#validateProfileCapabilities",
+        "lean/Guard/Policy/Cap.lean#capForcedKept"
+      ],
+      "proofs": [
+        "Guard.Props.valid_forced",
+        "Guard.Props.valid_required",
+        "Guard.Props.valid_text_only"
+      ],
+      "proofScope": "Covers the decidable profile conditions, not the browser's autofill or focus behavior.",
       "references": []
     }
   ]

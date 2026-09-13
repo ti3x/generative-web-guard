@@ -9,9 +9,10 @@
 //   { status: "validated", tree, changes: n, kinds: [...], rules: [...] }
 //   { status: "rejected", reasons: [...] }
 import { spawnSync } from "node:child_process";
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { checkTree, setClassAllowlist } from "../../src/policy.js";
+import { createLeanChecker } from "../../src/lean-checker.js";
 
 export const DEFAULT_CLASSES = ["card", "muted", "bar", "btn", "row", "stack", "title", "label", "axis", "chart"];
 
@@ -96,33 +97,62 @@ export function leanDockerEngine(env = process.env) {
   };
 }
 
-// Lean checker compiled to WebAssembly, instantiated once and reused.
+// Lean checker compiled to WebAssembly.
+//
+// This engine goes through the PRODUCTION path: `src/lean-checker.js` over the
+// versioned single-document ABI, one document per call. The old batch entry
+// point is not available any more -- the Wasm build deliberately exports only
+// the document ABI, because a permissive batch interface that takes a
+// caller-supplied class list is the wrong shape for an authority -- and using
+// the production path here is the point: the differential now compares the
+// JavaScript checker against the exact interface the browser uses.
+//
+// The class allowlist is SEALED into an instance at creation, so a run with a
+// different list builds a new instance rather than reconfiguring one. That is
+// the behaviour under test; the shim refuses a second, differing
+// configuration.
 export function wasmEngine() {
-  let modulePromise = null;
-  const load = () => {
-    if (!modulePromise) {
-      modulePromise = (async () => {
-        const createGuard = (await import(pathToFileURL(WASM_MJS.pathname).href)).default;
-        const Module = await createGuard();
-        const init = Module.cwrap("guard_init", "number", []);
-        const check = Module.cwrap("guard_check_c", "number", ["string"]);
-        const free = Module.cwrap("guard_free", null, ["number"]);
-        if (init() !== 0) throw new Error("wasm: lean runtime failed to initialize");
-        return { Module, check, free };
-      })();
-    }
-    return modulePromise;
+  let current = null; // { key, checker }
+  const checkerFor = async (classes) => {
+    const key = JSON.stringify(classes);
+    if (current && current.key === key) return current.checker;
+    if (current) current.checker.dispose();
+    const createModule = (await import(pathToFileURL(WASM_MJS.pathname).href)).default;
+    const checker = await createLeanChecker({
+      createModule,
+      wasmBinary: new Uint8Array(readFileSync(WASM_BIN.pathname)),
+      classes,
+      // A differential run has no frame, so there is no stylesheet to bind to.
+      // The value is sealed and echoed; it is not a policy input.
+      stylesheetHash: "differential",
+    });
+    current = { key, checker };
+    return checker;
   };
   return {
     name: "wasm",
     available: () => existsSync(WASM_MJS) && existsSync(WASM_BIN),
     sizeBytes: () => (existsSync(WASM_BIN) ? statSync(WASM_BIN).size : 0),
+    async identity() { return (await checkerFor(DEFAULT_CLASSES)).identity; },
     async run(raws, classes = DEFAULT_CLASSES) {
-      const { Module, check, free } = await load();
-      const ptr = check(JSON.stringify({ classes, inputs: raws }));
-      const out = Module.UTF8ToString(ptr);
-      free(ptr);
-      return JSON.parse(out).map(summarizeLean);
+      const checker = await checkerFor(classes);
+      return raws.map((raw, index) => {
+        const verdict = checker.check(`d${index}`, raw);
+        if (verdict.status === "accepted") {
+          return {
+            status: "validated",
+            tree: verdict.tree,
+            changes: verdict.changes,
+            kinds: verdict.changeKinds,
+            rules: verdict.changeRules,
+          };
+        }
+        if (verdict.status === "rejected") return { status: "rejected", reasons: verdict.reasons };
+        // A protocol or decoder error is not a policy rejection. Surfacing it
+        // under its own code keeps a differential mismatch readable instead of
+        // looking like a disagreement about the policy.
+        return { status: "rejected", reasons: [`abi:${verdict.reason.code}${verdict.reason.detail ? `:${verdict.reason.detail}` : ""}`] };
+      });
     },
   };
 }

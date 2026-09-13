@@ -72,11 +72,18 @@ def checkAttrs (ctx : Ctx) (ns : Ns) (tag : String) (table : Table) (path : List
   return sortAttrs seen
 
 mutual
-def checkChildren (fuel : Nat) (ctx : Ctx) (raws : List Raw) (parentNs : Ns) (depth : Nat) (path : List Nat)
-    (textOnly : Bool) : M (List Node) :=
+def checkChildren (fuel : Nat) (ctx : Ctx) (raws : List Raw) (parentNs : Ns) (depth : Nat)
+    (sdepth : Nat) (path : List Nat) (textOnly : Bool) : M (List Node) :=
   match fuel with
   | 0 => do reject "traversal-budget"; return []
   | fuel + 1 => do
+    -- Structural traversal ceiling. Unlike `maxDepth` this counts every
+    -- descent, including chains of unwrapped elements that do not increase
+    -- output depth. `src/policy.js` applies the identical ceiling at the
+    -- identical point so the two checkers still agree.
+    if sdepth > limits.maxTraversalDepth then
+      reject "traversal-depth"
+      return []
     let mut out : List Node := []
     let mut index := 0
     for raw in raws do
@@ -109,12 +116,12 @@ def checkChildren (fuel : Nat) (ctx : Ctx) (raws : List Raw) (parentNs : Ns) (de
             change { kind := "removed-element", tag, path := here, why := "namespace", rule := R.NS_POSITION }
           else
             match htmlElements.lookup tag with
-            | some table => out := out ++ [← checkElement fuel ctx .html tag table attrs children depth here]
+            | some table => out := out ++ [← checkElement fuel ctx .html tag table attrs children depth (sdepth + 1) here]
             | none =>
               match htmlUnwrap.lookup tag with
               | some rule =>
                 change { kind := "unwrapped-element", tag, path := here, rule }
-                out := out ++ (← checkChildren fuel ctx children parentNs depth here false)
+                out := out ++ (← checkChildren fuel ctx children parentNs depth (sdepth + 1) here false)
               | none =>
                 change { kind := "removed-element", tag, path := here, rule := (htmlDropRules.lookup tag).getD R.STRUCT_ELEMENT_ALLOWLIST }
         | some .svg =>
@@ -122,14 +129,14 @@ def checkChildren (fuel : Nat) (ctx : Ctx) (raws : List Raw) (parentNs : Ns) (de
             change { kind := "removed-element", tag, path := here, why := "namespace", rule := R.NS_POSITION }
           else
             match svgElements.lookup tag with
-            | some table => out := out ++ [← checkElement fuel ctx .svg tag table attrs children depth here]
+            | some table => out := out ++ [← checkElement fuel ctx .svg tag table attrs children depth (sdepth + 1) here]
             | none => change { kind := "removed-element", tag, path := here, rule := (svgDropRules.lookup tag).getD R.STRUCT_ELEMENT_ALLOWLIST }
         | none =>
           change { kind := "removed-element", tag, path := here, why := "namespace", rule := R.NS_MATHML }
     return out
 
 def checkElement (fuel : Nat) (ctx : Ctx) (ns : Ns) (tag : String) (table : Table) (attrs : List (String × String))
-    (children : List Raw) (depth : Nat) (here : List Nat) : M Node :=
+    (children : List Raw) (depth : Nat) (sdepth : Nat) (here : List Nat) : M Node :=
   match fuel with
   | 0 => do reject "traversal-budget"; return .text ""
   | fuel + 1 => do
@@ -139,7 +146,7 @@ def checkElement (fuel : Nat) (ctx : Ctx) (ns : Ns) (tag : String) (table : Tabl
       return .text ""
     let outAttrs ← checkAttrs ctx ns tag table here attrs
     let childTextOnly := ns == .svg && svgTextOnly.contains tag
-    let kids ← checkChildren fuel ctx children ns (depth + 1) here childTextOnly
+    let kids ← checkChildren fuel ctx children ns (depth + 1) sdepth here childTextOnly
     return .el ns tag outAttrs kids
 end
 
@@ -149,7 +156,7 @@ inductive Result where
 deriving Repr, BEq, DecidableEq
 
 def normalizeTree (ctx : Ctx) (rootChildren : List Raw) : Result :=
-  let (tree, st) := (checkChildren (2 * rawWeight rootChildren + 1) ctx rootChildren .html 0 [] false).run {}
+  let (tree, st) := (checkChildren (2 * rawWeight rootChildren + 1) ctx rootChildren .html 0 0 [] false).run {}
   if st.reasons.isEmpty then .validated tree st.changes.reverse else .rejected st.reasons.reverse
 
 /-- Only candidates that obey the output policy and normalize unchanged are

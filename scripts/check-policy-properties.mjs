@@ -76,7 +76,7 @@ export async function checkProperties(engines) {
   raws.push(...redTeamCases.map((entry) => parseHtmlToRaw(entry.html)));
   // Direct raw trees exercise properties hidden by HTML parser repairs.
   raws.push(root(Array.from({ length: 5001 }, () => text("x"))));
-  raws.push(root([el("div", [["onclick", "x"], ["id", "x"], ["id", "y"]])]));
+  raws.push(root([el("div", [["onclick", "x"], ["id", "x"]])]));
   raws.push(root([el("svg", [], [el("desc", [], [el("div", [], [text("x")])], "svg")], "svg")]));
   let baseline = null;
   for (const engine of engines) {
@@ -110,6 +110,45 @@ export async function checkProperties(engines) {
     }
     assert.equal(outputs[raws.length - 3].status, "rejected", "text-node budget must reject");
     console.log(`properties: ${engine.name}, ${raws.length} cases, ${accepted.length} fixed points`);
+  }
+  await checkStrictDecoderDivergence(engines);
+}
+
+/**
+ * Inputs where the PRODUCTION ABI is deliberately stricter than the candidate
+ * builder, and the difference is a contract rather than a bug.
+ *
+ * The Wasm engine speaks the versioned single-document ABI, whose decoder is
+ * strict: it refuses rather than repairs. `src/policy.js` and the native batch
+ * interface both use lenient decoding -- `Guard.rawFromJson` drops malformed
+ * attribute entries and resolves a duplicate name to the first occurrence --
+ * so on these inputs they validate while the ABI refuses.
+ *
+ * parse5 never produces a duplicate attribute name (the HTML parsing spec
+ * drops them in a start tag), so no parsed document is affected; these are
+ * hand-built raw trees. The reason to refuse is that "which duplicate wins" is
+ * a silent resolution inside an authority, and an authority should not resolve
+ * ambiguity it can reject.
+ *
+ * This is asserted rather than excluded, so if the ABI ever silently starts
+ * accepting one of these, the check fails.
+ */
+async function checkStrictDecoderDivergence(engines) {
+  const cases = [
+    ["duplicate attribute name", root([el("div", [["id", "x"], ["id", "y"]])]), /duplicate-attribute:id/],
+    ["duplicate class attribute", root([el("p", [["class", "card"], ["class", "muted"]])]), /duplicate-attribute:class/],
+  ];
+  for (const engine of engines) {
+    for (const [label, raw, pattern] of cases) {
+      const [out] = await engine.run([raw]);
+      if (engine.name === "wasm") {
+        assert.equal(out.status, "rejected", `${engine.name}: ${label} must be refused by the strict ABI decoder`);
+        assert.ok(out.reasons.some((r) => pattern.test(r)), `${engine.name}: ${label} refused for the wrong reason: ${out.reasons.join(",")}`);
+      } else {
+        assert.equal(out.status, "validated", `${engine.name}: ${label} is resolved leniently, not refused`);
+      }
+    }
+    console.log(`strict-decoder divergence: ${engine.name}, ${cases.length} cases behave as documented`);
   }
 }
 

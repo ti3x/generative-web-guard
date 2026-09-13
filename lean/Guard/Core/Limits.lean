@@ -12,6 +12,7 @@ structure Limits where
   maxPathNumbers : Nat := 4000
   maxPointsNumbers : Nat := 2000
   maxNumberMagnitude : Nat := 1000000
+  maxTraversalDepth : Nat := 256
 
 def limits : Limits := {}
 

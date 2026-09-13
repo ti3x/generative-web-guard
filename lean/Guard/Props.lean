@@ -5,3 +5,4 @@ import Guard.Props.Path
 import Guard.Props.Transform
 import Guard.Props.Color
 import Guard.Props.Checker
+import Guard.Props.Profile

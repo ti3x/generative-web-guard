@@ -97,8 +97,7 @@ def numberListCharOk (c : Char) : Bool := numberCharOk c || c == ' '
 /-- Every character of a number list is a digit, `.`, `-` or a single space. -/
 theorem numberListChars_ok {max : Nat} {cs r : List Char} (h : numberListChars max cs = some r) :
     ∀ c ∈ r, numberListCharOk c = true := by
-  unfold numberListChars at h
-  simp only at h
+  unfold numberListChars numberListOf at h
   split at h
   · simp at h
   · cases hall : allSome ((splitRuns true (trimChars cs)).map canonicalNumberChars) with

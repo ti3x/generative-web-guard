@@ -1,0 +1,1042 @@
+{
+  "capabilityVersion": 1,
+  "rules": [
+    "R-CAP-INVENTORY",
+    "R-CAP-CEILINGS",
+    "R-CAP-CONTROLS"
+  ],
+  "meaning": "Closed capability kernel for generated HTML/SVG output. Version 1 means: element and attribute identities listed here are the only ones any profile may permit; each attribute's descriptor is the widest value grammar reviewed for that attribute in that context; forcedAttributes and requiredAttributes are mandatory controls; ceilings are absolute upper bounds on the structural limits; excluded* names must never appear in accepted output. A profile may only restrict this kernel. Widening it (new element, new attribute, wider grammar, higher ceiling, removed requirement) is a kernel change: it needs security review of browser effects, renderer assumptions, tests and proof scope, and a capabilityVersion increment.",
+  "reviewedAt": "2026-09-12",
+  "reviewScope": "Reviewed against the raw-tree policy and the accepted-output theorems only. It says nothing about parser resource use, QuickJS isolation, host/frame messaging, CSS layout cost, or browser implementation bugs.",
+  "families": {
+    "plain": [
+      "num",
+      "nonNeg",
+      "unit",
+      "lenPct",
+      "path",
+      "transform",
+      "viewBox",
+      "color",
+      "text",
+      "ident",
+      "id",
+      "idRefs",
+      "cls",
+      "lang"
+    ],
+    "parameterized": [
+      "int",
+      "numList",
+      "oneOf",
+      "fixed"
+    ],
+    "wrapper": [
+      "tagged"
+    ]
+  },
+  "namespaces": [
+    "html",
+    "svg"
+  ],
+  "ceilings": {
+    "maxNodes": 5000,
+    "maxDepth": 32,
+    "maxTextLength": 20000,
+    "maxTotalText": 200000,
+    "maxAttrs": 24,
+    "maxAttrValueLength": 2000,
+    "maxPathNumbers": 4000,
+    "maxPointsNumbers": 2000,
+    "maxNumberMagnitude": 1000000,
+    "maxTraversalDepth": 256
+  },
+  "attributes": {
+    "shared": {
+      "class": [
+        "cls"
+      ],
+      "id": [
+        "id"
+      ],
+      "role": [
+        "oneOf",
+        [
+          "img",
+          "figure",
+          "group",
+          "list",
+          "listitem",
+          "table",
+          "row",
+          "cell",
+          "columnheader",
+          "rowheader",
+          "tablist",
+          "tab",
+          "tabpanel",
+          "button",
+          "presentation",
+          "none",
+          "status",
+          "region",
+          "heading",
+          "note",
+          "switch",
+          "radiogroup",
+          "toolbar",
+          "separator",
+          "graphics-document",
+          "graphics-object",
+          "graphics-symbol"
+        ]
+      ],
+      "tabindex": [
+        "oneOf",
+        [
+          "0",
+          "-1"
+        ]
+      ],
+      "data-action": [
+        "ident"
+      ],
+      "data-value": [
+        "text"
+      ],
+      "data-key": [
+        "text"
+      ],
+      "data-hover": [
+        "fixed",
+        ""
+      ],
+      "aria-label": [
+        "text"
+      ],
+      "aria-labelledby": [
+        "idRefs"
+      ],
+      "aria-describedby": [
+        "idRefs"
+      ],
+      "aria-controls": [
+        "idRefs"
+      ],
+      "aria-hidden": [
+        "oneOf",
+        [
+          "true",
+          "false"
+        ]
+      ],
+      "aria-expanded": [
+        "oneOf",
+        [
+          "true",
+          "false"
+        ]
+      ],
+      "aria-selected": [
+        "oneOf",
+        [
+          "true",
+          "false"
+        ]
+      ],
+      "aria-pressed": [
+        "oneOf",
+        [
+          "true",
+          "false",
+          "mixed"
+        ]
+      ],
+      "aria-checked": [
+        "oneOf",
+        [
+          "true",
+          "false",
+          "mixed"
+        ]
+      ],
+      "aria-disabled": [
+        "oneOf",
+        [
+          "true",
+          "false"
+        ]
+      ],
+      "aria-current": [
+        "oneOf",
+        [
+          "true",
+          "false",
+          "page",
+          "step",
+          "location",
+          "date",
+          "time"
+        ]
+      ],
+      "aria-live": [
+        "oneOf",
+        [
+          "off",
+          "polite"
+        ]
+      ],
+      "aria-sort": [
+        "oneOf",
+        [
+          "ascending",
+          "descending",
+          "none",
+          "other"
+        ]
+      ],
+      "aria-valuenow": [
+        "num"
+      ],
+      "aria-valuemin": [
+        "num"
+      ],
+      "aria-valuemax": [
+        "num"
+      ],
+      "aria-valuetext": [
+        "text"
+      ],
+      "aria-level": [
+        "int",
+        1,
+        9
+      ],
+      "aria-orientation": [
+        "oneOf",
+        [
+          "horizontal",
+          "vertical"
+        ]
+      ],
+      "aria-roledescription": [
+        "text"
+      ]
+    },
+    "html": {
+      "title": [
+        "text"
+      ],
+      "lang": [
+        "lang"
+      ],
+      "dir": [
+        "oneOf",
+        [
+          "ltr",
+          "rtl",
+          "auto"
+        ]
+      ],
+      "hidden": [
+        "fixed",
+        ""
+      ]
+    },
+    "svg": {
+      "transform": [
+        "transform"
+      ],
+      "fill": [
+        "color"
+      ],
+      "stroke": [
+        "color"
+      ],
+      "fill-opacity": [
+        "unit"
+      ],
+      "stroke-opacity": [
+        "unit"
+      ],
+      "opacity": [
+        "unit"
+      ],
+      "stroke-width": [
+        "nonNeg"
+      ],
+      "stroke-linecap": [
+        "oneOf",
+        [
+          "butt",
+          "round",
+          "square"
+        ]
+      ],
+      "stroke-linejoin": [
+        "oneOf",
+        [
+          "miter",
+          "round",
+          "bevel"
+        ]
+      ],
+      "stroke-dasharray": [
+        "numList",
+        64
+      ],
+      "fill-rule": [
+        "oneOf",
+        [
+          "nonzero",
+          "evenodd"
+        ]
+      ],
+      "pointer-events": [
+        "oneOf",
+        [
+          "none",
+          "all",
+          "visiblePainted"
+        ]
+      ],
+      "font-size": [
+        "nonNeg"
+      ],
+      "font-family": [
+        "oneOf",
+        [
+          "sans-serif",
+          "serif",
+          "monospace"
+        ]
+      ],
+      "font-weight": [
+        "oneOf",
+        [
+          "normal",
+          "bold",
+          "lighter",
+          "bolder",
+          "100",
+          "200",
+          "300",
+          "400",
+          "500",
+          "600",
+          "700",
+          "800",
+          "900"
+        ]
+      ],
+      "text-anchor": [
+        "oneOf",
+        [
+          "start",
+          "middle",
+          "end"
+        ]
+      ],
+      "dominant-baseline": [
+        "oneOf",
+        [
+          "auto",
+          "middle",
+          "central",
+          "hanging",
+          "alphabetic"
+        ]
+      ]
+    }
+  },
+  "elements": {
+    "html": {
+      "div": {},
+      "span": {},
+      "section": {},
+      "article": {},
+      "header": {},
+      "footer": {},
+      "main": {},
+      "nav": {},
+      "aside": {},
+      "p": {},
+      "br": {},
+      "hr": {},
+      "pre": {},
+      "code": {},
+      "blockquote": {},
+      "figure": {},
+      "figcaption": {},
+      "small": {},
+      "strong": {},
+      "em": {},
+      "b": {},
+      "i": {},
+      "u": {},
+      "s": {},
+      "sub": {},
+      "sup": {},
+      "mark": {},
+      "kbd": {},
+      "abbr": {},
+      "h1": {},
+      "h2": {},
+      "h3": {},
+      "h4": {},
+      "h5": {},
+      "h6": {},
+      "ul": {},
+      "dl": {},
+      "dt": {},
+      "dd": {},
+      "table": {},
+      "thead": {},
+      "tbody": {},
+      "tfoot": {},
+      "tr": {},
+      "caption": {},
+      "colgroup": {},
+      "details": {},
+      "summary": {},
+      "fieldset": {},
+      "legend": {},
+      "time": {
+        "datetime": [
+          "text"
+        ]
+      },
+      "ol": {
+        "start": [
+          "int",
+          -999999,
+          999999
+        ],
+        "reversed": [
+          "fixed",
+          ""
+        ],
+        "type": [
+          "oneOf",
+          [
+            "1",
+            "a",
+            "A",
+            "i",
+            "I"
+          ]
+        ]
+      },
+      "li": {
+        "value": [
+          "int",
+          -999999,
+          999999
+        ]
+      },
+      "th": {
+        "colspan": [
+          "int",
+          1,
+          1000
+        ],
+        "rowspan": [
+          "int",
+          1,
+          1000
+        ],
+        "scope": [
+          "oneOf",
+          [
+            "row",
+            "col",
+            "rowgroup",
+            "colgroup"
+          ]
+        ],
+        "headers": [
+          "idRefs"
+        ]
+      },
+      "td": {
+        "colspan": [
+          "int",
+          1,
+          1000
+        ],
+        "rowspan": [
+          "int",
+          1,
+          1000
+        ],
+        "headers": [
+          "idRefs"
+        ]
+      },
+      "col": {
+        "span": [
+          "int",
+          1,
+          1000
+        ]
+      },
+      "label": {
+        "for": [
+          "id"
+        ]
+      },
+      "output": {
+        "for": [
+          "idRefs"
+        ]
+      },
+      "button": {
+        "type": [
+          "fixed",
+          "button"
+        ],
+        "disabled": [
+          "fixed",
+          ""
+        ],
+        "value": [
+          "text"
+        ]
+      },
+      "input": {
+        "type": [
+          "oneOf",
+          [
+            "text",
+            "number",
+            "range",
+            "checkbox",
+            "radio",
+            "search"
+          ]
+        ],
+        "value": [
+          "text"
+        ],
+        "checked": [
+          "fixed",
+          ""
+        ],
+        "disabled": [
+          "fixed",
+          ""
+        ],
+        "readonly": [
+          "fixed",
+          ""
+        ],
+        "placeholder": [
+          "text"
+        ],
+        "min": [
+          "num"
+        ],
+        "max": [
+          "num"
+        ],
+        "step": [
+          "nonNeg"
+        ],
+        "minlength": [
+          "int",
+          0,
+          1000000
+        ],
+        "maxlength": [
+          "int",
+          0,
+          1000000
+        ],
+        "size": [
+          "int",
+          1,
+          1000
+        ],
+        "inputmode": [
+          "oneOf",
+          [
+            "text",
+            "decimal",
+            "numeric",
+            "search"
+          ]
+        ],
+        "autocomplete": [
+          "fixed",
+          "off"
+        ]
+      },
+      "select": {
+        "disabled": [
+          "fixed",
+          ""
+        ],
+        "multiple": [
+          "fixed",
+          ""
+        ],
+        "size": [
+          "int",
+          1,
+          1000
+        ],
+        "autocomplete": [
+          "fixed",
+          "off"
+        ]
+      },
+      "option": {
+        "value": [
+          "text"
+        ],
+        "selected": [
+          "fixed",
+          ""
+        ],
+        "disabled": [
+          "fixed",
+          ""
+        ],
+        "label": [
+          "text"
+        ]
+      },
+      "optgroup": {
+        "label": [
+          "text"
+        ],
+        "disabled": [
+          "fixed",
+          ""
+        ]
+      },
+      "textarea": {
+        "rows": [
+          "int",
+          1,
+          1000
+        ],
+        "cols": [
+          "int",
+          1,
+          1000
+        ],
+        "placeholder": [
+          "text"
+        ],
+        "disabled": [
+          "fixed",
+          ""
+        ],
+        "readonly": [
+          "fixed",
+          ""
+        ],
+        "maxlength": [
+          "int",
+          0,
+          1000000
+        ],
+        "autocomplete": [
+          "fixed",
+          "off"
+        ]
+      },
+      "progress": {
+        "value": [
+          "nonNeg"
+        ],
+        "max": [
+          "nonNeg"
+        ]
+      },
+      "meter": {
+        "value": [
+          "num"
+        ],
+        "min": [
+          "num"
+        ],
+        "max": [
+          "num"
+        ],
+        "low": [
+          "num"
+        ],
+        "high": [
+          "num"
+        ],
+        "optimum": [
+          "num"
+        ]
+      }
+    },
+    "svg": {
+      "svg": {
+        "viewBox": [
+          "viewBox"
+        ],
+        "width": [
+          "lenPct"
+        ],
+        "height": [
+          "lenPct"
+        ],
+        "preserveAspectRatio": [
+          "oneOf",
+          [
+            "none",
+            "xMidYMid meet",
+            "xMidYMid slice",
+            "xMinYMin meet",
+            "xMinYMin slice",
+            "xMaxYMax meet",
+            "xMaxYMax slice"
+          ]
+        ]
+      },
+      "g": {},
+      "title": {},
+      "desc": {},
+      "rect": {
+        "x": [
+          "num"
+        ],
+        "y": [
+          "num"
+        ],
+        "width": [
+          "nonNeg"
+        ],
+        "height": [
+          "nonNeg"
+        ],
+        "rx": [
+          "nonNeg"
+        ],
+        "ry": [
+          "nonNeg"
+        ]
+      },
+      "circle": {
+        "cx": [
+          "num"
+        ],
+        "cy": [
+          "num"
+        ],
+        "r": [
+          "nonNeg"
+        ]
+      },
+      "ellipse": {
+        "cx": [
+          "num"
+        ],
+        "cy": [
+          "num"
+        ],
+        "rx": [
+          "nonNeg"
+        ],
+        "ry": [
+          "nonNeg"
+        ]
+      },
+      "line": {
+        "x1": [
+          "num"
+        ],
+        "y1": [
+          "num"
+        ],
+        "x2": [
+          "num"
+        ],
+        "y2": [
+          "num"
+        ]
+      },
+      "polyline": {
+        "points": [
+          "numList",
+          2000
+        ]
+      },
+      "polygon": {
+        "points": [
+          "numList",
+          2000
+        ]
+      },
+      "path": {
+        "d": [
+          "path"
+        ]
+      },
+      "text": {
+        "x": [
+          "numList",
+          1
+        ],
+        "y": [
+          "numList",
+          1
+        ],
+        "dx": [
+          "numList",
+          1
+        ],
+        "dy": [
+          "numList",
+          1
+        ],
+        "rotate": [
+          "numList",
+          1
+        ],
+        "textLength": [
+          "nonNeg"
+        ]
+      },
+      "tspan": {
+        "x": [
+          "numList",
+          1
+        ],
+        "y": [
+          "numList",
+          1
+        ],
+        "dx": [
+          "numList",
+          1
+        ],
+        "dy": [
+          "numList",
+          1
+        ]
+      }
+    }
+  },
+  "forcedAttributes": {
+    "button": [
+      [
+        "type",
+        "button"
+      ]
+    ],
+    "input": [
+      [
+        "autocomplete",
+        "off"
+      ]
+    ],
+    "select": [
+      [
+        "autocomplete",
+        "off"
+      ]
+    ],
+    "textarea": [
+      [
+        "autocomplete",
+        "off"
+      ]
+    ]
+  },
+  "requiredAttributes": {
+    "input": [
+      "type"
+    ]
+  },
+  "textOnlyElements": {
+    "svg": [
+      "title",
+      "desc"
+    ]
+  },
+  "unwrappableElements": {
+    "html": [
+      "a",
+      "form",
+      "font",
+      "center",
+      "big",
+      "tt",
+      "strike",
+      "address",
+      "hgroup",
+      "ins",
+      "del",
+      "q",
+      "cite",
+      "dfn",
+      "var",
+      "samp",
+      "bdi",
+      "bdo",
+      "wbr",
+      "data",
+      "html",
+      "head",
+      "body"
+    ]
+  },
+  "excludedElements": {
+    "html": [
+      "script",
+      "style",
+      "iframe",
+      "frame",
+      "frameset",
+      "object",
+      "embed",
+      "applet",
+      "portal",
+      "link",
+      "meta",
+      "base",
+      "img",
+      "picture",
+      "source",
+      "track",
+      "video",
+      "audio",
+      "canvas",
+      "map",
+      "area",
+      "marquee",
+      "dialog",
+      "slot",
+      "noscript",
+      "xmp",
+      "noembed",
+      "noframes",
+      "plaintext",
+      "title",
+      "template",
+      "a",
+      "form",
+      "math",
+      "svg"
+    ],
+    "svg": [
+      "script",
+      "style",
+      "image",
+      "use",
+      "feimage",
+      "textpath",
+      "pattern",
+      "filter",
+      "mask",
+      "marker",
+      "clippath",
+      "lineargradient",
+      "radialgradient",
+      "a",
+      "foreignobject",
+      "animate",
+      "set",
+      "animatetransform",
+      "animatemotion",
+      "discard",
+      "switch",
+      "view",
+      "cursor",
+      "font-face",
+      "altglyph",
+      "handler",
+      "listener",
+      "html",
+      "iframe"
+    ]
+  },
+  "excludedAttributes": [
+    "src",
+    "srcset",
+    "srcdoc",
+    "href",
+    "xlink:href",
+    "poster",
+    "data",
+    "code",
+    "codebase",
+    "background",
+    "ping",
+    "formaction",
+    "action",
+    "content",
+    "http-equiv",
+    "longdesc",
+    "cite",
+    "manifest",
+    "usemap",
+    "rel",
+    "target",
+    "download",
+    "integrity",
+    "crossorigin",
+    "referrerpolicy",
+    "sandbox",
+    "allow",
+    "loading",
+    "media",
+    "sizes",
+    "hreflang",
+    "method",
+    "enctype",
+    "accept",
+    "accept-charset",
+    "formmethod",
+    "formtarget",
+    "style",
+    "name",
+    "nonce",
+    "is",
+    "slot",
+    "dirname",
+    "xmlns",
+    "xmlns:xlink",
+    "__proto__",
+    "constructor",
+    "prototype",
+    "autofocus",
+    "accesskey",
+    "contenteditable",
+    "draggable",
+    "spellcheck",
+    "inert",
+    "popover",
+    "popovertarget",
+    "onclick",
+    "onerror",
+    "onload",
+    "onfocus",
+    "onbegin",
+    "ontoggle",
+    "onmouseover",
+    "onanimationend",
+    "attributename",
+    "begin",
+    "dur",
+    "values",
+    "keytimes",
+    "repeatcount",
+    "filter",
+    "mask",
+    "clip-path",
+    "marker-start",
+    "marker-mid",
+    "marker-end",
+    "requiredextensions",
+    "systemlanguage",
+    "externalresourcesrequired"
+  ]
+}

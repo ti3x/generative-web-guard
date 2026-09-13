@@ -10,7 +10,8 @@ export const POLICY_DATA = {
     "maxAttrValueLength": 2000,
     "maxPathNumbers": 4000,
     "maxPointsNumbers": 2000,
-    "maxNumberMagnitude": 1000000
+    "maxNumberMagnitude": 1000000,
+    "maxTraversalDepth": 256
   },
   "sharedGlobal": {
     "class": [

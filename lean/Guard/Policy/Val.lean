@@ -19,7 +19,7 @@ inductive Val where
   | fixed (v : String)
   /-- Same validator, different rule cited on failure or rewrite. -/
   | tagged (rule : String) (v : Val)
-deriving Repr, BEq, Inhabited
+deriving Repr, DecidableEq, Inhabited
 
 structure Ctx where
   classes : List String

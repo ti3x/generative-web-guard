@@ -71,21 +71,31 @@ def lengthOrPercent (v : String) : Option String :=
   | '%' :: r => (canonicalNumber (String.mk r.reverse)).map (· ++ "%")
   | _ => canonicalNumber v
 
-/-- Integer in [lo, hi], canonical (no leading zeros, no -0). -/
-def boundedInt (lo hi : Int) (v : String) : Option String :=
+/-- Signed decimal integer, without a range test. Split out from `boundedInt`
+so that widening the range is a statement about the range test alone. -/
+def intParse (v : String) : Option Int :=
   let p := splitSign (trimChars v.toList)
   let ds := p.2
   if ds.isEmpty || !ds.all isDigit || ds.length > 15 then none
   else
     let n : Int := digitsToNat ds
-    let n := if p.1 then -n else n
-    if n < lo || n > hi then none else some (toString n)
+    some (if p.1 then -n else n)
+
+/-- Integer in [lo, hi], canonical (no leading zeros, no -0). -/
+def boundedInt (lo hi : Int) (v : String) : Option String :=
+  match intParse v with
+  | none => none
+  | some n => if n < lo || n > hi then none else some (toString n)
+
+/-- The list part of `numberListChars`, with the length bound applied to an
+already-split list, so that widening the bound is a statement about the bound. -/
+def numberListOf (max : Nat) (parts : List (List Char)) : Option (List Char) :=
+  if parts.isEmpty || parts.length > max then none
+  else (allSome (parts.map canonicalNumberChars)).map joinSpace
 
 /-- Whitespace or comma separated canonical numbers, joined by single spaces. -/
 def numberListChars (max : Nat) (cs : List Char) : Option (List Char) :=
-  let parts := splitRuns true (trimChars cs)
-  if parts.isEmpty || parts.length > max then none
-  else (allSome (parts.map canonicalNumberChars)).map joinSpace
+  numberListOf max (splitRuns true (trimChars cs))
 
 def numberList (max : Nat) (v : String) : Option String :=
   (numberListChars max v.toList).map String.mk
