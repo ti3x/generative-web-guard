@@ -140,10 +140,11 @@ async function checkStrictDecoderDivergence(engines) {
   ];
   for (const engine of engines) {
     for (const [label, raw, pattern] of cases) {
-      const [out] = await engine.run([raw]);
+      const [out] = engine.name === "wasm"
+        ? await engine.checkCandidates([raw]) : await engine.run([raw]);
       if (engine.name === "wasm") {
-        assert.equal(out.status, "rejected", `${engine.name}: ${label} must be refused by the strict ABI decoder`);
-        assert.ok(out.reasons.some((r) => pattern.test(r)), `${engine.name}: ${label} refused for the wrong reason: ${out.reasons.join(",")}`);
+        assert.equal(out.status, "error", `${engine.name}: ${label} must be refused by the strict ABI decoder`);
+        assert.match(out.reason.detail, pattern, `${engine.name}: ${label} refused for the wrong reason`);
       } else {
         assert.equal(out.status, "validated", `${engine.name}: ${label} is resolved leniently, not refused`);
       }

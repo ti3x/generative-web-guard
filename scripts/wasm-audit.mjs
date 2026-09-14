@@ -23,9 +23,10 @@
 // exist so that an input outside what was measured fails cleanly instead of
 // growing without limit.
 //
-// The worst cases below are the largest documents the frontend will forward:
-// the decoder's bounds are the preprocessing bounds, so nothing larger than
-// these can reach the checker through the policy Worker.
+// These include valid candidates and direct-ABI adversarial inputs up to the
+// decoder backstops. Those backstops are looser than the Worker's preprocessing
+// and candidate limits: some cases must be rejected, not treated as legal output.
+// This bypasses the Worker deliberately to measure the authority's own handling.
 import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { configureRequest, checkRequest, readCheckResponse, readInfoResponse } from "../src/lean-abi.js";

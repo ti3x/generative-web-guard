@@ -11,7 +11,7 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { pathToFileURL } from "node:url";
-import { checkTree, setClassAllowlist } from "../../src/policy.js";
+import { buildCandidate, checkTree, setClassAllowlist } from "../../src/policy.js";
 import { createLeanChecker } from "../../src/lean-checker.js";
 
 export const DEFAULT_CLASSES = ["card", "muted", "bar", "btn", "row", "stack", "title", "label", "axis", "chart"];
@@ -50,6 +50,9 @@ export function summarizeJs(result) {
 
 // Lean JSON response entry -> summary
 export function summarizeLean(entry) {
+  if (entry.status === "validated" && entry.candidateAccepted !== true) {
+    throw new Error("reference accepted output failed candidate acceptance");
+  }
   return entry.status === "validated"
     ? { status: "validated", tree: entry.tree, changes: entry.changes,
         kinds: entry.changeKinds ?? [], rules: entry.changeRules ?? [] }
@@ -134,20 +137,27 @@ export function wasmEngine() {
     available: () => existsSync(WASM_MJS) && existsSync(WASM_BIN),
     sizeBytes: () => (existsSync(WASM_BIN) ? statSync(WASM_BIN).size : 0),
     async identity() { return (await checkerFor(DEFAULT_CLASSES)).identity; },
+    async checkCandidates(trees, classes = DEFAULT_CLASSES) {
+      const checker = await checkerFor(classes);
+      return trees.map((tree, index) => checker.check(`c${index}`, tree));
+    },
     async run(raws, classes = DEFAULT_CLASSES) {
       const checker = await checkerFor(classes);
+      setClassAllowlist(classes);
       return raws.map((raw, index) => {
-        const verdict = checker.check(`d${index}`, raw);
+        const proposal = buildCandidate(raw);
+        if (proposal.status !== "proposed") return summarizeJs(proposal);
+        const verdict = checker.check(`d${index}`, proposal.tree);
         if (verdict.status === "accepted") {
           return {
             status: "validated",
             tree: verdict.tree,
-            changes: verdict.changes,
-            kinds: verdict.changeKinds,
-            rules: verdict.changeRules,
+            changes: proposal.changes.length,
+            kinds: proposal.changes.map(c => c.kind),
+            rules: proposal.changes.map(c => c.rule ?? ""),
           };
         }
-        if (verdict.status === "rejected") return { status: "rejected", reasons: verdict.reasons };
+        if (verdict.status === "rejected") return { status: "rejected", reasons: ["output-policy"] };
         // A protocol or decoder error is not a policy rejection. Surfacing it
         // under its own code keeps a differential mismatch readable instead of
         // looking like a disagreement about the policy.

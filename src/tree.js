@@ -31,10 +31,13 @@ export function root(children = []) {
 }
 
 // Cheap structural check for data that arrived over postMessage or JSON.
-// It does not apply the policy; callers must run checkTree() afterwards.
+// It does not apply policy. Acceptance belongs to Lean; this is the renderer's
+// bounded data contract. A nested root is never a renderer node.
 export function isTreeShaped(node, depth = 0) {
   if (depth > LIMITS.maxDepth + 1) return false;
   if (node === null || typeof node !== "object" || Array.isArray(node)) return false;
+  if (depth === 0 && node.kind !== "root") return false;
+  if (depth > 0 && node.kind === "root") return false;
   if (node.kind === "text") return typeof node.text === "string";
   if (node.kind === "root" || node.kind === "el") {
     if (!Array.isArray(node.children)) return false;

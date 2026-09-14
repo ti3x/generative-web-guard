@@ -21,10 +21,9 @@
 //     never rendered.
 //   * An accepted reply must name the Lean authority and carry a well-formed
 //     one-time acceptance record minted in the Worker. Anything else settles
-//     as a rejection. The record, not the tree, is what the render path takes:
-//     the registry here holds the exact tree that arrived with each record and
-//     hands that back on claim, so the host cannot substitute a tree between
-//     acceptance and rendering. See src/acceptance.js.
+//     as a rejection. Records carry diagnostic identity, not a render capability.
+//     Attached sessions never receive a tree; the Worker commits over its
+//     private port. Headless diagnostic sessions cannot commit their trees.
 //   * Startup has a THIRD stage now: wasm-init. `policy/ready` means the
 //     payload loaded; `policy/checker-ready` means the Lean authority exists.
 //     Until the second one arrives nothing can be accepted, and if
@@ -46,9 +45,9 @@ import {
   POLICY_TIMEOUTS,
   isPolicyEnvelope,
 } from "./policy-protocol.js";
-import { LEAN_AUTHORITY } from "./policy-core.js";
+const LEAN_AUTHORITY = "lean-wasm";
 import { LEAN_CHECKER_VERSION } from "./lean-abi.js";
-import { createAcceptanceRegistry, isAcceptanceToken } from "./acceptance.js";
+import { isAcceptanceToken } from "./acceptance.js";
 import {
   STARTUP_ERRORS,
   STARTUP_STAGES,
@@ -89,14 +88,6 @@ export function createPolicySession(options = {}) {
   let frameAttached = false; // the Worker confirmed it holds the frame port
   const pending = new Map(); // requestId -> { resolve, timer, generation }
   const stats = { requests: 0, accepted: 0, rendered: 0, rejected: 0, timeouts: 0, sessions: 0 };
-
-  // One-time acceptance records this session actually issued, each holding the
-  // exact tree that arrived with it. Bounded: an accepted tree can be
-  // megabytes, so the registry keeps only the most recent few.
-  const acceptances = createAcceptanceRegistry({
-    max: options.acceptanceMax,
-    expect: { authority: LEAN_AUTHORITY, checkerVersion: LEAN_CHECKER_VERSION },
-  });
 
   // ---- wasm-init stage --------------------------------------------------
   let checkerReadyPromise = null;
@@ -158,8 +149,7 @@ export function createPolicySession(options = {}) {
     handshakeDone = false;
     checkerIdentity = null;
     // A new session has a new checker instance, so no acceptance from the old
-    // one may be claimed against it.
-    acceptances.invalidate();
+    // one may settle against it.
     // Reuse a promise a caller is already waiting on; replace a settled one.
     if (readyPromise === null || readySettled) newReadyPromise();
     if (checkerReadyPromise === null || checkerReadySettled) newCheckerPromise();
@@ -252,7 +242,6 @@ export function createPolicySession(options = {}) {
           component: "policy-worker", detail: reason.detail, timeoutMs: timeouts.wasmInitMs,
         }));
     }
-    acceptances.invalidate();
     if (dying) {
       dying.removeEventListener("message", onMessage);
       dying.removeEventListener("error", onWorkerError);
@@ -379,10 +368,11 @@ export function createPolicySession(options = {}) {
         authority: message.authority,
         acceptance: token,
         diagnostics: message.diagnostics,
+        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, 16000) } : {}),
         stats: message.stats,
       });
     }
-    if (message.status === "accepted" && frameAttached) {
+    if (message.status === "accepted" && frame) {
       // With a frame port installed, a tree must never come back here. A
       // reply that carries one bypassed the port, whatever it claims.
       stats.rejected += 1;
@@ -417,22 +407,15 @@ export function createPolicySession(options = {}) {
           reason: { code: "acceptance-checker-version", detail: String(token.checkerVersion).slice(0, 60) },
         });
       }
-      const recorded = acceptances.record(token, message.tree);
-      if (!recorded.ok) {
-        stats.rejected += 1;
-        return settle(entry, message.requestId, { status: "rejected", reason: recorded.reason });
-      }
       stats.accepted += 1;
       return settle(entry, message.requestId, {
         status: "accepted",
         authority: message.authority,
-        // The record is what the render path takes. `tree` is here for host UI
-        // and diagnostics; handing it to the frame directly is not possible,
-        // because the frame's render path claims a record and uses the tree
-        // this registry stored.
+        // Headless diagnostic result only: there is no API to commit this tree.
         acceptance: token,
         tree: message.tree,
         diagnostics: message.diagnostics,
+        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, 16000) } : {}),
         stats: message.stats,
       });
     }
@@ -487,6 +470,7 @@ export function createPolicySession(options = {}) {
         generation: requestGeneration,
         requestId,
         html,
+        ...(requestOptions.preview === true ? { preview: true } : {}),
       };
       // The class allowlist is trusted host build configuration; send it once
       // per session rather than with every document.
@@ -536,7 +520,9 @@ export function createPolicySession(options = {}) {
      */
     start() {
       if (disposed) throw new Error("policy session disposed");
-      if (checkerReadyPromise === null || checkerReadySettled) newCheckerPromise();
+      // Keep the settled promise while its Worker is alive. Only the internal
+      // start() of a replacement Worker may reset a completed startup stage.
+      if (checkerReadyPromise === null) newCheckerPromise();
       if (worker === null) {
         try {
           start();
@@ -566,28 +552,10 @@ export function createPolicySession(options = {}) {
     /** Bounded identity of the authority in the live Worker, or null. */
     get checker() { return checkerIdentity; },
 
-    /**
-     * Claim a one-time acceptance record and get back the exact tree the
-     * policy Worker accepted with it. The frame's render path is wired to
-     * this, so a commit cannot happen without an acceptance this session
-     * issued and has not already spent.
-     *
-     * Returns `{ ok: true, tree }` or `{ ok: false, reason }`.
-     */
-    claimAcceptance(token) {
-      return acceptances.claim(token, { generation });
-    },
-
-    get acceptanceStats() { return acceptances.stats; },
-    get pendingAcceptances() { return acceptances.size; },
-
     /** Invalidate in-flight work for the previous document. */
     nextGeneration() {
       generation += 1;
-      // An acceptance for a superseded document must not be claimable: the
-      // host asked for a replacement, so committing the old one would render
-      // content the application has already moved past.
-      acceptances.invalidate((token) => token.generation !== generation);
+      // Replies for earlier generations cannot settle current work.
       return generation;
     },
     /** Idempotent: settles everything pending and releases the Worker. */

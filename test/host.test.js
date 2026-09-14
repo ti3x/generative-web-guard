@@ -63,9 +63,7 @@ test("[R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA] host refuses to send a non-v
   assert.equal(iframe.getAttribute("referrerpolicy"), "no-referrer");
   assert.ok(iframe.srcdoc.includes("default-src 'none'"));
 
-  const forged = { kind: "root", children: [{ kind: "el", ns: "html", tag: "script", attrs: [], children: [] }] };
-  assert.equal(await frame.render(forged), false);
-  assert.equal(statuses.at(-1).kind, "refused");
+  assert.equal(frame.render, undefined, "no parent render API, even before binding");
 
   // A message that does not come from the frame window is ignored.
   window.dispatchEvent(new window.MessageEvent("message", { data: { type: "event", event: { type: "click", action: "go" } }, source: window, origin: "null" }));
@@ -99,9 +97,7 @@ test("[R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA] once bound to the policy por
   assert.equal(frame.portBound, true);
   assert.ok(statuses.some((s) => s.kind === "bound" && s.detail.instanceId === "inst"));
 
-  const validated = { kind: "root", children: [] };
-  assert.equal(await frame.render(validated), false, "a validated tree is still refused: the host may not supply trees");
-  assert.match(statuses.at(-1).detail, /bound to the policy port/);
+  assert.equal(frame.render, undefined, "binding never enables a parent render API");
   await bound;
   frame.destroy();
   channel.port1.close();

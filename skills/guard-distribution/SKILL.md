@@ -17,10 +17,11 @@ become jsDelivr GitHub URLs. Generate bundles from source rather than editing
 minified output. Keep frame script/style hashes synchronized with their exact
 bytes and avoid build timestamps that make identical sources produce diffs.
 
-The small ESM bundle includes the markup parser, the JS candidate builder, the
-frame manifest and the ABI constants. The full bundle also embeds the QuickJS
+The small ESM bundle includes bounded markup preprocessing, port-only frame and
+session factories, the frame manifest and ABI constants. JS acceptance exports
+are absent; candidate construction runs in the policy Worker. The full bundle also embeds the QuickJS
 Worker source and the policy Worker source, and the policy Worker payload
-embeds the **Lean checker binary as base64** -- that is why it is megabytes.
+embeds the **candidate-only Lean checker binary as base64** -- that is why it is megabytes.
 Embedding is deliberate: a fetched `.wasm` would need `connect-src` in the host
 policy, and the adopted profile ships `connect-src 'none'`. `npm run build`
 refuses to run without `lean/wasm/dist/guard.wasm`, and there is no

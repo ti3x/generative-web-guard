@@ -15,22 +15,18 @@
 // "the deployed bytes are the bytes that were built and tested" trivially
 // true: there is one artifact to hash, not an artifact plus a fetch.
 //
-// The cost is measured, not guessed (see README's distribution section):
-// base64 costs +33% on a 1.71 MB binary, so the policy Worker payload grows
-// from ~210 KB to ~2.5 MB, and ~57 KB to ~545 KB gzipped. Phase 6 owns
-// reducing that -- it is the phase that bundles only the candidate checker and
-// records before/after compressed sizes -- and a gzip-then-base64 embedding
-// (measured at 344 KB / 459 KB base64) is the obvious next step there. It is
-// not done here because it would add a `DecompressionStream` dependency to the
-// trusted startup path in a phase whose job is correctness.
+// Embedding and compression measurements are recorded in docs/phase6-results.md.
+// The default encoding and optional gzip prototype are selected at build time.
+// Decoding is bounded, async, and cached; failure never installs an authority.
 //
 // This module is imported by src/policy-worker.js, so everything it pulls in
 // is bundled into the Worker payload. It must never gain a runtime import.
 
 import createGuardChecker from "../lean/wasm/dist/guard.mjs";
 import wasm from "../dist/lean-checker-wasm.js";
+import { decodeCheckerAsset } from "./checker-asset.js";
 
-/** `{ base64, bytes, sha256 }` of the checker, from the build. */
+/** Identity of the checker artifact from the build. */
 export const checkerAsset = Object.freeze({
   bytes: wasm.bytes,
   sha256: wasm.sha256,
@@ -44,17 +40,7 @@ let decoded = null;
  * realm reuses the array rather than decoding 2.3 MB of base64 again.
  */
 export function checkerBinary() {
-  if (decoded === null) {
-    const text = atob(wasm.base64);
-    const out = new Uint8Array(text.length);
-    for (let i = 0; i < text.length; i++) out[i] = text.charCodeAt(i);
-    if (out.byteLength !== wasm.bytes) {
-      // The build records the length; a mismatch means the embedded string was
-      // truncated or re-encoded somewhere in the pipeline.
-      throw new Error(`lean-module: decoded ${out.byteLength} bytes, build recorded ${wasm.bytes}`);
-    }
-    decoded = out;
-  }
+  if (decoded === null) decoded = decodeCheckerAsset(wasm);
   return decoded;
 }
 

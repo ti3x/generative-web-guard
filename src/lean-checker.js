@@ -3,7 +3,7 @@
 // This is the component that makes the proved checker the acceptance
 // authority. It owns exactly one WebAssembly instance, speaks only the
 // versioned single-document ABI (src/lean-abi.js), and has one job: turn a
-// bounded raw tree into Lean's verdict, or into a refusal.
+// bounded candidate tree into Lean's verdict, or into a refusal.
 //
 // THE RULE THIS MODULE EXISTS TO ENFORCE
 //
@@ -26,7 +26,7 @@
 //
 // WHAT THIS MODULE DOES NOT CLAIM
 //
-// It is trusted glue. The Lean theorems are about `checkTree`; they say
+// It is trusted glue. The Lean theorems are about `acceptCandidate`; they say
 // nothing about this file, the Emscripten runtime, the C shim, the browser or
 // the JSON codec on either side. What it does provide is that every tree it
 // returns came out of a `guard_check_document` response that validated against
@@ -197,10 +197,10 @@ export async function createLeanChecker({ createModule, wasmBinary, classes, sty
     get calls() { return calls; },
 
     /**
-     * Check one bounded raw tree.
+     * Check one bounded candidate tree without normalization.
      *
-     * Returns `{ status: "accepted", tree, changes, changeKinds, changeRules }`
-     * with the tree Lean's `checkTree` returned, or
+     * Returns `{ status: "accepted", tree }`
+     * with the tree Lean's `acceptCandidate` returned, or
      * `{ status: "rejected", reasons }`, or
      * `{ status: "error", reason }`. Never throws, and never returns a tree
      * except with `accepted`.

@@ -75,12 +75,30 @@ async function main() {
     return;
   }
 
+  // ---- stage: frame-bootstrap -------------------------------------------
+  let frame;
+  try {
+    frame = mod.createGuardFrame({
+      container: $("frame-container"),
+      onStatus: ({ kind, detail }) => {
+        if (kind === "startup-warning") stage(`frame-warning:${detail.code}`, true, detail);
+      },
+      onEvent: (event) => { void handleEvent(event); },
+    });
+    const info = await frame.ready;
+    // Firefox 141 has no Trusted Types at all, so this records which of the
+    // two rendering-boundary layers the engine actually provided.
+    stage("frame-bootstrap", true, info);
+  } catch (error) {
+    stage("frame-bootstrap", false, describe(error));
+    setStatus("frame did not bootstrap", true);
+    finished = true;
+    return;
+  }
+
   // ---- stage: policy worker (worker-create + channel-handshake) ---------
-  // The policy session comes FIRST now: the frame commits acceptance records
-  // issued by this session, so `createGuardFrame` needs it. That ordering is
-  // the point -- there is no way to obtain a frame that would render a tree
-  // without an authority behind it.
   const policy = mod.createGuardPolicySession({
+    frame,
     onTerminated: ({ code, detail, stage: at }) => {
       if (code !== "disposed") stage(`policy-terminated:${code}`, false, { at: at ?? null, detail: detail ?? null });
     },
@@ -99,48 +117,24 @@ async function main() {
     return;
   }
 
-  // ---- stage: frame-bootstrap -------------------------------------------
-  let frame;
-  try {
-    frame = mod.createGuardFrame({
-      container: $("frame-container"),
-      policy,
-      onStatus: ({ kind, detail }) => {
-        if (kind === "startup-warning") stage(`frame-warning:${detail.code}`, true, detail);
-      },
-      onEvent: (event) => { void handleEvent(event); },
-    });
-    const info = await frame.ready;
-    // Firefox 141 has no Trusted Types at all, so this records which of the
-    // two rendering-boundary layers the engine actually provided.
-    stage("frame-bootstrap", true, info);
-  } catch (error) {
-    stage("frame-bootstrap", false, describe(error));
-    setStatus("frame did not bootstrap", true);
-    finished = true;
-    return;
-  }
+  await frame.whenBound();
 
   // ---- stage: policy-accept ---------------------------------------------
-  let accepted = null;
   const decision = await policy.preprocess(BENIGN_HTML);
-  if (decision.status !== "accepted") {
+  if (decision.status !== "rendered") {
     stage("policy-accept", false, { status: decision.status, reason: decision.reason ?? null });
     setStatus("policy worker rejected the benign document", true);
     finished = true;
     return;
   }
-  accepted = decision.acceptance;
   stage("policy-accept", true, { authority: decision.authority, checkerVersion: decision.stats.checkerVersion });
 
   // ---- stage: commit ----------------------------------------------------
-  // A bare tree is refused even though it is the very tree that was accepted:
-  // the record is the authorization, not the tree. Measured here on the
-  // shipped cross-origin bundle rather than asserted.
-  stage("bare-tree-refused", (await frame.render(decision.tree)) === false);
-  const rendered = await frame.render(accepted);
-  stage("frame-commit", rendered === true);
-  stage("replay-refused", (await frame.render(accepted)) === false);
+  // These check API removal, not replay delivery. The browser's private-port
+  // probe separately sends a real duplicate sequence to the production frame.
+  stage("host-commit-absent", typeof frame.render === "undefined");
+  stage("frame-commit", decision.status === "rendered");
+  stage("js-acceptance-absent", ["checkTree", "isValidated", "guardHtml"].every(name => !(name in mod)));
 
   // ---- stage: wasm-init (QuickJS inside the blob: Worker) ---------------
   // The blob: Worker inherits this document's CSP, so this is where a missing
@@ -153,13 +147,13 @@ async function main() {
     const { view } = await runtime.load(PROGRAM);
     stage("wasm-init", true);
     const viewDecision = await policy.preprocess(view);
-    if (viewDecision.status !== "accepted") {
+    if (viewDecision.status !== "rendered") {
       stage("view-accept", false, { status: viewDecision.status, reason: viewDecision.reason ?? null });
       finished = true;
       return;
     }
     stage("view-accept", true);
-    stage("view-commit", (await frame.render(viewDecision.acceptance)) === true);
+    stage("view-commit", viewDecision.status === "rendered");
     policySession = policy;
     frameRef = frame;
     setStatus("cross-origin bundle: interactive", false);
@@ -178,7 +172,7 @@ async function handleEvent(event) {
   if (!runtime || runtime.dead || !policySession || !frameRef) return;
   const { view } = await runtime.step(event);
   const decision = await policySession.preprocess(view);
-  if (decision.status === "accepted") await frameRef.render(decision.acceptance);
+  if (decision.status !== "rendered") stage("event-view-refused", false, { reason: decision.reason });
 }
 
 window.__guardCdnProbe = {

@@ -1,12 +1,8 @@
 // Code that runs INSIDE the sandboxed, null-origin iframe. It is fixed
 // application code; generated content never executes here. Its job:
 //
-//   1. Receive structured trees over the private port from the policy Worker
-//      (src/frame-protocol.js). Until the parent has bootstrapped that port
-//      -- the legacy low-level path -- trees may also arrive from the parent
-//      over postMessage; once bound, a parent `render` is refused.
-//   2. Refuse anything that is not a fixed point of the policy (a tree the
-//      policy would change is not a validated tree, whoever sent it).
+//   1. Receive trees only over the private policy Worker port.
+//   2. Check the renderer construction contract, not policy acceptance.
 //   3. Render with the structured renderer. No HTML string is ever parsed.
 //   4. Convert user interactions on [data-action] elements into plain-data
 //      events and post them to the parent.
@@ -17,14 +13,9 @@
 // inject markup, load a resource or run other script.
 
 import { isTreeShaped } from "./tree.js";
-import { isValidated, setClassAllowlist } from "./policy.js";
 import { createRenderer } from "./render.js";
 import { createFrameReceiver } from "./frame-channel.js";
 import { FRAME_PROTOCOL_VERSION } from "./frame-protocol.js";
-
-// Injected at build time from the bundled stylesheet.
-// eslint-disable-next-line no-undef
-const CLASS_ALLOWLIST = typeof __CLASS_ALLOWLIST__ !== "undefined" ? __CLASS_ALLOWLIST__ : [];
 
 const MAX_EVENT_STRING = 2000;
 const FORWARDED_KEYS = new Set([
@@ -65,17 +56,15 @@ function bounded(s) {
 export function startFrame(win) {
   const doc = win.document;
   hardenSinks(win);
-  setClassAllowlist(CLASS_ALLOWLIST);
 
   const root = doc.getElementById("root");
   const renderer = createRenderer(doc, root);
   const parent = win.parent;
   const post = (msg) => parent.postMessage(msg, "*"); // null origin: parent verifies source
 
-  // Commit one tree, whichever route delivered it: the same re-validation and
-  // the same atomic clear-on-failure for both.
+  // Only the private authority port can reach this renderer contract check.
   function commit(tree) {
-    if (!isTreeShaped(tree) || !isValidated(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
+    if (!isTreeShaped(tree)) return { ok: false, reason: "malformed renderer tree" };
     try {
       renderer.render(tree);
       return { ok: true };
@@ -85,11 +74,8 @@ export function startFrame(win) {
     }
   }
 
-  // The private port to the policy Worker (src/frame-protocol.js). Once the
-  // parent has bootstrapped it, trees arrive ONLY over it and a `render` from
-  // the parent is refused: the parent can wire the channel, it cannot supply a
-  // tree. A later bootstrap replaces the port (the policy Worker was replaced)
-  // and never reopens the parent route.
+  // Only the private Worker port delivers trees, even before initial binding.
+  // A later bootstrap replaces the port without reopening a parent route.
   let receiver = null;
   let bound = null;
 
@@ -111,14 +97,7 @@ export function startFrame(win) {
       bootstrap(msg, e.ports);
     } else if (msg.type === "render") {
       const seq = typeof msg.seq === "number" ? msg.seq : -1;
-      if (bound) {
-        post({ type: "refused", seq, reason: "frame is bound to the policy port; the parent cannot supply a tree" });
-        return;
-      }
-      const result = commit(msg.tree);
-      post(result.ok ? { type: "rendered", seq } : { type: "refused", seq, reason: result.reason });
-    } else if (msg.type === "clear") {
-      renderer.clear();
+      post({ type: "refused", seq, reason: "trees require the private policy port" });
     }
   });
 

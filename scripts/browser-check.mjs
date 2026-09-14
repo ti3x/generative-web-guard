@@ -364,16 +364,14 @@ async function checkDemo(browser, engine) {
   check(recovered.status === "accepted", `the next request runs on a fresh policy Worker (${JSON.stringify(recovered)})`);
 
   // ---- the acceptance binding, measured on the shipped bytes ------------
-  // A fabricated record and a bare tree must both fail to commit, and a
-  // genuine record must be one-time. These are the same negative controls the
-  // unit tests run, re-measured in a real engine on the built bundle.
+  // Parent messages cannot commit, and a private-port sequence is one-time.
   const acceptance = await page.evaluate(() => window.__guardPolicyProbe.acceptanceControls());
   check(acceptance.accepted === true, `policy Worker accepted the control document (${JSON.stringify(acceptance).slice(0, 200)})`);
   check(acceptance.authority === "lean-wasm", `the authority is Lean/Wasm, reported honestly (${acceptance.authority})`);
   check(acceptance.forgedRendered === false, "a fabricated acceptance record does not render");
-  check(acceptance.bareTreeRendered === false, "a bare accepted tree does not render: the frame takes records only");
-  check(acceptance.genuine === true, "a genuine acceptance record can be claimed once");
-  check(acceptance.replayed === false, "a replayed acceptance record is refused");
+  check(acceptance.bareTreeRendered === false, "a bare accepted tree cannot render through the parent route");
+  check(acceptance.genuine === true, "an accepted tree renders once on the private test port");
+  check(acceptance.replayed === false, "a duplicate private-port sequence is ignored");
 
   // ---- the open-node path bound, measured in THIS engine -----------------
   // maxRawPathNodes exists because the Lean checker recurses once per sibling
@@ -421,9 +419,20 @@ async function checkDemo(browser, engine) {
   });
   check(shape.wide.status === "accepted",
     `a 100x8 table, over 2,000 raw nodes with about 200 open at most, is accepted (${JSON.stringify(shape.wide).slice(0, 160)})`);
-  check(shape.deepResults.every((r) => r.status === "rejected" && r.reason && r.reason.code === "lean-rejected"),
+  check(shape.deepResults.every((r) => r.status === "rejected" && r.reason && r.reason.code === "candidate-rejected" && r.reason.detail === "too-deep"),
     `the deepest, widest permitted shape (${shape.levels} levels, ${shape.beside} earlier siblings each) is answered by the policy, not a trap, three times (${JSON.stringify(shape.deepResults.map((r) => r.status + ":" + (r.reason && r.reason.code)))})`);
   note(`worst permitted shape on this engine: ${JSON.stringify(shape.deepResults[2]).slice(0, 200)}`);
+
+  const flattened = await page.evaluate(async () => {
+    const group = n => "<q>" + "<span></span>".repeat(n) + "</q>";
+    const at = await window.__guardPolicyProbe.preprocess(group(100).repeat(10));
+    const past = await window.__guardPolicyProbe.preprocess(group(100).repeat(10) + group(1));
+    const recovered = await window.__guardPolicyProbe.preprocess("<p>after flattening</p>");
+    return { at, past, recovered };
+  });
+  check(flattened.at.status === "accepted", "unwrapping to 1,000 candidate siblings remains accepted");
+  check(flattened.past.reason?.code === "candidate-path-nodes-exceeded", "unwrapping past the measured candidate path bound is refused before Wasm");
+  check(flattened.recovered.status === "accepted", "the Worker survives a refused flattened candidate");
 
   // ---- the checker is embedded, not fetched ------------------------------
   // A fetched .wasm would need connect-src, and Profile A ships
@@ -518,9 +527,9 @@ async function checkCrossOriginCdn(browser, engine) {
   check(byName.get("policy-accept")?.ok === true, "the cross-origin policy Worker accepted the benign document");
   check(byName.get("policy-accept")?.detail?.authority === "lean-wasm",
     `the cross-origin path reports the Lean authority (${JSON.stringify(byName.get("policy-accept")?.detail)})`);
-  check(byName.get("bare-tree-refused")?.ok === true, "the cross-origin frame refuses a bare accepted tree");
+  check(byName.get("host-commit-absent")?.ok === true, "the cross-origin frame exposes no host tree/token commit method");
   check(byName.get("frame-commit")?.ok === true, "the frame acknowledged the commit");
-  check(byName.get("replay-refused")?.ok === true, "the cross-origin frame refuses a replayed acceptance record");
+  check(byName.get("js-acceptance-absent")?.ok === true, "the cross-origin bundle exposes no JavaScript acceptance API");
   check(byName.get("wasm-init")?.ok === true, "QuickJS compiled Wasm inside the blob: Worker, which inherits the host policy");
   check(byName.get("view-commit")?.ok === true, `the generated view was validated and committed (${show()})`);
 

@@ -1,0 +1,343 @@
+{
+  "label": "after",
+  "engine": "firefox",
+  "version": "141.0",
+  "checker": {
+    "entry": "Guard.Wasm",
+    "modules": [
+      "Guard.Core.Chars",
+      "Guard.Core.Json",
+      "Guard.Core.Limits",
+      "Guard.Core.ListUtil",
+      "Guard.Core.Tree",
+      "Guard.Io.Abi",
+      "Guard.Io.Decode",
+      "Guard.Policy.Accept",
+      "Guard.Policy.Candidate",
+      "Guard.Policy.Cap",
+      "Guard.Policy.Capabilities",
+      "Guard.Policy.Profile",
+      "Guard.Policy.Tables.Attrs",
+      "Guard.Policy.Tables.Html",
+      "Guard.Policy.Tables.Svg",
+      "Guard.Policy.Val",
+      "Guard.Rules",
+      "Guard.Validators",
+      "Guard.Validators.Color",
+      "Guard.Validators.Ident",
+      "Guard.Validators.Number",
+      "Guard.Validators.Path",
+      "Guard.Validators.Text",
+      "Guard.Validators.Transform",
+      "Guard.Wasm"
+    ],
+    "wasmBytes": 1591870,
+    "wasmSha256": "8171ae736acbcf635a8b2e149179445aed1f8347fdc0ba6e07f1309fb8ec3c56",
+    "encoding": "base64",
+    "embeddedBytes": 1591870,
+    "base64Chars": 2122496,
+    "embeddedIn": [
+      "cdn/policy-worker.min.js",
+      "cdn/generative-web-guard.full.min.js"
+    ],
+    "fetched": false
+  },
+  "methodology": "Five fresh browser processes. Cold startup includes bundle import and createGuard. Ten measured renders per case after two warmups. Browser-descendant aggregate RSS sampled at 25 ms; includes browser overhead.",
+  "cold": {
+    "medianMs": 116,
+    "p95Ms": 124,
+    "samples": 5
+  },
+  "renders": {
+    "typical": {
+      "medianMs": 1,
+      "p95Ms": 2,
+      "samples": 50
+    },
+    "maximumNodes": {
+      "medianMs": 126,
+      "p95Ms": 128,
+      "samples": 50
+    },
+    "maximumText": {
+      "medianMs": 134,
+      "p95Ms": 142,
+      "samples": 50
+    }
+  },
+  "peakRssBytes": 954875904,
+  "assets": {
+    "lean/wasm/dist/guard.wasm": {
+      "bytes": 1591870,
+      "gzipBytes": 327802,
+      "brotliBytes": 235611
+    },
+    "cdn/policy-worker.min.js": {
+      "bytes": 2449615,
+      "gzipBytes": 550111,
+      "brotliBytes": 403742
+    },
+    "cdn/generative-web-guard.full.min.js": {
+      "bytes": 3492559,
+      "gzipBytes": 947979,
+      "brotliBytes": 684080
+    }
+  },
+  "samples": [
+    {
+      "readyMs": 124,
+      "render": {
+        "typical": [
+          2,
+          2,
+          1,
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          1
+        ],
+        "maximumNodes": [
+          125,
+          127,
+          126,
+          126,
+          125,
+          127,
+          126,
+          128,
+          126,
+          127
+        ],
+        "maximumText": [
+          132,
+          132,
+          132,
+          132,
+          132,
+          133,
+          142,
+          138,
+          134,
+          133
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 681541632,
+      "peakRssBytes": 944046080
+    },
+    {
+      "readyMs": 108,
+      "render": {
+        "typical": [
+          3,
+          1,
+          0,
+          1,
+          2,
+          0,
+          2,
+          1,
+          1,
+          0
+        ],
+        "maximumNodes": [
+          126,
+          126,
+          126,
+          125,
+          126,
+          127,
+          126,
+          128,
+          126,
+          126
+        ],
+        "maximumText": [
+          132,
+          134,
+          135,
+          133,
+          135,
+          135,
+          142,
+          137,
+          135,
+          134
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 682115072,
+      "peakRssBytes": 954875904
+    },
+    {
+      "readyMs": 116,
+      "render": {
+        "typical": [
+          1,
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "maximumNodes": [
+          126,
+          126,
+          126,
+          126,
+          126,
+          126,
+          127,
+          132,
+          130,
+          128
+        ],
+        "maximumText": [
+          133,
+          132,
+          135,
+          134,
+          134,
+          134,
+          142,
+          136,
+          134,
+          133
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 685342720,
+      "peakRssBytes": 944635904
+    },
+    {
+      "readyMs": 123,
+      "render": {
+        "typical": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "maximumNodes": [
+          127,
+          126,
+          126,
+          126,
+          126,
+          127,
+          127,
+          128,
+          126,
+          126
+        ],
+        "maximumText": [
+          131,
+          134,
+          131,
+          131,
+          132,
+          133,
+          142,
+          135,
+          134,
+          132
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 682246144,
+      "peakRssBytes": 950206464
+    },
+    {
+      "readyMs": 113,
+      "render": {
+        "typical": [
+          2,
+          2,
+          1,
+          1,
+          0,
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "maximumNodes": [
+          125,
+          127,
+          127,
+          127,
+          126,
+          127,
+          127,
+          126,
+          128,
+          126
+        ],
+        "maximumText": [
+          132,
+          132,
+          133,
+          133,
+          132,
+          134,
+          142,
+          138,
+          134,
+          134
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 680984576,
+      "peakRssBytes": 952696832
+    }
+  ]
+}

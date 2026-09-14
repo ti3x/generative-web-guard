@@ -45,12 +45,12 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 : "${LEAN_WASM:?set LEAN_WASM to the extracted lean-*-linux_wasm32 directory}"
 
-# Measured with scripts/wasm-audit.mjs on Node 22 / V8, this checkout:
+# Phase 6 measurements with scripts/wasm-audit.mjs on Node 22 / V8:
 #
-#   after instantiation                heap break 18.30 MiB
-#   largest document the input bounds  heap break 60.64 MiB
-#   allow (6,000 raw nodes, 1,000,000  memory grew to 69.19 MiB with a 48 MiB
-#   text code units, ~1.0 MB request)  initial memory
+#   after instantiation                heap break 11.30 MiB
+#   largest direct-ABI adversarial     heap break 52.43 MiB
+#   candidate (decoder backstops,      linear memory 80 MiB, no growth
+#   not necessarily legal output)
 #   linear-memory stack, every case    104 bytes
 #
 # So:
@@ -66,7 +66,7 @@ cd "$(dirname "$0")/.."
 #                         because the checker's recursion compiles to wasm
 #                         CALL FRAMES, which live on the engine's stack and are
 #                         not configurable here at all. That depth is bounded
-#                         by maxRawNodes on the input instead; see
+#                         by maxRawPathNodes on raw AND candidate input; see
 #                         src/policy-protocol.js.
 #   STACK_OVERFLOW_CHECK=1  turns a linear-stack overflow into a clean abort
 #                         instead of silent corruption. The glue treats an
@@ -76,14 +76,14 @@ MAXIMUM_MEMORY="${GUARD_WASM_MAXIMUM_MEMORY:-128MB}"
 STACK_SIZE="${GUARD_WASM_STACK_SIZE:-1MB}"
 STACK_OVERFLOW_CHECK="${GUARD_WASM_STACK_OVERFLOW_CHECK:-1}"
 
-lake build Guard   # host build generates the IR C files we compile below
+lake build Guard.Wasm   # host build generates the IR C files we compile below
 mkdir -p wasm/dist
 
 # Derive the C file list from the current Lean sources so stale IR files from
 # an earlier module layout can never be linked twice.
 IR=.lake/build/ir
-SOURCES=$(cd . && find Guard -name '*.lean' | sort | sed "s#^\(.*\)\.lean\$#$IR/\1.c#")
-SOURCES="$SOURCES $IR/Guard.c wasm/shim.c"
+SOURCES=$(python3 wasm/import-closure.py)
+SOURCES="$SOURCES wasm/shim.c"
 for f in $SOURCES; do [ -f "$f" ] || { echo "missing IR file $f (run lake build Guard)"; exit 1; }; done
 
 EXPORTS=_guard_init,_guard_info,_guard_configure_seal,_guard_is_configured,_guard_check

@@ -6,10 +6,9 @@ decide whether that candidate may leave the checker.
 
 **The browser now runs the Lean checker compiled to WebAssembly as the
 acceptance authority.** The JavaScript implementation still runs, as a
-candidate builder and a source of diagnostics, and its candidate must equal
-Lean's accepted tree exactly or the document is refused. The tree that reaches
-the DOM is the tree `Guard.checkTree` returned, and a frame commit requires a
-one-time acceptance record minted next to that verdict. See
+candidate builder and a source of diagnostics. Lean checks the proposed output
+without repairing it. Only Lean's returned tree reaches the private Worker-to-frame
+port. The full reference checker is retained for tests, not production replay. See
 [the acceptance authority](#the-acceptance-authority-in-production) below for
 what that does and does not establish.
 
@@ -22,7 +21,7 @@ what that does and does not establish.
 | Permit a *new* identity, widen a grammar, or raise a ceiling | `rules/capabilities.json` (kernel change) |
 | Explain a restriction and link evidence | `rules/catalog.json` |
 | Change a custom value grammar | JS validators in `src/policy.js` and Lean `Guard/Validators/` |
-| Change traversal or acceptance semantics | `src/policy.js`, Lean `Policy/Check.lean` and `Policy/Accept.lean` |
+| Change traversal or acceptance semantics | `src/policy.js`, Lean `Policy/Candidate.lean`, `Policy/Accept.lean`; reference: `Policy/Check.lean` |
 | Add an exploit regression | A tagged scenario under `features/`, with explicit expected behavior |
 
 `sharedGlobal` in the schema holds attributes shared by HTML and SVG; namespace
@@ -94,17 +93,17 @@ The shipped path is:
 
 ```text
 bounded HTML -> parse5 (bounded, iterative) -> raw tree
-  -> JS candidate builder            (a proposal and diagnostics)
-  -> Lean/Wasm Guard.checkTree       (THE AUTHORITY)
-  -> accepted tree + one-time acceptance record
-  -> frame commit
+  -> JS buildCandidate (proposal + diagnostics, not acceptance)
+  -> Lean/Wasm acceptCandidate (THE AUTHORITY)
+  -> exact accepted tree -> private Worker port -> frame commit
 ```
 
-`checkTree` is the existing whole-checker entry point, so an accepted tree
-carries its output-policy postcondition and its replay — a second
-normalization that must reproduce the tree with no further changes. Nothing
-renders a candidate on the strength of an unrelated success flag: the tree in
-the reply is the tree that call returned.
+`acceptCandidate` checks the output policy plus canonical representation:
+lowercase tags, exact namespace representation, sorted unique canonical attribute
+names and values, required attributes, context and resource accounting. It never
+normalizes or repairs input. `candidate_reference_fixed_point` proves that every
+accepted tree would pass the full reference checker unchanged with an empty change
+list; that proof replaces runtime replay, rather than dropping its guarantee.
 
 **There is no fallback.** A missing module, a failed instantiation, a version
 or bounds mismatch, a rejection, a malformed response, a trap and a timeout all
@@ -139,10 +138,13 @@ could influence the policy.
 
 ### Strict decoding, and what `rawFromJson` actually is
 
-`Guard.Io.decodeDocument` is the decoder the ABI uses. It is total (fuel-bounded
+`Guard.Io.decodeCandidateDocument` is the decoder ABI v2 uses. It is total (fuel-bounded
 recursion, no `partial`), bounded, and it **refuses rather than repairs**:
 unknown `kind`, missing or mistyped field, extra field, duplicate object key,
-malformed attribute entry and duplicate attribute name are all errors.
+malformed attribute entry and duplicate attribute name are all errors. Only
+`root` at the document level and `el`/`text` as children are accepted; namespaces
+must be exactly `html` or `svg`. The ABI returns the decoded tree only after
+candidate acceptance succeeds, without normalization diagnostics.
 
 `Guard.rawFromJson` is **not** that, and must not be described as a strict
 candidate decoder. It is `partial`, it silently defaults a missing or mistyped
@@ -153,7 +155,7 @@ feed both implementations the same parser output; it is not acceptable for an
 authority, because "repair silently" and "decide" must not live in the same
 function. `Guard/Core/Tree.lean` documents the behaviour item by item.
 
-The two decoders therefore disagree on a hand-built raw tree with a duplicate
+The strict candidate ABI and reference batch decoder therefore disagree on a hand-built tree with a duplicate
 attribute name — the ABI refuses it, the lenient path resolves it. parse5 never
 produces one (the HTML parsing spec drops duplicates in a start tag), and
 `scripts/check-policy-properties.mjs` asserts the divergence explicitly rather
@@ -173,8 +175,8 @@ measurement:
 
 - `node scripts/wasm-audit.mjs` paints the unused linear stack and scans it
   after the worst legal document, and reads the heap break and memory size.
-  Measured on this checkout: heap break 18.3 MiB after instantiation and
-  53.6 MiB at the worst legal document; **104 bytes** of linear-memory stack in
+  Phase 6 audit: heap break 11.30 MiB after instantiation and
+  52.43 MiB at the largest decoder-bounded adversarial candidate; **104 bytes** of linear-memory stack in
   every case.
 - The ceilings in `lean/wasm/build.sh` come from those numbers:
   `INITIAL_MEMORY=80MB` (above the measured worst case, so a hostile document
@@ -185,8 +187,9 @@ measurement:
 - The **engine** call stack is the one that matters and no build flag
   configures it: the checker recurses once per sibling, in `mutual` blocks Lean
   does not turn into loops. That bound goes on the input instead, and it is a
-  per-engine measurement — see
-  [docs/csp.md](csp.md#the-node-bound-is-an-engine-measurement).
+  per-engine measurement. The Worker checks the same path bound on the proposed
+  tree too, because unwrapping can increase sibling width — see
+  [docs/csp.md](csp.md#the-path-bound-is-an-engine-measurement).
 - The C shim (`lean/wasm/shim.c`) uses one static staging buffer of fixed
   capacity, does not export `_malloc`/`_free`, validates UTF-8 before building
   a Lean string, passes explicit lengths in both directions so a NUL can never
@@ -195,7 +198,8 @@ measurement:
 
 ### What this does not establish
 
-Lean's theorems are about `checkTree`. They say nothing about the Emscripten
+Lean's production theorems are about `acceptCandidate`; reference theorems
+remain about `checkTree`. They say nothing about the Emscripten
 runtime, the C shim, the JSON codec on either side, `src/lean-checker.js`,
 `src/policy-core.js`, the message transport, the renderer, the browser, or
 QuickJS isolation. All of those remain trusted glue with their own adversarial
@@ -205,8 +209,20 @@ or the surrounding code.
 
 ## Exact whole-checker guarantees
 
-The Lean boundary is `checkTree : Ctx → List Raw → Result`. Parsing strings and
-converting JSON to `Raw` happen before that boundary.
+The production Lean boundary is `acceptCandidate : Profile → Ctx → List Node → Bool`.
+Parsing and JSON-to-`Node` decoding remain outside the theorems. The new theorems
+are `candidate_permits`, `candidate_representation`, `candidate_sorted_attrs`,
+`candidate_unique_attrs`, `candidate_attribute_validator`, node/text bounds,
+profile exclusions and `candidate_restricts_permits`.
+
+For the default profile, `candidate_normalization` and
+`candidate_reference_fixed_point` prove unchanged normalization and acceptance
+by `checkTree`. Thus every reference guarantee below also holds for the new
+checker, by applying it to that proved reference acceptance. The converse
+(every accepted reference output passes the candidate checker) is regression-tested
+in the native harness, not claimed as a universal theorem.
+
+The retained reference boundary is `checkTree : Ctx → List Raw → Result`:
 
 | Theorem | Guarantee for every accepted output |
 |---|---|
@@ -227,7 +243,7 @@ The recursive predicate also checks namespace transitions, element depth,
 text-only SVG contexts, cleaned nonempty text, attribute counts, canonical
 validator results, and forced control attributes.
 
-These theorems apply to a guarded acceptance function. The normalizer uses total
+These reference theorems apply to a guarded acceptance function. Its normalizer uses total
 recursion with decreasing fuel. Its candidate must pass the output predicate
 and a second normalization. This makes acceptance sound even if a future
 normalizer change produces an invalid candidate: the document is rejected.
@@ -288,10 +304,10 @@ npm run setup:verification
    all content.
 7. Checks rule-to-test/code traceability, clearly labeled as traceability.
 
-The Wasm engine in the differential and in the Cucumber hooks goes through the
-**production** path — `src/lean-checker.js` over the single-document ABI, one
-document per call — so what agrees with `src/policy.js` is the exact interface
-the browser uses, not a separate batch entry point. The native Lean engine
+The Wasm engine in the differential and in the Cucumber hooks builds a JS proposal
+and sends it through `src/lean-checker.js` over the **production** single-document
+candidate ABI, one document per call. Direct malformed-candidate controls bypass
+the builder so normalization cannot hide a decoding or acceptance bug. The native Lean engine
 still uses the batch interface, which is what makes the strict-decoder
 divergence above visible and asserted.
 
@@ -357,8 +373,9 @@ module scripts.
 It also measures the acceptance authority itself, on the shipped bytes and on
 each engine: that the policy Worker instantiates the embedded Lean checker
 inside a `blob:` Worker and reports this build's identity; that a fabricated
-acceptance record, a bare accepted tree and a replayed record all fail to
-commit; that no request for a `.wasm` asset is ever made, which is what keeps
+acceptance record and a bare accepted tree cannot use parent messages, and a
+replayed private-port sequence cannot commit twice; that no request for a `.wasm`
+asset is ever made, which is what keeps
 `connect-src 'none'` sufficient; and that a document at the open-node path
 bound gets a structured answer and leaves the Worker alive, one node past it
 is refused by preprocessing, and a wide, shallow document above the old node
@@ -400,9 +417,9 @@ be a reasonable tradeoff.
 
 The shipping demos and the CDN entry point now run the Lean checker compiled to
 WebAssembly as the acceptance authority, so the proved implementation is what
-decides. The JavaScript checker still runs beside it and its candidate must
-match exactly; a divergence refuses the document rather than being resolved in
-either side's favour.
+decides. JavaScript builds proposals and diagnostics, while the candidate
+checker accepts or refuses those proposals without running a second sanitizer.
+The Worker forwards only the returned accepted tree.
 
 That is not a proof of JS equivalence, and differential tests never were one.
 What changed is which implementation the browser obeys: it is now the one the

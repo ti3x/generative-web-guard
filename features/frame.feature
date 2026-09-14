@@ -1,4 +1,4 @@
-Feature: The rendering frame accepts only validated trees and well-typed messages
+Feature: The rendering frame commits only over its private port and checks message schemas
   Rules R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA and R-FRAME-CSP-SINKS.
 
   @rule:R-FRAME-FIXED-POINT
@@ -23,12 +23,19 @@ Feature: The rendering frame accepts only validated trees and well-typed message
     Then the tree is not a policy fixed point
 
   @rule:R-FRAME-FIXED-POINT
-  Scenario: Policy output is a fixed point and is accepted
+  Scenario: Even a reference-validated tree cannot use the parent rendering route
     Given a frame host
     And a validated tree from the HTML "<div class=\"card\"><h1 id=\"t\">T</h1><button data-action=\"go\">go</button></div>"
     Then the tree is a policy fixed point
     When the host is asked to render it
-    Then the host accepts it for rendering
+    Then the host refuses to render it
+
+  @rule:R-FRAME-FIXED-POINT
+  Scenario: The private port can deliver an accepted tree
+    Given a frame host
+    And a validated tree from the HTML "<p>accepted content</p>"
+    When the private policy port delivers it
+    Then the private port acknowledges rendering
 
   @rule:R-FRAME-MESSAGE-SCHEMA
   Scenario: Messages from a window other than the frame are ignored

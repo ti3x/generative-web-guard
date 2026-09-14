@@ -12,6 +12,7 @@ import { PROTOCOL_VERSION } from "../src/runtime/protocol.js";
 import { createCore } from "../src/runtime/core.js";
 import { createFrameReceiver } from "../src/frame-channel.js";
 import { isValidated, setClassAllowlist } from "../src/policy.js";
+import { isTreeShaped } from "../src/tree.js";
 import { CLASSES, leanSkip, realChecker } from "./lean-support.js";
 import { portWorker } from "./port-support.js";
 
@@ -53,7 +54,7 @@ function guardFrame({ refuse = false, neverAck = false } = {}) {
       ...ids,
       onRender: (tree) => {
         if (refuse) return { ok: false, reason: "frame declined" };
-        if (!isValidated(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
+        if (!isTreeShaped(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
         frame.rendered.push(tree);
         return { ok: true };
       },
@@ -167,7 +168,7 @@ test("[R-CHECK-ACCEPTANCE] a document the authority refuses is a rejected result
   const deep = "<div>".repeat(40) + "x" + "</div>".repeat(40);
   const result = await h.guard.render({ html: deep });
   assert.equal(result.status, "rejected");
-  assert.equal(result.reason.code, "lean-rejected");
+  assert.equal(result.reason.code, "candidate-rejected");
   assert.equal(h.frame.rendered.length, 1, "nothing new reached the frame");
   assert.equal(textOf(h.frame.rendered[0]), "kept");
   h.guard.dispose();
@@ -240,7 +241,7 @@ test("[R-CHECK-ACCEPTANCE] a view the authority refuses stops the program that p
   await tick(400);
   assert.equal(h.guard.interactive, false);
   const stop = h.created.statuses.find((s) => s.kind === "runtime-stopped");
-  assert.equal(stop.detail.reason.code, "lean-rejected");
+  assert.equal(stop.detail.reason.code, "candidate-rejected");
   assert.equal(h.frame.rendered.length, 1);
   h.guard.dispose();
 });

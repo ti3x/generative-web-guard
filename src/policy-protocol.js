@@ -125,8 +125,9 @@ export const PREPROCESS_LIMITS = Object.freeze({
   // consecutive calls on all three engines. Bounding this quantity instead of
   // the node total is what lets an ordinary 50-row table through: under a
   // 1,000-node cap it was refused. Raising the number needs the per-sibling
-  // recursion in the checker to become iterative, which is Phase 6 work on
-  // proved code.
+  // recursion in the checker to become iterative, which remains future work.
+  // Phase 6 also applies this same bound to the proposed output: unwrapping
+  // may increase sibling width even when the raw tree has a small path count.
   //
   // A document that overflows anyway is still a bounded failure and never a
   // render: the trap poisons the checker instance (src/lean-checker.js), the

@@ -1,9 +1,11 @@
 import Guard.Core.Tree
 import Guard.Policy.Check
+import Guard.Policy.Candidate
 
 /-!
-Request/response API shared by the native executable (`Main.lean`, stdin to
-stdout) and the WebAssembly export (`guard_check`, string to string).
+Reference request/response API for the native executable (`Main.lean`, stdin
+to stdout). Never imported by the production Wasm root. Each accepted result
+also asserts candidate compatibility in the differential harness.
 
 Request:  { "classes": ["card", ...], "inputs": [ { "kind": "root", "children": [...] }, ... ] }
 Response: [ { "status": "validated", "tree": {...}, "changes": n, "changeKinds": [...] }
@@ -14,10 +16,11 @@ namespace Guard
 
 open J
 
-def resultToJson : Result → Json
+def resultToJson (ctx : Ctx) : Result → Json
   | .validated tree changes =>
     .obj
       [ ("status", .str "validated")
+      , ("candidateAccepted", .bool (acceptCandidate defaultProfile ctx tree))
       , ("tree", .obj [("kind", .str "root"), ("children", .arr (tree.map Node.toJson))])
       , ("changes", .num (toString changes.length))
       , ("changeKinds", .arr (changes.map fun c => .str c.kind))
@@ -32,7 +35,7 @@ def processRequest (input : String) : String :=
   | .ok j =>
     let classes : List String := (j.getArr "classes").filterMap Json.asStr?
     let ctx : Ctx := { classes }
-    let results := (j.getArr "inputs").map fun raw => resultToJson (checkTree ctx (rawRootChildren raw))
+    let results := (j.getArr "inputs").map fun raw => resultToJson ctx (checkTree ctx (rawRootChildren raw))
     (Json.arr results).compress
 
 /-!

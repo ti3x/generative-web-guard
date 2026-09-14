@@ -1,39 +1,11 @@
-// Acceptance records: the binding between a Lean verdict and a frame commit.
+// Bounded verdict identity records, minted beside Lean's verdict. These are
+// diagnostic metadata, not a public frame-render capability. The production
+// client checks their identity; trees travel only over the private Worker port.
 //
-// WHAT PROBLEM THIS SOLVES
-//
-// Before this, the host received an accepted tree from the policy Worker and
-// then called `frame.render(tree)` with whatever object it happened to be
-// holding. The frame re-checked the tree with the JavaScript predicate, so an
-// obviously-unsafe tree was refused -- but nothing tied the commit to the
-// acceptance that authorized it. A caller could render a *different* validated
-// tree, an older one, or the same one twice, and the frame could not tell.
-//
-// So the policy Worker now mints a one-time acceptance record for each
-// accepted document. The record's nonce is generated INSIDE the Worker, next
-// to the Lean verdict. The host keeps a bounded registry mapping each nonce to
-// the exact tree that arrived with it, and the frame's render path takes a
-// record, not a tree: it claims the nonce, gets the stored tree back, and
-// renders THAT. The host has no way to put a different tree in front of the
-// frame, because it never supplies one.
-//
-// Consequences that the negative controls check:
-//   * a fabricated record has an unknown nonce               -> refused
-//   * a replayed record has a consumed nonce                 -> refused
-//   * a record from a superseded generation                  -> refused
-//   * a record whose checker identity is not this build's    -> refused
-//
-// WHAT THIS IS NOT
-//
-// It is not a cryptographic authentication of the tree, and it is not a
-// defence against a compromised host: the host is inside the trusted computing
-// base, it holds the registry, and per the plan the attacker model is
-// generated content, not the embedding application. What it provides is that
-// there is no *code path* from a JavaScript-only decision to a frame commit,
-// and that provenance, staleness and replay are detected rather than assumed.
-// The private MessagePort in Phase 5 replaces the host's custody of the tree
-// with delivery straight from the Worker; this is the ownership discipline
-// that makes that change a narrowing rather than a rewrite.
+// createAcceptanceRegistry below is retained solely as a reference/test utility
+// for the retired token route. It is not used by the production client or frame,
+// and is not exported by the CDN entries. Neither records nor this registry
+// authenticate an arbitrary host-supplied tree; trusted glue remains in scope.
 
 /** Nonce size. 128 bits of randomness, hex encoded. */
 export const ACCEPTANCE_NONCE_BYTES = 16;
@@ -98,8 +70,8 @@ export function isAcceptanceToken(token) {
 /**
  * A bounded, one-time registry of acceptances a session actually issued.
  *
- * `record` is called by the policy client when an accepted reply arrives.
- * `claim` is called by the render path. A nonce can be claimed once; every
+ * Reference/test utility for the retired host-custody design, not a production
+ * render path. A nonce can be claimed once; every
  * other outcome is a named refusal so a test can distinguish "you made this
  * up" from "you used it already".
  */

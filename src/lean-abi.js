@@ -14,7 +14,7 @@
 //                capabilityVersion, profile }, status, ... }
 //
 // `status` is one of `accepted`, `rejected`, `configured`, `info` or `error`.
-// Only `accepted` carries a `tree`, and that tree is the one Lean's `checkTree`
+// Only `accepted` carries a `tree`, and that tree is the one Lean's `acceptCandidate`
 // returned. Anything unexpected -- a version mismatch, an unknown status, a
 // missing field, a tree that is not tree-shaped, a request id that is not the
 // one we sent -- is a refusal here, never a render.
@@ -34,7 +34,7 @@ import { isTreeShaped } from "./tree.js";
 import { PREPROCESS_LIMITS, utf8ByteLength } from "./policy-protocol.js";
 
 /** ABI generation. Both sides check it; a mismatch is a startup failure. */
-export const LEAN_ABI_VERSION = 1;
+export const LEAN_ABI_VERSION = 2;
 
 /** The only profile a shipped build can apply. There is no profile loader. */
 export const LEAN_PROFILE = "default";
@@ -59,7 +59,7 @@ export const LEAN_CHECKER_VERSION = `guard-checker/${LEAN_ABI_VERSION}.${CAPABIL
  * document preprocessing already accepted, and the refusal would look like a
  * policy decision. Looser is fine and is deliberate for `maxRawNodes`: the
  * frontend's is a capacity bound equal to the policy's maxNodes, while the
- * module's is a backstop for a caller that hands the checker a raw tree
+ * module's is a backstop for a caller that hands the checker a candidate tree
  * directly. The bound that actually protects the checker's per-sibling
  * recursion is the frontend's `maxRawPathNodes` (see src/policy-protocol.js),
  * which the module does not report: a direct caller is covered by the node
@@ -150,7 +150,7 @@ export function configureRequest({ classes, stylesheetHash }) {
   });
 }
 
-/** Build one document request. `document` is the bounded raw tree. */
+/** Build one document request. `document` is the bounded proposed output tree. */
 export function checkRequest(requestId, document) {
   if (typeof requestId !== "string" || requestId.length === 0
       || requestId.length > LEAN_ABI_LIMITS.maxRequestIdCodeUnits) {
@@ -211,7 +211,7 @@ const ALLOWED_STATUS = Object.freeze({
 
 /**
  * Interpret a `check` response. Returns one of
- *   { status: "accepted", tree, changes, changeKinds, changeRules }
+ *   { status: "accepted", tree }
  *   { status: "rejected", reasons }
  *   { status: "error", reason }
  *
@@ -248,21 +248,7 @@ export function readCheckResponse(text, requestId) {
   if (!isTreeShaped(tree)) {
     return { status: "error", reason: { code: "lean-tree-malformed" } };
   }
-  if (!Number.isInteger(message.changes) || message.changes < 0) {
-    return { status: "error", reason: { code: "lean-changes-not-count" } };
-  }
-  const kinds = Array.isArray(message.changeKinds) ? message.changeKinds : null;
-  const rules = Array.isArray(message.changeRules) ? message.changeRules : null;
-  if (kinds === null || rules === null || kinds.length !== message.changes || rules.length !== message.changes) {
-    return { status: "error", reason: { code: "lean-change-records-inconsistent" } };
-  }
-  return {
-    status: "accepted",
-    tree,
-    changes: message.changes,
-    changeKinds: kinds.map((k) => String(k).slice(0, 60)),
-    changeRules: rules.map((r) => String(r).slice(0, 60)),
-  };
+  return { status: "accepted", tree };
 }
 
 /**

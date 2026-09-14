@@ -28,10 +28,12 @@ produce a refusal, never a silently different document.
 
 ## What this decoder does NOT do
 
-It does not reject on *content*. A NUL, a bidi override, a lone-surrogate
+The raw reference decoder does not reject on *content*. A NUL, a bidi override, a lone-surrogate
 replacement character or a supplementary-plane character in a name, an
 attribute value or a text node is transported faithfully to `checkTree`, which
-is the component that decides. Making the decoder reject content would move
+decides in reference tests. Production uses `decodeCandidateDocument` and
+`acceptCandidate`: content is preserved by decoding and rejected if noncanonical.
+Making the decoder reject content would move
 policy decisions out of the checked checker and would make it disagree with
 `src/policy.js`. The bounds below are *resource* bounds and mirror
 `PREPROCESS_LIMITS` in `src/policy-protocol.js` exactly, so the decoder cannot
@@ -230,5 +232,48 @@ partial def rawToJson : Raw → Json
 
 def documentToJson (raws : List Raw) : Json :=
   .obj [("kind", .str "root"), ("children", .arr (raws.map rawToJson))]
+
+/-- Production candidate decoding constructs `Node` directly. No raw-tree
+normalization, namespace coercion, dropped nodes, or repaired fields. -/
+def decodeCandidateList (lim : AbiLimits) (fuel : Nat) (js : List Json) (st : DecSt) :
+    Except String (List Node × DecSt) :=
+  match fuel with
+  | 0 => .error "raw-depth-exceeded"
+  | fuel + 1 => do
+    let mut out : List Node := []
+    let mut s := st
+    for j in js do
+      s := { s with nodes := s.nodes + 1 }
+      if s.nodes > lim.maxRawNodes then throw "raw-nodes-exceeded"
+      let kvs ← strictObject ["kind", "text", "ns", "tag", "attrs", "children"] j
+      let kind ← requireStr kvs "kind"
+      if kind == "text" then
+        let fields ← strictObject ["kind", "text"] j
+        let text ← requireStr fields "text"
+        let len := utf16Length text
+        if len > lim.maxRawTextCodeUnits then throw "raw-text-exceeded"
+        s := { s with totalText := s.totalText + len }
+        if s.totalText > lim.maxRawTotalTextCodeUnits then throw "raw-total-text-exceeded"
+        out := .text text :: out
+      else if kind == "el" then
+        let fields ← strictObject ["kind", "ns", "tag", "attrs", "children"] j
+        let nsString ← requireStr fields "ns"
+        let ns ← if nsString == "html" then pure Ns.html
+          else if nsString == "svg" then pure Ns.svg else throw "unknown-namespace"
+        let tag ← requireStr fields "tag"
+        if tag.isEmpty then throw "tag-empty"
+        if utf16Length tag > lim.maxRawNameCodeUnits then throw "raw-name-too-long"
+        let attrs ← decodeAttrs lim (← requireArr fields "attrs")
+        let (kids, next) ← decodeCandidateList lim fuel (← requireArr fields "children") s
+        s := next
+        out := .el ns tag attrs kids :: out
+      else throw "unknown-node-kind"
+    return (out.reverse, s)
+
+def decodeCandidateDocument (lim : AbiLimits) (j : Json) : Except String (List Node) := do
+  let fields ← strictObject ["kind", "children"] j
+  if (← requireStr fields "kind") != "root" then throw "document-kind"
+  let (tree, _) ← decodeCandidateList lim (lim.maxRawDepth + 1) (← requireArr fields "children") {}
+  return tree
 
 end Guard.Io

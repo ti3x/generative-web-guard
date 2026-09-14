@@ -83,7 +83,7 @@ def RT_LIMITS : String := "R-RT-LIMITS"
 def RT_FROZEN_DATA : String := "R-RT-FROZEN-DATA"
 /-- Unsupported programs are rejected with diagnostics -/
 def GATE_INTERFACE : String := "R-GATE-INTERFACE"
-/-- Only policy fixed points are rendered -/
+/-- Frame commits only through the private authority port -/
 def FRAME_FIXED_POINT : String := "R-FRAME-FIXED-POINT"
 /-- Frame messages are source-checked and schema-checked -/
 def FRAME_MESSAGE_SCHEMA : String := "R-FRAME-MESSAGE-SCHEMA"

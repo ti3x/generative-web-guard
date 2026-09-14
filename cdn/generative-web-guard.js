@@ -1,5 +1,5 @@
 // dist/frame-manifest.js
-var frame_manifest_default = { "script": '(() => {\n  // <define:__CLASS_ALLOWLIST__>\n  var define_CLASS_ALLOWLIST_default = ["axis", "bar", "bar-alt", "btn", "btn-active", "btn-primary", "card", "center", "chart", "grow", "hidden", "input", "label", "mono", "muted", "right", "row", "small", "stack", "tab", "tab-active", "table", "tabs", "title", "tooltip"];\n\n  // src/policy-data.js\n  var POLICY_DATA = {\n    "version": 1,\n    "limits": {\n      "maxNodes": 5e3,\n      "maxDepth": 32,\n      "maxTextLength": 2e4,\n      "maxTotalText": 2e5,\n      "maxAttrs": 24,\n      "maxAttrValueLength": 2e3,\n      "maxPathNumbers": 4e3,\n      "maxPointsNumbers": 2e3,\n      "maxNumberMagnitude": 1e6,\n      "maxTraversalDepth": 256\n    },\n    "sharedGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ]\n    },\n    "htmlGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ],\n      "title": [\n        "text"\n      ],\n      "lang": [\n        "lang"\n      ],\n      "dir": [\n        "oneOf",\n        [\n          "ltr",\n          "rtl",\n          "auto"\n        ]\n      ],\n      "hidden": [\n        "fixed",\n        ""\n      ]\n    },\n    "svgGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ],\n      "transform": [\n        "transform"\n      ],\n      "fill": [\n        "color"\n      ],\n      "stroke": [\n        "color"\n      ],\n      "fill-opacity": [\n        "unit"\n      ],\n      "stroke-opacity": [\n        "unit"\n      ],\n      "opacity": [\n        "unit"\n      ],\n      "stroke-width": [\n        "nonNeg"\n      ],\n      "stroke-linecap": [\n        "oneOf",\n        [\n          "butt",\n          "round",\n          "square"\n        ]\n      ],\n      "stroke-linejoin": [\n        "oneOf",\n        [\n          "miter",\n          "round",\n          "bevel"\n        ]\n      ],\n      "stroke-dasharray": [\n        "numList",\n        16\n      ],\n      "fill-rule": [\n        "oneOf",\n        [\n          "nonzero",\n          "evenodd"\n        ]\n      ],\n      "pointer-events": [\n        "oneOf",\n        [\n          "none",\n          "all",\n          "visiblePainted"\n        ]\n      ],\n      "font-size": [\n        "nonNeg"\n      ],\n      "font-family": [\n        "oneOf",\n        [\n          "sans-serif",\n          "serif",\n          "monospace"\n        ]\n      ],\n      "font-weight": [\n        "oneOf",\n        [\n          "normal",\n          "bold",\n          "400",\n          "600",\n          "700"\n        ]\n      ],\n      "text-anchor": [\n        "oneOf",\n        [\n          "start",\n          "middle",\n          "end"\n        ]\n      ],\n      "dominant-baseline": [\n        "oneOf",\n        [\n          "auto",\n          "middle",\n          "central",\n          "hanging",\n          "alphabetic"\n        ]\n      ]\n    },\n    "htmlElements": {\n      "div": null,\n      "span": null,\n      "section": null,\n      "article": null,\n      "header": null,\n      "footer": null,\n      "main": null,\n      "nav": null,\n      "aside": null,\n      "p": null,\n      "br": null,\n      "hr": null,\n      "pre": null,\n      "code": null,\n      "blockquote": null,\n      "figure": null,\n      "figcaption": null,\n      "small": null,\n      "strong": null,\n      "em": null,\n      "b": null,\n      "i": null,\n      "u": null,\n      "s": null,\n      "sub": null,\n      "sup": null,\n      "mark": null,\n      "kbd": null,\n      "abbr": null,\n      "h1": null,\n      "h2": null,\n      "h3": null,\n      "h4": null,\n      "h5": null,\n      "h6": null,\n      "ul": null,\n      "dl": null,\n      "dt": null,\n      "dd": null,\n      "table": null,\n      "thead": null,\n      "tbody": null,\n      "tfoot": null,\n      "tr": null,\n      "caption": null,\n      "colgroup": null,\n      "details": null,\n      "summary": null,\n      "fieldset": null,\n      "legend": null,\n      "time": {\n        "datetime": [\n          "text"\n        ]\n      },\n      "ol": {\n        "start": [\n          "int",\n          -9999,\n          9999\n        ],\n        "reversed": [\n          "fixed",\n          ""\n        ],\n        "type": [\n          "oneOf",\n          [\n            "1",\n            "a",\n            "A",\n            "i",\n            "I"\n          ]\n        ]\n      },\n      "li": {\n        "value": [\n          "int",\n          -9999,\n          9999\n        ]\n      },\n      "th": {\n        "colspan": [\n          "int",\n          1,\n          100\n        ],\n        "rowspan": [\n          "int",\n          1,\n          100\n        ],\n        "scope": [\n          "oneOf",\n          [\n            "row",\n            "col",\n            "rowgroup",\n            "colgroup"\n          ]\n        ],\n        "headers": [\n          "idRefs"\n        ]\n      },\n      "td": {\n        "colspan": [\n          "int",\n          1,\n          100\n        ],\n        "rowspan": [\n          "int",\n          1,\n          100\n        ],\n        "headers": [\n          "idRefs"\n        ]\n      },\n      "col": {\n        "span": [\n          "int",\n          1,\n          100\n        ]\n      },\n      "label": {\n        "for": [\n          "id"\n        ]\n      },\n      "output": {\n        "for": [\n          "idRefs"\n        ]\n      },\n      "button": {\n        "type": [\n          "tagged",\n          "R-CTRL-BUTTON-TYPE",\n          [\n            "fixed",\n            "button"\n          ]\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "value": [\n          "text"\n        ]\n      },\n      "input": {\n        "type": [\n          "tagged",\n          "R-CTRL-INPUT-TYPE",\n          [\n            "oneOf",\n            [\n              "text",\n              "number",\n              "range",\n              "checkbox",\n              "radio",\n              "search"\n            ]\n          ]\n        ],\n        "value": [\n          "text"\n        ],\n        "checked": [\n          "fixed",\n          ""\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "readonly": [\n          "fixed",\n          ""\n        ],\n        "placeholder": [\n          "text"\n        ],\n        "min": [\n          "num"\n        ],\n        "max": [\n          "num"\n        ],\n        "step": [\n          "nonNeg"\n        ],\n        "minlength": [\n          "int",\n          0,\n          1e4\n        ],\n        "maxlength": [\n          "int",\n          0,\n          1e4\n        ],\n        "size": [\n          "int",\n          1,\n          200\n        ],\n        "inputmode": [\n          "oneOf",\n          [\n            "text",\n            "decimal",\n            "numeric",\n            "search"\n          ]\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "select": {\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "multiple": [\n          "fixed",\n          ""\n        ],\n        "size": [\n          "int",\n          1,\n          50\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "option": {\n        "value": [\n          "text"\n        ],\n        "selected": [\n          "fixed",\n          ""\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "label": [\n          "text"\n        ]\n      },\n      "optgroup": {\n        "label": [\n          "text"\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ]\n      },\n      "textarea": {\n        "rows": [\n          "int",\n          1,\n          100\n        ],\n        "cols": [\n          "int",\n          1,\n          200\n        ],\n        "placeholder": [\n          "text"\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "readonly": [\n          "fixed",\n          ""\n        ],\n        "maxlength": [\n          "int",\n          0,\n          1e5\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "progress": {\n        "value": [\n          "nonNeg"\n        ],\n        "max": [\n          "nonNeg"\n        ]\n      },\n      "meter": {\n        "value": [\n          "num"\n        ],\n        "min": [\n          "num"\n        ],\n        "max": [\n          "num"\n        ],\n        "low": [\n          "num"\n        ],\n        "high": [\n          "num"\n        ],\n        "optimum": [\n          "num"\n        ]\n      }\n    },\n    "svgElements": {\n      "svg": {\n        "viewBox": [\n          "viewBox"\n        ],\n        "width": [\n          "lenPct"\n        ],\n        "height": [\n          "lenPct"\n        ],\n        "preserveAspectRatio": [\n          "oneOf",\n          [\n            "none",\n            "xMidYMid meet",\n            "xMinYMin meet",\n            "xMidYMid slice"\n          ]\n        ]\n      },\n      "g": null,\n      "title": null,\n      "desc": null,\n      "rect": {\n        "x": [\n          "num"\n        ],\n        "y": [\n          "num"\n        ],\n        "width": [\n          "nonNeg"\n        ],\n        "height": [\n          "nonNeg"\n        ],\n        "rx": [\n          "nonNeg"\n        ],\n        "ry": [\n          "nonNeg"\n        ]\n      },\n      "circle": {\n        "cx": [\n          "num"\n        ],\n        "cy": [\n          "num"\n        ],\n        "r": [\n          "nonNeg"\n        ]\n      },\n      "ellipse": {\n        "cx": [\n          "num"\n        ],\n        "cy": [\n          "num"\n        ],\n        "rx": [\n          "nonNeg"\n        ],\n        "ry": [\n          "nonNeg"\n        ]\n      },\n      "line": {\n        "x1": [\n          "num"\n        ],\n        "y1": [\n          "num"\n        ],\n        "x2": [\n          "num"\n        ],\n        "y2": [\n          "num"\n        ]\n      },\n      "polyline": {\n        "points": [\n          "numList",\n          2e3\n        ]\n      },\n      "polygon": {\n        "points": [\n          "numList",\n          2e3\n        ]\n      },\n      "path": {\n        "d": [\n          "path"\n        ]\n      },\n      "text": {\n        "x": [\n          "numList",\n          1\n        ],\n        "y": [\n          "numList",\n          1\n        ],\n        "dx": [\n          "numList",\n          1\n        ],\n        "dy": [\n          "numList",\n          1\n        ],\n        "rotate": [\n          "numList",\n          1\n        ],\n        "textLength": [\n          "nonNeg"\n        ]\n      },\n      "tspan": {\n        "x": [\n          "numList",\n          1\n        ],\n        "y": [\n          "numList",\n          1\n        ],\n        "dx": [\n          "numList",\n          1\n        ],\n        "dy": [\n          "numList",\n          1\n        ]\n      }\n    },\n    "htmlForced": {\n      "button": [\n        [\n          "type",\n          "button"\n        ]\n      ],\n      "input": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ],\n      "select": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ],\n      "textarea": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ]\n    },\n    "htmlUnwrap": [\n      [\n        "a",\n        "R-NAV-ANCHOR"\n      ],\n      [\n        "form",\n        "R-NAV-FORM"\n      ],\n      [\n        "font",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "center",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "big",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "tt",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "strike",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "address",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "hgroup",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "ins",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "del",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "q",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "cite",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "dfn",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "var",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "samp",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "bdi",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "bdo",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "wbr",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "data",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "html",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "head",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "body",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ]\n    ],\n    "htmlDropRules": [\n      [\n        "script",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "style",\n        "R-STYLE-ELEMENT"\n      ],\n      [\n        "iframe",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "frame",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "frameset",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "object",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "embed",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "applet",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "portal",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "link",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "meta",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "base",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "img",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "picture",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "source",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "track",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "video",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "audio",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "noscript",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "xmp",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "noembed",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "noframes",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "plaintext",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "title",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "template",\n        "R-RCDATA-TEMPLATE"\n      ]\n    ],\n    "svgDropRules": [\n      [\n        "script",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animate",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "set",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animatetransform",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animatemotion",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "discard",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "style",\n        "R-STYLE-ELEMENT"\n      ],\n      [\n        "image",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "use",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "feimage",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "textpath",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "pattern",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "filter",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "mask",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "marker",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "clippath",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "lineargradient",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "radialgradient",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "a",\n        "R-NAV-ANCHOR"\n      ],\n      [\n        "foreignobject",\n        "R-NS-POSITION"\n      ]\n    ],\n    "attrDropRules": [\n      [\n        "src",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "srcset",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "href",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "xlink:href",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "poster",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "data",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "code",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "background",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "ping",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "formaction",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "action",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "content",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "http-equiv",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "longdesc",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "cite",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "manifest",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "style",\n        "R-STYLE-INLINE"\n      ],\n      [\n        "name",\n        "R-CLOBBER-NAME"\n      ],\n      [\n        "__proto__",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "constructor",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "prototype",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "autofocus",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "accesskey",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "contenteditable",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "draggable",\n        "R-CTRL-FOCUS"\n      ]\n    ],\n    "svgTextOnly": [\n      "title",\n      "desc"\n    ]\n  };\n  var POLICY_LIMITS = Object.freeze(POLICY_DATA.limits);\n  function createPolicyTables(resolve) {\n    const attrs = (table) => table === null ? null : Object.fromEntries(Object.entries(table).map(([n, d]) => [n, resolve(d)]));\n    const elements = (table) => Object.fromEntries(Object.entries(table).map(([tag, t]) => [tag, attrs(t)]));\n    return {\n      HTML_GLOBAL: attrs(POLICY_DATA.htmlGlobal),\n      SVG_GLOBAL: attrs(POLICY_DATA.svgGlobal),\n      HTML_ELEMENTS: elements(POLICY_DATA.htmlElements),\n      SVG_ELEMENTS: elements(POLICY_DATA.svgElements),\n      HTML_FORCED: POLICY_DATA.htmlForced,\n      HTML_UNWRAP: new Map(POLICY_DATA.htmlUnwrap),\n      HTML_DROP_RULES: new Map(POLICY_DATA.htmlDropRules),\n      SVG_DROP_RULES: new Map(POLICY_DATA.svgDropRules),\n      ATTR_DROP_RULES: new Map(POLICY_DATA.attrDropRules),\n      SVG_TEXT_ONLY: new Set(POLICY_DATA.svgTextOnly)\n    };\n  }\n\n  // src/tree.js\n  var NS = Object.freeze({\n    html: "http://www.w3.org/1999/xhtml",\n    svg: "http://www.w3.org/2000/svg"\n  });\n  function el(ns, tag, attrs = [], children = []) {\n    return { kind: "el", ns, tag, attrs, children };\n  }\n  function text(s) {\n    return { kind: "text", text: s };\n  }\n  function root(children = []) {\n    return { kind: "root", children };\n  }\n  function isTreeShaped(node, depth = 0) {\n    if (depth > POLICY_LIMITS.maxDepth + 1) return false;\n    if (node === null || typeof node !== "object" || Array.isArray(node)) return false;\n    if (node.kind === "text") return typeof node.text === "string";\n    if (node.kind === "root" || node.kind === "el") {\n      if (!Array.isArray(node.children)) return false;\n      if (node.kind === "el") {\n        if (node.ns !== "html" && node.ns !== "svg") return false;\n        if (typeof node.tag !== "string") return false;\n        if (!Array.isArray(node.attrs)) return false;\n        for (const a of node.attrs) {\n          if (!Array.isArray(a) || a.length !== 2) return false;\n          if (typeof a[0] !== "string" || typeof a[1] !== "string") return false;\n        }\n      }\n      return node.children.every((c) => isTreeShaped(c, depth + 1));\n    }\n    return false;\n  }\n\n  // src/rules.js\n  var RULES = Object.freeze({\n    EXEC_SCRIPT: "R-EXEC-SCRIPT",\n    EXEC_HANDLER: "R-EXEC-HANDLER",\n    RES_ELEMENT: "R-RES-ELEMENT",\n    RES_SVG_REF: "R-RES-SVG-REF",\n    RES_URL_ATTR: "R-RES-URL-ATTR",\n    NAV_ANCHOR: "R-NAV-ANCHOR",\n    NAV_FORM: "R-NAV-FORM",\n    NS_MATHML: "R-NS-MATHML",\n    NS_POSITION: "R-NS-POSITION",\n    RCDATA_RAWTEXT: "R-RCDATA-RAWTEXT",\n    RCDATA_TEMPLATE: "R-RCDATA-TEMPLATE",\n    RCDATA_NO_REPARSE: "R-RCDATA-NO-REPARSE",\n    ATTR_ALLOWLIST: "R-ATTR-ALLOWLIST",\n    ATTR_NAMESPACED: "R-ATTR-NAMESPACED",\n    STYLE_ELEMENT: "R-STYLE-ELEMENT",\n    STYLE_INLINE: "R-STYLE-INLINE",\n    STYLE_CLASS: "R-STYLE-CLASS",\n    CLOBBER_ID_PREFIX: "R-CLOBBER-ID-PREFIX",\n    CLOBBER_NAME: "R-CLOBBER-NAME",\n    CLOBBER_ATTR_KEYS: "R-CLOBBER-ATTR-KEYS",\n    LIMIT_TREE: "R-LIMIT-TREE",\n    LIMIT_ATTRS: "R-LIMIT-ATTRS",\n    CTRL_INPUT_TYPE: "R-CTRL-INPUT-TYPE",\n    CTRL_AUTOCOMPLETE: "R-CTRL-AUTOCOMPLETE",\n    CTRL_BUTTON_TYPE: "R-CTRL-BUTTON-TYPE",\n    CTRL_FOCUS: "R-CTRL-FOCUS",\n    TEXT_CONTROL_BIDI: "R-TEXT-CONTROL-BIDI",\n    VAL_NUMBER: "R-VAL-NUMBER",\n    VAL_COLOR: "R-VAL-COLOR",\n    VAL_PATH: "R-VAL-PATH",\n    VAL_TRANSFORM: "R-VAL-TRANSFORM",\n    VAL_KEYWORD: "R-VAL-KEYWORD",\n    STRUCT_NON_ELEMENT: "R-STRUCT-NON-ELEMENT",\n    STRUCT_ELEMENT_ALLOWLIST: "R-STRUCT-ELEMENT-ALLOWLIST",\n    RT_ISOLATION: "R-RT-ISOLATION",\n    RT_LIMITS: "R-RT-LIMITS",\n    RT_FROZEN_DATA: "R-RT-FROZEN-DATA",\n    GATE_INTERFACE: "R-GATE-INTERFACE",\n    FRAME_FIXED_POINT: "R-FRAME-FIXED-POINT",\n    FRAME_MESSAGE_SCHEMA: "R-FRAME-MESSAGE-SCHEMA",\n    FRAME_CSP_SINKS: "R-FRAME-CSP-SINKS",\n    RENDER_CONSTRUCTORS_ONLY: "R-RENDER-CONSTRUCTORS-ONLY",\n    CHECK_ACCEPTANCE: "R-CHECK-ACCEPTANCE",\n    CAP_INVENTORY: "R-CAP-INVENTORY",\n    CAP_CEILINGS: "R-CAP-CEILINGS",\n    CAP_CONTROLS: "R-CAP-CONTROLS"\n  });\n  var RULE_IDS = Object.freeze(Object.values(RULES));\n  var RULE_CLASSES = Object.freeze({\n    "R-EXEC-SCRIPT": "execution",\n    "R-EXEC-HANDLER": "execution",\n    "R-RES-ELEMENT": "resource-load",\n    "R-RES-SVG-REF": "resource-load",\n    "R-RES-URL-ATTR": "resource-load",\n    "R-NAV-ANCHOR": "navigation",\n    "R-NAV-FORM": "navigation",\n    "R-NS-MATHML": "namespace",\n    "R-NS-POSITION": "namespace",\n    "R-RCDATA-RAWTEXT": "rcdata",\n    "R-RCDATA-TEMPLATE": "rcdata",\n    "R-RCDATA-NO-REPARSE": "rcdata",\n    "R-ATTR-ALLOWLIST": "attribute",\n    "R-ATTR-NAMESPACED": "attribute",\n    "R-STYLE-ELEMENT": "style",\n    "R-STYLE-INLINE": "style",\n    "R-STYLE-CLASS": "style",\n    "R-CLOBBER-ID-PREFIX": "clobbering",\n    "R-CLOBBER-NAME": "clobbering",\n    "R-CLOBBER-ATTR-KEYS": "clobbering",\n    "R-LIMIT-TREE": "limits",\n    "R-LIMIT-ATTRS": "limits",\n    "R-CTRL-INPUT-TYPE": "controls",\n    "R-CTRL-AUTOCOMPLETE": "controls",\n    "R-CTRL-BUTTON-TYPE": "controls",\n    "R-CTRL-FOCUS": "controls",\n    "R-TEXT-CONTROL-BIDI": "text",\n    "R-VAL-NUMBER": "values",\n    "R-VAL-COLOR": "values",\n    "R-VAL-PATH": "values",\n    "R-VAL-TRANSFORM": "values",\n    "R-VAL-KEYWORD": "values",\n    "R-STRUCT-NON-ELEMENT": "structure",\n    "R-STRUCT-ELEMENT-ALLOWLIST": "structure",\n    "R-RT-ISOLATION": "runtime",\n    "R-RT-LIMITS": "runtime",\n    "R-RT-FROZEN-DATA": "runtime",\n    "R-GATE-INTERFACE": "gate",\n    "R-FRAME-FIXED-POINT": "frame",\n    "R-FRAME-MESSAGE-SCHEMA": "frame",\n    "R-FRAME-CSP-SINKS": "frame",\n    "R-RENDER-CONSTRUCTORS-ONLY": "renderer",\n    "R-CHECK-ACCEPTANCE": "structure",\n    "R-CAP-INVENTORY": "capability",\n    "R-CAP-CEILINGS": "capability",\n    "R-CAP-CONTROLS": "capability"\n  });\n\n  // src/policy.js\n  function withRule(rule, fn) {\n    const wrapped = (v) => fn(v);\n    wrapped.rule = rule;\n    return wrapped;\n  }\n  function asciiLower(s) {\n    return s.replace(/[A-Z]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 32));\n  }\n  var NUM_RE = /^(-?)(\\d*)(?:\\.(\\d+))?$/;\n  function boundedNumber(v) {\n    const m = NUM_RE.exec(v.trim());\n    if (!m) return null;\n    let [, sign, int, frac = ""] = m;\n    if (int === "" && frac === "") return null;\n    if (int.length > 7) return null;\n    int = int.replace(/^0+/, "");\n    if (int === "") int = "0";\n    frac = frac.replace(/0+$/, "");\n    const n = Number(int);\n    if (n > POLICY_LIMITS.maxNumberMagnitude || n === POLICY_LIMITS.maxNumberMagnitude && frac !== "") return null;\n    if (int === "0" && frac === "") return "0";\n    return sign + int + (frac ? "." + frac : "");\n  }\n  boundedNumber.rule = RULES.VAL_NUMBER;\n  function lengthOrPercent(v) {\n    v = v.trim();\n    if (v.endsWith("%")) {\n      const n = boundedNumber(v.slice(0, -1));\n      return n === null ? null : n + "%";\n    }\n    return boundedNumber(v);\n  }\n  lengthOrPercent.rule = RULES.VAL_NUMBER;\n  function boundedInt(min, max) {\n    return withRule(RULES.VAL_NUMBER, (v) => {\n      v = v.trim();\n      if (!/^-?\\d+$/.test(v) || v.replace("-", "").length > 15) return null;\n      const n = Number(v);\n      if (n < min || n > max) return null;\n      return String(n);\n    });\n  }\n  function oneOf(...values) {\n    const set = new Set(values);\n    return withRule(RULES.VAL_KEYWORD, (v) => set.has(v.trim()) ? v.trim() : null);\n  }\n  function fixed(value) {\n    return withRule(RULES.VAL_KEYWORD, () => value);\n  }\n  function plainText(v) {\n    if (v.length > POLICY_LIMITS.maxAttrValueLength) return null;\n    return cleanText(v);\n  }\n  plainText.rule = RULES.TEXT_CONTROL_BIDI;\n  var CONTROL_RE = /[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]/g;\n  var BIDI_RE = /[\\u202A-\\u202E\\u2066-\\u2069]/g;\n  function cleanText(s) {\n    return s.replace(CONTROL_RE, "").replace(BIDI_RE, "");\n  }\n  var IDENT_RE = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;\n  function ident(v) {\n    v = v.trim();\n    return IDENT_RE.test(v) ? v : null;\n  }\n  ident.rule = RULES.VAL_KEYWORD;\n  var ID_PREFIX = "g-";\n  function idValue(v) {\n    v = v.trim();\n    if (v.startsWith(ID_PREFIX) && IDENT_RE.test(v.slice(ID_PREFIX.length))) return v;\n    return IDENT_RE.test(v) ? ID_PREFIX + v : null;\n  }\n  idValue.rule = RULES.CLOBBER_ID_PREFIX;\n  function idRefList(v) {\n    const parts = v.trim().split(/\\s+/).filter(Boolean);\n    if (parts.length === 0 || parts.length > 8) return null;\n    const out = [];\n    for (const p of parts) {\n      const id = idValue(p);\n      if (id === null) return null;\n      out.push(id);\n    }\n    return out.join(" ");\n  }\n  idRefList.rule = RULES.CLOBBER_ID_PREFIX;\n  var classAllowlist = /* @__PURE__ */ new Set();\n  function setClassAllowlist(names) {\n    classAllowlist = new Set(names);\n  }\n  function classValue(v) {\n    const parts = v.trim().split(/\\s+/).filter(Boolean);\n    const kept = parts.filter((p) => classAllowlist.has(p));\n    if (kept.length === 0) return null;\n    return kept.join(" ");\n  }\n  classValue.rule = RULES.STYLE_CLASS;\n  var NAMED_COLORS = /* @__PURE__ */ new Set([\n    "black",\n    "silver",\n    "gray",\n    "grey",\n    "white",\n    "maroon",\n    "red",\n    "purple",\n    "fuchsia",\n    "green",\n    "lime",\n    "olive",\n    "yellow",\n    "navy",\n    "blue",\n    "teal",\n    "aqua",\n    "orange",\n    "none",\n    "currentcolor",\n    "transparent"\n  ]);\n  var HEX_RE = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;\n  var RGB_RE = /^rgba?\\(\\s*(\\d{1,3}%?)\\s*,\\s*(\\d{1,3}%?)\\s*,\\s*(\\d{1,3}%?)\\s*(?:,\\s*(0|1|0?\\.\\d+|\\d{1,3}%)\\s*)?\\)$/;\n  function color(v) {\n    v = v.trim();\n    const lower = asciiLower(v);\n    if (NAMED_COLORS.has(lower)) return lower === "currentcolor" ? "currentColor" : lower;\n    if (HEX_RE.test(v)) return v;\n    if (RGB_RE.test(lower)) return lower;\n    return null;\n  }\n  color.rule = RULES.VAL_COLOR;\n  function unitInterval(v) {\n    const n = boundedNumber(v);\n    if (n === null) return null;\n    const f = Number(n);\n    return f >= 0 && f <= 1 ? n : null;\n  }\n  unitInterval.rule = RULES.VAL_NUMBER;\n  function nonNegative(v) {\n    const n = boundedNumber(v);\n    if (n === null || Number(n) < 0) return null;\n    return n;\n  }\n  nonNegative.rule = RULES.VAL_NUMBER;\n  function numberList(maxCount) {\n    return withRule(RULES.VAL_NUMBER, (v) => {\n      const parts = v.trim().split(/[\\s,]+/).filter(Boolean);\n      if (parts.length === 0 || parts.length > maxCount) return null;\n      const out = [];\n      for (const p of parts) {\n        const n = boundedNumber(p);\n        if (n === null) return null;\n        out.push(n);\n      }\n      return out.join(" ");\n    });\n  }\n  var PATH_COMMANDS = new Set("MmZzLlHhVvCcSsQqTtAa");\n  var PATH_NUMBER_RE = /^-?(?:\\d+\\.?\\d*|\\.\\d+)/;\n  function pathData(v) {\n    v = v.trim();\n    if (v.length > POLICY_LIMITS.maxAttrValueLength * 10) return null;\n    const out = [];\n    let numbers = 0;\n    let i = 0;\n    while (i < v.length) {\n      const c = v[i];\n      if (/[\\s,]/.test(c)) {\n        i++;\n        continue;\n      }\n      if (PATH_COMMANDS.has(c)) {\n        out.push(c);\n        i++;\n        continue;\n      }\n      const m = PATH_NUMBER_RE.exec(v.slice(i));\n      if (!m) return null;\n      if (++numbers > POLICY_LIMITS.maxPathNumbers) return null;\n      const n = boundedNumber(m[0]);\n      if (n === null) return null;\n      out.push(n);\n      i += m[0].length;\n    }\n    if (out.length === 0 || !/^[Mm]$/.test(out[0])) return null;\n    return out.join(" ");\n  }\n  pathData.rule = RULES.VAL_PATH;\n  var TRANSFORM_ARITY = {\n    translate: [1, 2],\n    scale: [1, 2],\n    rotate: [1, 3],\n    skewX: [1, 1],\n    skewY: [1, 1],\n    matrix: [6, 6]\n  };\n  function transform(v) {\n    v = v.trim();\n    if (v.length > POLICY_LIMITS.maxAttrValueLength || v.length === 0) return null;\n    const out = [];\n    let i = 0;\n    for (; ; ) {\n      while (i < v.length && /\\s/.test(v[i])) i++;\n      if (i >= v.length) break;\n      if (out.length + 1 > 8) return null;\n      const name = /^[A-Za-z]*/.exec(v.slice(i))[0];\n      if (!Object.prototype.hasOwnProperty.call(TRANSFORM_ARITY, name)) return null;\n      i += name.length;\n      while (i < v.length && /\\s/.test(v[i])) i++;\n      if (v[i] !== "(") return null;\n      i++;\n      const close = v.indexOf(")", i);\n      if (close === -1) return null;\n      const args = v.slice(i, close);\n      if (args.includes("(")) return null;\n      i = close + 1;\n      const nums = numberList(6)(args);\n      if (nums === null) return null;\n      const arity = nums.split(" ").length;\n      const [lo, hi] = TRANSFORM_ARITY[name];\n      if (arity < lo || arity > hi) return null;\n      out.push(`${name}(${nums})`);\n    }\n    return out.length ? out.join(" ") : null;\n  }\n  transform.rule = RULES.VAL_TRANSFORM;\n  function viewBox(v) {\n    const nums = numberList(4)(v);\n    if (nums === null || nums.split(" ").length !== 4) return null;\n    const [, , w, h] = nums.split(" ").map(Number);\n    return w > 0 && h > 0 ? nums : null;\n  }\n  viewBox.rule = RULES.VAL_NUMBER;\n  function resolveValidator([kind, a, b]) {\n    const simple = {\n      num: boundedNumber,\n      nonNeg: nonNegative,\n      unit: unitInterval,\n      lenPct: lengthOrPercent,\n      path: pathData,\n      transform,\n      viewBox,\n      color,\n      text: plainText,\n      ident,\n      id: idValue,\n      idRefs: idRefList,\n      cls: classValue,\n      lang: withRule(RULES.VAL_KEYWORD, (v) => /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8}){0,3}$/.test(v.trim()) ? v.trim() : null)\n    };\n    if (Object.hasOwn(simple, kind)) return simple[kind];\n    if (kind === "int") return boundedInt(a, b);\n    if (kind === "numList") return numberList(a);\n    if (kind === "oneOf") return oneOf(...a);\n    if (kind === "fixed") return fixed(a);\n    if (kind === "tagged") return withRule(a, resolveValidator(b));\n    throw new Error(`unknown validator descriptor: ${kind}`);\n  }\n  var TABLES = createPolicyTables(resolveValidator);\n  var { HTML_ELEMENTS, SVG_ELEMENTS, HTML_UNWRAP, HTML_DROP_RULES, SVG_DROP_RULES, ATTR_DROP_RULES } = TABLES;\n  var { HTML_GLOBAL, SVG_GLOBAL, HTML_FORCED, SVG_TEXT_ONLY } = TABLES;\n  function dropRuleFor(name) {\n    return ATTR_DROP_RULES.get(name) ?? (name.includes(":") ? RULES.ATTR_NAMESPACED : name.startsWith("on") ? RULES.EXEC_HANDLER : RULES.ATTR_ALLOWLIST);\n  }\n  var SVG_ATTR_CANONICAL = /* @__PURE__ */ new Map();\n  for (const table of [SVG_GLOBAL, ...Object.values(SVG_ELEMENTS)]) {\n    if (table) for (const name of Object.keys(table)) SVG_ATTR_CANONICAL.set(asciiLower(name), name);\n  }\n  function normalizeTree(rawRoot) {\n    const changes = [];\n    const counters = { nodes: 0, totalText: 0 };\n    const reasons = [];\n    const children = checkChildren(rawRoot.children ?? [], "html", 0, [], changes, counters, reasons, false);\n    if (reasons.length) return { status: "rejected", reasons };\n    return { status: "validated", tree: root(children), changes };\n  }\n  function policyOk(tree) {\n    let nodes = 0, totalText = 0;\n    function visit(children, parentNs, depth, textOnly) {\n      return children.every((node) => {\n        if (++nodes > POLICY_LIMITS.maxNodes) return false;\n        if (node.kind === "text") {\n          totalText += node.text.length;\n          return node.text.length > 0 && node.text === cleanText(node.text) && node.text.length <= POLICY_LIMITS.maxTextLength && totalText <= POLICY_LIMITS.maxTotalText;\n        }\n        if (textOnly || depth + 1 > POLICY_LIMITS.maxDepth) return false;\n        const tables = node.ns === "html" ? HTML_ELEMENTS : node.ns === "svg" ? SVG_ELEMENTS : null;\n        if (!tables || !Object.hasOwn(tables, node.tag)) return false;\n        if (node.ns === "html" ? parentNs !== "html" : node.tag !== "svg" && parentNs !== "svg") return false;\n        const table = tables[node.tag] ?? {};\n        const global = node.ns === "html" ? HTML_GLOBAL : SVG_GLOBAL;\n        if (node.attrs.length > POLICY_LIMITS.maxAttrs) return false;\n        for (const [name, value] of node.attrs) {\n          if (name.includes(":") || name.startsWith("on")) return false;\n          const validator = Object.hasOwn(table, name) ? table[name] : Object.hasOwn(global, name) ? global[name] : null;\n          if (!validator || validator(value) !== value) return false;\n        }\n        if (node.ns === "html") {\n          const attrs = new Map(node.attrs);\n          for (const [name, value] of HTML_FORCED[node.tag] ?? []) if (attrs.get(name) !== value) return false;\n          if (node.tag === "input" && !attrs.has("type")) return false;\n        }\n        return visit(node.children, node.ns, depth + 1, node.ns === "svg" && SVG_TEXT_ONLY.has(node.tag));\n      });\n    }\n    return visit(tree.children, "html", 0, false);\n  }\n  function checkTree(rawRoot) {\n    const candidate = normalizeTree(rawRoot);\n    if (candidate.status !== "validated") return candidate;\n    if (!policyOk(candidate.tree)) return { status: "rejected", reasons: [{ code: "output-policy" }] };\n    const replay = normalizeTree(candidate.tree);\n    if (replay.status !== "validated" || replay.changes.length !== 0 || JSON.stringify(replay.tree) !== JSON.stringify(candidate.tree)) {\n      return { status: "rejected", reasons: [{ code: "non-canonical-output" }] };\n    }\n    return candidate;\n  }\n  function checkChildren(rawChildren, parentNs, depth, path, changes, counters, reasons, textOnly) {\n    const rootOut = [];\n    const stack = [{\n      list: Array.isArray(rawChildren) ? rawChildren : [],\n      parentNs,\n      depth,\n      sdepth: 0,\n      path,\n      textOnly,\n      out: rootOut,\n      index: 0,\n      finish: null\n    }];\n    const descend = (frame, list, childNs, childDepth, here, childTextOnly, out, finish) => {\n      if (frame.sdepth + 1 > POLICY_LIMITS.maxTraversalDepth) {\n        reasons.push({ code: "traversal-depth", path: here });\n        if (finish) finish(out);\n        return;\n      }\n      stack.push({\n        list: Array.isArray(list) ? list : [],\n        parentNs: childNs,\n        depth: childDepth,\n        sdepth: frame.sdepth + 1,\n        path: here,\n        textOnly: childTextOnly,\n        out,\n        index: 0,\n        finish\n      });\n    };\n    while (stack.length) {\n      const frame = stack[stack.length - 1];\n      if (frame.index >= frame.list.length) {\n        stack.pop();\n        if (frame.finish) frame.finish(frame.out);\n        continue;\n      }\n      const raw = frame.list[frame.index];\n      const here = frame.path.concat(frame.index);\n      frame.index++;\n      if (reasons.length) continue;\n      if (raw == null || typeof raw !== "object") continue;\n      if (raw.kind === "text") {\n        const s = typeof raw.text === "string" ? cleanText(raw.text) : "";\n        if (s.length === 0) continue;\n        if (s.length > POLICY_LIMITS.maxTextLength) {\n          reasons.push({ code: "text-too-long", path: here });\n          continue;\n        }\n        counters.totalText += s.length;\n        if (counters.totalText > POLICY_LIMITS.maxTotalText) {\n          reasons.push({ code: "total-text-too-long", path: here });\n          continue;\n        }\n        counters.nodes++;\n        if (counters.nodes > POLICY_LIMITS.maxNodes) {\n          reasons.push({ code: "too-many-nodes", path: here });\n          continue;\n        }\n        frame.out.push(text(s));\n        continue;\n      }\n      if (raw.kind === "comment" || raw.kind === "doctype") {\n        changes.push({ kind: "removed-node", what: raw.kind, path: here, rule: RULES.STRUCT_NON_ELEMENT });\n        continue;\n      }\n      if (raw.kind !== "el" || typeof raw.tag !== "string") {\n        changes.push({ kind: "removed-node", what: "unknown", path: here, rule: RULES.STRUCT_NON_ELEMENT });\n        continue;\n      }\n      if (frame.textOnly) {\n        changes.push({ kind: "removed-element", tag: raw.tag, path: here, why: "text-only-context", rule: RULES.NS_POSITION });\n        continue;\n      }\n      const tag = asciiLower(raw.tag);\n      const ns = raw.ns === "svg" ? "svg" : raw.ns === "html" ? "html" : "other";\n      if (frame.depth + 1 > POLICY_LIMITS.maxDepth) {\n        reasons.push({ code: "too-deep", path: here });\n        continue;\n      }\n      let table = null;\n      if (ns === "html" && frame.parentNs === "html") {\n        if (Object.prototype.hasOwnProperty.call(HTML_ELEMENTS, tag)) table = HTML_ELEMENTS[tag];\n        else if (HTML_UNWRAP.has(tag)) {\n          changes.push({ kind: "unwrapped-element", tag, path: here, rule: HTML_UNWRAP.get(tag) });\n          descend(frame, raw.children, frame.parentNs, frame.depth, here, false, frame.out, null);\n          continue;\n        } else {\n          changes.push({ kind: "removed-element", tag, path: here, rule: HTML_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });\n          continue;\n        }\n      } else if (ns === "svg" && (tag === "svg" || frame.parentNs === "svg")) {\n        if (Object.prototype.hasOwnProperty.call(SVG_ELEMENTS, tag)) table = SVG_ELEMENTS[tag];\n        else {\n          changes.push({ kind: "removed-element", tag, ns, path: here, rule: SVG_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });\n          continue;\n        }\n      } else {\n        changes.push({ kind: "removed-element", tag, ns, path: here, why: "namespace", rule: ns === "other" ? RULES.NS_MATHML : RULES.NS_POSITION });\n        continue;\n      }\n      counters.nodes++;\n      if (counters.nodes > POLICY_LIMITS.maxNodes) {\n        reasons.push({ code: "too-many-nodes", path: here });\n        continue;\n      }\n      const attrs = checkAttrs(raw.attrs, ns, tag, table, here, changes);\n      const childTextOnly = ns === "svg" && SVG_TEXT_ONLY.has(tag);\n      const out = frame.out;\n      const kids = [];\n      descend(frame, raw.children, ns, frame.depth + 1, here, childTextOnly, kids, (k) => out.push(el(ns, tag, attrs, k)));\n    }\n    return rootOut;\n  }\n  function checkAttrs(rawAttrs, ns, tag, table, path, changes) {\n    const global = ns === "html" ? HTML_GLOBAL : SVG_GLOBAL;\n    const seen = /* @__PURE__ */ new Map();\n    const list = Array.isArray(rawAttrs) ? rawAttrs : [];\n    let count = 0;\n    for (const pair of list) {\n      if (!Array.isArray(pair) || typeof pair[0] !== "string" || typeof pair[1] !== "string") continue;\n      const lower = asciiLower(pair[0]);\n      const name = ns === "svg" ? SVG_ATTR_CANONICAL.get(lower) ?? lower : lower;\n      const value = pair[1];\n      if (++count > POLICY_LIMITS.maxAttrs) {\n        changes.push({ kind: "removed-attribute", tag, name, path, why: "too-many", rule: RULES.LIMIT_ATTRS });\n        continue;\n      }\n      if (name.includes(":") || name.startsWith("on")) {\n        changes.push({ kind: "removed-attribute", tag, name, path, rule: dropRuleFor(name) });\n        continue;\n      }\n      let validator = null;\n      if (table && Object.prototype.hasOwnProperty.call(table, name)) validator = table[name];\n      else if (Object.prototype.hasOwnProperty.call(global, name)) validator = global[name];\n      if (!validator) {\n        changes.push({ kind: "removed-attribute", tag, name, path, rule: dropRuleFor(name) });\n        continue;\n      }\n      if (value.length > POLICY_LIMITS.maxAttrValueLength * 10) {\n        changes.push({ kind: "removed-attribute", tag, name, path, why: "too-long", rule: RULES.LIMIT_ATTRS });\n        continue;\n      }\n      const canonical = validator(value);\n      if (canonical === null) {\n        changes.push({ kind: "removed-attribute", tag, name, path, why: "value", rule: validator.rule });\n        continue;\n      }\n      if (canonical !== value) changes.push({ kind: "rewrote-attribute", tag, name, path, rule: validator.rule });\n      if (!seen.has(name)) seen.set(name, canonical);\n    }\n    if (ns === "html" && HTML_FORCED[tag]) {\n      for (const [name, value] of HTML_FORCED[tag]) {\n        if (!seen.has(name)) seen.set(name, value);\n      }\n    }\n    if (ns === "html" && tag === "input" && !seen.has("type")) seen.set("type", "text");\n    return Array.from(seen.entries()).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);\n  }\n  function isValidated(tree) {\n    const result = checkTree(tree);\n    if (result.status !== "validated") return false;\n    if (result.changes.length !== 0) return false;\n    return JSON.stringify(result.tree) === JSON.stringify(tree);\n  }\n\n  // src/render.js\n  var REFUSED_ATTR_RE = /^(on|style$|src|href|xlink|xmlns|srcdoc|formaction|action|ping|srcset|background|poster|data$|code$|codebase|manifest|usemap|is$|slot$|nonce$)/i;\n  function ensureElementAllowed(node) {\n    const table = node.ns === "html" ? HTML_ELEMENTS : node.ns === "svg" ? SVG_ELEMENTS : null;\n    if (!table || !Object.prototype.hasOwnProperty.call(table, node.tag)) {\n      throw new Error(`renderer: refused element ${node.ns}:${node.tag}`);\n    }\n  }\n  function ensureAttrAllowed(name) {\n    if (name.includes(":") || REFUSED_ATTR_RE.test(name)) {\n      throw new Error(`renderer: refused attribute ${name}`);\n    }\n  }\n  function createRenderer(doc, mount) {\n    let current = null;\n    function createNode(node) {\n      if (node.kind === "text") return doc.createTextNode(node.text);\n      ensureElementAllowed(node);\n      const element = doc.createElementNS(NS[node.ns], node.tag);\n      for (const [name, value] of node.attrs) {\n        ensureAttrAllowed(name);\n        element.setAttribute(name, value);\n      }\n      syncControlState(element, node, null);\n      for (const child of node.children) element.appendChild(createNode(child));\n      return element;\n    }\n    function patchAttrs(element, oldNode, newNode) {\n      const oldMap = new Map(oldNode.attrs);\n      for (const [name, value] of newNode.attrs) {\n        ensureAttrAllowed(name);\n        if (oldMap.get(name) !== value) element.setAttribute(name, value);\n        oldMap.delete(name);\n      }\n      for (const name of oldMap.keys()) element.removeAttribute(name);\n      syncControlState(element, newNode, oldNode);\n    }\n    function patchChildren(parent, oldChildren, newChildren) {\n      const domChildren = Array.from(parent.childNodes);\n      const shared = Math.min(oldChildren.length, newChildren.length);\n      for (let i = 0; i < shared; i++) {\n        patchNode(parent, domChildren[i], oldChildren[i], newChildren[i]);\n      }\n      for (let i = shared; i < oldChildren.length; i++) parent.removeChild(domChildren[i]);\n      for (let i = shared; i < newChildren.length; i++) parent.appendChild(createNode(newChildren[i]));\n    }\n    function patchNode(parent, domNode, oldNode, newNode) {\n      if (oldNode.kind !== newNode.kind) {\n        parent.replaceChild(createNode(newNode), domNode);\n        return;\n      }\n      if (newNode.kind === "text") {\n        if (oldNode.text !== newNode.text) domNode.data = newNode.text;\n        return;\n      }\n      if (oldNode.ns !== newNode.ns || oldNode.tag !== newNode.tag) {\n        parent.replaceChild(createNode(newNode), domNode);\n        return;\n      }\n      ensureElementAllowed(newNode);\n      patchAttrs(domNode, oldNode, newNode);\n      patchChildren(domNode, oldNode.children, newNode.children);\n    }\n    function syncControlState(element, newNode, oldNode) {\n      if (newNode.ns !== "html") return;\n      const tag = newNode.tag;\n      if (tag !== "input" && tag !== "textarea" && tag !== "select" && tag !== "option") return;\n      const attr = (node, name) => {\n        if (!node) return void 0;\n        const pair = node.attrs.find((a) => a[0] === name);\n        return pair ? pair[1] : void 0;\n      };\n      if (tag === "input") {\n        const type = attr(newNode, "type");\n        if (type === "checkbox" || type === "radio") {\n          const now = attr(newNode, "checked") !== void 0;\n          const before = oldNode ? attr(oldNode, "checked") !== void 0 : void 0;\n          if (before !== now) element.checked = now;\n        } else {\n          const now = attr(newNode, "value");\n          const before = attr(oldNode, "value");\n          if (now !== void 0 && now !== before && element.value !== now) element.value = now;\n        }\n      } else if (tag === "option") {\n        const now = attr(newNode, "selected") !== void 0;\n        const before = oldNode ? attr(oldNode, "selected") !== void 0 : void 0;\n        if (before !== now) element.selected = now;\n      }\n    }\n    function captureFocus() {\n      const active = doc.activeElement;\n      if (!active || active === doc.body || !mount.contains(active)) return null;\n      const path = [];\n      let n = active;\n      while (n && n !== mount) {\n        path.unshift(Array.prototype.indexOf.call(n.parentNode.childNodes, n));\n        n = n.parentNode;\n      }\n      const sel = {};\n      if (typeof active.selectionStart === "number") {\n        sel.start = active.selectionStart;\n        sel.end = active.selectionEnd;\n        sel.direction = active.selectionDirection;\n      }\n      return { path, sel, tag: active.localName };\n    }\n    function restoreFocus(saved) {\n      if (!saved) return;\n      let n = mount;\n      for (const i of saved.path) {\n        n = n && n.childNodes[i];\n      }\n      if (!n || n.nodeType !== 1 || n.localName !== saved.tag) return;\n      if (doc.activeElement !== n && typeof n.focus === "function") {\n        try {\n          n.focus({ preventScroll: true });\n        } catch {\n        }\n      }\n      if (saved.sel.start !== void 0 && typeof n.setSelectionRange === "function") {\n        try {\n          n.setSelectionRange(saved.sel.start, saved.sel.end, saved.sel.direction);\n        } catch {\n        }\n      }\n    }\n    return {\n      render(tree) {\n        if (!tree || tree.kind !== "root") throw new Error("renderer: expected root");\n        const focus = captureFocus();\n        if (current === null) {\n          while (mount.firstChild) mount.removeChild(mount.firstChild);\n          for (const child of tree.children) mount.appendChild(createNode(child));\n        } else {\n          patchChildren(mount, current.children, tree.children);\n        }\n        current = tree;\n        restoreFocus(focus);\n      },\n      clear() {\n        while (mount.firstChild) mount.removeChild(mount.firstChild);\n        current = null;\n      },\n      get current() {\n        return current;\n      }\n    };\n  }\n\n  // src/frame-protocol.js\n  var FRAME_PROTOCOL_VERSION = 1;\n  var FRAME_MESSAGE = Object.freeze({\n    // parent -> frame, via postMessage with the MessagePort in `ports[0]`.\n    // Accepted again only to REPLACE a port (the policy Worker was replaced); a\n    // bootstrap never carries a tree and never reopens the parent route.\n    bootstrap: "frame/bootstrap",\n    // frame -> parent, once a port is installed.\n    bound: "frame/bound",\n    // policy Worker -> frame, over the port.\n    render: "frame/render",\n    // frame -> policy Worker, over the port.\n    rendered: "frame/rendered",\n    refused: "frame/refused"\n  });\n  var MAX_REASON = 300;\n  function isId(value) {\n    return typeof value === "string" && value.length > 0 && value.length <= 128;\n  }\n  function isCount(value) {\n    return Number.isInteger(value) && value >= 0;\n  }\n  function isFrameIdentity(message, expect = {}) {\n    if (!message || typeof message !== "object") return false;\n    if (message.protocol !== FRAME_PROTOCOL_VERSION) return false;\n    if (!isId(message.instanceId) || !isId(message.sessionId)) return false;\n    if (expect.instanceId !== void 0 && message.instanceId !== expect.instanceId) return false;\n    if (expect.sessionId !== void 0 && message.sessionId !== expect.sessionId) return false;\n    return true;\n  }\n  function isFrameRender(message, expect = {}) {\n    if (!isFrameIdentity(message, expect)) return false;\n    if (message.kind !== FRAME_MESSAGE.render) return false;\n    if (!isCount(message.generation) || !isCount(message.requestId) || !isCount(message.seq)) return false;\n    if (message.tree === null || typeof message.tree !== "object") return false;\n    return true;\n  }\n  function frameEnvelope(ids, kind, body = {}) {\n    return { protocol: FRAME_PROTOCOL_VERSION, kind, instanceId: ids.instanceId, sessionId: ids.sessionId, ...body };\n  }\n  function boundedReason(value) {\n    return typeof value === "string" ? value.slice(0, MAX_REASON) : void 0;\n  }\n\n  // src/frame-channel.js\n  function detach(port) {\n    if (typeof port.start === "function") port.start();\n  }\n  function createFrameReceiver(port, { instanceId, sessionId, onRender }) {\n    const ids = { instanceId, sessionId };\n    let lastSeq = 0;\n    let closed = false;\n    const stats = { rendered: 0, refused: 0, ignored: 0 };\n    port.onmessage = (event) => {\n      const message = event.data;\n      if (!isFrameRender(message, ids) || message.seq <= lastSeq) {\n        stats.ignored += 1;\n        return;\n      }\n      lastSeq = message.seq;\n      let result;\n      try {\n        result = onRender(message.tree);\n      } catch (error) {\n        result = { ok: false, reason: boundedReason(error && error.message) ?? "render failed" };\n      }\n      const ack = { generation: message.generation, requestId: message.requestId, seq: message.seq };\n      if (result && result.ok === true) {\n        stats.rendered += 1;\n        port.postMessage(frameEnvelope(ids, FRAME_MESSAGE.rendered, ack));\n      } else {\n        stats.refused += 1;\n        port.postMessage(frameEnvelope(ids, FRAME_MESSAGE.refused, { ...ack, reason: boundedReason(result && result.reason) ?? "refused" }));\n      }\n    };\n    detach(port);\n    return {\n      dispose() {\n        if (closed) return;\n        closed = true;\n        port.onmessage = null;\n        try {\n          port.close();\n        } catch {\n        }\n      },\n      get lastSeq() {\n        return lastSeq;\n      },\n      get stats() {\n        return { ...stats };\n      }\n    };\n  }\n\n  // src/frame.js\n  var CLASS_ALLOWLIST = typeof define_CLASS_ALLOWLIST_default !== "undefined" ? define_CLASS_ALLOWLIST_default : [];\n  var MAX_EVENT_STRING = 2e3;\n  var FORWARDED_KEYS = /* @__PURE__ */ new Set([\n    "Enter",\n    " ",\n    "Escape",\n    "ArrowUp",\n    "ArrowDown",\n    "ArrowLeft",\n    "ArrowRight",\n    "Home",\n    "End",\n    "Tab"\n  ]);\n  function hardenSinks(win) {\n    const thrower = (what) => () => {\n      throw new Error(`frame: ${what} is disabled`);\n    };\n    const define = (obj, prop, what) => {\n      try {\n        Object.defineProperty(obj, prop, { configurable: false, set: thrower(what), get: () => "" });\n      } catch {\n      }\n    };\n    define(win.Element.prototype, "innerHTML", "innerHTML");\n    define(win.Element.prototype, "outerHTML", "outerHTML");\n    define(win.ShadowRoot.prototype, "innerHTML", "shadowRoot.innerHTML");\n    const kill = (obj, prop, what) => {\n      try {\n        Object.defineProperty(obj, prop, { configurable: false, writable: false, value: thrower(what) });\n      } catch {\n      }\n    };\n    kill(win.Element.prototype, "insertAdjacentHTML", "insertAdjacentHTML");\n    kill(win.Element.prototype, "setHTMLUnsafe", "setHTMLUnsafe");\n    kill(win.Document.prototype, "write", "document.write");\n    kill(win.Document.prototype, "writeln", "document.writeln");\n    kill(win.Range.prototype, "createContextualFragment", "createContextualFragment");\n    kill(win, "DOMParser", "DOMParser");\n  }\n  function bounded(s) {\n    return typeof s === "string" ? s.slice(0, MAX_EVENT_STRING) : void 0;\n  }\n  function startFrame(win) {\n    const doc = win.document;\n    hardenSinks(win);\n    setClassAllowlist(CLASS_ALLOWLIST);\n    const root2 = doc.getElementById("root");\n    const renderer = createRenderer(doc, root2);\n    const parent = win.parent;\n    const post = (msg) => parent.postMessage(msg, "*");\n    function commit(tree) {\n      if (!isTreeShaped(tree) || !isValidated(tree)) return { ok: false, reason: "tree is not a validated fixed point" };\n      try {\n        renderer.render(tree);\n        return { ok: true };\n      } catch (err) {\n        renderer.clear();\n        return { ok: false, reason: String(err && err.message) };\n      }\n    }\n    let receiver = null;\n    let bound = null;\n    function bootstrap(msg, ports) {\n      const port = ports && ports[0];\n      if (!port || msg.protocol !== FRAME_PROTOCOL_VERSION) return;\n      if (typeof msg.instanceId !== "string" || typeof msg.sessionId !== "string") return;\n      if (receiver) receiver.dispose();\n      bound = { instanceId: msg.instanceId, sessionId: msg.sessionId };\n      receiver = createFrameReceiver(port, { ...bound, onRender: commit });\n      post({ type: "bound", instanceId: bound.instanceId, sessionId: bound.sessionId });\n    }\n    win.addEventListener("message", (e) => {\n      if (e.source !== parent) return;\n      const msg = e.data;\n      if (!msg || typeof msg !== "object") return;\n      if (msg.type === "bootstrap") {\n        bootstrap(msg, e.ports);\n      } else if (msg.type === "render") {\n        const seq = typeof msg.seq === "number" ? msg.seq : -1;\n        if (bound) {\n          post({ type: "refused", seq, reason: "frame is bound to the policy port; the parent cannot supply a tree" });\n          return;\n        }\n        const result = commit(msg.tree);\n        post(result.ok ? { type: "rendered", seq } : { type: "refused", seq, reason: result.reason });\n      } else if (msg.type === "clear") {\n        renderer.clear();\n      }\n    });\n    function actionTarget(target) {\n      if (!(target instanceof win.Element)) return null;\n      const el2 = target.closest("[data-action]");\n      if (!el2 || !root2.contains(el2)) return null;\n      return el2;\n    }\n    function baseEvent(type, el2) {\n      return {\n        type,\n        action: el2.getAttribute("data-action"),\n        dataValue: bounded(el2.getAttribute("data-value") ?? void 0),\n        dataKey: bounded(el2.getAttribute("data-key") ?? void 0)\n      };\n    }\n    function controlFields(el2) {\n      const out = {};\n      if (el2 instanceof win.HTMLInputElement) {\n        if (el2.type === "checkbox" || el2.type === "radio") out.checked = el2.checked;\n        else out.value = bounded(el2.value);\n      } else if (el2 instanceof win.HTMLSelectElement || el2 instanceof win.HTMLTextAreaElement) {\n        out.value = bounded(el2.value);\n      }\n      return out;\n    }\n    root2.addEventListener("click", (e) => {\n      const el2 = actionTarget(e.target);\n      if (!el2) return;\n      e.preventDefault();\n      post({ type: "event", event: { ...baseEvent("click", el2), ...controlFields(el2) } });\n    });\n    for (const type of ["input", "change"]) {\n      root2.addEventListener(type, (e) => {\n        const el2 = actionTarget(e.target);\n        if (!el2) return;\n        post({ type: "event", event: { ...baseEvent(type, el2), ...controlFields(e.target) } });\n      });\n    }\n    root2.addEventListener("keydown", (e) => {\n      const el2 = actionTarget(e.target);\n      if (!el2 || !FORWARDED_KEYS.has(e.key)) return;\n      if (e.key !== "Tab") e.preventDefault();\n      post({ type: "event", event: { ...baseEvent("keydown", el2), key: e.key, ...controlFields(e.target) } });\n    });\n    let pendingPointer = null;\n    const flushPointer = () => {\n      if (pendingPointer) post({ type: "event", event: pendingPointer });\n      pendingPointer = null;\n    };\n    for (const type of ["pointermove", "pointerenter", "pointerleave"]) {\n      root2.addEventListener(type, (e) => {\n        const el2 = actionTarget(e.target);\n        if (!el2 || !el2.hasAttribute("data-hover")) return;\n        const rect = el2.getBoundingClientRect();\n        const ev = {\n          ...baseEvent(type, el2),\n          x: Math.round(e.clientX - rect.left),\n          y: Math.round(e.clientY - rect.top)\n        };\n        if (type === "pointermove") {\n          const first = pendingPointer === null;\n          pendingPointer = ev;\n          if (first) win.requestAnimationFrame(flushPointer);\n        } else {\n          post({ type: "event", event: ev });\n        }\n      }, true);\n    }\n    post({\n      type: "ready",\n      styleSheets: doc.styleSheets ? doc.styleSheets.length : -1,\n      trustedTypes: typeof win.trustedTypes !== "undefined"\n    });\n  }\n  if (typeof window !== "undefined" && window.parent !== window) {\n    startFrame(window);\n  }\n})();\n', "css": '/* Bundled stylesheet for generated content. Every class selector here becomes\n   a permitted class name. Rules deliberately contain content: nothing here may\n   position fixed, escape the root, raise z-index or reference a URL. */\n\n:root {\n  color-scheme: light dark;\n  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;\n  color: CanvasText;\n  background: Canvas;\n}\nhtml, body { margin: 0; }\nbody { padding: 12px; overflow: auto; }\n#root { contain: layout paint; overflow: hidden; }\n* { box-sizing: border-box; max-width: 100%; }\nimg, iframe, object, embed, video, audio, canvas, form { display: none !important; }\nsvg { max-width: 100%; height: auto; }\n\n.stack { display: flex; flex-direction: column; gap: 8px; }\n.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }\n.grow { flex: 1 1 auto; }\n.card { border: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); border-radius: 8px; padding: 12px; }\n.title { font-weight: 600; font-size: 16px; margin: 0; }\n.muted { opacity: 0.7; }\n.small { font-size: 12px; }\n.mono { font-family: ui-monospace, monospace; }\n.right { text-align: right; }\n.center { text-align: center; }\n.hidden { display: none; }\n\n.btn {\n  font: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer;\n  border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit;\n}\n.btn:hover { background: color-mix(in srgb, CanvasText 8%, Canvas); }\n.btn-primary { background: #2a6ef0; color: white; border-color: #2a6ef0; }\n.btn-active { outline: 2px solid #2a6ef0; outline-offset: 1px; }\n.input { font: inherit; padding: 4px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit; }\n\n.tabs { display: flex; gap: 4px; border-bottom: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); }\n.tab { padding: 6px 10px; border: 0; background: none; font: inherit; cursor: pointer; color: inherit; border-bottom: 2px solid transparent; }\n.tab-active { border-bottom-color: #2a6ef0; font-weight: 600; }\n\n.table { border-collapse: collapse; width: 100%; }\n.table th, .table td { padding: 4px 8px; border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, Canvas); text-align: left; }\n.table th { cursor: pointer; user-select: none; }\n\n.chart { display: block; width: 100%; height: auto; }\n.bar { fill: #2a6ef0; }\n.bar:hover { fill: #1b4fb8; }\n.bar-alt { fill: #8bb4ff; }\n.axis { stroke: color-mix(in srgb, CanvasText 40%, Canvas); stroke-width: 1; }\n.label { fill: CanvasText; font-size: 11px; }\n.tooltip { border-radius: 6px; padding: 4px 8px; background: color-mix(in srgb, CanvasText 90%, Canvas); color: Canvas; display: inline-block; }\n', "classes": ["axis", "bar", "bar-alt", "btn", "btn-active", "btn-primary", "card", "center", "chart", "grow", "hidden", "input", "label", "mono", "muted", "right", "row", "small", "stack", "tab", "tab-active", "table", "tabs", "title", "tooltip"], "scriptHash": "XlwTjqgkMscAV8ahiJZ1ZGFBU1Xg7Uw7S139Dk/RgVI=", "cssHash": "Krlr2KhFjDPgFQ2Ffw87pI93sYzNjgUfAteJBYhgzCM=" };
+var frame_manifest_default = { "script": '(() => {\n  // src/policy-data.js\n  var POLICY_DATA = {\n    "version": 1,\n    "limits": {\n      "maxNodes": 5e3,\n      "maxDepth": 32,\n      "maxTextLength": 2e4,\n      "maxTotalText": 2e5,\n      "maxAttrs": 24,\n      "maxAttrValueLength": 2e3,\n      "maxPathNumbers": 4e3,\n      "maxPointsNumbers": 2e3,\n      "maxNumberMagnitude": 1e6,\n      "maxTraversalDepth": 256\n    },\n    "sharedGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ]\n    },\n    "htmlGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ],\n      "title": [\n        "text"\n      ],\n      "lang": [\n        "lang"\n      ],\n      "dir": [\n        "oneOf",\n        [\n          "ltr",\n          "rtl",\n          "auto"\n        ]\n      ],\n      "hidden": [\n        "fixed",\n        ""\n      ]\n    },\n    "svgGlobal": {\n      "class": [\n        "cls"\n      ],\n      "id": [\n        "id"\n      ],\n      "role": [\n        "oneOf",\n        [\n          "img",\n          "figure",\n          "group",\n          "list",\n          "listitem",\n          "table",\n          "row",\n          "cell",\n          "columnheader",\n          "rowheader",\n          "tablist",\n          "tab",\n          "tabpanel",\n          "button",\n          "presentation",\n          "none",\n          "status",\n          "region",\n          "heading",\n          "note",\n          "switch",\n          "radiogroup",\n          "toolbar",\n          "separator",\n          "graphics-document",\n          "graphics-object",\n          "graphics-symbol"\n        ]\n      ],\n      "tabindex": [\n        "tagged",\n        "R-CTRL-FOCUS",\n        [\n          "oneOf",\n          [\n            "0",\n            "-1"\n          ]\n        ]\n      ],\n      "data-action": [\n        "ident"\n      ],\n      "data-value": [\n        "text"\n      ],\n      "data-key": [\n        "text"\n      ],\n      "data-hover": [\n        "fixed",\n        ""\n      ],\n      "aria-label": [\n        "text"\n      ],\n      "aria-labelledby": [\n        "idRefs"\n      ],\n      "aria-describedby": [\n        "idRefs"\n      ],\n      "aria-controls": [\n        "idRefs"\n      ],\n      "aria-hidden": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-expanded": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-selected": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-pressed": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-checked": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "mixed"\n        ]\n      ],\n      "aria-disabled": [\n        "oneOf",\n        [\n          "true",\n          "false"\n        ]\n      ],\n      "aria-current": [\n        "oneOf",\n        [\n          "true",\n          "false",\n          "page",\n          "step",\n          "location",\n          "date",\n          "time"\n        ]\n      ],\n      "aria-live": [\n        "oneOf",\n        [\n          "off",\n          "polite"\n        ]\n      ],\n      "aria-sort": [\n        "oneOf",\n        [\n          "ascending",\n          "descending",\n          "none",\n          "other"\n        ]\n      ],\n      "aria-valuenow": [\n        "num"\n      ],\n      "aria-valuemin": [\n        "num"\n      ],\n      "aria-valuemax": [\n        "num"\n      ],\n      "aria-valuetext": [\n        "text"\n      ],\n      "aria-level": [\n        "int",\n        1,\n        6\n      ],\n      "aria-orientation": [\n        "oneOf",\n        [\n          "horizontal",\n          "vertical"\n        ]\n      ],\n      "aria-roledescription": [\n        "text"\n      ],\n      "transform": [\n        "transform"\n      ],\n      "fill": [\n        "color"\n      ],\n      "stroke": [\n        "color"\n      ],\n      "fill-opacity": [\n        "unit"\n      ],\n      "stroke-opacity": [\n        "unit"\n      ],\n      "opacity": [\n        "unit"\n      ],\n      "stroke-width": [\n        "nonNeg"\n      ],\n      "stroke-linecap": [\n        "oneOf",\n        [\n          "butt",\n          "round",\n          "square"\n        ]\n      ],\n      "stroke-linejoin": [\n        "oneOf",\n        [\n          "miter",\n          "round",\n          "bevel"\n        ]\n      ],\n      "stroke-dasharray": [\n        "numList",\n        16\n      ],\n      "fill-rule": [\n        "oneOf",\n        [\n          "nonzero",\n          "evenodd"\n        ]\n      ],\n      "pointer-events": [\n        "oneOf",\n        [\n          "none",\n          "all",\n          "visiblePainted"\n        ]\n      ],\n      "font-size": [\n        "nonNeg"\n      ],\n      "font-family": [\n        "oneOf",\n        [\n          "sans-serif",\n          "serif",\n          "monospace"\n        ]\n      ],\n      "font-weight": [\n        "oneOf",\n        [\n          "normal",\n          "bold",\n          "400",\n          "600",\n          "700"\n        ]\n      ],\n      "text-anchor": [\n        "oneOf",\n        [\n          "start",\n          "middle",\n          "end"\n        ]\n      ],\n      "dominant-baseline": [\n        "oneOf",\n        [\n          "auto",\n          "middle",\n          "central",\n          "hanging",\n          "alphabetic"\n        ]\n      ]\n    },\n    "htmlElements": {\n      "div": null,\n      "span": null,\n      "section": null,\n      "article": null,\n      "header": null,\n      "footer": null,\n      "main": null,\n      "nav": null,\n      "aside": null,\n      "p": null,\n      "br": null,\n      "hr": null,\n      "pre": null,\n      "code": null,\n      "blockquote": null,\n      "figure": null,\n      "figcaption": null,\n      "small": null,\n      "strong": null,\n      "em": null,\n      "b": null,\n      "i": null,\n      "u": null,\n      "s": null,\n      "sub": null,\n      "sup": null,\n      "mark": null,\n      "kbd": null,\n      "abbr": null,\n      "h1": null,\n      "h2": null,\n      "h3": null,\n      "h4": null,\n      "h5": null,\n      "h6": null,\n      "ul": null,\n      "dl": null,\n      "dt": null,\n      "dd": null,\n      "table": null,\n      "thead": null,\n      "tbody": null,\n      "tfoot": null,\n      "tr": null,\n      "caption": null,\n      "colgroup": null,\n      "details": null,\n      "summary": null,\n      "fieldset": null,\n      "legend": null,\n      "time": {\n        "datetime": [\n          "text"\n        ]\n      },\n      "ol": {\n        "start": [\n          "int",\n          -9999,\n          9999\n        ],\n        "reversed": [\n          "fixed",\n          ""\n        ],\n        "type": [\n          "oneOf",\n          [\n            "1",\n            "a",\n            "A",\n            "i",\n            "I"\n          ]\n        ]\n      },\n      "li": {\n        "value": [\n          "int",\n          -9999,\n          9999\n        ]\n      },\n      "th": {\n        "colspan": [\n          "int",\n          1,\n          100\n        ],\n        "rowspan": [\n          "int",\n          1,\n          100\n        ],\n        "scope": [\n          "oneOf",\n          [\n            "row",\n            "col",\n            "rowgroup",\n            "colgroup"\n          ]\n        ],\n        "headers": [\n          "idRefs"\n        ]\n      },\n      "td": {\n        "colspan": [\n          "int",\n          1,\n          100\n        ],\n        "rowspan": [\n          "int",\n          1,\n          100\n        ],\n        "headers": [\n          "idRefs"\n        ]\n      },\n      "col": {\n        "span": [\n          "int",\n          1,\n          100\n        ]\n      },\n      "label": {\n        "for": [\n          "id"\n        ]\n      },\n      "output": {\n        "for": [\n          "idRefs"\n        ]\n      },\n      "button": {\n        "type": [\n          "tagged",\n          "R-CTRL-BUTTON-TYPE",\n          [\n            "fixed",\n            "button"\n          ]\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "value": [\n          "text"\n        ]\n      },\n      "input": {\n        "type": [\n          "tagged",\n          "R-CTRL-INPUT-TYPE",\n          [\n            "oneOf",\n            [\n              "text",\n              "number",\n              "range",\n              "checkbox",\n              "radio",\n              "search"\n            ]\n          ]\n        ],\n        "value": [\n          "text"\n        ],\n        "checked": [\n          "fixed",\n          ""\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "readonly": [\n          "fixed",\n          ""\n        ],\n        "placeholder": [\n          "text"\n        ],\n        "min": [\n          "num"\n        ],\n        "max": [\n          "num"\n        ],\n        "step": [\n          "nonNeg"\n        ],\n        "minlength": [\n          "int",\n          0,\n          1e4\n        ],\n        "maxlength": [\n          "int",\n          0,\n          1e4\n        ],\n        "size": [\n          "int",\n          1,\n          200\n        ],\n        "inputmode": [\n          "oneOf",\n          [\n            "text",\n            "decimal",\n            "numeric",\n            "search"\n          ]\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "select": {\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "multiple": [\n          "fixed",\n          ""\n        ],\n        "size": [\n          "int",\n          1,\n          50\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "option": {\n        "value": [\n          "text"\n        ],\n        "selected": [\n          "fixed",\n          ""\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "label": [\n          "text"\n        ]\n      },\n      "optgroup": {\n        "label": [\n          "text"\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ]\n      },\n      "textarea": {\n        "rows": [\n          "int",\n          1,\n          100\n        ],\n        "cols": [\n          "int",\n          1,\n          200\n        ],\n        "placeholder": [\n          "text"\n        ],\n        "disabled": [\n          "fixed",\n          ""\n        ],\n        "readonly": [\n          "fixed",\n          ""\n        ],\n        "maxlength": [\n          "int",\n          0,\n          1e5\n        ],\n        "autocomplete": [\n          "tagged",\n          "R-CTRL-AUTOCOMPLETE",\n          [\n            "fixed",\n            "off"\n          ]\n        ]\n      },\n      "progress": {\n        "value": [\n          "nonNeg"\n        ],\n        "max": [\n          "nonNeg"\n        ]\n      },\n      "meter": {\n        "value": [\n          "num"\n        ],\n        "min": [\n          "num"\n        ],\n        "max": [\n          "num"\n        ],\n        "low": [\n          "num"\n        ],\n        "high": [\n          "num"\n        ],\n        "optimum": [\n          "num"\n        ]\n      }\n    },\n    "svgElements": {\n      "svg": {\n        "viewBox": [\n          "viewBox"\n        ],\n        "width": [\n          "lenPct"\n        ],\n        "height": [\n          "lenPct"\n        ],\n        "preserveAspectRatio": [\n          "oneOf",\n          [\n            "none",\n            "xMidYMid meet",\n            "xMinYMin meet",\n            "xMidYMid slice"\n          ]\n        ]\n      },\n      "g": null,\n      "title": null,\n      "desc": null,\n      "rect": {\n        "x": [\n          "num"\n        ],\n        "y": [\n          "num"\n        ],\n        "width": [\n          "nonNeg"\n        ],\n        "height": [\n          "nonNeg"\n        ],\n        "rx": [\n          "nonNeg"\n        ],\n        "ry": [\n          "nonNeg"\n        ]\n      },\n      "circle": {\n        "cx": [\n          "num"\n        ],\n        "cy": [\n          "num"\n        ],\n        "r": [\n          "nonNeg"\n        ]\n      },\n      "ellipse": {\n        "cx": [\n          "num"\n        ],\n        "cy": [\n          "num"\n        ],\n        "rx": [\n          "nonNeg"\n        ],\n        "ry": [\n          "nonNeg"\n        ]\n      },\n      "line": {\n        "x1": [\n          "num"\n        ],\n        "y1": [\n          "num"\n        ],\n        "x2": [\n          "num"\n        ],\n        "y2": [\n          "num"\n        ]\n      },\n      "polyline": {\n        "points": [\n          "numList",\n          2e3\n        ]\n      },\n      "polygon": {\n        "points": [\n          "numList",\n          2e3\n        ]\n      },\n      "path": {\n        "d": [\n          "path"\n        ]\n      },\n      "text": {\n        "x": [\n          "numList",\n          1\n        ],\n        "y": [\n          "numList",\n          1\n        ],\n        "dx": [\n          "numList",\n          1\n        ],\n        "dy": [\n          "numList",\n          1\n        ],\n        "rotate": [\n          "numList",\n          1\n        ],\n        "textLength": [\n          "nonNeg"\n        ]\n      },\n      "tspan": {\n        "x": [\n          "numList",\n          1\n        ],\n        "y": [\n          "numList",\n          1\n        ],\n        "dx": [\n          "numList",\n          1\n        ],\n        "dy": [\n          "numList",\n          1\n        ]\n      }\n    },\n    "htmlForced": {\n      "button": [\n        [\n          "type",\n          "button"\n        ]\n      ],\n      "input": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ],\n      "select": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ],\n      "textarea": [\n        [\n          "autocomplete",\n          "off"\n        ]\n      ]\n    },\n    "htmlUnwrap": [\n      [\n        "a",\n        "R-NAV-ANCHOR"\n      ],\n      [\n        "form",\n        "R-NAV-FORM"\n      ],\n      [\n        "font",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "center",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "big",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "tt",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "strike",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "address",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "hgroup",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "ins",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "del",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "q",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "cite",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "dfn",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "var",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "samp",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "bdi",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "bdo",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "wbr",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "data",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "html",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "head",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ],\n      [\n        "body",\n        "R-STRUCT-ELEMENT-ALLOWLIST"\n      ]\n    ],\n    "htmlDropRules": [\n      [\n        "script",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "style",\n        "R-STYLE-ELEMENT"\n      ],\n      [\n        "iframe",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "frame",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "frameset",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "object",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "embed",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "applet",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "portal",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "link",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "meta",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "base",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "img",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "picture",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "source",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "track",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "video",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "audio",\n        "R-RES-ELEMENT"\n      ],\n      [\n        "noscript",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "xmp",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "noembed",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "noframes",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "plaintext",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "title",\n        "R-RCDATA-RAWTEXT"\n      ],\n      [\n        "template",\n        "R-RCDATA-TEMPLATE"\n      ]\n    ],\n    "svgDropRules": [\n      [\n        "script",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animate",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "set",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animatetransform",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "animatemotion",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "discard",\n        "R-EXEC-SCRIPT"\n      ],\n      [\n        "style",\n        "R-STYLE-ELEMENT"\n      ],\n      [\n        "image",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "use",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "feimage",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "textpath",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "pattern",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "filter",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "mask",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "marker",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "clippath",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "lineargradient",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "radialgradient",\n        "R-RES-SVG-REF"\n      ],\n      [\n        "a",\n        "R-NAV-ANCHOR"\n      ],\n      [\n        "foreignobject",\n        "R-NS-POSITION"\n      ]\n    ],\n    "attrDropRules": [\n      [\n        "src",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "srcset",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "href",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "xlink:href",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "poster",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "data",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "code",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "background",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "ping",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "formaction",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "action",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "content",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "http-equiv",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "longdesc",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "cite",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "manifest",\n        "R-RES-URL-ATTR"\n      ],\n      [\n        "style",\n        "R-STYLE-INLINE"\n      ],\n      [\n        "name",\n        "R-CLOBBER-NAME"\n      ],\n      [\n        "__proto__",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "constructor",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "prototype",\n        "R-CLOBBER-ATTR-KEYS"\n      ],\n      [\n        "autofocus",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "accesskey",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "contenteditable",\n        "R-CTRL-FOCUS"\n      ],\n      [\n        "draggable",\n        "R-CTRL-FOCUS"\n      ]\n    ],\n    "svgTextOnly": [\n      "title",\n      "desc"\n    ]\n  };\n  var POLICY_LIMITS = Object.freeze(POLICY_DATA.limits);\n\n  // src/tree.js\n  var NS = Object.freeze({\n    html: "http://www.w3.org/1999/xhtml",\n    svg: "http://www.w3.org/2000/svg"\n  });\n  function isTreeShaped(node, depth = 0) {\n    if (depth > POLICY_LIMITS.maxDepth + 1) return false;\n    if (node === null || typeof node !== "object" || Array.isArray(node)) return false;\n    if (depth === 0 && node.kind !== "root") return false;\n    if (depth > 0 && node.kind === "root") return false;\n    if (node.kind === "text") return typeof node.text === "string";\n    if (node.kind === "root" || node.kind === "el") {\n      if (!Array.isArray(node.children)) return false;\n      if (node.kind === "el") {\n        if (node.ns !== "html" && node.ns !== "svg") return false;\n        if (typeof node.tag !== "string") return false;\n        if (!Array.isArray(node.attrs)) return false;\n        for (const a of node.attrs) {\n          if (!Array.isArray(a) || a.length !== 2) return false;\n          if (typeof a[0] !== "string" || typeof a[1] !== "string") return false;\n        }\n      }\n      return node.children.every((c) => isTreeShaped(c, depth + 1));\n    }\n    return false;\n  }\n\n  // src/render.js\n  var HTML_ELEMENTS = POLICY_DATA.htmlElements;\n  var SVG_ELEMENTS = POLICY_DATA.svgElements;\n  var REFUSED_ATTR_RE = /^(on|style$|src|href|xlink|xmlns|srcdoc|formaction|action|ping|srcset|background|poster|data$|code$|codebase|manifest|usemap|is$|slot$|nonce$)/i;\n  function ensureElementAllowed(node) {\n    const table = node.ns === "html" ? HTML_ELEMENTS : node.ns === "svg" ? SVG_ELEMENTS : null;\n    if (!table || !Object.prototype.hasOwnProperty.call(table, node.tag)) {\n      throw new Error(`renderer: refused element ${node.ns}:${node.tag}`);\n    }\n  }\n  function ensureAttrAllowed(name) {\n    if (name.includes(":") || REFUSED_ATTR_RE.test(name)) {\n      throw new Error(`renderer: refused attribute ${name}`);\n    }\n  }\n  function createRenderer(doc, mount) {\n    let current = null;\n    function createNode(node) {\n      if (node.kind === "text") return doc.createTextNode(node.text);\n      ensureElementAllowed(node);\n      const element = doc.createElementNS(NS[node.ns], node.tag);\n      for (const [name, value] of node.attrs) {\n        ensureAttrAllowed(name);\n        element.setAttribute(name, value);\n      }\n      syncControlState(element, node, null);\n      for (const child of node.children) element.appendChild(createNode(child));\n      return element;\n    }\n    function patchAttrs(element, oldNode, newNode) {\n      const oldMap = new Map(oldNode.attrs);\n      for (const [name, value] of newNode.attrs) {\n        ensureAttrAllowed(name);\n        if (oldMap.get(name) !== value) element.setAttribute(name, value);\n        oldMap.delete(name);\n      }\n      for (const name of oldMap.keys()) element.removeAttribute(name);\n      syncControlState(element, newNode, oldNode);\n    }\n    function patchChildren(parent, oldChildren, newChildren) {\n      const domChildren = Array.from(parent.childNodes);\n      const shared = Math.min(oldChildren.length, newChildren.length);\n      for (let i = 0; i < shared; i++) {\n        patchNode(parent, domChildren[i], oldChildren[i], newChildren[i]);\n      }\n      for (let i = shared; i < oldChildren.length; i++) parent.removeChild(domChildren[i]);\n      for (let i = shared; i < newChildren.length; i++) parent.appendChild(createNode(newChildren[i]));\n    }\n    function patchNode(parent, domNode, oldNode, newNode) {\n      if (oldNode.kind !== newNode.kind) {\n        parent.replaceChild(createNode(newNode), domNode);\n        return;\n      }\n      if (newNode.kind === "text") {\n        if (oldNode.text !== newNode.text) domNode.data = newNode.text;\n        return;\n      }\n      if (oldNode.ns !== newNode.ns || oldNode.tag !== newNode.tag) {\n        parent.replaceChild(createNode(newNode), domNode);\n        return;\n      }\n      ensureElementAllowed(newNode);\n      patchAttrs(domNode, oldNode, newNode);\n      patchChildren(domNode, oldNode.children, newNode.children);\n    }\n    function syncControlState(element, newNode, oldNode) {\n      if (newNode.ns !== "html") return;\n      const tag = newNode.tag;\n      if (tag !== "input" && tag !== "textarea" && tag !== "select" && tag !== "option") return;\n      const attr = (node, name) => {\n        if (!node) return void 0;\n        const pair = node.attrs.find((a) => a[0] === name);\n        return pair ? pair[1] : void 0;\n      };\n      if (tag === "input") {\n        const type = attr(newNode, "type");\n        if (type === "checkbox" || type === "radio") {\n          const now = attr(newNode, "checked") !== void 0;\n          const before = oldNode ? attr(oldNode, "checked") !== void 0 : void 0;\n          if (before !== now) element.checked = now;\n        } else {\n          const now = attr(newNode, "value");\n          const before = attr(oldNode, "value");\n          if (now !== void 0 && now !== before && element.value !== now) element.value = now;\n        }\n      } else if (tag === "option") {\n        const now = attr(newNode, "selected") !== void 0;\n        const before = oldNode ? attr(oldNode, "selected") !== void 0 : void 0;\n        if (before !== now) element.selected = now;\n      }\n    }\n    function captureFocus() {\n      const active = doc.activeElement;\n      if (!active || active === doc.body || !mount.contains(active)) return null;\n      const path = [];\n      let n = active;\n      while (n && n !== mount) {\n        path.unshift(Array.prototype.indexOf.call(n.parentNode.childNodes, n));\n        n = n.parentNode;\n      }\n      const sel = {};\n      if (typeof active.selectionStart === "number") {\n        sel.start = active.selectionStart;\n        sel.end = active.selectionEnd;\n        sel.direction = active.selectionDirection;\n      }\n      return { path, sel, tag: active.localName };\n    }\n    function restoreFocus(saved) {\n      if (!saved) return;\n      let n = mount;\n      for (const i of saved.path) {\n        n = n && n.childNodes[i];\n      }\n      if (!n || n.nodeType !== 1 || n.localName !== saved.tag) return;\n      if (doc.activeElement !== n && typeof n.focus === "function") {\n        try {\n          n.focus({ preventScroll: true });\n        } catch {\n        }\n      }\n      if (saved.sel.start !== void 0 && typeof n.setSelectionRange === "function") {\n        try {\n          n.setSelectionRange(saved.sel.start, saved.sel.end, saved.sel.direction);\n        } catch {\n        }\n      }\n    }\n    return {\n      render(tree) {\n        if (!tree || tree.kind !== "root") throw new Error("renderer: expected root");\n        const focus = captureFocus();\n        if (current === null) {\n          while (mount.firstChild) mount.removeChild(mount.firstChild);\n          for (const child of tree.children) mount.appendChild(createNode(child));\n        } else {\n          patchChildren(mount, current.children, tree.children);\n        }\n        current = tree;\n        restoreFocus(focus);\n      },\n      clear() {\n        while (mount.firstChild) mount.removeChild(mount.firstChild);\n        current = null;\n      },\n      get current() {\n        return current;\n      }\n    };\n  }\n\n  // src/frame-protocol.js\n  var FRAME_PROTOCOL_VERSION = 1;\n  var FRAME_MESSAGE = Object.freeze({\n    // parent -> frame, via postMessage with the MessagePort in `ports[0]`.\n    // Accepted again only to REPLACE a port (the policy Worker was replaced); a\n    // bootstrap never carries a tree and never reopens the parent route.\n    bootstrap: "frame/bootstrap",\n    // frame -> parent, once a port is installed.\n    bound: "frame/bound",\n    // policy Worker -> frame, over the port.\n    render: "frame/render",\n    // frame -> policy Worker, over the port.\n    rendered: "frame/rendered",\n    refused: "frame/refused"\n  });\n  var MAX_REASON = 300;\n  function isId(value) {\n    return typeof value === "string" && value.length > 0 && value.length <= 128;\n  }\n  function isCount(value) {\n    return Number.isInteger(value) && value >= 0;\n  }\n  function isFrameIdentity(message, expect = {}) {\n    if (!message || typeof message !== "object") return false;\n    if (message.protocol !== FRAME_PROTOCOL_VERSION) return false;\n    if (!isId(message.instanceId) || !isId(message.sessionId)) return false;\n    if (expect.instanceId !== void 0 && message.instanceId !== expect.instanceId) return false;\n    if (expect.sessionId !== void 0 && message.sessionId !== expect.sessionId) return false;\n    return true;\n  }\n  function isFrameRender(message, expect = {}) {\n    if (!isFrameIdentity(message, expect)) return false;\n    if (message.kind !== FRAME_MESSAGE.render) return false;\n    if (!isCount(message.generation) || !isCount(message.requestId) || !isCount(message.seq)) return false;\n    if (message.tree === null || typeof message.tree !== "object") return false;\n    return true;\n  }\n  function frameEnvelope(ids, kind, body = {}) {\n    return { protocol: FRAME_PROTOCOL_VERSION, kind, instanceId: ids.instanceId, sessionId: ids.sessionId, ...body };\n  }\n  function boundedReason(value) {\n    return typeof value === "string" ? value.slice(0, MAX_REASON) : void 0;\n  }\n\n  // src/frame-channel.js\n  function detach(port) {\n    if (typeof port.start === "function") port.start();\n  }\n  function createFrameReceiver(port, { instanceId, sessionId, onRender }) {\n    const ids = { instanceId, sessionId };\n    let lastSeq = 0;\n    let closed = false;\n    const stats = { rendered: 0, refused: 0, ignored: 0 };\n    port.onmessage = (event) => {\n      const message = event.data;\n      if (!isFrameRender(message, ids) || message.seq <= lastSeq) {\n        stats.ignored += 1;\n        return;\n      }\n      lastSeq = message.seq;\n      let result;\n      try {\n        result = onRender(message.tree);\n      } catch (error) {\n        result = { ok: false, reason: boundedReason(error && error.message) ?? "render failed" };\n      }\n      const ack = { generation: message.generation, requestId: message.requestId, seq: message.seq };\n      if (result && result.ok === true) {\n        stats.rendered += 1;\n        port.postMessage(frameEnvelope(ids, FRAME_MESSAGE.rendered, ack));\n      } else {\n        stats.refused += 1;\n        port.postMessage(frameEnvelope(ids, FRAME_MESSAGE.refused, { ...ack, reason: boundedReason(result && result.reason) ?? "refused" }));\n      }\n    };\n    detach(port);\n    return {\n      dispose() {\n        if (closed) return;\n        closed = true;\n        port.onmessage = null;\n        try {\n          port.close();\n        } catch {\n        }\n      },\n      get lastSeq() {\n        return lastSeq;\n      },\n      get stats() {\n        return { ...stats };\n      }\n    };\n  }\n\n  // src/frame.js\n  var MAX_EVENT_STRING = 2e3;\n  var FORWARDED_KEYS = /* @__PURE__ */ new Set([\n    "Enter",\n    " ",\n    "Escape",\n    "ArrowUp",\n    "ArrowDown",\n    "ArrowLeft",\n    "ArrowRight",\n    "Home",\n    "End",\n    "Tab"\n  ]);\n  function hardenSinks(win) {\n    const thrower = (what) => () => {\n      throw new Error(`frame: ${what} is disabled`);\n    };\n    const define = (obj, prop, what) => {\n      try {\n        Object.defineProperty(obj, prop, { configurable: false, set: thrower(what), get: () => "" });\n      } catch {\n      }\n    };\n    define(win.Element.prototype, "innerHTML", "innerHTML");\n    define(win.Element.prototype, "outerHTML", "outerHTML");\n    define(win.ShadowRoot.prototype, "innerHTML", "shadowRoot.innerHTML");\n    const kill = (obj, prop, what) => {\n      try {\n        Object.defineProperty(obj, prop, { configurable: false, writable: false, value: thrower(what) });\n      } catch {\n      }\n    };\n    kill(win.Element.prototype, "insertAdjacentHTML", "insertAdjacentHTML");\n    kill(win.Element.prototype, "setHTMLUnsafe", "setHTMLUnsafe");\n    kill(win.Document.prototype, "write", "document.write");\n    kill(win.Document.prototype, "writeln", "document.writeln");\n    kill(win.Range.prototype, "createContextualFragment", "createContextualFragment");\n    kill(win, "DOMParser", "DOMParser");\n  }\n  function bounded(s) {\n    return typeof s === "string" ? s.slice(0, MAX_EVENT_STRING) : void 0;\n  }\n  function startFrame(win) {\n    const doc = win.document;\n    hardenSinks(win);\n    const root = doc.getElementById("root");\n    const renderer = createRenderer(doc, root);\n    const parent = win.parent;\n    const post = (msg) => parent.postMessage(msg, "*");\n    function commit(tree) {\n      if (!isTreeShaped(tree)) return { ok: false, reason: "malformed renderer tree" };\n      try {\n        renderer.render(tree);\n        return { ok: true };\n      } catch (err) {\n        renderer.clear();\n        return { ok: false, reason: String(err && err.message) };\n      }\n    }\n    let receiver = null;\n    let bound = null;\n    function bootstrap(msg, ports) {\n      const port = ports && ports[0];\n      if (!port || msg.protocol !== FRAME_PROTOCOL_VERSION) return;\n      if (typeof msg.instanceId !== "string" || typeof msg.sessionId !== "string") return;\n      if (receiver) receiver.dispose();\n      bound = { instanceId: msg.instanceId, sessionId: msg.sessionId };\n      receiver = createFrameReceiver(port, { ...bound, onRender: commit });\n      post({ type: "bound", instanceId: bound.instanceId, sessionId: bound.sessionId });\n    }\n    win.addEventListener("message", (e) => {\n      if (e.source !== parent) return;\n      const msg = e.data;\n      if (!msg || typeof msg !== "object") return;\n      if (msg.type === "bootstrap") {\n        bootstrap(msg, e.ports);\n      } else if (msg.type === "render") {\n        const seq = typeof msg.seq === "number" ? msg.seq : -1;\n        post({ type: "refused", seq, reason: "trees require the private policy port" });\n      }\n    });\n    function actionTarget(target) {\n      if (!(target instanceof win.Element)) return null;\n      const el = target.closest("[data-action]");\n      if (!el || !root.contains(el)) return null;\n      return el;\n    }\n    function baseEvent(type, el) {\n      return {\n        type,\n        action: el.getAttribute("data-action"),\n        dataValue: bounded(el.getAttribute("data-value") ?? void 0),\n        dataKey: bounded(el.getAttribute("data-key") ?? void 0)\n      };\n    }\n    function controlFields(el) {\n      const out = {};\n      if (el instanceof win.HTMLInputElement) {\n        if (el.type === "checkbox" || el.type === "radio") out.checked = el.checked;\n        else out.value = bounded(el.value);\n      } else if (el instanceof win.HTMLSelectElement || el instanceof win.HTMLTextAreaElement) {\n        out.value = bounded(el.value);\n      }\n      return out;\n    }\n    root.addEventListener("click", (e) => {\n      const el = actionTarget(e.target);\n      if (!el) return;\n      e.preventDefault();\n      post({ type: "event", event: { ...baseEvent("click", el), ...controlFields(el) } });\n    });\n    for (const type of ["input", "change"]) {\n      root.addEventListener(type, (e) => {\n        const el = actionTarget(e.target);\n        if (!el) return;\n        post({ type: "event", event: { ...baseEvent(type, el), ...controlFields(e.target) } });\n      });\n    }\n    root.addEventListener("keydown", (e) => {\n      const el = actionTarget(e.target);\n      if (!el || !FORWARDED_KEYS.has(e.key)) return;\n      if (e.key !== "Tab") e.preventDefault();\n      post({ type: "event", event: { ...baseEvent("keydown", el), key: e.key, ...controlFields(e.target) } });\n    });\n    let pendingPointer = null;\n    const flushPointer = () => {\n      if (pendingPointer) post({ type: "event", event: pendingPointer });\n      pendingPointer = null;\n    };\n    for (const type of ["pointermove", "pointerenter", "pointerleave"]) {\n      root.addEventListener(type, (e) => {\n        const el = actionTarget(e.target);\n        if (!el || !el.hasAttribute("data-hover")) return;\n        const rect = el.getBoundingClientRect();\n        const ev = {\n          ...baseEvent(type, el),\n          x: Math.round(e.clientX - rect.left),\n          y: Math.round(e.clientY - rect.top)\n        };\n        if (type === "pointermove") {\n          const first = pendingPointer === null;\n          pendingPointer = ev;\n          if (first) win.requestAnimationFrame(flushPointer);\n        } else {\n          post({ type: "event", event: ev });\n        }\n      }, true);\n    }\n    post({\n      type: "ready",\n      styleSheets: doc.styleSheets ? doc.styleSheets.length : -1,\n      trustedTypes: typeof win.trustedTypes !== "undefined"\n    });\n  }\n  if (typeof window !== "undefined" && window.parent !== window) {\n    startFrame(window);\n  }\n})();\n', "css": '/* Bundled stylesheet for generated content. Every class selector here becomes\n   a permitted class name. Rules deliberately contain content: nothing here may\n   position fixed, escape the root, raise z-index or reference a URL. */\n\n:root {\n  color-scheme: light dark;\n  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;\n  color: CanvasText;\n  background: Canvas;\n}\nhtml, body { margin: 0; }\nbody { padding: 12px; overflow: auto; }\n#root { contain: layout paint; overflow: hidden; }\n* { box-sizing: border-box; max-width: 100%; }\nimg, iframe, object, embed, video, audio, canvas, form { display: none !important; }\nsvg { max-width: 100%; height: auto; }\n\n.stack { display: flex; flex-direction: column; gap: 8px; }\n.row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }\n.grow { flex: 1 1 auto; }\n.card { border: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); border-radius: 8px; padding: 12px; }\n.title { font-weight: 600; font-size: 16px; margin: 0; }\n.muted { opacity: 0.7; }\n.small { font-size: 12px; }\n.mono { font-family: ui-monospace, monospace; }\n.right { text-align: right; }\n.center { text-align: center; }\n.hidden { display: none; }\n\n.btn {\n  font: inherit; padding: 4px 10px; border-radius: 6px; cursor: pointer;\n  border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit;\n}\n.btn:hover { background: color-mix(in srgb, CanvasText 8%, Canvas); }\n.btn-primary { background: #2a6ef0; color: white; border-color: #2a6ef0; }\n.btn-active { outline: 2px solid #2a6ef0; outline-offset: 1px; }\n.input { font: inherit; padding: 4px 8px; border-radius: 6px; border: 1px solid color-mix(in srgb, CanvasText 30%, Canvas); background: Canvas; color: inherit; }\n\n.tabs { display: flex; gap: 4px; border-bottom: 1px solid color-mix(in srgb, CanvasText 18%, Canvas); }\n.tab { padding: 6px 10px; border: 0; background: none; font: inherit; cursor: pointer; color: inherit; border-bottom: 2px solid transparent; }\n.tab-active { border-bottom-color: #2a6ef0; font-weight: 600; }\n\n.table { border-collapse: collapse; width: 100%; }\n.table th, .table td { padding: 4px 8px; border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, Canvas); text-align: left; }\n.table th { cursor: pointer; user-select: none; }\n\n.chart { display: block; width: 100%; height: auto; }\n.bar { fill: #2a6ef0; }\n.bar:hover { fill: #1b4fb8; }\n.bar-alt { fill: #8bb4ff; }\n.axis { stroke: color-mix(in srgb, CanvasText 40%, Canvas); stroke-width: 1; }\n.label { fill: CanvasText; font-size: 11px; }\n.tooltip { border-radius: 6px; padding: 4px 8px; background: color-mix(in srgb, CanvasText 90%, Canvas); color: Canvas; display: inline-block; }\n', "classes": ["axis", "bar", "bar-alt", "btn", "btn-active", "btn-primary", "card", "center", "chart", "grow", "hidden", "input", "label", "mono", "muted", "right", "row", "small", "stack", "tab", "tab-active", "table", "tabs", "title", "tooltip"], "scriptHash": "0RBXc9G5DF1PNBJljYj7nR384Bn7GK1DKE22GTXXgOY=", "cssHash": "Krlr2KhFjDPgFQ2Ffw87pI93sYzNjgUfAteJBYhgzCM=" };
 
 // node_modules/parse5/dist/common/unicode.js
 var UNDEFINED_CODE_POINTS = /* @__PURE__ */ new Set([
@@ -4379,22 +4379,22 @@ var defaultTreeAdapter = {
       node.parentNode = null;
     }
   },
-  insertText(parentNode, text2) {
+  insertText(parentNode, text) {
     if (parentNode.childNodes.length > 0) {
       const prevNode = parentNode.childNodes[parentNode.childNodes.length - 1];
       if (defaultTreeAdapter.isTextNode(prevNode)) {
-        prevNode.value += text2;
+        prevNode.value += text;
         return;
       }
     }
-    defaultTreeAdapter.appendChild(parentNode, defaultTreeAdapter.createTextNode(text2));
+    defaultTreeAdapter.appendChild(parentNode, defaultTreeAdapter.createTextNode(text));
   },
-  insertTextBefore(parentNode, text2, referenceNode) {
+  insertTextBefore(parentNode, text, referenceNode) {
     const prevNode = parentNode.childNodes[parentNode.childNodes.indexOf(referenceNode) - 1];
     if (prevNode && defaultTreeAdapter.isTextNode(prevNode)) {
-      prevNode.value += text2;
+      prevNode.value += text;
     } else {
-      defaultTreeAdapter.insertBefore(parentNode, defaultTreeAdapter.createTextNode(text2), referenceNode);
+      defaultTreeAdapter.insertBefore(parentNode, defaultTreeAdapter.createTextNode(text), referenceNode);
     }
   },
   adoptAttributes(recipient, attrs) {
@@ -9417,37 +9417,12 @@ var POLICY_DATA = {
   ]
 };
 var POLICY_LIMITS = Object.freeze(POLICY_DATA.limits);
-function createPolicyTables(resolve) {
-  const attrs = (table) => table === null ? null : Object.fromEntries(Object.entries(table).map(([n, d]) => [n, resolve(d)]));
-  const elements = (table) => Object.fromEntries(Object.entries(table).map(([tag, t]) => [tag, attrs(t)]));
-  return {
-    HTML_GLOBAL: attrs(POLICY_DATA.htmlGlobal),
-    SVG_GLOBAL: attrs(POLICY_DATA.svgGlobal),
-    HTML_ELEMENTS: elements(POLICY_DATA.htmlElements),
-    SVG_ELEMENTS: elements(POLICY_DATA.svgElements),
-    HTML_FORCED: POLICY_DATA.htmlForced,
-    HTML_UNWRAP: new Map(POLICY_DATA.htmlUnwrap),
-    HTML_DROP_RULES: new Map(POLICY_DATA.htmlDropRules),
-    SVG_DROP_RULES: new Map(POLICY_DATA.svgDropRules),
-    ATTR_DROP_RULES: new Map(POLICY_DATA.attrDropRules),
-    SVG_TEXT_ONLY: new Set(POLICY_DATA.svgTextOnly)
-  };
-}
 
 // src/tree.js
 var NS2 = Object.freeze({
   html: "http://www.w3.org/1999/xhtml",
   svg: "http://www.w3.org/2000/svg"
 });
-function el(ns, tag, attrs = [], children = []) {
-  return { kind: "el", ns, tag, attrs, children };
-}
-function text(s) {
-  return { kind: "text", text: s };
-}
-function root(children = []) {
-  return { kind: "root", children };
-}
 
 // src/runtime/protocol.js
 var PROTOCOL_VERSION = 1;
@@ -9665,8 +9640,9 @@ var PREPROCESS_LIMITS = Object.freeze({
   // consecutive calls on all three engines. Bounding this quantity instead of
   // the node total is what lets an ordinary 50-row table through: under a
   // 1,000-node cap it was refused. Raising the number needs the per-sibling
-  // recursion in the checker to become iterative, which is Phase 6 work on
-  // proved code.
+  // recursion in the checker to become iterative, which remains future work.
+  // Phase 6 also applies this same bound to the proposed output: unwrapping
+  // may increase sibling width even when the raw tree has a small path count.
   //
   // A document that overflows anyway is still a bounded failure and never a
   // render: the trap poisons the checker instance (src/lean-checker.js), the
@@ -9954,676 +9930,6 @@ function addCandidateBytes(stats, limits, bytes) {
   return null;
 }
 
-// src/rules.js
-var RULES = Object.freeze({
-  EXEC_SCRIPT: "R-EXEC-SCRIPT",
-  EXEC_HANDLER: "R-EXEC-HANDLER",
-  RES_ELEMENT: "R-RES-ELEMENT",
-  RES_SVG_REF: "R-RES-SVG-REF",
-  RES_URL_ATTR: "R-RES-URL-ATTR",
-  NAV_ANCHOR: "R-NAV-ANCHOR",
-  NAV_FORM: "R-NAV-FORM",
-  NS_MATHML: "R-NS-MATHML",
-  NS_POSITION: "R-NS-POSITION",
-  RCDATA_RAWTEXT: "R-RCDATA-RAWTEXT",
-  RCDATA_TEMPLATE: "R-RCDATA-TEMPLATE",
-  RCDATA_NO_REPARSE: "R-RCDATA-NO-REPARSE",
-  ATTR_ALLOWLIST: "R-ATTR-ALLOWLIST",
-  ATTR_NAMESPACED: "R-ATTR-NAMESPACED",
-  STYLE_ELEMENT: "R-STYLE-ELEMENT",
-  STYLE_INLINE: "R-STYLE-INLINE",
-  STYLE_CLASS: "R-STYLE-CLASS",
-  CLOBBER_ID_PREFIX: "R-CLOBBER-ID-PREFIX",
-  CLOBBER_NAME: "R-CLOBBER-NAME",
-  CLOBBER_ATTR_KEYS: "R-CLOBBER-ATTR-KEYS",
-  LIMIT_TREE: "R-LIMIT-TREE",
-  LIMIT_ATTRS: "R-LIMIT-ATTRS",
-  CTRL_INPUT_TYPE: "R-CTRL-INPUT-TYPE",
-  CTRL_AUTOCOMPLETE: "R-CTRL-AUTOCOMPLETE",
-  CTRL_BUTTON_TYPE: "R-CTRL-BUTTON-TYPE",
-  CTRL_FOCUS: "R-CTRL-FOCUS",
-  TEXT_CONTROL_BIDI: "R-TEXT-CONTROL-BIDI",
-  VAL_NUMBER: "R-VAL-NUMBER",
-  VAL_COLOR: "R-VAL-COLOR",
-  VAL_PATH: "R-VAL-PATH",
-  VAL_TRANSFORM: "R-VAL-TRANSFORM",
-  VAL_KEYWORD: "R-VAL-KEYWORD",
-  STRUCT_NON_ELEMENT: "R-STRUCT-NON-ELEMENT",
-  STRUCT_ELEMENT_ALLOWLIST: "R-STRUCT-ELEMENT-ALLOWLIST",
-  RT_ISOLATION: "R-RT-ISOLATION",
-  RT_LIMITS: "R-RT-LIMITS",
-  RT_FROZEN_DATA: "R-RT-FROZEN-DATA",
-  GATE_INTERFACE: "R-GATE-INTERFACE",
-  FRAME_FIXED_POINT: "R-FRAME-FIXED-POINT",
-  FRAME_MESSAGE_SCHEMA: "R-FRAME-MESSAGE-SCHEMA",
-  FRAME_CSP_SINKS: "R-FRAME-CSP-SINKS",
-  RENDER_CONSTRUCTORS_ONLY: "R-RENDER-CONSTRUCTORS-ONLY",
-  CHECK_ACCEPTANCE: "R-CHECK-ACCEPTANCE",
-  CAP_INVENTORY: "R-CAP-INVENTORY",
-  CAP_CEILINGS: "R-CAP-CEILINGS",
-  CAP_CONTROLS: "R-CAP-CONTROLS"
-});
-var RULE_IDS = Object.freeze(Object.values(RULES));
-var RULE_CLASSES = Object.freeze({
-  "R-EXEC-SCRIPT": "execution",
-  "R-EXEC-HANDLER": "execution",
-  "R-RES-ELEMENT": "resource-load",
-  "R-RES-SVG-REF": "resource-load",
-  "R-RES-URL-ATTR": "resource-load",
-  "R-NAV-ANCHOR": "navigation",
-  "R-NAV-FORM": "navigation",
-  "R-NS-MATHML": "namespace",
-  "R-NS-POSITION": "namespace",
-  "R-RCDATA-RAWTEXT": "rcdata",
-  "R-RCDATA-TEMPLATE": "rcdata",
-  "R-RCDATA-NO-REPARSE": "rcdata",
-  "R-ATTR-ALLOWLIST": "attribute",
-  "R-ATTR-NAMESPACED": "attribute",
-  "R-STYLE-ELEMENT": "style",
-  "R-STYLE-INLINE": "style",
-  "R-STYLE-CLASS": "style",
-  "R-CLOBBER-ID-PREFIX": "clobbering",
-  "R-CLOBBER-NAME": "clobbering",
-  "R-CLOBBER-ATTR-KEYS": "clobbering",
-  "R-LIMIT-TREE": "limits",
-  "R-LIMIT-ATTRS": "limits",
-  "R-CTRL-INPUT-TYPE": "controls",
-  "R-CTRL-AUTOCOMPLETE": "controls",
-  "R-CTRL-BUTTON-TYPE": "controls",
-  "R-CTRL-FOCUS": "controls",
-  "R-TEXT-CONTROL-BIDI": "text",
-  "R-VAL-NUMBER": "values",
-  "R-VAL-COLOR": "values",
-  "R-VAL-PATH": "values",
-  "R-VAL-TRANSFORM": "values",
-  "R-VAL-KEYWORD": "values",
-  "R-STRUCT-NON-ELEMENT": "structure",
-  "R-STRUCT-ELEMENT-ALLOWLIST": "structure",
-  "R-RT-ISOLATION": "runtime",
-  "R-RT-LIMITS": "runtime",
-  "R-RT-FROZEN-DATA": "runtime",
-  "R-GATE-INTERFACE": "gate",
-  "R-FRAME-FIXED-POINT": "frame",
-  "R-FRAME-MESSAGE-SCHEMA": "frame",
-  "R-FRAME-CSP-SINKS": "frame",
-  "R-RENDER-CONSTRUCTORS-ONLY": "renderer",
-  "R-CHECK-ACCEPTANCE": "structure",
-  "R-CAP-INVENTORY": "capability",
-  "R-CAP-CEILINGS": "capability",
-  "R-CAP-CONTROLS": "capability"
-});
-
-// src/policy.js
-function withRule(rule, fn) {
-  const wrapped = (v) => fn(v);
-  wrapped.rule = rule;
-  return wrapped;
-}
-function asciiLower(s) {
-  return s.replace(/[A-Z]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 32));
-}
-var NUM_RE = /^(-?)(\d*)(?:\.(\d+))?$/;
-function boundedNumber(v) {
-  const m = NUM_RE.exec(v.trim());
-  if (!m) return null;
-  let [, sign, int, frac = ""] = m;
-  if (int === "" && frac === "") return null;
-  if (int.length > 7) return null;
-  int = int.replace(/^0+/, "");
-  if (int === "") int = "0";
-  frac = frac.replace(/0+$/, "");
-  const n = Number(int);
-  if (n > POLICY_LIMITS.maxNumberMagnitude || n === POLICY_LIMITS.maxNumberMagnitude && frac !== "") return null;
-  if (int === "0" && frac === "") return "0";
-  return sign + int + (frac ? "." + frac : "");
-}
-boundedNumber.rule = RULES.VAL_NUMBER;
-function lengthOrPercent(v) {
-  v = v.trim();
-  if (v.endsWith("%")) {
-    const n = boundedNumber(v.slice(0, -1));
-    return n === null ? null : n + "%";
-  }
-  return boundedNumber(v);
-}
-lengthOrPercent.rule = RULES.VAL_NUMBER;
-function boundedInt(min, max) {
-  return withRule(RULES.VAL_NUMBER, (v) => {
-    v = v.trim();
-    if (!/^-?\d+$/.test(v) || v.replace("-", "").length > 15) return null;
-    const n = Number(v);
-    if (n < min || n > max) return null;
-    return String(n);
-  });
-}
-function oneOf(...values) {
-  const set = new Set(values);
-  return withRule(RULES.VAL_KEYWORD, (v) => set.has(v.trim()) ? v.trim() : null);
-}
-function fixed(value) {
-  return withRule(RULES.VAL_KEYWORD, () => value);
-}
-function plainText(v) {
-  if (v.length > POLICY_LIMITS.maxAttrValueLength) return null;
-  return cleanText(v);
-}
-plainText.rule = RULES.TEXT_CONTROL_BIDI;
-var CONTROL_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g;
-var BIDI_RE = /[\u202A-\u202E\u2066-\u2069]/g;
-function cleanText(s) {
-  return s.replace(CONTROL_RE, "").replace(BIDI_RE, "");
-}
-var IDENT_RE = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
-function ident(v) {
-  v = v.trim();
-  return IDENT_RE.test(v) ? v : null;
-}
-ident.rule = RULES.VAL_KEYWORD;
-var ID_PREFIX = "g-";
-function idValue(v) {
-  v = v.trim();
-  if (v.startsWith(ID_PREFIX) && IDENT_RE.test(v.slice(ID_PREFIX.length))) return v;
-  return IDENT_RE.test(v) ? ID_PREFIX + v : null;
-}
-idValue.rule = RULES.CLOBBER_ID_PREFIX;
-function idRefList(v) {
-  const parts = v.trim().split(/\s+/).filter(Boolean);
-  if (parts.length === 0 || parts.length > 8) return null;
-  const out = [];
-  for (const p of parts) {
-    const id = idValue(p);
-    if (id === null) return null;
-    out.push(id);
-  }
-  return out.join(" ");
-}
-idRefList.rule = RULES.CLOBBER_ID_PREFIX;
-var classAllowlist = /* @__PURE__ */ new Set();
-function setClassAllowlist(names) {
-  classAllowlist = new Set(names);
-}
-function classValue(v) {
-  const parts = v.trim().split(/\s+/).filter(Boolean);
-  const kept = parts.filter((p) => classAllowlist.has(p));
-  if (kept.length === 0) return null;
-  return kept.join(" ");
-}
-classValue.rule = RULES.STYLE_CLASS;
-var NAMED_COLORS = /* @__PURE__ */ new Set([
-  "black",
-  "silver",
-  "gray",
-  "grey",
-  "white",
-  "maroon",
-  "red",
-  "purple",
-  "fuchsia",
-  "green",
-  "lime",
-  "olive",
-  "yellow",
-  "navy",
-  "blue",
-  "teal",
-  "aqua",
-  "orange",
-  "none",
-  "currentcolor",
-  "transparent"
-]);
-var HEX_RE = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
-var RGB_RE = /^rgba?\(\s*(\d{1,3}%?)\s*,\s*(\d{1,3}%?)\s*,\s*(\d{1,3}%?)\s*(?:,\s*(0|1|0?\.\d+|\d{1,3}%)\s*)?\)$/;
-function color(v) {
-  v = v.trim();
-  const lower = asciiLower(v);
-  if (NAMED_COLORS.has(lower)) return lower === "currentcolor" ? "currentColor" : lower;
-  if (HEX_RE.test(v)) return v;
-  if (RGB_RE.test(lower)) return lower;
-  return null;
-}
-color.rule = RULES.VAL_COLOR;
-function unitInterval(v) {
-  const n = boundedNumber(v);
-  if (n === null) return null;
-  const f = Number(n);
-  return f >= 0 && f <= 1 ? n : null;
-}
-unitInterval.rule = RULES.VAL_NUMBER;
-function nonNegative(v) {
-  const n = boundedNumber(v);
-  if (n === null || Number(n) < 0) return null;
-  return n;
-}
-nonNegative.rule = RULES.VAL_NUMBER;
-function numberList(maxCount) {
-  return withRule(RULES.VAL_NUMBER, (v) => {
-    const parts = v.trim().split(/[\s,]+/).filter(Boolean);
-    if (parts.length === 0 || parts.length > maxCount) return null;
-    const out = [];
-    for (const p of parts) {
-      const n = boundedNumber(p);
-      if (n === null) return null;
-      out.push(n);
-    }
-    return out.join(" ");
-  });
-}
-var PATH_COMMANDS = new Set("MmZzLlHhVvCcSsQqTtAa");
-var PATH_NUMBER_RE = /^-?(?:\d+\.?\d*|\.\d+)/;
-function pathData(v) {
-  v = v.trim();
-  if (v.length > POLICY_LIMITS.maxAttrValueLength * 10) return null;
-  const out = [];
-  let numbers = 0;
-  let i = 0;
-  while (i < v.length) {
-    const c = v[i];
-    if (/[\s,]/.test(c)) {
-      i++;
-      continue;
-    }
-    if (PATH_COMMANDS.has(c)) {
-      out.push(c);
-      i++;
-      continue;
-    }
-    const m = PATH_NUMBER_RE.exec(v.slice(i));
-    if (!m) return null;
-    if (++numbers > POLICY_LIMITS.maxPathNumbers) return null;
-    const n = boundedNumber(m[0]);
-    if (n === null) return null;
-    out.push(n);
-    i += m[0].length;
-  }
-  if (out.length === 0 || !/^[Mm]$/.test(out[0])) return null;
-  return out.join(" ");
-}
-pathData.rule = RULES.VAL_PATH;
-var TRANSFORM_ARITY = {
-  translate: [1, 2],
-  scale: [1, 2],
-  rotate: [1, 3],
-  skewX: [1, 1],
-  skewY: [1, 1],
-  matrix: [6, 6]
-};
-function transform(v) {
-  v = v.trim();
-  if (v.length > POLICY_LIMITS.maxAttrValueLength || v.length === 0) return null;
-  const out = [];
-  let i = 0;
-  for (; ; ) {
-    while (i < v.length && /\s/.test(v[i])) i++;
-    if (i >= v.length) break;
-    if (out.length + 1 > 8) return null;
-    const name = /^[A-Za-z]*/.exec(v.slice(i))[0];
-    if (!Object.prototype.hasOwnProperty.call(TRANSFORM_ARITY, name)) return null;
-    i += name.length;
-    while (i < v.length && /\s/.test(v[i])) i++;
-    if (v[i] !== "(") return null;
-    i++;
-    const close = v.indexOf(")", i);
-    if (close === -1) return null;
-    const args = v.slice(i, close);
-    if (args.includes("(")) return null;
-    i = close + 1;
-    const nums = numberList(6)(args);
-    if (nums === null) return null;
-    const arity = nums.split(" ").length;
-    const [lo, hi] = TRANSFORM_ARITY[name];
-    if (arity < lo || arity > hi) return null;
-    out.push(`${name}(${nums})`);
-  }
-  return out.length ? out.join(" ") : null;
-}
-transform.rule = RULES.VAL_TRANSFORM;
-function viewBox(v) {
-  const nums = numberList(4)(v);
-  if (nums === null || nums.split(" ").length !== 4) return null;
-  const [, , w, h] = nums.split(" ").map(Number);
-  return w > 0 && h > 0 ? nums : null;
-}
-viewBox.rule = RULES.VAL_NUMBER;
-function resolveValidator([kind, a, b]) {
-  const simple = {
-    num: boundedNumber,
-    nonNeg: nonNegative,
-    unit: unitInterval,
-    lenPct: lengthOrPercent,
-    path: pathData,
-    transform,
-    viewBox,
-    color,
-    text: plainText,
-    ident,
-    id: idValue,
-    idRefs: idRefList,
-    cls: classValue,
-    lang: withRule(RULES.VAL_KEYWORD, (v) => /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8}){0,3}$/.test(v.trim()) ? v.trim() : null)
-  };
-  if (Object.hasOwn(simple, kind)) return simple[kind];
-  if (kind === "int") return boundedInt(a, b);
-  if (kind === "numList") return numberList(a);
-  if (kind === "oneOf") return oneOf(...a);
-  if (kind === "fixed") return fixed(a);
-  if (kind === "tagged") return withRule(a, resolveValidator(b));
-  throw new Error(`unknown validator descriptor: ${kind}`);
-}
-var TABLES = createPolicyTables(resolveValidator);
-var { HTML_ELEMENTS, SVG_ELEMENTS, HTML_UNWRAP, HTML_DROP_RULES, SVG_DROP_RULES, ATTR_DROP_RULES } = TABLES;
-var { HTML_GLOBAL, SVG_GLOBAL, HTML_FORCED, SVG_TEXT_ONLY } = TABLES;
-function dropRuleFor(name) {
-  return ATTR_DROP_RULES.get(name) ?? (name.includes(":") ? RULES.ATTR_NAMESPACED : name.startsWith("on") ? RULES.EXEC_HANDLER : RULES.ATTR_ALLOWLIST);
-}
-var SVG_ATTR_CANONICAL = /* @__PURE__ */ new Map();
-for (const table of [SVG_GLOBAL, ...Object.values(SVG_ELEMENTS)]) {
-  if (table) for (const name of Object.keys(table)) SVG_ATTR_CANONICAL.set(asciiLower(name), name);
-}
-function normalizeTree(rawRoot) {
-  const changes = [];
-  const counters = { nodes: 0, totalText: 0 };
-  const reasons = [];
-  const children = checkChildren(rawRoot.children ?? [], "html", 0, [], changes, counters, reasons, false);
-  if (reasons.length) return { status: "rejected", reasons };
-  return { status: "validated", tree: root(children), changes };
-}
-function policyOk(tree) {
-  let nodes = 0, totalText = 0;
-  function visit(children, parentNs, depth, textOnly) {
-    return children.every((node) => {
-      if (++nodes > POLICY_LIMITS.maxNodes) return false;
-      if (node.kind === "text") {
-        totalText += node.text.length;
-        return node.text.length > 0 && node.text === cleanText(node.text) && node.text.length <= POLICY_LIMITS.maxTextLength && totalText <= POLICY_LIMITS.maxTotalText;
-      }
-      if (textOnly || depth + 1 > POLICY_LIMITS.maxDepth) return false;
-      const tables = node.ns === "html" ? HTML_ELEMENTS : node.ns === "svg" ? SVG_ELEMENTS : null;
-      if (!tables || !Object.hasOwn(tables, node.tag)) return false;
-      if (node.ns === "html" ? parentNs !== "html" : node.tag !== "svg" && parentNs !== "svg") return false;
-      const table = tables[node.tag] ?? {};
-      const global = node.ns === "html" ? HTML_GLOBAL : SVG_GLOBAL;
-      if (node.attrs.length > POLICY_LIMITS.maxAttrs) return false;
-      for (const [name, value] of node.attrs) {
-        if (name.includes(":") || name.startsWith("on")) return false;
-        const validator = Object.hasOwn(table, name) ? table[name] : Object.hasOwn(global, name) ? global[name] : null;
-        if (!validator || validator(value) !== value) return false;
-      }
-      if (node.ns === "html") {
-        const attrs = new Map(node.attrs);
-        for (const [name, value] of HTML_FORCED[node.tag] ?? []) if (attrs.get(name) !== value) return false;
-        if (node.tag === "input" && !attrs.has("type")) return false;
-      }
-      return visit(node.children, node.ns, depth + 1, node.ns === "svg" && SVG_TEXT_ONLY.has(node.tag));
-    });
-  }
-  return visit(tree.children, "html", 0, false);
-}
-function checkTree(rawRoot) {
-  const candidate = normalizeTree(rawRoot);
-  if (candidate.status !== "validated") return candidate;
-  if (!policyOk(candidate.tree)) return { status: "rejected", reasons: [{ code: "output-policy" }] };
-  const replay = normalizeTree(candidate.tree);
-  if (replay.status !== "validated" || replay.changes.length !== 0 || JSON.stringify(replay.tree) !== JSON.stringify(candidate.tree)) {
-    return { status: "rejected", reasons: [{ code: "non-canonical-output" }] };
-  }
-  return candidate;
-}
-function checkChildren(rawChildren, parentNs, depth, path, changes, counters, reasons, textOnly) {
-  const rootOut = [];
-  const stack = [{
-    list: Array.isArray(rawChildren) ? rawChildren : [],
-    parentNs,
-    depth,
-    sdepth: 0,
-    path,
-    textOnly,
-    out: rootOut,
-    index: 0,
-    finish: null
-  }];
-  const descend = (frame, list, childNs, childDepth, here, childTextOnly, out, finish) => {
-    if (frame.sdepth + 1 > POLICY_LIMITS.maxTraversalDepth) {
-      reasons.push({ code: "traversal-depth", path: here });
-      if (finish) finish(out);
-      return;
-    }
-    stack.push({
-      list: Array.isArray(list) ? list : [],
-      parentNs: childNs,
-      depth: childDepth,
-      sdepth: frame.sdepth + 1,
-      path: here,
-      textOnly: childTextOnly,
-      out,
-      index: 0,
-      finish
-    });
-  };
-  while (stack.length) {
-    const frame = stack[stack.length - 1];
-    if (frame.index >= frame.list.length) {
-      stack.pop();
-      if (frame.finish) frame.finish(frame.out);
-      continue;
-    }
-    const raw = frame.list[frame.index];
-    const here = frame.path.concat(frame.index);
-    frame.index++;
-    if (reasons.length) continue;
-    if (raw == null || typeof raw !== "object") continue;
-    if (raw.kind === "text") {
-      const s = typeof raw.text === "string" ? cleanText(raw.text) : "";
-      if (s.length === 0) continue;
-      if (s.length > POLICY_LIMITS.maxTextLength) {
-        reasons.push({ code: "text-too-long", path: here });
-        continue;
-      }
-      counters.totalText += s.length;
-      if (counters.totalText > POLICY_LIMITS.maxTotalText) {
-        reasons.push({ code: "total-text-too-long", path: here });
-        continue;
-      }
-      counters.nodes++;
-      if (counters.nodes > POLICY_LIMITS.maxNodes) {
-        reasons.push({ code: "too-many-nodes", path: here });
-        continue;
-      }
-      frame.out.push(text(s));
-      continue;
-    }
-    if (raw.kind === "comment" || raw.kind === "doctype") {
-      changes.push({ kind: "removed-node", what: raw.kind, path: here, rule: RULES.STRUCT_NON_ELEMENT });
-      continue;
-    }
-    if (raw.kind !== "el" || typeof raw.tag !== "string") {
-      changes.push({ kind: "removed-node", what: "unknown", path: here, rule: RULES.STRUCT_NON_ELEMENT });
-      continue;
-    }
-    if (frame.textOnly) {
-      changes.push({ kind: "removed-element", tag: raw.tag, path: here, why: "text-only-context", rule: RULES.NS_POSITION });
-      continue;
-    }
-    const tag = asciiLower(raw.tag);
-    const ns = raw.ns === "svg" ? "svg" : raw.ns === "html" ? "html" : "other";
-    if (frame.depth + 1 > POLICY_LIMITS.maxDepth) {
-      reasons.push({ code: "too-deep", path: here });
-      continue;
-    }
-    let table = null;
-    if (ns === "html" && frame.parentNs === "html") {
-      if (Object.prototype.hasOwnProperty.call(HTML_ELEMENTS, tag)) table = HTML_ELEMENTS[tag];
-      else if (HTML_UNWRAP.has(tag)) {
-        changes.push({ kind: "unwrapped-element", tag, path: here, rule: HTML_UNWRAP.get(tag) });
-        descend(frame, raw.children, frame.parentNs, frame.depth, here, false, frame.out, null);
-        continue;
-      } else {
-        changes.push({ kind: "removed-element", tag, path: here, rule: HTML_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });
-        continue;
-      }
-    } else if (ns === "svg" && (tag === "svg" || frame.parentNs === "svg")) {
-      if (Object.prototype.hasOwnProperty.call(SVG_ELEMENTS, tag)) table = SVG_ELEMENTS[tag];
-      else {
-        changes.push({ kind: "removed-element", tag, ns, path: here, rule: SVG_DROP_RULES.get(tag) ?? RULES.STRUCT_ELEMENT_ALLOWLIST });
-        continue;
-      }
-    } else {
-      changes.push({ kind: "removed-element", tag, ns, path: here, why: "namespace", rule: ns === "other" ? RULES.NS_MATHML : RULES.NS_POSITION });
-      continue;
-    }
-    counters.nodes++;
-    if (counters.nodes > POLICY_LIMITS.maxNodes) {
-      reasons.push({ code: "too-many-nodes", path: here });
-      continue;
-    }
-    const attrs = checkAttrs(raw.attrs, ns, tag, table, here, changes);
-    const childTextOnly = ns === "svg" && SVG_TEXT_ONLY.has(tag);
-    const out = frame.out;
-    const kids = [];
-    descend(frame, raw.children, ns, frame.depth + 1, here, childTextOnly, kids, (k) => out.push(el(ns, tag, attrs, k)));
-  }
-  return rootOut;
-}
-function checkAttrs(rawAttrs, ns, tag, table, path, changes) {
-  const global = ns === "html" ? HTML_GLOBAL : SVG_GLOBAL;
-  const seen = /* @__PURE__ */ new Map();
-  const list = Array.isArray(rawAttrs) ? rawAttrs : [];
-  let count = 0;
-  for (const pair of list) {
-    if (!Array.isArray(pair) || typeof pair[0] !== "string" || typeof pair[1] !== "string") continue;
-    const lower = asciiLower(pair[0]);
-    const name = ns === "svg" ? SVG_ATTR_CANONICAL.get(lower) ?? lower : lower;
-    const value = pair[1];
-    if (++count > POLICY_LIMITS.maxAttrs) {
-      changes.push({ kind: "removed-attribute", tag, name, path, why: "too-many", rule: RULES.LIMIT_ATTRS });
-      continue;
-    }
-    if (name.includes(":") || name.startsWith("on")) {
-      changes.push({ kind: "removed-attribute", tag, name, path, rule: dropRuleFor(name) });
-      continue;
-    }
-    let validator = null;
-    if (table && Object.prototype.hasOwnProperty.call(table, name)) validator = table[name];
-    else if (Object.prototype.hasOwnProperty.call(global, name)) validator = global[name];
-    if (!validator) {
-      changes.push({ kind: "removed-attribute", tag, name, path, rule: dropRuleFor(name) });
-      continue;
-    }
-    if (value.length > POLICY_LIMITS.maxAttrValueLength * 10) {
-      changes.push({ kind: "removed-attribute", tag, name, path, why: "too-long", rule: RULES.LIMIT_ATTRS });
-      continue;
-    }
-    const canonical = validator(value);
-    if (canonical === null) {
-      changes.push({ kind: "removed-attribute", tag, name, path, why: "value", rule: validator.rule });
-      continue;
-    }
-    if (canonical !== value) changes.push({ kind: "rewrote-attribute", tag, name, path, rule: validator.rule });
-    if (!seen.has(name)) seen.set(name, canonical);
-  }
-  if (ns === "html" && HTML_FORCED[tag]) {
-    for (const [name, value] of HTML_FORCED[tag]) {
-      if (!seen.has(name)) seen.set(name, value);
-    }
-  }
-  if (ns === "html" && tag === "input" && !seen.has("type")) seen.set("type", "text");
-  return Array.from(seen.entries()).sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
-}
-function isValidated(tree) {
-  const result = checkTree(tree);
-  if (result.status !== "validated") return false;
-  if (result.changes.length !== 0) return false;
-  return JSON.stringify(result.tree) === JSON.stringify(tree);
-}
-
-// src/acceptance.js
-var ACCEPTANCE_NONCE_BYTES = 16;
-var ACCEPTANCE_REGISTRY_MAX = 4;
-var HEX = /^[0-9a-f]+$/;
-function isAcceptanceToken(token) {
-  if (token === null || typeof token !== "object" || Array.isArray(token)) return false;
-  if (typeof token.nonce !== "string") return false;
-  if (token.nonce.length !== ACCEPTANCE_NONCE_BYTES * 2 || !HEX.test(token.nonce)) return false;
-  if (typeof token.authority !== "string" || token.authority.length === 0) return false;
-  if (typeof token.checkerVersion !== "string" || token.checkerVersion.length === 0) return false;
-  if (!Number.isInteger(token.abi) || token.abi < 0) return false;
-  if (!Number.isInteger(token.capabilityVersion) || token.capabilityVersion < 0) return false;
-  if (typeof token.profile !== "string" || token.profile.length === 0) return false;
-  if (typeof token.instanceId !== "string" || typeof token.sessionId !== "string") return false;
-  if (!Number.isInteger(token.generation) || token.generation < 0) return false;
-  if (!Number.isInteger(token.requestId) || token.requestId < 0) return false;
-  return true;
-}
-function createAcceptanceRegistry({ max = ACCEPTANCE_REGISTRY_MAX, expect = {} } = {}) {
-  const entries = /* @__PURE__ */ new Map();
-  const stats = { recorded: 0, claimed: 0, evicted: 0, refused: 0 };
-  function record(token, tree) {
-    if (!isAcceptanceToken(token)) return { ok: false, reason: { code: "acceptance-malformed" } };
-    if (entries.has(token.nonce)) return { ok: false, reason: { code: "acceptance-nonce-reused" } };
-    while (entries.size >= max) {
-      const oldest = entries.keys().next().value;
-      entries.delete(oldest);
-      stats.evicted += 1;
-    }
-    entries.set(token.nonce, { token, tree });
-    stats.recorded += 1;
-    return { ok: true };
-  }
-  function claim(token, context = {}) {
-    if (!isAcceptanceToken(token)) {
-      stats.refused += 1;
-      return { ok: false, reason: { code: "acceptance-malformed" } };
-    }
-    const entry = entries.get(token.nonce);
-    if (!entry) {
-      stats.refused += 1;
-      return { ok: false, reason: { code: "acceptance-unknown-or-claimed" } };
-    }
-    entries.delete(token.nonce);
-    const issued = entry.token;
-    for (const field of ["authority", "checkerVersion", "capabilityVersion", "profile", "instanceId", "sessionId", "requestId", "generation"]) {
-      if (token[field] !== issued[field]) {
-        stats.refused += 1;
-        return { ok: false, reason: { code: "acceptance-field-mismatch", detail: field } };
-      }
-    }
-    if (expect.checkerVersion !== void 0 && issued.checkerVersion !== expect.checkerVersion) {
-      stats.refused += 1;
-      return { ok: false, reason: { code: "acceptance-checker-version", detail: String(issued.checkerVersion).slice(0, 60) } };
-    }
-    if (expect.authority !== void 0 && issued.authority !== expect.authority) {
-      stats.refused += 1;
-      return { ok: false, reason: { code: "acceptance-authority", detail: String(issued.authority).slice(0, 60) } };
-    }
-    if (context.generation !== void 0 && issued.generation !== context.generation) {
-      stats.refused += 1;
-      return { ok: false, reason: { code: "acceptance-superseded" } };
-    }
-    stats.claimed += 1;
-    return { ok: true, tree: entry.tree, token: issued };
-  }
-  function invalidate(predicate) {
-    if (typeof predicate !== "function") {
-      entries.clear();
-      return;
-    }
-    for (const [nonce, entry] of [...entries.entries()]) {
-      if (predicate(entry.token)) entries.delete(nonce);
-    }
-  }
-  return {
-    record,
-    claim,
-    invalidate,
-    get size() {
-      return entries.size;
-    },
-    get stats() {
-      return { ...stats };
-    }
-  };
-}
-
 // src/frame-protocol.js
 var FRAME_PROTOCOL_VERSION = 1;
 var FRAME_MESSAGE = Object.freeze({
@@ -10735,14 +10041,14 @@ var StartupError = class extends Error {
   }
 };
 function classifyStartupFailure(stage, error, fallbackCode) {
-  const text2 = error == null ? "" : typeof error === "string" ? error : `${error.name ?? ""} ${error.message ?? ""}`;
-  if (/CompileError|wasm-eval|wasm-unsafe-eval|Refused to compile or instantiate|blocked by CSP/i.test(text2)) {
+  const text = error == null ? "" : typeof error === "string" ? error : `${error.name ?? ""} ${error.message ?? ""}`;
+  if (/CompileError|wasm-eval|wasm-unsafe-eval|Refused to compile or instantiate|blocked by CSP/i.test(text)) {
     return "csp-wasm-unsafe-eval";
   }
-  if (/blob/i.test(text2) && /(refus|block|violat|security|content security)/i.test(text2)) return "csp-worker-blob";
-  if (/cannot be accessed from origin|SecurityError/i.test(text2)) return "csp-worker-blob";
-  if (/dynamically imported module|script-src-elem|Importing a module script failed/i.test(text2)) return "csp-cdn-script-src";
-  if (/compileStreaming|connect-src/i.test(text2)) return "csp-connect-src";
+  if (/blob/i.test(text) && /(refus|block|violat|security|content security)/i.test(text)) return "csp-worker-blob";
+  if (/cannot be accessed from origin|SecurityError/i.test(text)) return "csp-worker-blob";
+  if (/dynamically imported module|script-src-elem|Importing a module script failed/i.test(text)) return "csp-cdn-script-src";
+  if (/compileStreaming|connect-src/i.test(text)) return "csp-connect-src";
   return fallbackCode === void 0 ? "worker-startup-error" : fallbackCode;
 }
 function createBlobWorker(source, options = {}) {
@@ -10775,7 +10081,7 @@ var EVENT_TYPES = /* @__PURE__ */ new Set([
   "pointerenter",
   "pointerleave"
 ]);
-var IDENT_RE2 = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
+var IDENT_RE = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
 var MAX_STRING = 2e3;
 function optionalString(v) {
   return v === void 0 || typeof v === "string" && v.length <= MAX_STRING;
@@ -10792,7 +10098,7 @@ function sanitizeEvent(raw) {
   const e = {};
   for (const k of ["type", "action", "value", "dataValue", "dataKey", "key", "checked", "x", "y"]) e[k] = own(k);
   if (!EVENT_TYPES.has(e.type)) return null;
-  if (typeof e.action !== "string" || !IDENT_RE2.test(e.action)) return null;
+  if (typeof e.action !== "string" || !IDENT_RE.test(e.action)) return null;
   if (!optionalString(e.value) || !optionalString(e.dataValue) || !optionalString(e.dataKey)) return null;
   if (!optionalString(e.key) || !optionalBool(e.checked) || !optionalInt(e.x) || !optionalInt(e.y)) return null;
   const out = { type: e.type, action: e.action };
@@ -10819,8 +10125,7 @@ function createSandboxFrame({
   onEvent,
   onStatus,
   title = "Generated content",
-  startupTimeoutMs = STARTUP_TIMEOUTS.frameBootstrapMs,
-  claimAcceptance = null
+  startupTimeoutMs = STARTUP_TIMEOUTS.frameBootstrapMs
 }) {
   const doc = container.ownerDocument;
   const win = doc.defaultView;
@@ -10831,10 +10136,7 @@ function createSandboxFrame({
   iframe.setAttribute("loading", "eager");
   iframe.srcdoc = buildFrameDocument(manifest);
   let ready = false;
-  let seq = 0;
-  let queued = null;
   let destroyed = false;
-  const pending = /* @__PURE__ */ new Map();
   let portBound = false;
   let pendingBootstrap = null;
   let bootstrapResolve = null;
@@ -10861,9 +10163,6 @@ function createSandboxFrame({
     status("startup-failed", error.toJSON());
     failReady(error);
   }, startupTimeoutMs);
-  function send(msg) {
-    iframe.contentWindow.postMessage(msg, "*");
-  }
   function postBootstrap({ message, port }) {
     try {
       iframe.contentWindow.postMessage(message, "*", [port]);
@@ -10910,21 +10209,10 @@ function createSandboxFrame({
             b.resolve(false);
           }
         }
-        if (queued && !portBound) {
-          const t = queued;
-          queued = null;
-          if (isValidated(t)) {
-            const mySeq = ++seq;
-            send({ type: "render", seq: mySeq, tree: t });
-          } else {
-            status("refused", "host: queued tree is not validated");
-          }
-        }
         break;
       }
       case "bound": {
         portBound = true;
-        queued = null;
         status("bound", {
           instanceId: String(msg.instanceId).slice(0, 128),
           sessionId: String(msg.sessionId).slice(0, 128)
@@ -10940,12 +10228,8 @@ function createSandboxFrame({
         }
         break;
       }
-      case "rendered":
       case "refused": {
-        const resolve = pending.get(msg.seq);
-        pending.delete(msg.seq);
-        if (msg.type === "refused") status("refused", String(msg.reason).slice(0, 500));
-        if (resolve) resolve(msg.type === "rendered");
+        status("refused", String(msg.reason).slice(0, 500));
         break;
       }
       case "event": {
@@ -10959,61 +10243,13 @@ function createSandboxFrame({
   }
   win.addEventListener("message", onMessage);
   container.appendChild(iframe);
-  function resolveRender(input) {
-    if (claimAcceptance) {
-      if (!isAcceptanceToken(input)) {
-        return { ok: false, detail: "host: render requires a policy-worker acceptance record, not a tree" };
-      }
-      const claimed = claimAcceptance(input);
-      if (!claimed || claimed.ok !== true) {
-        return { ok: false, detail: `host: acceptance refused (${claimed?.reason?.code ?? "unknown"}${claimed?.reason?.detail ? `: ${claimed.reason.detail}` : ""})` };
-      }
-      if (!isValidated(claimed.tree)) {
-        return { ok: false, detail: "host: the accepted tree is not validated by the host predicate" };
-      }
-      return { ok: true, tree: claimed.tree };
-    }
-    if (!isValidated(input)) return { ok: false, detail: "host: tree is not validated" };
-    return { ok: true, tree: input };
-  }
   const api = {
-    /**
-     * Commit one document. Takes an acceptance record when the frame is wired
-     * to a policy session, or a validated tree on the legacy path. Resolves
-     * true only after the frame acknowledges the exact request.
-     */
-    render(input) {
-      if (destroyed) return Promise.resolve(false);
-      if (portBound) {
-        status("refused", "host: frame is bound to the policy port; trees are delivered by the policy Worker");
-        return Promise.resolve(false);
-      }
-      const resolved = resolveRender(input);
-      if (!resolved.ok) {
-        status("refused", resolved.detail);
-        return Promise.resolve(false);
-      }
-      const tree = resolved.tree;
-      if (!ready) {
-        queued = tree;
-        return Promise.resolve(true);
-      }
-      const mySeq = ++seq;
-      return new Promise((resolve) => {
-        pending.set(mySeq, resolve);
-        send({ type: "render", seq: mySeq, tree });
-      });
-    },
-    /** True when this frame requires an acceptance record to commit. */
-    get requiresAcceptance() {
-      return claimAcceptance !== null;
-    },
     /**
      * Hand the frame its end of the private channel to the policy Worker
      * (src/frame-protocol.js). Resolves true once the frame reports `bound`,
      * false if the bootstrap could not be posted, was superseded by a newer
      * one, or the frame was destroyed; the caller's stage timeout bounds the
-     * wait. After this, `render` is refused: trees reach the frame only from
+     * wait. There is no parent render API: trees reach the frame only from
      * the policy Worker.
      */
     attachPort(port, { instanceId, sessionId }) {
@@ -11060,9 +10296,6 @@ function createSandboxFrame({
      * unhandled rejection.
      */
     ready: readyPromise,
-    clear() {
-      if (ready && !destroyed) send({ type: "clear" });
-    },
     destroy() {
       destroyed = true;
       clearTimeout(bootstrapTimer);
@@ -11284,8 +10517,104 @@ function createRuntimeController({
   };
 }
 
-// src/policy-core.js
-var LEAN_AUTHORITY = "lean-wasm";
+// src/rules.js
+var RULES = Object.freeze({
+  EXEC_SCRIPT: "R-EXEC-SCRIPT",
+  EXEC_HANDLER: "R-EXEC-HANDLER",
+  RES_ELEMENT: "R-RES-ELEMENT",
+  RES_SVG_REF: "R-RES-SVG-REF",
+  RES_URL_ATTR: "R-RES-URL-ATTR",
+  NAV_ANCHOR: "R-NAV-ANCHOR",
+  NAV_FORM: "R-NAV-FORM",
+  NS_MATHML: "R-NS-MATHML",
+  NS_POSITION: "R-NS-POSITION",
+  RCDATA_RAWTEXT: "R-RCDATA-RAWTEXT",
+  RCDATA_TEMPLATE: "R-RCDATA-TEMPLATE",
+  RCDATA_NO_REPARSE: "R-RCDATA-NO-REPARSE",
+  ATTR_ALLOWLIST: "R-ATTR-ALLOWLIST",
+  ATTR_NAMESPACED: "R-ATTR-NAMESPACED",
+  STYLE_ELEMENT: "R-STYLE-ELEMENT",
+  STYLE_INLINE: "R-STYLE-INLINE",
+  STYLE_CLASS: "R-STYLE-CLASS",
+  CLOBBER_ID_PREFIX: "R-CLOBBER-ID-PREFIX",
+  CLOBBER_NAME: "R-CLOBBER-NAME",
+  CLOBBER_ATTR_KEYS: "R-CLOBBER-ATTR-KEYS",
+  LIMIT_TREE: "R-LIMIT-TREE",
+  LIMIT_ATTRS: "R-LIMIT-ATTRS",
+  CTRL_INPUT_TYPE: "R-CTRL-INPUT-TYPE",
+  CTRL_AUTOCOMPLETE: "R-CTRL-AUTOCOMPLETE",
+  CTRL_BUTTON_TYPE: "R-CTRL-BUTTON-TYPE",
+  CTRL_FOCUS: "R-CTRL-FOCUS",
+  TEXT_CONTROL_BIDI: "R-TEXT-CONTROL-BIDI",
+  VAL_NUMBER: "R-VAL-NUMBER",
+  VAL_COLOR: "R-VAL-COLOR",
+  VAL_PATH: "R-VAL-PATH",
+  VAL_TRANSFORM: "R-VAL-TRANSFORM",
+  VAL_KEYWORD: "R-VAL-KEYWORD",
+  STRUCT_NON_ELEMENT: "R-STRUCT-NON-ELEMENT",
+  STRUCT_ELEMENT_ALLOWLIST: "R-STRUCT-ELEMENT-ALLOWLIST",
+  RT_ISOLATION: "R-RT-ISOLATION",
+  RT_LIMITS: "R-RT-LIMITS",
+  RT_FROZEN_DATA: "R-RT-FROZEN-DATA",
+  GATE_INTERFACE: "R-GATE-INTERFACE",
+  FRAME_FIXED_POINT: "R-FRAME-FIXED-POINT",
+  FRAME_MESSAGE_SCHEMA: "R-FRAME-MESSAGE-SCHEMA",
+  FRAME_CSP_SINKS: "R-FRAME-CSP-SINKS",
+  RENDER_CONSTRUCTORS_ONLY: "R-RENDER-CONSTRUCTORS-ONLY",
+  CHECK_ACCEPTANCE: "R-CHECK-ACCEPTANCE",
+  CAP_INVENTORY: "R-CAP-INVENTORY",
+  CAP_CEILINGS: "R-CAP-CEILINGS",
+  CAP_CONTROLS: "R-CAP-CONTROLS"
+});
+var RULE_IDS = Object.freeze(Object.values(RULES));
+var RULE_CLASSES = Object.freeze({
+  "R-EXEC-SCRIPT": "execution",
+  "R-EXEC-HANDLER": "execution",
+  "R-RES-ELEMENT": "resource-load",
+  "R-RES-SVG-REF": "resource-load",
+  "R-RES-URL-ATTR": "resource-load",
+  "R-NAV-ANCHOR": "navigation",
+  "R-NAV-FORM": "navigation",
+  "R-NS-MATHML": "namespace",
+  "R-NS-POSITION": "namespace",
+  "R-RCDATA-RAWTEXT": "rcdata",
+  "R-RCDATA-TEMPLATE": "rcdata",
+  "R-RCDATA-NO-REPARSE": "rcdata",
+  "R-ATTR-ALLOWLIST": "attribute",
+  "R-ATTR-NAMESPACED": "attribute",
+  "R-STYLE-ELEMENT": "style",
+  "R-STYLE-INLINE": "style",
+  "R-STYLE-CLASS": "style",
+  "R-CLOBBER-ID-PREFIX": "clobbering",
+  "R-CLOBBER-NAME": "clobbering",
+  "R-CLOBBER-ATTR-KEYS": "clobbering",
+  "R-LIMIT-TREE": "limits",
+  "R-LIMIT-ATTRS": "limits",
+  "R-CTRL-INPUT-TYPE": "controls",
+  "R-CTRL-AUTOCOMPLETE": "controls",
+  "R-CTRL-BUTTON-TYPE": "controls",
+  "R-CTRL-FOCUS": "controls",
+  "R-TEXT-CONTROL-BIDI": "text",
+  "R-VAL-NUMBER": "values",
+  "R-VAL-COLOR": "values",
+  "R-VAL-PATH": "values",
+  "R-VAL-TRANSFORM": "values",
+  "R-VAL-KEYWORD": "values",
+  "R-STRUCT-NON-ELEMENT": "structure",
+  "R-STRUCT-ELEMENT-ALLOWLIST": "structure",
+  "R-RT-ISOLATION": "runtime",
+  "R-RT-LIMITS": "runtime",
+  "R-RT-FROZEN-DATA": "runtime",
+  "R-GATE-INTERFACE": "gate",
+  "R-FRAME-FIXED-POINT": "frame",
+  "R-FRAME-MESSAGE-SCHEMA": "frame",
+  "R-FRAME-CSP-SINKS": "frame",
+  "R-RENDER-CONSTRUCTORS-ONLY": "renderer",
+  "R-CHECK-ACCEPTANCE": "structure",
+  "R-CAP-INVENTORY": "capability",
+  "R-CAP-CEILINGS": "capability",
+  "R-CAP-CONTROLS": "capability"
+});
 
 // src/capabilities-data.js
 var CAPABILITY_VERSION = 1;
@@ -12334,7 +11663,7 @@ var CAPABILITIES = Object.freeze({
 });
 
 // src/lean-abi.js
-var LEAN_ABI_VERSION = 1;
+var LEAN_ABI_VERSION = 2;
 var LEAN_PROFILE = "default";
 var LEAN_CHECKER_VERSION = `guard-checker/${LEAN_ABI_VERSION}.${CAPABILITY_VERSION}`;
 var LEAN_MIN_LIMITS = Object.freeze({
@@ -12384,7 +11713,26 @@ var ALLOWED_STATUS = Object.freeze({
   check: /* @__PURE__ */ new Set(["accepted", "rejected", "error"])
 });
 
+// src/acceptance.js
+var ACCEPTANCE_NONCE_BYTES = 16;
+var HEX = /^[0-9a-f]+$/;
+function isAcceptanceToken(token) {
+  if (token === null || typeof token !== "object" || Array.isArray(token)) return false;
+  if (typeof token.nonce !== "string") return false;
+  if (token.nonce.length !== ACCEPTANCE_NONCE_BYTES * 2 || !HEX.test(token.nonce)) return false;
+  if (typeof token.authority !== "string" || token.authority.length === 0) return false;
+  if (typeof token.checkerVersion !== "string" || token.checkerVersion.length === 0) return false;
+  if (!Number.isInteger(token.abi) || token.abi < 0) return false;
+  if (!Number.isInteger(token.capabilityVersion) || token.capabilityVersion < 0) return false;
+  if (typeof token.profile !== "string" || token.profile.length === 0) return false;
+  if (typeof token.instanceId !== "string" || typeof token.sessionId !== "string") return false;
+  if (!Number.isInteger(token.generation) || token.generation < 0) return false;
+  if (!Number.isInteger(token.requestId) || token.requestId < 0) return false;
+  return true;
+}
+
 // src/policy-client.js
+var LEAN_AUTHORITY = "lean-wasm";
 var counter = 0;
 function newId(prefix) {
   counter += 1;
@@ -12408,10 +11756,6 @@ function createPolicySession(options = {}) {
   let frameAttached = false;
   const pending = /* @__PURE__ */ new Map();
   const stats = { requests: 0, accepted: 0, rendered: 0, rejected: 0, timeouts: 0, sessions: 0 };
-  const acceptances = createAcceptanceRegistry({
-    max: options.acceptanceMax,
-    expect: { authority: LEAN_AUTHORITY, checkerVersion: LEAN_CHECKER_VERSION }
-  });
   let checkerReadyPromise = null;
   let checkerReadySettled = false;
   let settleChecker = null;
@@ -12457,7 +11801,6 @@ function createPolicySession(options = {}) {
     sessionId = newId("session");
     handshakeDone = false;
     checkerIdentity = null;
-    acceptances.invalidate();
     if (readyPromise === null || readySettled) newReadyPromise();
     if (checkerReadyPromise === null || checkerReadySettled) newCheckerPromise();
     try {
@@ -12533,7 +11876,6 @@ function createPolicySession(options = {}) {
         timeoutMs: timeouts.wasmInitMs
       }));
     }
-    acceptances.invalidate();
     if (dying) {
       dying.removeEventListener("message", onMessage);
       dying.removeEventListener("error", onWorkerError);
@@ -12638,10 +11980,11 @@ function createPolicySession(options = {}) {
         authority: message.authority,
         acceptance: token,
         diagnostics: message.diagnostics,
+        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, 16e3) } : {},
         stats: message.stats
       });
     }
-    if (message.status === "accepted" && frameAttached) {
+    if (message.status === "accepted" && frame) {
       stats.rejected += 1;
       return settle(entry, message.requestId, { status: "rejected", reason: { code: "authority-path-mismatch" } });
     }
@@ -12669,22 +12012,15 @@ function createPolicySession(options = {}) {
           reason: { code: "acceptance-checker-version", detail: String(token.checkerVersion).slice(0, 60) }
         });
       }
-      const recorded = acceptances.record(token, message.tree);
-      if (!recorded.ok) {
-        stats.rejected += 1;
-        return settle(entry, message.requestId, { status: "rejected", reason: recorded.reason });
-      }
       stats.accepted += 1;
       return settle(entry, message.requestId, {
         status: "accepted",
         authority: message.authority,
-        // The record is what the render path takes. `tree` is here for host UI
-        // and diagnostics; handing it to the frame directly is not possible,
-        // because the frame's render path claims a record and uses the tree
-        // this registry stored.
+        // Headless diagnostic result only: there is no API to commit this tree.
         acceptance: token,
         tree: message.tree,
         diagnostics: message.diagnostics,
+        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, 16e3) } : {},
         stats: message.stats
       });
     }
@@ -12725,7 +12061,8 @@ function createPolicySession(options = {}) {
         sessionId,
         generation: requestGeneration,
         requestId,
-        html
+        html,
+        ...requestOptions.preview === true ? { preview: true } : {}
       };
       if (!classAllowlistSent && Array.isArray(classes)) {
         envelope.classes = classes;
@@ -12769,7 +12106,7 @@ function createPolicySession(options = {}) {
      */
     start() {
       if (disposed) throw new Error("policy session disposed");
-      if (checkerReadyPromise === null || checkerReadySettled) newCheckerPromise();
+      if (checkerReadyPromise === null) newCheckerPromise();
       if (worker === null) {
         try {
           start();
@@ -12797,27 +12134,9 @@ function createPolicySession(options = {}) {
     get checker() {
       return checkerIdentity;
     },
-    /**
-     * Claim a one-time acceptance record and get back the exact tree the
-     * policy Worker accepted with it. The frame's render path is wired to
-     * this, so a commit cannot happen without an acceptance this session
-     * issued and has not already spent.
-     *
-     * Returns `{ ok: true, tree }` or `{ ok: false, reason }`.
-     */
-    claimAcceptance(token) {
-      return acceptances.claim(token, { generation });
-    },
-    get acceptanceStats() {
-      return acceptances.stats;
-    },
-    get pendingAcceptances() {
-      return acceptances.size;
-    },
     /** Invalidate in-flight work for the previous document. */
     nextGeneration() {
       generation += 1;
-      acceptances.invalidate((token) => token.generation !== generation);
       return generation;
     },
     /** Idempotent: settles everything pending and releases the Worker. */
@@ -12852,28 +12171,13 @@ function createPolicySession(options = {}) {
 }
 
 // src/cdn.js
-setClassAllowlist(frame_manifest_default.classes);
-function guardHtml(html) {
-  if (typeof html !== "string") throw new TypeError("guardHtml: expected an HTML string");
-  const pre = preprocessHtml(html);
-  if (pre.status === "rejected") return { status: "rejected", reasons: [pre.reason] };
-  return checkTree(pre.raw);
-}
+var LEAN_AUTHORITY2 = "lean-wasm";
 function createGuardFrame(options = {}) {
-  const { policy = null, claimAcceptance = null, ...rest } = options;
-  const claim = claimAcceptance ?? (policy && typeof policy.claimAcceptance === "function" ? (token) => policy.claimAcceptance(token) : null);
-  if (typeof claim !== "function") {
-    throw new TypeError(
-      "createGuardFrame: pass `policy` (a createPolicySession/createGuardPolicySession session) or `claimAcceptance`. This entry point renders only acceptance records issued by the Lean/Wasm authority; it does not accept a tree."
-    );
-  }
-  return createSandboxFrame({ ...rest, manifest: frame_manifest_default, claimAcceptance: claim });
+  return createSandboxFrame({ ...options, manifest: frame_manifest_default });
 }
 export {
-  ACCEPTANCE_NONCE_BYTES,
-  ACCEPTANCE_REGISTRY_MAX,
   LEAN_ABI_VERSION,
-  LEAN_AUTHORITY,
+  LEAN_AUTHORITY2 as LEAN_AUTHORITY,
   LEAN_CHECKER_VERSION,
   LEAN_PROFILE,
   POLICY_PROTOCOL_VERSION,
@@ -12885,15 +12189,10 @@ export {
   STARTUP_TIMEOUTS,
   STARTUP_WARNINGS,
   StartupError,
-  checkTree,
-  createAcceptanceRegistry,
   createBlobWorker,
   createGuardFrame,
   createPolicySession,
   createRuntimeController,
-  guardHtml,
-  isAcceptanceToken,
-  isValidated,
   frame_manifest_default as manifest,
   parseHtmlToRaw,
   preprocessHtml

@@ -1,12 +1,15 @@
 // Step definitions for the frame protocol: fixed-point re-validation, message
 // source and schema checks, and the frame document's sandbox and CSP.
 // JavaScript-only rules: R-FRAME-FIXED-POINT, R-FRAME-MESSAGE-SCHEMA, R-FRAME-CSP-SINKS.
-import { Given, When, Then } from "@cucumber/cucumber";
+import { Given, When, Then, After } from "@cucumber/cucumber";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
 import { createSandboxFrame, sanitizeEvent, buildFrameDocument } from "../../src/host.js";
 import { checkTree, isValidated, setClassAllowlist } from "../../src/policy.js";
 import { parseHtmlToRaw } from "../../src/adapters/parse5.js";
+import { startFrame } from "../../src/frame.js";
+import { createFrameSender } from "../../src/frame-channel.js";
+import { FRAME_PROTOCOL_VERSION } from "../../src/frame-protocol.js";
 
 const MANIFEST = { script: "", css: "", scriptHash: "S", cssHash: "C" };
 
@@ -21,7 +24,20 @@ function newHost(world) {
     onEvent: (e) => world.hostEvents.push(e),
     onStatus: (s) => world.hostStatuses.push(s),
   });
+  world.sandboxWindow = new JSDOM('<div id="root"></div>').window;
+  world.frameReports = [];
+  world.testParent = { postMessage: msg => world.frameReports.push(msg) };
+  Object.defineProperty(world.sandboxWindow, "parent", { value: world.testParent });
+  startFrame(world.sandboxWindow);
 }
+
+After(function () {
+  this.frame?.destroy();
+  this.sender?.dispose();
+  this.framePort?.close();
+  if (this.sandboxWindow) { this.sandboxWindow.document.body.remove(); this.sandboxWindow.close(); }
+  this.hostWindow?.close();
+});
 
 // --- Given ------------------------------------------------------------------
 
@@ -59,7 +75,23 @@ Given("a frame event with an inherited field", function () {
 // --- When -------------------------------------------------------------------
 
 When("the host is asked to render it", async function () {
-  this.renderResult = await this.frame.render(this.tree);
+  assert.equal(this.frame.render, undefined);
+  const win = this.sandboxWindow;
+  win.dispatchEvent(new win.MessageEvent("message", { source: this.testParent, data: { type: "render", seq: 1, tree: this.tree } }));
+  this.renderResult = this.frameReports.at(-1).type === "rendered";
+});
+
+When("the private policy port delivers it", async function () {
+  const wasm = this.engines.find(engine => engine.name === "wasm");
+  if (wasm) assert.equal((await wasm.checkCandidates([this.tree]))[0].status, "accepted");
+  const channel = new MessageChannel();
+  const ids = { instanceId: "bdd-frame", sessionId: "bdd-session" };
+  this.framePort = channel.port2;
+  const win = this.sandboxWindow;
+  win.dispatchEvent(new win.MessageEvent("message", { source: this.testParent,
+    data: { type: "bootstrap", protocol: FRAME_PROTOCOL_VERSION, ...ids }, ports: [channel.port2] }));
+  this.sender = createFrameSender(channel.port1, { ...ids, timeoutMs: 1000 });
+  this.renderResult = (await this.sender.render(this.tree, { generation: 0, requestId: 1 })).ok;
 });
 
 When("the host receives that event from an unrelated window", function () {
@@ -87,11 +119,13 @@ Then("the tree is a policy fixed point", function () {
 
 Then("the host refuses to render it", function () {
   assert.equal(this.renderResult, false);
-  assert.equal(this.hostStatuses.at(-1)?.kind, "refused");
+  assert.equal(this.frameReports.at(-1)?.type, "refused");
+  assert.equal(this.sandboxWindow.document.getElementById("root").textContent, "");
 });
 
-Then("the host accepts it for rendering", function () {
+Then("the private port acknowledges rendering", function () {
   assert.equal(this.renderResult, true);
+  assert.equal(this.sandboxWindow.document.getElementById("root").textContent, "accepted content");
 });
 
 Then("the host ignores it", function () {

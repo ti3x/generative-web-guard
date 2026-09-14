@@ -1069,19 +1069,22 @@
       "id": "R-FRAME-FIXED-POINT",
       "class": "frame",
       "severity": "critical",
-      "title": "Only policy fixed points are rendered",
-      "statement": "Given any tree sent to the frame or the host renderer, it is re-validated and rendered only if the policy returns it unchanged with no changes; forged, stale or tampered trees are refused.",
+      "title": "Frame commits only through the private authority port",
+      "statement": "The frame accepts trees only through its private policy Worker port, with identity and replay checks. Parent render messages are refused even before port binding. The renderer retains structural, namespace/tag, and forbidden-attribute construction assertions but does not repeat policy normalization. Lean candidate acceptance implies the reference fixed-point guarantee.",
       "engines": [
         "js"
       ],
       "mechanisms": [
-        "frame:revalidate",
-        "host:revalidate"
+        "frame:private-port",
+        "frame:sequence",
+        "renderer:construction-contract"
       ],
       "cites": [
         "src/frame.js",
+        "src/frame-channel.js",
         "src/host.js",
-        "src/policy.js#isValidated"
+        "src/render.js",
+        "lean/Guard/Props/CandidateReplay.lean#candidate_reference_fixed_point"
       ],
       "proofs": [],
       "references": []
@@ -1091,7 +1094,7 @@
       "class": "frame",
       "severity": "high",
       "title": "Frame messages are source-checked and schema-checked",
-      "statement": "Given a message, the host acts only if it comes from the frame window with a null origin and its event has known, well-typed own fields; the frame acts only on messages from its parent.",
+      "statement": "The host accepts frame events only from the exact frame window at null origin and only known, typed own fields. The frame accepts parent messages only to bootstrap a private port; render messages on that port must match instance/session identity and have a newer sequence number. Parent trees, foreign sessions and replayed sequences never commit.",
       "engines": [
         "js"
       ],
@@ -1152,7 +1155,7 @@
       "class": "structure",
       "severity": "critical",
       "title": "Accepted output satisfies the structural policy and is a fixed point",
-      "statement": "Given any raw tree, every accepted output satisfies the explicit output predicate (allowed elements, canonical attribute values, namespace nesting, text and structural bounds), and checking that output again returns the identical tree with no changes. Candidates failing either postcondition are rejected. In production the checker that decides is the Lean implementation compiled to WebAssembly, reached through a versioned single-document ABI; the JavaScript candidate must equal the accepted tree, and a missing, failing, rejecting, malformed or timed-out checker refuses to render rather than falling back to JavaScript acceptance.",
+      "statement": "Every candidate accepted by the production Lean/Wasm checker satisfies the output policy and explicit canonical representation checks. The candidate_reference_fixed_point theorem proves the full reference checker would accept that exact tree without changes; replay is not executed in production. JS builds proposals and diagnostics only. Missing, failing, rejecting, malformed or timed-out Lean refuses to render. Frames receive accepted trees exclusively over the private Worker port; there is no parent-message or token-claim render API.",
       "engines": [
         "js",
         "lean"
@@ -1172,7 +1175,10 @@
         "lean/Guard/Policy/Accept.lean#policyOk",
         "lean/Guard/Policy/Check.lean#checkTree",
         "lean/Guard/Io/Abi.lean#checkDocument",
-        "lean/Guard/Io/Decode.lean#decodeDocument"
+        "lean/Guard/Io/Decode.lean#decodeDocument",
+        "lean/Guard/Policy/Candidate.lean#acceptCandidate",
+        "lean/Guard/Props/CandidateReplay.lean#candidate_reference_fixed_point",
+        "lean/Guard/Io/Decode.lean#decodeCandidateDocument"
       ],
       "proofs": [
         "Guard.Props.accepted_policy",
@@ -1186,7 +1192,17 @@
         "Guard.Props.accepted_descendant",
         "Guard.Props.accepted_element_allowed",
         "Guard.Props.accepted_no_script",
-        "Guard.Props.accepted_no_handler"
+        "Guard.Props.accepted_no_handler",
+        "Guard.Props.candidate_permits",
+        "Guard.Props.candidate_representation",
+        "Guard.Props.candidate_node_bound",
+        "Guard.Props.candidate_text_bound",
+        "Guard.Props.candidate_descendant",
+        "Guard.Props.candidate_sorted_attrs",
+        "Guard.Props.candidate_unique_attrs",
+        "Guard.Props.candidate_attribute_validator",
+        "Guard.Props.candidate_normalization",
+        "Guard.Props.candidate_reference_fixed_point"
       ],
       "proofScope": "Theorems cover the postcondition-guarded Lean checker over Raw/Node values. They do not prove normalization always succeeds, JS equivalence, parsing, serialization, rendering, runtime isolation, or browser semantics. Making that checker the production authority does not extend the theorems to the Emscripten runtime, the C shim, the JSON codec on either side, the trusted glue or the transport; and the resource bounds that keep the checker inside an engine's call stack are measurements, not theorems.",
       "references": []
@@ -1236,7 +1252,10 @@
         "Guard.Props.attrCanonical_restricts",
         "Guard.Props.restricts_element",
         "Guard.Props.restricts_forced",
-        "Guard.Props.restricts_textOnly"
+        "Guard.Props.restricts_textOnly",
+        "Guard.Props.candidate_no_excluded_element",
+        "Guard.Props.candidate_no_excluded_attribute",
+        "Guard.Props.candidate_restricts_permits"
       ],
       "proofScope": "The certificate covers the shipped profile against the generated inventory; the exclusion and value contracts hold for every profile that certifies. They do not prove the generator, an arbitrarily edited inventory, the JavaScript validator, the parser, the renderer or the browser correct.",
       "references": []

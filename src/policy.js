@@ -317,6 +317,13 @@ function normalizeTree(rawRoot) {
   return { status: "validated", tree: root(children), changes };
 }
 
+/** Internal proposal builder. A proposal is not permission to render. */
+export function buildCandidate(rawRoot) {
+  const result = normalizeTree(rawRoot);
+  return result.status === "validated" ? { ...result, status: "proposed" } : result;
+}
+
+// Reference/test-only acceptance; not used by the production Worker.
 // Mirrors Lean's explicit output predicate. It verifies a candidate without
 // repairing it; the normalizer above is not trusted to satisfy it implicitly.
 export function policyOk(tree) {

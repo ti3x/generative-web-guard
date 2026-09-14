@@ -1,6 +1,6 @@
 // Demo host application. Wires together: QuickJS worker runtime -> view string
 // -> POLICY WORKER (bounded parse5 preprocessing + candidate construction +
-// LEAN/WASM ACCEPTANCE) -> one-time acceptance record -> sandboxed frame.
+// LEAN/WASM ACCEPTANCE) -> private port -> sandboxed frame.
 //
 // The render path is createGuard: it owns the frame, the policy Worker with
 // its Lean/Wasm authority, the private port that carries accepted trees from
@@ -24,7 +24,6 @@ import { createSandboxFrame } from "../src/host.js";
 import { createRuntimeController } from "../src/runtime/controller.js";
 import { createPolicySession } from "../src/policy-client.js";
 import { PREPROCESS_LIMITS } from "../src/policy-protocol.js";
-import { setClassAllowlist } from "../src/policy.js";
 // The two Worker payloads, embedded as source by scripts/build.mjs. Both
 // Workers are created from blob: URLs, never from a script URL:
 //   * a cross-origin Worker URL fails on every engine under every CSP,
@@ -38,11 +37,6 @@ import policyWorkerSource from "guard:policy-worker-source";
 import { createBlobWorker } from "../src/startup.js";
 import { createGuardWith } from "../src/guard.js";
 
-// The frontend now lives in the policy Worker, but src/host.js keeps its own
-// defence-in-depth re-check of any tree handed to the frame, so the host copy
-// of the policy still needs the build's class allowlist. Removing that second
-// check is Phase 6 work, not this phase's.
-setClassAllowlist(manifest.classes);
 
 // The integrated API, assembled from source the same way src/cdn-full.js
 // assembles the shipped createGuard: same frame, same policy Worker, same
@@ -69,7 +63,7 @@ function report(lines) {
 
 let guard = null;
 let policy = null; // probe-only: the low-level session the negative controls drive
-let probeFrame = null; // probe-only: a legacy record-path frame for the acceptance controls
+let probeFrame = null; // probe-only: an unbound port-only frame for parent-message controls
 
 // Startup diagnostics, kept as plain data so the browser check can read them.
 // Each entry is one stage outcome: a CSP failure in the frame produces no
@@ -386,27 +380,48 @@ window.__guardPolicyProbe = {
       return { ok: false, ...startupFailure(error) };
     }
   },
-  // NEGATIVE CONTROL, in the browser, on the shipped bytes: a fabricated
-  // acceptance record and a replayed one must both fail to render. Neither
-  // touches the policy Worker; both are refused by the frame's render path.
+  // Negative controls on the actual frame: parent messages cannot render,
+  // and a duplicate sequence on a private test port cannot commit twice.
   async acceptanceControls() {
     const result = await policySession().preprocess('<p class="card">control</p>');
     if (result.status !== "accepted") return { accepted: false, reason: result.reason ?? null };
-    // A dedicated record-path frame, off-screen, so this control is separate
-    // from the guard's own frame (which is port-bound and takes no records).
+    // A dedicated inert frame, off-screen, for actual parent-message refusals.
     if (!probeFrame) {
       const box = document.createElement("div");
       box.style.display = "none";
       document.body.appendChild(box);
-      probeFrame = createSandboxFrame({ container: box, manifest, claimAcceptance: (token) => policySession().claimAcceptance(token) });
+      probeFrame = createSandboxFrame({ container: box, manifest });
     }
-    const forged = { ...result.acceptance, nonce: "0".repeat(result.acceptance.nonce.length) };
-    const forgedRendered = await probeFrame.render(forged);
-    const bareTreeRendered = await probeFrame.render(result.tree);
-    // The one-time property is checked through the session, so this control
-    // does not replace the document the rest of the page is asserting about.
-    const genuine = policySession().claimAcceptance(result.acceptance).ok;
-    const replayed = policySession().claimAcceptance(result.acceptance).ok;
+    await probeFrame.ready;
+    const tryParentRender = (payload, seq) => new Promise((resolve) => {
+      const timer = setTimeout(() => { window.removeEventListener("message", listen); resolve(true); }, 1000);
+      function listen(event) {
+        if (event.source !== probeFrame.element.contentWindow || event.data?.seq !== seq) return;
+        clearTimeout(timer); window.removeEventListener("message", listen);
+        resolve(event.data.type !== "refused");
+      }
+      window.addEventListener("message", listen);
+      probeFrame.element.contentWindow.postMessage({ type: "render", seq, ...payload }, "*");
+    });
+    const forgedRendered = await tryParentRender({ acceptance: { ...result.acceptance, nonce: "0".repeat(32) } }, 801);
+    const bareTreeRendered = await tryParentRender({ tree: result.tree }, 802);
+    // Browser-only protocol probe: transfer a fresh test port to the hidden
+    // frame, then replay the same sequence number. No public commit API exists.
+    const channel = new MessageChannel();
+    const ids = { instanceId: "browser-probe", sessionId: `probe-${Date.now()}` };
+    await probeFrame.attachPort(channel.port2, ids);
+    const command = { protocol: 1, kind: "frame/render", ...ids, seq: 1, generation: 0, requestId: 1, tree: result.tree };
+    const send = () => new Promise(resolve => {
+      const timer = setTimeout(() => { channel.port1.onmessage = null; resolve(false); }, 150);
+      channel.port1.onmessage = event => {
+        clearTimeout(timer); channel.port1.onmessage = null;
+        resolve(event.data.kind === "frame/rendered");
+      };
+      channel.port1.postMessage(command);
+    });
+    const genuine = await send();
+    const replayed = await send();
+    channel.port1.close();
     return {
       accepted: true,
       authority: result.authority,

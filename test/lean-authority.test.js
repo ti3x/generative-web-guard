@@ -26,7 +26,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
-import { createPolicyCore, handlePolicyRequest, sameTree, LEAN_AUTHORITY } from "../src/policy-core.js";
+import { createPolicyCore, handlePolicyRequest, LEAN_AUTHORITY } from "../src/policy-core.js";
 import { createPolicySession } from "../src/policy-client.js";
 import { createLeanChecker } from "../src/lean-checker.js";
 import { createSandboxFrame } from "../src/host.js";
@@ -128,6 +128,20 @@ function session(workerOptions = {}, sessionOptions = {}) {
 // The authority itself: identity, sealing, and what the ABI will accept
 // ---------------------------------------------------------------------------
 
+test("[R-CHECK-ACCEPTANCE] eager policy startup reuses its promise before and after readiness", async () => {
+  const { client } = session();
+  try {
+    const first = client.start();
+    assert.equal(client.start(), first, "concurrent starts share one startup");
+    const identity = await first;
+    assert.equal(client.start(), first, "a ready Worker must not get an unsettled replacement promise");
+    assert.deepEqual(await client.start(), identity);
+    assert.equal(client.stats.sessions, 1);
+  } finally {
+    client.dispose();
+  }
+});
+
 test("[R-CHECK-ACCEPTANCE] the shipped module reports this build's checker identity and the frontend's bounds", { skip }, async () => {
   const checker = await realChecker();
   assert.equal(checker.identity.abi, LEAN_ABI_VERSION);
@@ -164,8 +178,9 @@ test("[R-CHECK-ACCEPTANCE] the instance's configuration is sealed: the same conf
   }
   // And the sealed list is still the one that decides.
   const verdict = checker.check("r", doc(el([txt("x")], [["class", "card evil"]], "p")));
-  assert.equal(verdict.status, "accepted");
-  assert.deepEqual(verdict.tree.children[0].attrs, [["class", "card"]]);
+  assert.equal(verdict.status, "rejected");
+  assert.equal(verdict.tree, undefined);
+  assert.equal(checker.check("allowed", doc(el([], [["class", "card"]], "p"))).status, "accepted");
 });
 
 test("[R-CHECK-ACCEPTANCE] a check request carries only the document, so nothing on the hot path can set policy", () => {
@@ -197,13 +212,13 @@ test("[R-CHECK-ACCEPTANCE] a canonical document round trips through the ABI exac
   const first = checker.check("r1", canonical);
   assert.equal(first.status, "accepted");
   assert.deepEqual(first.tree, canonical);
-  assert.equal(first.changes, 0);
+  assert.equal("changes" in first, false);
   // And it is a fixed point: feeding the accepted tree back changes nothing.
   const second = checker.check("r2", first.tree);
   assert.equal(second.status, "accepted");
   assert.deepEqual(second.tree, first.tree);
-  assert.equal(second.changes, 0);
-  assert.ok(sameTree(first.tree, second.tree));
+  assert.equal("changes" in second, false);
+  assert.deepEqual(first.tree, second.tree);
 });
 
 test("[R-CHECK-ACCEPTANCE] the decoder rejects malformed documents instead of repairing them", { skip }, async () => {
@@ -212,8 +227,8 @@ test("[R-CHECK-ACCEPTANCE] the decoder rejects malformed documents instead of re
     [{ kind: "text" }, /missing-field:text/],
     [{ kind: "text", text: 7 }, /field-not-string:text/],
     [{ kind: "text", text: "a", ns: "html" }, /unknown-field:ns/],
-    [{ kind: "mystery" }, /unknown-node-kind:mystery/],
-    [{ kind: "root", children: [] }, /unknown-node-kind:root/],
+    [{ kind: "mystery" }, /unknown-node-kind/],
+    [{ kind: "root", children: [] }, /unknown-node-kind/],
     [{ kind: "el", ns: "html", tag: "p", children: [] }, /missing-field:attrs/],
     [{ kind: "el", ns: "html", tag: "", attrs: [], children: [] }, /tag-empty/],
     // A malformed attribute entry is an ERROR, not a silent drop. This is the
@@ -260,17 +275,16 @@ test("[R-CHECK-ACCEPTANCE] NULs, lone surrogates and supplementary characters co
   assert.equal(lone.tree.children[0].children[0].text, "a�b");
 
   // A NUL is valid UTF-8 and is transported, then removed by the policy's text
-  // cleaning -- not used as a terminator anywhere. If it were, "a" would come
-  // back instead of "ab".
+  // predicate. The candidate ABI refuses it without repairing or truncating.
   const nul = checker.check("r", doc(el([txt("a b")], [], "p")));
-  assert.equal(nul.status, "accepted");
-  assert.equal(nul.tree.children[0].children[0].text, "ab");
+  assert.equal(nul.status, "rejected");
+  assert.equal(nul.tree, undefined);
 
   // A NUL in an attribute name cannot smuggle an allowed name past the
-  // allowlist: the attribute is dropped.
+  // allowlist: the candidate is rejected.
   const nulAttr = checker.check("r", doc(el([txt("x")], [["cla ss", "card"]], "p")));
-  assert.equal(nulAttr.status, "accepted");
-  assert.deepEqual(nulAttr.tree.children[0].attrs, []);
+  assert.equal(nulAttr.status, "rejected");
+  assert.equal(nulAttr.tree, undefined);
 });
 
 test("[R-LIMIT-TREE] the decoder's own bounds refuse oversized documents before the checker walks them", { skip }, async () => {
@@ -416,8 +430,7 @@ test("[R-CHECK-ACCEPTANCE] the response validator refuses anything that is not t
     [{ ...base, tree: undefined }, "lean-accepted-without-tree"],
     [{ ...base, tree: { kind: "el", children: [] } }, "lean-tree-not-root"],
     [{ ...base, tree: { kind: "root", children: [{ kind: "el" }] } }, "lean-tree-malformed"],
-    [{ ...base, changes: 1 }, "lean-change-records-inconsistent"],
-    [{ ...base, changes: -1 }, "lean-changes-not-count"],
+    [{ ...base, tree: doc(doc()) }, "lean-tree-malformed"],
     // A rejection must not smuggle a tree back with it.
     [{ ...base, status: "rejected", reasons: ["x"], tree: forbidden }, "lean-rejected-with-tree"],
   ];
@@ -452,7 +465,7 @@ test("[R-CHECK-ACCEPTANCE] control: when Lean rejects a benign document, nothing
   assert.equal(result.status, "rejected");
   assert.equal(result.reason.code, "lean-rejected");
   assert.equal(result.acceptance, undefined);
-  assert.equal(client.acceptanceStats.recorded, 0);
+  assert.equal(client.stats.accepted, 0);
   client.dispose();
 });
 
@@ -659,7 +672,7 @@ test("[R-FRAME-MESSAGE-SCHEMA] control: a spoofed acceptance is refused -- wrong
     assert.equal(result.status, "rejected", code);
     assert.equal(result.reason.code, code);
     assert.equal(result.acceptance, undefined);
-    assert.equal(client.acceptanceStats.recorded, 0);
+    assert.equal(client.stats.accepted, 0);
     client.dispose();
   }
 });
@@ -671,23 +684,29 @@ test("[R-FRAME-MESSAGE-SCHEMA] control: a fabricated record cannot be claimed, a
   const accepted = await client.preprocess(BENIGN);
   assert.equal(accepted.status, "accepted");
 
+  // Retired reference registry, not a session/frame commit API.
+  assert.equal(client.claimAcceptance, undefined);
+  const registry = createAcceptanceRegistry();
+  registry.record(accepted.acceptance, accepted.tree);
   // A record this session never issued.
   const forged = { ...accepted.acceptance, nonce: "0".repeat(ACCEPTANCE_NONCE_BYTES * 2) };
-  assert.equal(client.claimAcceptance(forged).ok, false);
-  assert.equal(client.claimAcceptance(forged).reason.code, "acceptance-unknown-or-claimed");
+  assert.equal(registry.claim(forged).ok, false);
+  assert.equal(registry.claim(forged).reason.code, "acceptance-unknown-or-claimed");
   // Nonsense shapes.
   for (const bad of [null, undefined, {}, "nonce", { nonce: 1 }, { ...accepted.acceptance, nonce: "zz" }]) {
-    assert.equal(client.claimAcceptance(bad).ok, false);
+    assert.equal(registry.claim(bad).ok, false);
   }
   // The genuine one still works exactly once.
-  assert.equal(client.claimAcceptance(accepted.acceptance).ok, true);
+  assert.equal(registry.claim(accepted.acceptance).ok, true);
 
   // A record whose document has been superseded is dropped when the generation
   // advances, so a late commit cannot render content the app moved past.
   const second = await client.preprocess(BENIGN);
   assert.equal(second.status, "accepted");
+  registry.record(second.acceptance, second.tree);
   client.nextGeneration();
-  const stale = client.claimAcceptance(second.acceptance);
+  registry.invalidate(token => token.generation !== client.generation);
+  const stale = registry.claim(second.acceptance);
   assert.equal(stale.ok, false);
   assert.equal(stale.reason.code, "acceptance-unknown-or-claimed");
   client.dispose();
@@ -702,14 +721,16 @@ test("[R-FRAME-MESSAGE-SCHEMA] control: an acceptance record is one-time, so a r
   const core = createPolicyCore({ classes: CLASSES, checker });
   const { client } = session({ core });
   const accepted = await client.preprocess(BENIGN);
-  const first = client.claimAcceptance(accepted.acceptance);
+  const registry = createAcceptanceRegistry();
+  registry.record(accepted.acceptance, accepted.tree);
+  const first = registry.claim(accepted.acceptance);
   assert.equal(first.ok, true);
   assert.deepEqual(first.tree, accepted.tree);
-  const replay = client.claimAcceptance(accepted.acceptance);
+  const replay = registry.claim(accepted.acceptance);
   assert.equal(replay.ok, false);
   assert.equal(replay.reason.code, "acceptance-unknown-or-claimed");
-  assert.equal(client.acceptanceStats.claimed, 1);
-  assert.equal(client.acceptanceStats.refused, 1);
+  assert.equal(registry.stats.claimed, 1);
+  assert.equal(registry.stats.refused, 1);
   client.dispose();
 });
 
@@ -750,32 +771,45 @@ test("[R-CHECK-ACCEPTANCE] control: a candidate builder forced to emit a forbidd
     doc(el([], [["onclick", "steal()"]], "div")),
     doc(el([], [["src", "https://attacker.invalid/x"]], "img")),
     doc(el([], [], "iframe")),
-    // A tree that is merely DIFFERENT from what Lean accepted, not obviously
-    // unsafe. The differential gate has to catch this too, or a candidate
-    // builder bug could change what renders.
-    doc(el([txt("substituted")], [["class", "card"]], "p")),
+    doc(el([], [["title", "a"], ["class", "card"]], "div")),
+    doc(el([], [["class", "card"], ["class", "card"]], "div")),
+    doc(el([], [], "DIV")),
+    doc(el([], [], "button")),
+    doc(txt("")),
   ];
   for (const tree of forbidden) {
     const core = createPolicyCore({
       classes: CLASSES,
       checker,
-      candidateBuilder: () => ({ status: "validated", tree, changes: [] }),
+      candidateBuilder: () => ({ status: "proposed", tree, changes: [] }),
     });
     const reply = handlePolicyRequest(core, envelope());
     assert.equal(reply.status, "rejected", JSON.stringify(tree).slice(0, 60));
-    assert.equal(reply.reason.code, "authority-mismatch");
+    assert.ok(["lean-rejected", "lean-error", "candidate-rejected"].includes(reply.reason.code), reply.reason.code);
     assert.equal(reply.tree, undefined);
     assert.equal(reply.acceptance, undefined);
   }
-  // A candidate builder that rejects what Lean accepted also refuses, rather
-  // than one side quietly winning.
+  // A benign substitution is intentionally a proposal, not a raw-input
+  // equivalence check. Lean accepts the candidate itself exactly once.
+  const replacement = doc(el([txt("substituted")], [["class", "card"]], "p"));
+  let checks = 0;
+  const proposing = createPolicyCore({ classes: CLASSES,
+    checker: { identity: checker.identity, check(id, tree) { checks++; assert.deepEqual(tree, replacement); return checker.check(id, tree); } },
+    candidateBuilder: () => ({ status: "proposed", tree: replacement, changes: [] }),
+  });
+  const acceptedProposal = handlePolicyRequest(proposing, envelope());
+  assert.equal(acceptedProposal.status, "accepted");
+  assert.deepEqual(acceptedProposal.tree, replacement);
+  assert.equal(checks, 1);
+
+  // A builder refusal never falls back to normalizing raw input in Lean.
   const rejecting = createPolicyCore({
     classes: CLASSES,
     checker,
     candidateBuilder: () => ({ status: "rejected", reasons: [{ code: "candidate-says-no" }] }),
   });
   const reply = handlePolicyRequest(rejecting, envelope());
-  assert.equal(reply.reason.code, "authority-mismatch");
+  assert.ok(["lean-rejected", "lean-error", "candidate-rejected"].includes(reply.reason.code), reply.reason.code);
   assert.match(reply.reason.detail, /candidate-says-no/);
 });
 
@@ -784,7 +818,7 @@ test("[R-CHECK-ACCEPTANCE] control: a checker that claims acceptance without a u
     const core = createPolicyCore({ classes: CLASSES, checker: corruptChecker(tree) });
     const reply = handlePolicyRequest(core, envelope());
     assert.equal(reply.status, "rejected", JSON.stringify(tree));
-    assert.ok(["authority-mismatch", "authority-tree-unvalidated", "worker-fault"].includes(reply.reason.code), reply.reason.code);
+    assert.ok(["authority-tree-malformed", "worker-fault"].includes(reply.reason.code), reply.reason.code);
     assert.equal(reply.acceptance, undefined);
   }
   // A checker that returns no verdict at all, or a nonsense one.
@@ -807,7 +841,7 @@ test("[R-RT-ISOLATION] control: no message field can install, replace or disable
   // from the real authority, with a real record.
   const attempts = [
     { checker: { check: () => ({ status: "accepted", tree: doc(el([], [], "script")) }) } },
-    { candidateBuilder: () => ({ status: "validated", tree: doc(el([], [], "script")), changes: [] }) },
+    { candidateBuilder: () => ({ status: "proposed", tree: doc(el([], [], "script")), changes: [] }) },
     { acceptance: { ok: true } },
     { authority: "js-checker" },
     { validated: true },
@@ -956,7 +990,7 @@ test("[R-RT-LIMITS] a module whose call throws is poisoned permanently and answe
 // The frame boundary: a commit requires a record, not a tree
 // ---------------------------------------------------------------------------
 
-test("[R-FRAME-MESSAGE-SCHEMA] control: a frame wired to a policy session commits records only, never a tree", { skip }, async () => {
+test("[R-FRAME-MESSAGE-SCHEMA] control: a frame has no parent commit API, even with a claimed acceptance", { skip }, async () => {
   const dom = new JSDOM("<!doctype html><div id='c'></div>", { url: "https://host.invalid/" });
   const previousWindow = globalThis.window;
   const previousDocument = globalThis.document;
@@ -974,28 +1008,10 @@ test("[R-FRAME-MESSAGE-SCHEMA] control: a frame wired to a policy session commit
       container: dom.window.document.getElementById("c"),
       manifest: { script: "", css: "", scriptHash: "S", cssHash: "C", classes: CLASSES },
       onStatus: ({ kind, detail }) => { if (kind === "refused") refusals.push(detail); },
-      claimAcceptance: (token) => client.claimAcceptance(token),
       startupTimeoutMs: 20,
     });
-    assert.equal(frame.requiresAcceptance, true);
-
-    // A bare tree -- including the very tree that was accepted -- is refused.
-    assert.equal(await frame.render(accepted.tree), false);
-    assert.match(refusals.at(-1), /requires a policy-worker acceptance record/);
-    // A fabricated record is refused.
-    assert.equal(await frame.render({ ...accepted.acceptance, nonce: "1".repeat(32) }), false);
-    assert.match(refusals.at(-1), /acceptance refused \(acceptance-unknown-or-claimed/);
-    // Nonsense is refused.
-    for (const bad of [null, undefined, "tree", 7, {}]) {
-      assert.equal(await frame.render(bad), false);
-    }
-    // The genuine record commits once. The frame has not bootstrapped in this
-    // JSDOM, so the commit is queued and reported as accepted-for-commit; the
-    // point is that it was not refused.
-    assert.equal(await frame.render(accepted.acceptance), true);
-    // And a replay of it is refused.
-    assert.equal(await frame.render(accepted.acceptance), false);
-    assert.match(refusals.at(-1), /acceptance refused/);
+    assert.equal(frame.render, undefined, "neither a tree nor a genuine/forged token has a commit API");
+    assert.equal(frame.clear, undefined, "clear must also go through the authority");
     frame.destroy();
     client.dispose();
   } finally {

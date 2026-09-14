@@ -60,9 +60,9 @@
 #define GUARD_ERR_BUSY (-10)
 
 // Lean runtime and module initializers. The module initializer name is
-// derived from the module path: Guard -> initialize_Guard.
+// derived from the module path: Guard.Wasm -> initialize_Guard_Wasm.
 extern void lean_initialize_runtime_module(void);
-extern lean_object *initialize_Guard(uint8_t builtin, lean_object *w);
+extern lean_object *initialize_Guard_Wasm(uint8_t builtin, lean_object *w);
 // Exported by Guard/Io/Abi.lean. Each consumes its arguments.
 extern lean_object *guard_abi_info(lean_object *unit);
 extern lean_object *guard_configure(lean_object *config);
@@ -131,7 +131,7 @@ static int utf8_valid(const unsigned char *s, unsigned n) {
 int guard_init(void) {
   if (initialized) return GUARD_OK;
   lean_initialize_runtime_module();
-  lean_object *res = initialize_Guard(1 /* builtin */, lean_io_mk_world());
+  lean_object *res = initialize_Guard_Wasm(1 /* builtin */, lean_io_mk_world());
   int ok = lean_io_result_is_ok(res);
   if (ok) lean_dec_ref(res); else { lean_io_result_show_error(res); lean_dec(res); }
   lean_io_mark_end_initialization();

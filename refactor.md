@@ -427,20 +427,23 @@ view uses the same acceptance path. Source APIs cannot accidentally bypass it.
 ### Phase 6 — Reduce duplicated policy enforcement
 
 A self-contained handoff for a focused session: [docs/phase-6-plan.md](docs/phase-6-plan.md).
+Completed implementation, proof scope, verification, and before/after measurements:
+[docs/phase6-results.md](docs/phase6-results.md). API-removal rationale and design
+decisions: [docs/phrase6-feedback.md](docs/phrase6-feedback.md).
 
-- [ ] Split JS candidate construction/diagnostics from acceptance. It may
+- [x] Split JS candidate construction/diagnostics from acceptance. It may
   propose content but cannot declare a document safe for production rendering.
-- [ ] Implement the smaller Lean `acceptCandidate` checker with strict decoding
+- [x] Implement the smaller Lean `acceptCandidate` checker with strict decoding
   and canonicality obligations described above. Prove its concrete invariants
   and test preserved behavior before replacing production `checkTree`.
-- [ ] Remove repeated host/frame normalization and redundant JS acceptance
+- [x] Remove repeated host/frame normalization and redundant JS acceptance
   copies from the default runtime only after Phase 4/5 bypass tests still pass.
   Keep renderer assertions where they check its own construction contract.
-- [ ] Retain the full Lean normalizer and JS comparison as reference/test tools
+- [x] Retain the full Lean normalizer and JS comparison as reference/test tools
   initially. Stop requiring identical diagnostic change counts where the new
   contracts intentionally differ; continue independent safety, exact benign
   output, and agreement tests for shared semantic behavior.
-- [ ] Bundle only the candidate checker and necessary dependencies into the
+- [x] Bundle only the candidate checker and necessary dependencies into the
   production Wasm entry. Measure cold start, resident/peak memory, typical and
   maximum-size render latency, message copies, and compressed distribution
   size. Record before/after numbers on the supported browser matrix.

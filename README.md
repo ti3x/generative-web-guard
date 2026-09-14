@@ -48,15 +48,12 @@ Types does not exist on Firefox 141**, and **WebKit 26 does not gate
 
 The package ships two entry points, and the split is deliberate. The **integrated
 `createGuard` API and the mandatory Lean/Wasm authority live in the `./full`
-entry** (`cdn/generative-web-guard.full.min.js`, ~2.8 MB: it embeds both the
-Lean checker and the QuickJS Worker). The **default entry**
-(`cdn/generative-web-guard.js`, ~480 KB) is the low-level bundle:
-`guardHtml` (the JavaScript checker as a proposal, not an acceptance),
-`createPolicySession`, `createGuardFrame`, `checkTree` and the startup
-diagnostics, with no embedded Worker. Import from `./full` to render generated
-content safely; import the default only to compose the low-level pieces or to
-run `guardHtml` on your own thread. There is no small build of `createGuard`,
-because a secure render requires the embedded Lean authority.
+entry** (`cdn/generative-web-guard.full.min.js`). It embeds both the Lean
+checker and the QuickJS Worker. The **default entry** contains bounded parse5
+preprocessing, `createPolicySession`, `createGuardFrame`, and startup diagnostics,
+with no embedded Worker. `checkTree`, `isValidated`, and synchronous `guardHtml`
+are not public exports: JS-only validation cannot authorize a render.
+See [Phase 6 measurements](docs/phase6-results.md) for distribution sizes.
 
 
 `npm run build` writes two kinds of output. `dist/` contains local demo assets
@@ -107,31 +104,27 @@ infrastructure.
 
 ### The layer beneath
 
-`createGuard` is built from three exported pieces, available for hosts that
-need to compose them directly. The policy session owns the Worker that runs
-bounded parse5 preprocessing and the Lean/Wasm checker; it mints a **one-time
-acceptance record** next to Lean's verdict, and the frame commits that record,
-never a tree:
+For custom composition, create the frame first and bind the policy session to
+it. The session sends accepted trees directly to the frame; the host receives a
+`rendered` acknowledgement, not a tree or a claimable rendering token.
 
 ```js
 import { createGuardPolicySession, createGuardFrame } from "…/generative-web-guard.full.min.js";
-const policy = createGuardPolicySession();
-await policy.start();                                  // rejects if the checker cannot start
-const frame = createGuardFrame({ container, policy }); // commits records issued by this authority
+const frame = createGuardFrame({ container });
+const policy = createGuardPolicySession({ frame });
+await Promise.all([frame.ready, policy.start(), frame.whenBound()]);
 const result = await policy.preprocess("<h1>Hello</h1><script>alert(1)</script>");
-if (result.status === "accepted") await frame.render(result.acceptance);  // the RECORD, not the tree
+// result.status === "rendered" only after the private-port acknowledgement.
+await policy.preprocess(""); // clear through the same authority
+policy.dispose();
+frame.destroy();
 ```
 
-A record is one-time, so a replay renders nothing and a fabricated one is
-refused; `result.tree` is returned for host UI but passing it to
-`frame.render` is refused. `createGuardFrame` throws if given neither `policy`
-nor `claimAcceptance`, rather than producing a frame that would accept a bare
-tree.
-
-`guardHtml` is still exported and still synchronous, and it is still **only the
-JavaScript checker**: a proposal and a diagnostic, not an acceptance. It mints
-no record, so its output cannot be committed. Treat
-`status: "validated"` there as "the JavaScript checker had no objection".
+An unbound frame is inert. There is no `frame.render`, `frame.clear`, or
+`claimAcceptance` API. A session without a frame may return a Lean-accepted tree
+for headless diagnostics, but cannot commit it to any frame. The optional
+`{ preview: true }` request returns at most 16,000 characters of diagnostic
+markup from the accepted tree; display it with `textContent`, never reparse it.
 
 The full bundle also embeds the QuickJS worker and the Lean checker, avoiding
 cross-origin Worker URL restrictions and any runtime asset fetch:
@@ -194,9 +187,8 @@ section before choosing it.
 
 The full bundle also embeds the policy Worker. `createGuardPolicySession()`
 returns a host-side session whose `preprocess(html)` parses and checks off the
-main thread and always settles with `accepted`, `rejected` or `superseded`;
-`guardHtml` remains available and synchronous for callers that accept doing
-that work on their own thread.
+main thread. Attached sessions settle with `rendered`, `rejected`, or
+`superseded`; headless diagnostic sessions use `accepted` instead of `rendered`.
 
 The optional program linter is no longer exported by the default bundle
 (**breaking**: `gateProgram` moved out of `cdn/generative-web-guard.js`). It
@@ -218,17 +210,10 @@ the license for Generative Web Guard itself.
 
 ## Data flow
 
-```
-generated HTML ─────────────────────────────┐
-                                            ├─► POLICY WORKER ─► parse5 ─► bounded raw tree ─► JS candidate ─┐
-generated JS ─► QuickJS worker ─► view string┘   (terminable; no generated JS ever runs here)                │
-       ▲                                                                    LEAN/WASM checkTree decides ◄─────┘
-       │                                                                                  │
-       │                                    accepted tree + one-time acceptance record ───┘
-       │                                            │
-       │                        frame.render(record) ─► frame re-validates ─► DOM
-       │                                                    (null origin, CSP, Trusted Types where the engine has it)
-       └────────────────────── plain-data events (schema-checked) ◄──────────────────────────────────────┘
+```text
+HTML / QuickJS view -> policy Worker: parse5 -> JS proposal -> Lean acceptCandidate
+                                                        -> private port -> frame DOM
+QuickJS update <- host event schema check <- frame events
 ```
 
 Preprocessing is bounded before the policy runs: the source length is checked
@@ -244,12 +229,11 @@ storage, timers, host objects or module loader, so computed access and built-in
 dynamic evaluation reach nothing (`test/confinement.test.js`). The optional
 linter is a development diagnostic, shipped separately.
 
-No HTML string exists after the policy runs. The frame accepts only **one-time
-acceptance records** issued by the policy session, and renders the exact tree
-that session recorded with the record — so the host cannot substitute a tree
-between acceptance and rendering, a replayed record renders nothing, and a
-fabricated one is refused. The frame's own fixed-point re-check still runs on
-top of that.
+The rendering path never reparses HTML. The frame receives Lean's accepted tree
+only over its private Worker port; sequence and identity checks reject replay
+and foreign messages. The host wires the port but has no tree/token commit API.
+Optional diagnostic preview strings are not rendered. Renderer construction
+assertions remain, while repeated host/frame policy normalization is removed.
 
 ## Layout
 
@@ -262,7 +246,7 @@ top of that.
 | `features/` | Cucumber features tagged `@rule:`/`@cve:`, step definitions, engine hooks |
 | `red-team/corpus.json` | Reviewable hostile-input corpus with provenance, rule links, and preservation expectations |
 | `src/tree.js` | Tree format and structural limits |
-| `src/policy.js` | Validator algorithms, descriptor interpreter, normalizer, output checks, `checkTree`, `isValidated` |
+| `src/policy.js` | Validator algorithms and proposal builder; full `checkTree`/`isValidated` retained only for reference tests |
 | `src/adapters/parse5.js` | Production HTML frontend: bounded, iterative parse5 to raw tree |
 | `src/adapters/dom.js` | `DOMParser` adapter, kept only for parser-differential compatibility tests |
 | `src/policy-protocol.js` | Policy-Worker protocol version, message envelope, and preprocessing limits (units named) |
@@ -270,7 +254,10 @@ top of that.
 | `src/lean-abi.js` | The versioned single-document ABI: request builders, strict response validation, version and bounds constants |
 | `src/lean-checker.js` | One WebAssembly instance, sealed at startup; poisons itself on a trap and never falls back |
 | `src/lean-module.js` | The checker as a self-contained module: Emscripten factory plus the embedded binary |
-| `src/acceptance.js` | One-time acceptance records and the bounded registry that binds a verdict to a frame commit |
+| `src/acceptance.js` | Verdict identity records; retired registry retained only as a reference/test utility |
+| `lean/Guard/Policy/Candidate.lean` | Production output-policy and canonical-representation acceptance |
+| `lean/Guard/Props/CandidateReplay.lean` | Proof that candidate acceptance implies unchanged full reference acceptance |
+| `lean/Guard/Wasm.lean` | Minimal production import root, excluding normalization, batch IO and proofs |
 | `src/policy-worker.js` | Policy Worker entry; never executes generated JavaScript |
 | `src/policy-client.js` | Host-side session: identity, generation, request ids, timeouts, termination |
 | `src/render.js` | DOM construction and patching from a validated tree |
@@ -351,21 +338,17 @@ permitted **output trees**; it does not claim that a tighter profile accepts
 fewer raw inputs. Widening the inventory is a kernel change, and neither the
 generator nor an arbitrarily edited inventory is proved safe.
 
-These are proofs about a **guarded acceptance function**. The total normalizer
-first creates a candidate; a separate structural predicate checks it, and a
-second normalization must leave it unchanged. Failed postconditions reject the
-document. This adds runtime work and can reject a candidate that the earlier
-normalizer would have released. It does not prove the normalizer always produces
-acceptable output. Both JS and Lean implement these acceptance checks.
+The production checker is `acceptCandidate`: output policy plus canonical
+representation checks, with no normalization or replay. The theorem
+`candidate_reference_fixed_point` proves that every accepted candidate would
+pass the full reference checker unchanged with no changes. Generic profile
+exclusions, validator canonicality, node/text bounds, attribute ordering and
+uniqueness, and output-profile restriction are proved separately.
 
-**The demos and the CDN entry point now run the Lean checker compiled to
-WebAssembly as the acceptance authority.** The JavaScript checker still runs as
-a candidate builder and diagnostics source, and its candidate must equal Lean's
-accepted tree exactly or the document is refused; the tree that reaches the DOM
-is the one `checkTree` returned. Missing, failing, rejecting, malformed or
-timed-out Lean never falls back to JavaScript acceptance — it refuses to
-render, and `test/lean-authority.test.js` breaks the authority nine ways to
-demonstrate that rather than assert it.
+JS constructs a proposal and diagnostics once; Lean decides whether that
+candidate is acceptable. The Worker sends only Lean's returned tree over the
+private frame port. Missing, failing, rejecting, malformed or timed-out Lean
+never falls back to JavaScript acceptance.
 
 This is not a proof of JS equivalence, and differential tests never were one.
 What changed is which implementation the browser obeys. Parsing, JSON
@@ -397,37 +380,17 @@ npm run wasm:build           # Emscripten SDK + Lean wasm32 runtime image, then 
 npm run check:wasm           # load lean/wasm/dist/guard.mjs in Node, compare to policy.js
 ```
 
-Measured on this machine, this checkout:
-
-| | |
-|---|---|
-| `guard.wasm` | 1,707,724 bytes (1.63 MiB), gzip 344,164 |
-| JS glue (`guard.mjs`) | 73,680 bytes |
-| Base64 of the binary, as embedded | 2,276,968 chars, gzip 487,455 |
-| 523 differential cases through the production ABI | about 88 ms including instantiation |
-| Mismatches against `policy.js` | 0 |
-
-The binary is **embedded** in the Worker payloads rather than fetched, which is
-what keeps `connect-src 'none'` in the host policy and makes "the deployed
-bytes are the bytes that were built" one artifact to hash. The cost is size:
-
-| Artifact | Before | After | gzip before | gzip after |
-|---|---|---|---|---|
-| `cdn/policy-worker.min.js` | 210,128 | 2,620,458 | 57,546 | 584,383 |
-| `cdn/generative-web-guard.full.min.js` | 1,262,017 | 3,688,676 | 458,976 | 992,870 |
-| `cdn/generative-web-guard.js` (no checker) | 450,863 | 484,657 | 93,545 | 101,833 |
-
-A gzip-then-base64 embedding would cut that to about 459,000 embedded chars,
-and reducing the compiled checker is explicitly later work — this change is
-about correctness, and adding a `DecompressionStream` dependency to the trusted
-startup path was not worth it here. The numbers are recorded in
-`cdn/asset-manifest.json` on every build.
+The production build uses the minimal `Guard.Wasm` import root; the build rejects
+reference normalization, batch IO, and proof modules in its dependency closure.
+The binary remains embedded, not fetched, preserving `connect-src 'none'`.
+See [Phase 6 results](docs/phase6-results.md) for before/after startup, memory,
+latency, message copies, distribution sizes, and the compression experiment.
 
 Four things were needed to get there and are worth knowing:
 
 - Lean's runtime references four libuv functions for temp-file helpers. The wasm32 distribution ships no libuv, so `lean/wasm/shim.c` stubs them; the checker never touches the filesystem.
 - Initializing with `lean_initialize()` and linking `libLean` produced a 56 MB module. Using `lean_initialize_runtime_module()` and linking only `libInit` and `libleanrt` brought it to 1.4 MB. This is also why `Guard/Core/Json.lean` exists instead of `Lean.Data.Json`.
-- Emscripten's default 64 KB stack is far below what Lean assumes, but 16 MB turned out to be address space for nothing: `node scripts/wasm-audit.mjs` measures **104 bytes** of linear-memory stack for every case, because the recursion that matters compiles to wasm *call frames* on the engine's own stack, which `-sSTACK_SIZE` does not configure. The audited ceilings are now `INITIAL_MEMORY=80MB` (above the measured 53.6 MiB worst legal document, so growth never happens under load), `MAXIMUM_MEMORY=128MB` (a real ceiling: growth with no maximum is not one) and `STACK_SIZE=1MB` with `STACK_OVERFLOW_CHECK=1`.
+- Emscripten's default 64 KB stack is far below what Lean assumes, but 16 MB turned out to be address space for nothing: `node scripts/wasm-audit.mjs` measures **104 bytes** of linear-memory stack for every case, because the recursion that matters compiles to wasm *call frames* on the engine's own stack, which `-sSTACK_SIZE` does not configure. The audited ceilings are now `INITIAL_MEMORY=80MB` (above the measured 52.43 MiB peak heap break, with no growth in the audit workloads), `MAXIMUM_MEMORY=128MB` (a real ceiling: growth with no maximum is not one) and `STACK_SIZE=1MB` with `STACK_OVERFLOW_CHECK=1`.
 - The engine call stack is bounded by the *input* instead, and that bound is a per-engine measurement: WebKit 26 overflowed at 2,500 siblings where V8 managed 9,000. See [docs/csp.md](docs/csp.md#the-path-bound-is-an-engine-measurement).
 
 **Iterating on Lean sources** without rebuilding images:

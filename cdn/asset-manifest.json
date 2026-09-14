@@ -2,9 +2,39 @@
   "manifestVersion": 1,
   "note": "sha256 of each shipped artifact. These bind build CONTENTS and detect a stale or mismatched artifact. They do not prove provenance: nothing here is signed, and a hash says nothing about which toolchain or which sources produced the input. Deterministic by construction -- sorted keys, no timestamps.",
   "checker": {
-    "wasmBytes": 1707724,
-    "wasmSha256": "853b2bec7bf05d278b047bc99a7a8bd27d8766bbb7295fbdee0b766e9ddf1202",
-    "base64Chars": 2276968,
+    "entry": "Guard.Wasm",
+    "modules": [
+      "Guard.Core.Chars",
+      "Guard.Core.Json",
+      "Guard.Core.Limits",
+      "Guard.Core.ListUtil",
+      "Guard.Core.Tree",
+      "Guard.Io.Abi",
+      "Guard.Io.Decode",
+      "Guard.Policy.Accept",
+      "Guard.Policy.Candidate",
+      "Guard.Policy.Cap",
+      "Guard.Policy.Capabilities",
+      "Guard.Policy.Profile",
+      "Guard.Policy.Tables.Attrs",
+      "Guard.Policy.Tables.Html",
+      "Guard.Policy.Tables.Svg",
+      "Guard.Policy.Val",
+      "Guard.Rules",
+      "Guard.Validators",
+      "Guard.Validators.Color",
+      "Guard.Validators.Ident",
+      "Guard.Validators.Number",
+      "Guard.Validators.Path",
+      "Guard.Validators.Text",
+      "Guard.Validators.Transform",
+      "Guard.Wasm"
+    ],
+    "wasmBytes": 1591870,
+    "wasmSha256": "8171ae736acbcf635a8b2e149179445aed1f8347fdc0ba6e07f1309fb8ec3c56",
+    "encoding": "base64",
+    "embeddedBytes": 1591870,
+    "base64Chars": 2122496,
     "embeddedIn": [
       "cdn/policy-worker.min.js",
       "cdn/generative-web-guard.full.min.js"
@@ -12,32 +42,32 @@
     "fetched": false
   },
   "frame": {
-    "scriptBytes": 65290,
-    "scriptHash": "XlwTjqgkMscAV8ahiJZ1ZGFBU1Xg7Uw7S139Dk/RgVI=",
+    "scriptBytes": 41614,
+    "scriptHash": "0RBXc9G5DF1PNBJljYj7nR384Bn7GK1DKE22GTXXgOY=",
     "cssBytes": 2689,
     "cssHash": "Krlr2KhFjDPgFQ2Ffw87pI93sYzNjgUfAteJBYhgzCM=",
     "classes": 25
   },
   "assets": {
     "cdn/generative-web-guard.full.min.js": {
-      "bytes": 3709558,
-      "sha256": "b6b36ed7beb44f345cbf6e984acf0b01f70f41c6c5292607fdcfa6d8c5c64f03"
+      "bytes": 3492559,
+      "sha256": "fb4fb3185aa2ca2811370ad1c688b7c0949b03c1c3281653223e5b16f91a823e"
     },
     "cdn/generative-web-guard.js": {
-      "bytes": 500663,
-      "sha256": "ac3d4a6a0523c22c6c9f1f40db3a4c17ad65e8da33ee2245ca384632b39eefd9"
+      "bytes": 450617,
+      "sha256": "cbf40f049956efc5b6e4e20fea9fd3cbbf546cded9b135b6fae47b924ced7d79"
     },
     "cdn/generative-web-guard.lint.js": {
       "bytes": 201855,
       "sha256": "0f0e81561503eabdbd593dc09b9f85259d60286d58435e2424bcc6d322513004"
     },
     "cdn/generative-web-guard.min.js": {
-      "bytes": 316046,
-      "sha256": "db0b6528108f62fb634d53cb70f9c87f46f93a159e782019adbe263644391668"
+      "bytes": 277817,
+      "sha256": "263039c5f821a84ed8370b9b27283949d9ee75bcfc106872a3ff7ca27a84d394"
     },
     "cdn/policy-worker.min.js": {
-      "bytes": 2628310,
-      "sha256": "a604862fdf4030a0d03f7c987a76bebf639a19c5d756dc2b72b9de992457974d"
+      "bytes": 2449615,
+      "sha256": "99e257be83f88da0f3bddf673ce6ddfbc2a1e495dc45e3e1b65e45584a5cc26a"
     },
     "cdn/worker.min.js": {
       "bytes": 752247,
@@ -45,11 +75,11 @@
     },
     "lean/wasm/dist/guard.mjs": {
       "bytes": 73680,
-      "sha256": "54bb04beb83493613f61185301d92fcbaffaded3849378ea55370a6bb836199e"
+      "sha256": "4126ea0632ed783346ce9a67d393cbeda6dd13154a2a7f59e33d7ed0a59a2668"
     },
     "lean/wasm/dist/guard.wasm": {
-      "bytes": 1707724,
-      "sha256": "853b2bec7bf05d278b047bc99a7a8bd27d8766bbb7295fbdee0b766e9ddf1202"
+      "bytes": 1591870,
+      "sha256": "8171ae736acbcf635a8b2e149179445aed1f8347fdc0ba6e07f1309fb8ec3c56"
     }
   }
 }

@@ -3,7 +3,7 @@
 import { createPolicyCore, handlePolicyRequest } from "../src/policy-core.js";
 import { createFrameReceiver, createFrameSender } from "../src/frame-channel.js";
 import { POLICY_MESSAGE, POLICY_PROTOCOL_VERSION, replyEnvelope } from "../src/policy-protocol.js";
-import { isValidated } from "../src/policy.js";
+import { isTreeShaped } from "../src/tree.js";
 import { CLASSES } from "./lean-support.js";
 
 // Mirrors the entry point: attach installs a sender on the transferred port;
@@ -63,7 +63,7 @@ export function fakeFrame({ refuse = false } = {}) {
       ...ids,
       onRender: (tree) => {
         if (refuse) return { ok: false, reason: "frame declined" };
-        if (!isValidated(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
+        if (!isTreeShaped(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
         frame.rendered.push(tree);
         return { ok: true };
       },
@@ -73,4 +73,3 @@ export function fakeFrame({ refuse = false } = {}) {
   frame.dispose = () => { if (frame.receiver) frame.receiver.dispose(); };
   return frame;
 }
-

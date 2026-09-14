@@ -69,8 +69,8 @@ export function preprocessHtml(html, options = {}) {
 }
 
 /**
- * Compatibility wrapper for existing synchronous callers (tests, the Lean
- * differential, the CDN's guardHtml). Success returns the raw tree; a bounded
+ * Synchronous parsing helper for tests, the Lean differential, and callers
+ * that need raw syntax rather than acceptance. Success returns a raw tree; a bounded
  * rejection throws a PreprocessLimitError carrying the structured reason.
  */
 export function parseHtmlToRaw(html, options) {

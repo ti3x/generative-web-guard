@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { gunzipSync } from "node:zlib";
+import { JSDOM } from "jsdom";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
@@ -10,14 +12,13 @@ const full = await import(`${fullUrl.href}?check=${Date.now()}`);
 const lint = await import(`${lintUrl.href}?check=${Date.now()}`);
 
 for (const name of [
-  "guardHtml", "createGuardFrame", "checkTree", "manifest",
+  "createGuardFrame", "manifest",
   "preprocessHtml", "PREPROCESS_LIMITS", "createPolicySession", "POLICY_PROTOCOL_VERSION",
   // Startup diagnostics: per-stage codes, budgets and the blob: Worker helper.
   "STARTUP_STAGES", "STARTUP_TIMEOUTS", "STARTUP_ERRORS", "STARTUP_WARNINGS",
   "StartupError", "createBlobWorker",
   // The Lean/Wasm authority contract and the acceptance binding.
   "LEAN_ABI_VERSION", "LEAN_CHECKER_VERSION", "LEAN_PROFILE", "LEAN_AUTHORITY",
-  "isAcceptanceToken", "createAcceptanceRegistry", "ACCEPTANCE_NONCE_BYTES",
 ]) {
   assert.ok(name in core, `CDN core export missing: ${name}`);
 }
@@ -62,17 +63,15 @@ assert.ok("gateProgram" in lint, "CDN lint export missing: gateProgram");
 assert.ok(!("gateProgram" in core), "gateProgram must not be in the default entry point");
 assert.equal(lint.gateProgram("const initialState=1;\nfunction update(s){return s}\nfunction view(){return ''}").authorization, "none");
 
-const result = core.guardHtml("<p onclick=bad()>safe<script>alert(1)</script></p>");
-assert.equal(result.status, "validated");
-assert.equal(result.changes.length, 2);
-assert.ok(!JSON.stringify(result.tree).includes("script"));
-assert.ok(!JSON.stringify(result.tree).includes("onclick"));
+for (const name of ["guardHtml", "checkTree", "isValidated", "createAcceptanceRegistry"]) {
+  assert.ok(!(name in core) && !(name in full), `removed acceptance export still shipped: ${name}`);
+}
 
 // R3: bounded preprocessing rather than a stack overflow, on the shipped bytes.
-const deep = core.guardHtml("<div>".repeat(5000) + "x" + "</div>".repeat(5000));
+const deep = core.preprocessHtml("<div>".repeat(5000) + "x" + "</div>".repeat(5000));
 assert.equal(deep.status, "rejected");
-assert.equal(deep.reasons[0].code, "raw-depth-exceeded");
-assert.equal(deep.reasons[0].limit, "maxRawDepth");
+assert.equal(deep.reason.code, "raw-depth-exceeded");
+assert.equal(deep.reason.limit, "maxRawDepth");
 
 for (const file of [
   "generative-web-guard.js",
@@ -94,6 +93,8 @@ for (const [name, text] of [["generative-web-guard.js", coreText], ["generative-
 }
 // The policy Worker must not be able to execute generated JavaScript.
 const policyText = await readFile(new URL("../cdn/policy-worker.min.js", import.meta.url), "utf8");
+assert.ok(!policyText.includes("non-canonical-output"), "production Worker still bundles JS replay acceptance");
+assert.ok(!policyText.includes("authority-mismatch"), "production Worker still bundles JS/Lean acceptance comparison");
 for (const token of ["new Function", "quickjs"]) {
   assert.ok(!policyText.includes(token), `policy worker bundle references ${token}`);
 }
@@ -168,37 +169,31 @@ for (const name of assetManifest.checker.embeddedIn) {
   // bundle also carries QuickJS's own embedded binary, which likewise starts
   // with the "\0asm" magic. Select by the recorded length and then prove the
   // choice by hash, so picking the wrong run cannot pass.
-  const runs = text.match(/AGFzbQ[A-Za-z0-9+/]+={0,2}/g) ?? [];
+  const runs = text.match(/(?:AGFzbQ|H4sI)[A-Za-z0-9+/]+={0,2}/g) ?? [];
   assert.ok(runs.length > 0, `${name} embeds no base64 WebAssembly module at all`);
   const candidates = runs.filter((run) => run.length === assetManifest.checker.base64Chars);
   assert.equal(
     candidates.length, 1,
     `${name}: expected exactly one embedded module of ${assetManifest.checker.base64Chars} base64 chars, found ${candidates.length} (run lengths: ${runs.map((r) => r.length).join(", ")})`,
   );
-  const embedded = Buffer.from(candidates[0], "base64");
+  const encoded = Buffer.from(candidates[0], "base64");
+  const embedded = assetManifest.checker.encoding === "gzip-base64" ? gunzipSync(encoded) : encoded;
   assert.equal(embedded.byteLength, assetManifest.checker.wasmBytes, `${name}: embedded checker is ${embedded.byteLength} bytes, manifest says ${assetManifest.checker.wasmBytes}`);
   assert.equal(createHash("sha256").update(embedded).digest("hex"), assetManifest.checker.wasmSha256, `${name}: embedded checker sha256 differs from the manifest`);
   assert.deepEqual([...embedded.subarray(0, 4)], [0x00, 0x61, 0x73, 0x6d], `${name}: embedded checker is not a WebAssembly module`);
 }
 
-// The default entry point's frame commits acceptance records, not trees. There
-// is no way to get a frame without an authority binding.
-assert.throws(() => core.createGuardFrame({ container: null }), /acceptance records/);
-assert.throws(() => core.createGuardFrame({ container: null, policy: {} }), /acceptance records/);
-// And the low-level tree-taking factory is not reachable from either bundle,
-// so there is no JavaScript-only route into the frame in the distribution at
-// all. `createSandboxFrame` stays a source-level export for renderer tests.
+// The lower-level frame factory creates an inert port-only endpoint.
+const frameDom = new JSDOM("<div id=c></div>");
+const portFrame = core.createGuardFrame({ container: frameDom.window.document.getElementById("c") });
+assert.equal(portFrame.render, undefined);
+assert.equal(portFrame.clear, undefined);
+assert.equal(typeof portFrame.attachPort, "function");
+portFrame.destroy(); frameDom.window.close();
 for (const [label, mod] of [["core", core], ["full", full]]) {
-  assert.ok(!("createSandboxFrame" in mod), `${label} bundle exports createSandboxFrame, which accepts a bare tree`);
+  assert.ok(!("createSandboxFrame" in mod), `${label} bundle exports createSandboxFrame, source-only factory`);
   assert.ok(!("createPolicyCore" in mod), `${label} bundle exports createPolicyCore, whose options can install a checker`);
 }
-// `guardHtml` is the JavaScript checker only: a proposal, never an acceptance.
-const jsOnly = core.guardHtml("<p>x</p>");
-assert.equal(jsOnly.status, "validated");
-assert.equal(jsOnly.acceptance, undefined, "guardHtml must not mint an acceptance");
-assert.equal(core.isAcceptanceToken(jsOnly), false);
-assert.equal(core.LEAN_AUTHORITY, "lean-wasm");
-assert.match(core.LEAN_CHECKER_VERSION, /^guard-checker\/\d+\.\d+$/);
 
 // ---------------------------------------------------------------------------
 // Worker payloads must be self-contained, on the shipped bytes.
@@ -221,4 +216,4 @@ const fullText = await readFile(fullUrl, "utf8");
 assert.ok(!/new Worker\(\s*["'`]/.test(fullText), "full bundle constructs a Worker from a literal URL instead of a blob:");
 assert.ok(fullText.includes("createObjectURL"), "full bundle does not create its Workers from blob: URLs");
 
-console.log(`CDN artifacts: imports, public exports, startup codes, self-contained worker payloads, embedded Lean checker verified by hash in ${assetManifest.checker.embeddedIn.length} payloads (${(assetManifest.checker.wasmBytes / 1024).toFixed(0)} KiB, sha256 ${assetManifest.checker.wasmSha256.slice(0, 12)}), ${verified} manifest hashes checked${skipped ? ` (${skipped} local build output(s) absent)` : ""}, acceptance-only frame, linter separation, bounded preprocessing, and malicious-markup smoke check passed`);
+console.log(`CDN artifacts: imports, public exports, startup codes, self-contained worker payloads, embedded Lean checker verified by hash in ${assetManifest.checker.embeddedIn.length} payloads (${(assetManifest.checker.wasmBytes / 1024).toFixed(0)} KiB, sha256 ${assetManifest.checker.wasmSha256.slice(0, 12)}), ${verified} manifest hashes checked${skipped ? ` (${skipped} local build output(s) absent)` : ""}, port-only frame, linter separation, and bounded preprocessing passed`);

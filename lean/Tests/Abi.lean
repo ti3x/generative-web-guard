@@ -249,10 +249,10 @@ def supplementaryCountsTwice : Bool :=
 Protocol data is rejected explicitly rather than defaulted. -/
 
 def CFG : String :=
-  "{\"abi\":1,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"card\"],\"stylesheetHash\":\"h\"}"
+  "{\"abi\":2,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"card\"],\"stylesheetHash\":\"h\"}"
 
 def req (doc : String) : String :=
-  "{\"abi\":1,\"op\":\"check\",\"requestId\":\"r1\",\"document\":" ++ doc ++ "}"
+  "{\"abi\":2,\"op\":\"check\",\"requestId\":\"r1\",\"document\":" ++ doc ++ "}"
 
 def has (out : String) (needle : String) : Bool := (out.splitOn needle).length > 1
 def errOf (out : String) : Bool := has out "\"status\":\"error\""
@@ -274,35 +274,35 @@ def acceptsBenign : Bool :=
 response tree is the checker's output, never the decoder's input. -/
 def dropsScript : Bool :=
   let out := checkDocument CFG (req "{\"kind\":\"root\",\"children\":[{\"kind\":\"el\",\"ns\":\"html\",\"tag\":\"script\",\"attrs\":[],\"children\":[]}]}")
-  okOf out && !has out "script"
+  rejOf out && !has out "\"tree\""
 #guard dropsScript
 
-def wrongAbi : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
+def wrongAbi : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
 #guard wrongAbi
 def abiNotNumber : Bool := errOf (checkDocument CFG "{\"abi\":\"1\",\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
 #guard abiNotNumber
-def wrongOp : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"configure\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
+def wrongOp : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"configure\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
 #guard wrongOp
-def emptyRequestId : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"check\",\"requestId\":\"\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
+def emptyRequestId : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"check\",\"requestId\":\"\",\"document\":{\"kind\":\"root\",\"children\":[]}}")
 #guard emptyRequestId
 /-- A document request cannot smuggle a class list or a profile. -/
-def requestCannotSetClasses : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"classes\":[\"evil\"]}")
+def requestCannotSetClasses : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"classes\":[\"evil\"]}")
 #guard requestCannotSetClasses
-def requestCannotSetProfile : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"profile\":\"other\"}")
+def requestCannotSetProfile : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"profile\":\"other\"}")
 #guard requestCannotSetProfile
-def requestCannotSetLimits : Bool := errOf (checkDocument CFG "{\"abi\":1,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"limits\":{}}")
+def requestCannotSetLimits : Bool := errOf (checkDocument CFG "{\"abi\":2,\"op\":\"check\",\"requestId\":\"r\",\"document\":{\"kind\":\"root\",\"children\":[]},\"limits\":{}}")
 #guard requestCannotSetLimits
 def notJsonRequest : Bool := errOf (checkDocument CFG "not json")
 #guard notJsonRequest
 def trailingGarbage : Bool := errOf (checkDocument CFG (req "{\"kind\":\"root\",\"children\":[]}" ++ "x"))
 #guard trailingGarbage
-def unknownProfileConfig : Bool := errOf (checkDocument "{\"abi\":1,\"op\":\"configure\",\"profile\":\"other\",\"classes\":[],\"stylesheetHash\":\"h\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
+def unknownProfileConfig : Bool := errOf (checkDocument "{\"abi\":2,\"op\":\"configure\",\"profile\":\"other\",\"classes\":[],\"stylesheetHash\":\"h\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
 #guard unknownProfileConfig
-def duplicateClassConfig : Bool := errOf (checkDocument "{\"abi\":1,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\",\"a\"],\"stylesheetHash\":\"h\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
+def duplicateClassConfig : Bool := errOf (checkDocument "{\"abi\":2,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\",\"a\"],\"stylesheetHash\":\"h\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
 #guard duplicateClassConfig
-def emptyStylesheetHash : Bool := errOf (checkDocument "{\"abi\":1,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\"],\"stylesheetHash\":\"\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
+def emptyStylesheetHash : Bool := errOf (checkDocument "{\"abi\":2,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\"],\"stylesheetHash\":\"\"}" (req "{\"kind\":\"root\",\"children\":[]}"))
 #guard emptyStylesheetHash
-def configMissingStylesheet : Bool := errOf (checkDocument "{\"abi\":1,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\"]}" (req "{\"kind\":\"root\",\"children\":[]}"))
+def configMissingStylesheet : Bool := errOf (checkDocument "{\"abi\":2,\"op\":\"configure\",\"profile\":\"default\",\"classes\":[\"a\"]}" (req "{\"kind\":\"root\",\"children\":[]}"))
 #guard configMissingStylesheet
 /-- A malformed document is an error and no tree comes back with it. -/
 def malformedDocumentNoTree : Bool :=
@@ -314,13 +314,13 @@ def malformedDocumentNoTree : Bool :=
 def classesAreSealed : Bool :=
   let doc := req "{\"kind\":\"root\",\"children\":[{\"kind\":\"el\",\"ns\":\"html\",\"tag\":\"p\",\"attrs\":[[\"class\",\"card evil\"]],\"children\":[{\"kind\":\"text\",\"text\":\"x\"}]}]}"
   let out := checkDocument CFG doc
-  okOf out && has out "[\"class\",\"card\"]" && !has out "evil"
+  rejOf out && !has out "\"tree\""
 #guard classesAreSealed
 
 /-- A document the policy rejects reports `rejected` and carries no tree. -/
 def rejectsTooDeep : Bool :=
   let out := checkDocument CFG (req (nestedDoc 40))
-  rejOf out && !has out "\"tree\"" && has out "too-deep"
+  rejOf out && !has out "\"tree\"" && has out "candidate-policy"
 #guard rejectsTooDeep
 
 /-- `guard_abi_info` reports the compiled-in bounds so the glue can compare

@@ -47,13 +47,15 @@ attributes, and acceptance/replay checks unless the task explicitly changes
 that contract.
 
 Lean's current guarantees concern guarded acceptance. Inspect the actual
-theorem types in `lean/Guard/Props/Checker.lean` and output predicate in
+theorem types in `lean/Guard/Props/{Candidate,CandidateReplay,Checker}.lean` and output predicate in
 `lean/Guard/Policy/Accept.lean`. Do not weaken a property or add admitted proofs,
 custom axioms, or `native_decide` to make verification pass. If the intended
 policy changes a theorem's meaning, explain and update that specification.
 
-Lean/Wasm is the production acceptance authority, so a change to `checkTree`
-semantics changes what the browser renders. Two things follow. First, the
+Lean/Wasm is the production acceptance authority, so a change to `acceptCandidate`
+semantics changes what the browser accepts. `checkTree` remains the full
+reference normalizer; `CandidateReplay.lean` proves candidate acceptance implies
+reference fixed-point acceptance. Two things follow. First, the
 single-document ABI (`lean/Guard/Io/Abi.lean`) versions the wire contract and
 the checker identity: a semantic change needs `capabilityVersion` or
 `abiVersion` moved, or the glue will happily use a module that no longer means

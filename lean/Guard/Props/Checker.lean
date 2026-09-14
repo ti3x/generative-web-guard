@@ -7,7 +7,8 @@ from the normalizer is safe, nor that browser rendering is formally modeled.
 
 The structural lemmas are stated for an arbitrary profile so that
 `Guard.Props.Profile` can reuse them; the `accepted_*` theorems are about
-production acceptance, which always runs `defaultProfile`.
+the reference checker, which runs `defaultProfile`. Production candidate
+acceptance implies these guarantees through `candidate_reference_fixed_point`.
 -/
 
 namespace Guard.Props

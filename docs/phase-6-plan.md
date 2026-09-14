@@ -1,5 +1,12 @@
 # Phase 6 handoff — reduce duplicated policy enforcement
 
+Status: implemented and locally verified. Results and measurements:
+[phase6-results.md](phase6-results.md).
+Design decisions and removal rationale: [phrase6-feedback.md](phrase6-feedback.md).
+The brief below describes the **pre-implementation baseline** at `0ea6687`;
+its descriptions of the old API, checker, and payload are historical, not the
+current runtime contract. See the results document for final verification status.
+
 A self-contained brief for a focused session. Phases 1–5 are complete,
 committed and verified; this is the remaining major work from
 [refactor.md](../refactor.md). Read that file's "Phase 6" section and its

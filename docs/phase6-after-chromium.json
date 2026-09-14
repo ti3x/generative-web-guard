@@ -1,0 +1,343 @@
+{
+  "label": "after",
+  "engine": "chromium",
+  "version": "140.0.7339.186",
+  "checker": {
+    "entry": "Guard.Wasm",
+    "modules": [
+      "Guard.Core.Chars",
+      "Guard.Core.Json",
+      "Guard.Core.Limits",
+      "Guard.Core.ListUtil",
+      "Guard.Core.Tree",
+      "Guard.Io.Abi",
+      "Guard.Io.Decode",
+      "Guard.Policy.Accept",
+      "Guard.Policy.Candidate",
+      "Guard.Policy.Cap",
+      "Guard.Policy.Capabilities",
+      "Guard.Policy.Profile",
+      "Guard.Policy.Tables.Attrs",
+      "Guard.Policy.Tables.Html",
+      "Guard.Policy.Tables.Svg",
+      "Guard.Policy.Val",
+      "Guard.Rules",
+      "Guard.Validators",
+      "Guard.Validators.Color",
+      "Guard.Validators.Ident",
+      "Guard.Validators.Number",
+      "Guard.Validators.Path",
+      "Guard.Validators.Text",
+      "Guard.Validators.Transform",
+      "Guard.Wasm"
+    ],
+    "wasmBytes": 1591870,
+    "wasmSha256": "8171ae736acbcf635a8b2e149179445aed1f8347fdc0ba6e07f1309fb8ec3c56",
+    "encoding": "base64",
+    "embeddedBytes": 1591870,
+    "base64Chars": 2122496,
+    "embeddedIn": [
+      "cdn/policy-worker.min.js",
+      "cdn/generative-web-guard.full.min.js"
+    ],
+    "fetched": false
+  },
+  "methodology": "Five fresh browser processes. Cold startup includes bundle import and createGuard. Ten measured renders per case after two warmups. Browser-descendant aggregate RSS sampled at 25 ms; includes browser overhead.",
+  "cold": {
+    "medianMs": 108.69999998807907,
+    "p95Ms": 119.10000002384186,
+    "samples": 5
+  },
+  "renders": {
+    "typical": {
+      "medianMs": 0.5,
+      "p95Ms": 1,
+      "samples": 50
+    },
+    "maximumNodes": {
+      "medianMs": 29.200000017881393,
+      "p95Ms": 32.30000001192093,
+      "samples": 50
+    },
+    "maximumText": {
+      "medianMs": 27.19999998807907,
+      "p95Ms": 30.899999976158142,
+      "samples": 50
+    }
+  },
+  "peakRssBytes": 994410496,
+  "assets": {
+    "lean/wasm/dist/guard.wasm": {
+      "bytes": 1591870,
+      "gzipBytes": 327802,
+      "brotliBytes": 235611
+    },
+    "cdn/policy-worker.min.js": {
+      "bytes": 2449615,
+      "gzipBytes": 550111,
+      "brotliBytes": 403742
+    },
+    "cdn/generative-web-guard.full.min.js": {
+      "bytes": 3492559,
+      "gzipBytes": 947979,
+      "brotliBytes": 684080
+    }
+  },
+  "samples": [
+    {
+      "readyMs": 119.10000002384186,
+      "render": {
+        "typical": [
+          1,
+          0.7000000178813934,
+          0.8999999761581421,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          1.5,
+          0.5,
+          0.30000001192092896
+        ],
+        "maximumNodes": [
+          32.29999998211861,
+          31.30000001192093,
+          31.799999982118607,
+          32.60000002384186,
+          32.19999998807907,
+          32.30000001192093,
+          32.099999994039536,
+          31.099999994039536,
+          32.900000005960464,
+          31.69999998807907
+        ],
+        "maximumText": [
+          31.200000017881393,
+          30.799999982118607,
+          28.900000005960464,
+          28.80000001192093,
+          30.899999976158142,
+          28.30000001192093,
+          28.599999994039536,
+          32.5,
+          28.099999994039536,
+          28.200000017881393
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 638943232,
+      "peakRssBytes": 990396416
+    },
+    {
+      "readyMs": 118.69999998807907,
+      "render": {
+        "typical": [
+          1.199999988079071,
+          0.6000000238418579,
+          0.5,
+          0.5,
+          0.5,
+          0.699999988079071,
+          0.5,
+          0.5,
+          0.4000000059604645,
+          0.29999998211860657
+        ],
+        "maximumNodes": [
+          31.900000005960464,
+          29.900000005960464,
+          29.599999994039536,
+          29,
+          29,
+          29.30000001192093,
+          29.19999998807907,
+          28.69999998807907,
+          28.700000017881393,
+          28.599999994039536
+        ],
+        "maximumText": [
+          27.700000017881393,
+          28.299999982118607,
+          25.200000017881393,
+          25.69999998807907,
+          27.69999998807907,
+          25.5,
+          25.700000017881393,
+          28.400000005960464,
+          25.19999998807907,
+          25.400000005960464
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 638091264,
+      "peakRssBytes": 988725248
+    },
+    {
+      "readyMs": 108.69999998807907,
+      "render": {
+        "typical": [
+          0.9000000059604645,
+          0.7000000178813934,
+          0.699999988079071,
+          0.5,
+          0.4000000059604645,
+          0.5,
+          0.5999999940395355,
+          0.5,
+          0.4000000059604645,
+          0.30000001192092896
+        ],
+        "maximumNodes": [
+          29.099999994039536,
+          28.80000001192093,
+          29.899999976158142,
+          29.600000023841858,
+          29.299999982118607,
+          28.80000001192093,
+          28.400000005960464,
+          27.69999998807907,
+          29,
+          28.400000005960464
+        ],
+        "maximumText": [
+          27.900000005960464,
+          27.900000005960464,
+          25.299999982118607,
+          25.400000005960464,
+          28.100000023841858,
+          25.599999994039536,
+          25.69999998807907,
+          28.700000017881393,
+          25.5,
+          25.5
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 637452288,
+      "peakRssBytes": 993902592
+    },
+    {
+      "readyMs": 107.7999999821186,
+      "render": {
+        "typical": [
+          0.7999999821186066,
+          1,
+          0.800000011920929,
+          0.5,
+          0.4000000059604645,
+          0.5,
+          0.5999999940395355,
+          0.4000000059604645,
+          0.4000000059604645,
+          0.7999999821186066
+        ],
+        "maximumNodes": [
+          30,
+          28.400000005960464,
+          29.5,
+          29.799999982118607,
+          29.5,
+          28.80000001192093,
+          28.400000005960464,
+          27.799999982118607,
+          29.200000017881393,
+          28.19999998807907
+        ],
+        "maximumText": [
+          27.900000005960464,
+          27.19999998807907,
+          25.30000001192093,
+          25.299999982118607,
+          28.200000017881393,
+          25.299999982118607,
+          25.900000005960464,
+          27.700000017881393,
+          25.299999982118607,
+          24.900000005960464
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 641335296,
+      "peakRssBytes": 994410496
+    },
+    {
+      "readyMs": 107.7000000178814,
+      "render": {
+        "typical": [
+          0.9000000059604645,
+          0.7999999821186066,
+          0.5,
+          0.29999998211860657,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.4000000059604645,
+          0.19999998807907104
+        ],
+        "maximumNodes": [
+          29.900000005960464,
+          28.900000005960464,
+          28.69999998807907,
+          29.30000001192093,
+          30.19999998807907,
+          28.700000017881393,
+          28.299999982118607,
+          29.30000001192093,
+          29.099999994039536,
+          27.5
+        ],
+        "maximumText": [
+          27.900000005960464,
+          28,
+          25.5,
+          26.399999976158142,
+          27.900000005960464,
+          25.80000001192093,
+          25.69999998807907,
+          28.400000005960464,
+          25.400000005960464,
+          25.299999982118607
+        ]
+      },
+      "messageCopies": {
+        "htmlToWorker": 36,
+        "treeToWorker": 0,
+        "treeToHost": 0,
+        "renderedToHost": 36,
+        "treeToFrame": 36
+      },
+      "decompressionStream": true,
+      "idleRssBytes": 641089536,
+      "peakRssBytes": 993083392
+    }
+  ]
+}

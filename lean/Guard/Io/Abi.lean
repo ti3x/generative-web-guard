@@ -1,5 +1,5 @@
 import Guard.Io.Decode
-import Guard.Policy.Check
+import Guard.Policy.Candidate
 import Guard.Policy.Capabilities
 
 /-!
@@ -39,23 +39,23 @@ and the compile-time constants are what make it true for everything else.
 ## Wire format
 
 ```text
-configure request   { "abi": 1, "op": "configure", "profile": "default",
+configure request   { "abi": 2, "op": "configure", "profile": "default",
                       "classes": ["card", ...], "stylesheetHash": "<base64>" }
-check request       { "abi": 1, "op": "check", "requestId": "<=128 chars",
+check request       { "abi": 2, "op": "check", "requestId": "<=128 chars",
                       "document": { "kind": "root", "children": [...] } }
 
-response            { "abi": 1, "op": <op>, "requestId": <echo>,
+response            { "abi": 2, "op": <op>, "requestId": <echo>,
                       "checker": { "abi", "checkerVersion",
                                    "capabilityVersion", "profile" },
                       "status": "accepted" | "rejected" | "configured" | "error",
                       ... }
 ```
 
-`accepted` carries `tree`, `changes`, `changeKinds`, `changeRules`.
+`accepted` carries only `tree`; builder diagnostics are not an authority verdict.
 `rejected` carries `reasons`. `error` carries `error`, a bounded machine code,
 and is what every malformed or unknown protocol datum produces. No status other
 than `accepted` ever carries a `tree`, and `accepted` always carries the tree
-that `checkTree` returned — never the decoder's input.
+that `acceptCandidate` checked, unchanged. Noncanonical candidates are rejected.
 -/
 
 namespace Guard.Io
@@ -63,7 +63,7 @@ namespace Guard.Io
 open Guard J
 
 /-- ABI generation. Increment on any wire-format change. Both sides check it. -/
-def abiVersion : Nat := 1
+def abiVersion : Nat := 2
 
 /-- The only profile this build can apply. -/
 def profileName : String := "default"
@@ -169,13 +169,11 @@ def decodeRequest (input : String) : Except String Request := do
   | none => throw "missing-field:document"
   | some document => return { requestId, document }
 
-def acceptedResponse (requestId : String) (tree : List Node) (changes : List Change) : String :=
+def acceptedResponse (requestId : String) (tree : List Node) : String :=
   envelope "check" requestId
     [ ("status", .str "accepted")
     , ("tree", .obj [("kind", .str "root"), ("children", .arr (tree.map Node.toJson))])
-    , ("changes", .num (toString changes.length))
-    , ("changeKinds", .arr (changes.map fun c => .str c.kind))
-    , ("changeRules", .arr (changes.map fun c => .str c.rule)) ]
+ ]
 
 def rejectedResponse (requestId : String) (reasons : List String) : String :=
   envelope "check" requestId
@@ -185,10 +183,8 @@ def rejectedResponse (requestId : String) (reasons : List String) : String :=
 The whole production path, as one pure function of the sealed configuration and
 one request.
 
-`checkTree` is the existing whole-checker entry point, so the accepted tree
-carries its postcondition (`policyOk`) and its replay (a second normalization
-that must reproduce the tree with no changes). The tree in the response is the
-tree `checkTree` returned; the decoder's input is never echoed back as output.
+`acceptCandidate` validates the decoded candidate without normalization. Its
+reference fixed-point theorem is proved separately; replay is not executed.
 -/
 def checkDocument (config : String) (request : String) : String :=
   match decodeConfig config with
@@ -197,12 +193,12 @@ def checkDocument (config : String) (request : String) : String :=
     match decodeRequest request with
     | .error e => errorResponse "check" "" s!"request:{e}"
     | .ok req =>
-      match decodeDocument abiLimits req.document with
+      match decodeCandidateDocument abiLimits req.document with
       | .error e => errorResponse "check" req.requestId s!"document:{e}"
-      | .ok raws =>
-        match checkTree { classes := cfg.classes } raws with
-        | .validated tree changes => acceptedResponse req.requestId tree changes
-        | .rejected reasons => rejectedResponse req.requestId reasons
+      | .ok tree =>
+        if acceptCandidate defaultProfile { classes := cfg.classes } tree then
+          acceptedResponse req.requestId tree
+        else rejectedResponse req.requestId ["candidate-policy"]
 
 /-! ### C symbols
 

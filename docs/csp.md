@@ -262,7 +262,7 @@ to extend coverage, and update this table with what you measured.
 | `'strict-dynamic'` changes whether `worker-src` must list `blob:` | no | no | no |
 | Nonce readable at runtime via `script[nonce].nonce` (attribute hidden) | yes | yes | yes |
 | The Lean/Wasm checker instantiates from the embedded binary inside the `blob:` policy Worker | yes | yes | yes |
-| Largest sibling count the checker survives (see [the path bound](#the-path-bound-is-an-engine-measurement)) | no failure observed | 5,800 ok / 6,000 overflow | 2,000 ok / 2,500 overflow |
+| Historical full-checker sibling stress test (see [the path bound](#the-path-bound-is-an-engine-measurement)); not a Phase 6 maximum | no failure observed | 5,800 ok / 6,000 overflow | 2,000 ok / 2,500 overflow |
 
 ### Known gaps in specific engines
 
@@ -311,8 +311,9 @@ permissive behaviour. Measured in
 
 ### The path bound is an engine measurement
 
-The Lean checker recurses once per **sibling** — its traversal runs in a state
-monad, and `nodesToRaw`, `treeStats` and `nodesPolicyOk` each recurse over
+The historical full checker recursed once per **sibling** in its normalizer
+and replay. The Phase 6 candidate checker removes those passes but still has
+`treeStats`, `nodesPolicyOk`, and representation checks recursing over
 sibling lists inside `mutual` blocks, which Lean does not turn into loops. That
 recursion compiles to WebAssembly function calls, and their depth is bounded by
 **the engine's own call stack**, which no build flag configures:
@@ -333,7 +334,8 @@ accepted; and a 100×8 table (2,733 raw nodes, 218 open at most) and a 300-item
 list (2,102 raw nodes, 604 open) both passed. Under an earlier 1,000-**node**
 cap the table and the list were refused.
 
-Measured per engine by sending flat documents of increasing width through the
+Historical Phase 4/5 measurements, retained as the conservative limit baseline,
+from sending flat documents of increasing width through the
 real policy Worker (for a flat list, open nodes equals siblings):
 
 | Engine | Fine | Overflowed |
@@ -355,6 +357,13 @@ times on each engine and requires a structured policy answer every time. It
 re-measures the flat bound too: a document at the bound must get a structured
 answer and leave the Worker alive, one node past it must be refused by
 preprocessing, and a 100×8 table above the old node cap must be accepted.
+
+Phase 6 keeps the numeric limit unchanged and checks it again on the actual
+proposed tree before Wasm, since unwrapping can expand sibling width. Browser
+regressions accept 1,000 flattened siblings, refuse 1,001 before Wasm, and verify
+that the next request still succeeds. This is a preprocessing work bound, not a
+new Lean policy theorem. See [Phase 6 results](phase6-results.md) for current
+memory, latency and compression evidence.
 
 A document that overflows anyway is a bounded failure and never a render: the
 trap poisons the checker instance, the request is refused, and the host

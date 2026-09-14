@@ -12,17 +12,19 @@ There are three different kinds of assurance:
 |---|---|
 | Tests | The selected inputs produced the expected results. |
 | Runtime assertions | Each executed check passed for this particular candidate output, assuming the assertion and execution are correct. |
-| Lean proofs | Every accepted output of the modeled Lean checker satisfies the stated properties, across all finite raw-tree inputs. |
+| Lean proofs | Every accepted candidate satisfies the stated properties; reference-checker theorems also cover accepted outputs across finite raw-tree inputs. |
 
-We use all three. Both implementations check candidate outputs before accepting
-them. Lean additionally proves consequences of acceptance: allowed elements,
+We use all three. JS proposes output; production acceptance is Lean-only. Full JS and Lean
+normalizers remain reference tools. Lean proves consequences of acceptance: allowed elements,
 no script elements or event-handler attributes anywhere in the tree, bounded
 node/text counts, and unchanged output when checked again. Lean's kernel checks
 the proofs; our verification command also audits their axioms. See
 [Lean's proof-validation documentation](https://lean-lang.org/doc/reference/latest/ValidatingProofs/).
 
 The current design proves a guarded acceptance function: a candidate must pass
-an output predicate and a second normalization. This does not prove that the
+an output predicate and canonical representation checks. A separate theorem
+proves it would pass the full reference normalizer unchanged; production does
+not run that second normalization. This does not prove that the
 normalizer always succeeds, preserves every benign document, or implements a
 complete model of browser security. An assertion that merely restates a weak
 policy is still weak, even when acceptance implies it by a proved theorem.
@@ -36,9 +38,9 @@ The tradeoff is proof-maintenance work and a second implementation.
 **What the browser actually runs:** the demos and the CDN bundles now use the
 Lean checker compiled to WebAssembly as the acceptance authority, so the
 implementation the theorems are about is the one that decides. The JavaScript
-checker still runs beside it as a candidate builder and a diagnostics source,
-and a disagreement between the two refuses the document rather than being
-resolved in either side's favour. Missing, failing, rejecting, malformed or
+checker still runs beside it as a candidate builder and a diagnostics source.
+Lean accepts or refuses that candidate without independently normalizing the
+original HTML or comparing two outputs. Missing, failing, rejecting, malformed or
 timed-out Lean never falls back to JavaScript acceptance: the library refuses
 to render.
 
@@ -69,15 +71,16 @@ The full integration adds protections outside a sanitizer's responsibility:
   host page. The host CSP is documented and cross-engine tested in
   [csp.md](csp.md), including the two places engines diverge: Trusted Types is
   absent on Firefox 141, and WebKit 26 does not gate every Wasm entry point.
-- The frame validates each received tree again before rendering it.
+- The frame receives trees only through the private policy Worker port and
+  checks its renderer construction contract, without repeating policy checks.
 - Generated JavaScript runs in QuickJS/Wasm in a Worker, with restricted
   capabilities and resource limits. There is no mandatory static denylist: the
   runtime has no DOM, network, storage, timers or module loader to reach.
 - Every view returned by that JavaScript goes through the markup policy before
   it can be rendered.
 
-Calling `guardHtml()` alone does not set up those other boundaries. Consumers
-must integrate the frame and runtime correctly.
+Use `createGuard` to assemble those boundaries. The synchronous JS-only
+`guardHtml` export has been removed.
 
 DOMPurify can be configured with restrictive allowlists and can return DOM
 nodes or fragments; it is not inherently limited to producing strings.

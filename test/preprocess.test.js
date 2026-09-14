@@ -12,7 +12,7 @@ import { preprocessHtml, parseHtmlToRaw, PreprocessLimitError } from "../src/ada
 import { preprocessHtmlWithDom } from "../src/adapters/dom.js";
 import { PREPROCESS_LIMITS, utf8ByteLength } from "../src/policy-protocol.js";
 import { checkTree, setClassAllowlist } from "../src/policy.js";
-import { guardHtml } from "../src/cdn.js";
+import * as publicApi from "../src/cdn.js";
 
 setClassAllowlist(["card", "muted"]);
 
@@ -45,9 +45,7 @@ test("[R-LIMIT-TREE] nesting in UNWRAPPED elements is bounded: the policy's dept
   // depth. Preprocessing is what bounds this shape.
   const reason = rejection(nest("q", 5000));
   assert.equal(reason.code, "raw-depth-exceeded");
-  const guarded = guardHtml(nest("q", 5000));
-  assert.equal(guarded.status, "rejected");
-  assert.equal(guarded.reasons[0].code, "raw-depth-exceeded");
+  assert.equal(publicApi.guardHtml, undefined, "no synchronous JS acceptance API");
 });
 
 test("[R-LIMIT-TREE] nesting in DROPPED elements is bounded too", () => {
@@ -257,12 +255,11 @@ test("[R-LIMIT-TREE] parseHtmlToRaw throws a typed error carrying the structured
   assert.equal(parseHtmlToRaw("<p>ok</p>").children[0].tag, "p");
 });
 
-test("[R-LIMIT-TREE] guardHtml returns a rejection in the usual shape instead of throwing", () => {
-  const result = guardHtml(nest("div", 5000));
+test("[R-LIMIT-TREE] the public API exposes bounded preprocessing, not JS acceptance", () => {
+  const result = publicApi.preprocessHtml(nest("div", 5000));
   assert.equal(result.status, "rejected");
-  assert.equal(result.reasons.length, 1);
-  assert.equal(result.reasons[0].code, "raw-depth-exceeded");
-  assert.throws(() => guardHtml(42), /expected an HTML string/);
+  assert.equal(result.reason.code, "raw-depth-exceeded");
+  for (const name of ["guardHtml", "checkTree", "isValidated"]) assert.equal(publicApi[name], undefined);
 });
 
 // --- benign preservation ----------------------------------------------------

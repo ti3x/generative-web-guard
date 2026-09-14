@@ -16,7 +16,9 @@
 // a bad node through, this is the last line before the browser.
 
 import { NS } from "./tree.js";
-import { HTML_ELEMENTS, SVG_ELEMENTS } from "./policy.js";
+import { POLICY_DATA } from "./policy-data.js";
+const HTML_ELEMENTS = POLICY_DATA.htmlElements;
+const SVG_ELEMENTS = POLICY_DATA.svgElements;
 
 const REFUSED_ATTR_RE = /^(on|style$|src|href|xlink|xmlns|srcdoc|formaction|action|ping|srcset|background|poster|data$|code$|codebase|manifest|usemap|is$|slot$|nonce$)/i;
 

@@ -25,7 +25,7 @@
 // src/frame-protocol.js), an accepted tree is posted straight to the frame
 // with the request's identity, and the host is told `rendered` only after the
 // frame acknowledged that exact request. The host never holds the tree.
-// Without a port (Node tests, the legacy low-level path) the accepted reply
+// Without a port (headless diagnostics and Node tests) the accepted reply
 // carries the tree as before.
 //
 // THERE IS NO FALLBACK. If the checker does not start, every request is
@@ -102,9 +102,10 @@ function serve(message) {
     // the frame's verdict on this exact request. The reply to the host carries
     // no tree: there is nothing for it to render with.
     const { tree, ...rest } = reply;
-    frameSender.render(tree, { generation: message.generation, requestId: message.requestId }).then((ack) => {
+    const sender = frameSender;
+    sender.render(tree, { generation: message.generation, requestId: message.requestId }).then((ack) => {
       post(ack.ok
-        ? { ...rest, status: "rendered" }
+        ? { ...rest, status: "rendered", stats: { ...rest.stats, frameTreeMessages: sender.stats.sent } }
         : replyEnvelope(message, POLICY_MESSAGE.result, policyRejection(ack.reason.code, ack.reason)));
     });
     return;
@@ -141,7 +142,7 @@ post({ protocol: POLICY_PROTOCOL_VERSION, kind: POLICY_MESSAGE.ready });
   try {
     const checker = await createLeanChecker({
       createModule,
-      wasmBinary: checkerBinary(),
+      wasmBinary: await checkerBinary(),
       classes: manifest.classes,
       stylesheetHash: manifest.cssHash,
     });
