@@ -453,6 +453,15 @@ frontend, a small public API, and an explicit account of what duplication was
 removed. Proofs/specifications are strengthened or deliberately replaced with
 documented obligations, never weakened just to make verification pass.
 
+### Phase 7 — Verify the tool itself
+
+Planned, not implemented: [docs/phase-7-plan.md](docs/phase-7-plan.md).
+Model-based fuzzing of the session state machine, mutation fuzzing of the
+untrusted-input path with fixed-point and no-trap oracles, Wasm and browser
+resource soaks, a browser round-trip oracle and host-integration matrix,
+hostile guest-program generation, mutation testing of the negative controls,
+and an AST sink scan of the shipped bundles.
+
 ## Verification and release gates
 
 Use checks proportional to each phase and record actual results/skips:
