@@ -50,24 +50,24 @@
   },
   "assets": {
     "cdn/generative-web-guard.full.min.js": {
-      "bytes": 3492536,
-      "sha256": "565ac670605fdf2686601278c53cc23e2a14deb8820aabeeda7484a8d2b9d470"
+      "bytes": 3493476,
+      "sha256": "c3bdfb622b31639459d5bcf69f8b4acd6761f5faeffa4c472c82b9a10532d8f8"
     },
     "cdn/generative-web-guard.js": {
-      "bytes": 450638,
-      "sha256": "d2a9156fbd70058c4a4e73f58a7a8ce22d704fb8c6ab73378e86603984b3b915"
+      "bytes": 452499,
+      "sha256": "bef0c3c6e57f420d2205faf6febe4420328b208f1e23a2d599fb3c2f5bf04817"
     },
     "cdn/generative-web-guard.lint.js": {
       "bytes": 201855,
       "sha256": "0f0e81561503eabdbd593dc09b9f85259d60286d58435e2424bcc6d322513004"
     },
     "cdn/generative-web-guard.min.js": {
-      "bytes": 277798,
-      "sha256": "720e46f9969f7ee598e7e0015931cba8bea923892fb455a4567b76dc05e41ba0"
+      "bytes": 278293,
+      "sha256": "39dc6ac1a51fc375264722e004faa029fdecbbcf84e9a1ea97751180ba9b3707"
     },
     "cdn/policy-worker.min.js": {
-      "bytes": 2449611,
-      "sha256": "8859c048f3a87fbc4bc4db08decfdac986e720461b7e306fabad3acf4dea7f7c"
+      "bytes": 2450044,
+      "sha256": "41ea86195d3c931435a618c929959c039ccabbc801235626d9d5741b45cdd428"
     },
     "cdn/worker.min.js": {
       "bytes": 752247,

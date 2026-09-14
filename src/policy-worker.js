@@ -26,7 +26,9 @@
 // with the request's identity, and the host is told `rendered` only after the
 // frame acknowledged that exact request. The host never holds the tree.
 // Without a port (headless diagnostics and Node tests) the accepted reply
-// carries the tree as before.
+// carries the tree, but only for a request that declared `delivery: "host"`;
+// a request declaring `delivery: "frame"` is refused until the port exists
+// (src/policy-protocol.js#deliveryRefusal). The Worker never infers delivery.
 //
 // THERE IS NO FALLBACK. If the checker does not start, every request is
 // refused with a bounded reason. The Worker does not fall back to the
@@ -46,6 +48,8 @@ import {
   POLICY_MESSAGE,
   POLICY_PROTOCOL_VERSION,
   POLICY_STARTUP_QUEUE_MAX,
+  deliveryRefusal,
+  isPolicyEnvelope,
   policyRejection,
   replyEnvelope,
 } from "./policy-protocol.js";
@@ -80,6 +84,14 @@ function attachFrame(message, ports) {
 }
 
 function serve(message) {
+  // The host declares where the tree may go; this Worker only checks that its
+  // port state agrees. A frame request with no port is refused rather than
+  // answered with a tree, and a headless request is refused once a port
+  // exists. Checked at serve time, so a request queued during startup sees
+  // the port an attach delivered while it waited. A malformed envelope is
+  // left to handlePolicyRequest so it still answers `bad-envelope`.
+  const delivery = isPolicyEnvelope(message) ? deliveryRefusal(message, frameSender !== null) : null;
+  if (delivery) return refuse(message, delivery);
   let reply;
   try {
     reply = handlePolicyRequest(core, message);

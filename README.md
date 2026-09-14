@@ -120,6 +120,13 @@ policy.dispose();
 frame.destroy();
 ```
 
+A session with a frame holds its requests until the Worker confirms it holds
+the private port, so the `Promise.all` above is for surfacing startup errors
+early, not a prerequisite for safety. Every request declares its delivery
+(`frame` or `host`); the Worker refuses a frame request it cannot deliver over
+a port and a host request while a port is installed, and never chooses by
+inference. A tree that nonetheless reaches a frame session ends that session.
+
 An unbound frame is inert. There is no `frame.render`, `frame.clear`, or
 `claimAcceptance` API. A session without a frame may return a Lean-accepted tree
 for headless diagnostics, but cannot commit it to any frame. The optional

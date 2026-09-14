@@ -39,6 +39,12 @@ const HOST_DOCUMENT_CODE_UNITS = 512_000;
 /** Message types. `kind` is always one of these exact strings. */
 export const POLICY_MESSAGE = Object.freeze({
   // host -> worker
+  //   preprocess    one bounded HTML string. Every request declares its
+  //                 `delivery` (POLICY_DELIVERY): a session with a frame says
+  //                 "frame" and the Worker refuses to serve it until it holds
+  //                 the port; a headless diagnostic session says "host" and the
+  //                 Worker refuses it while a port is installed. The Worker
+  //                 therefore never chooses where a tree goes by inference.
   preprocess: "policy/preprocess",
   //   attachFrame   hands the Worker its end of the private port to the frame
   //                 (src/frame-protocol.js); the MessagePort travels in the
@@ -69,6 +75,35 @@ export const POLICY_MESSAGE = Object.freeze({
 
 /** How many requests the Worker holds while the checker is still starting. */
 export const POLICY_STARTUP_QUEUE_MAX = 8;
+
+/** Where a request's accepted tree may go. Declared by the host on every request. */
+export const POLICY_DELIVERY = Object.freeze({
+  /** Only over the private port to the frame; the host reply carries no tree. */
+  frame: "frame",
+  /** Back to the host as headless diagnostics; no frame may be attached. */
+  host: "host",
+});
+
+/**
+ * The Worker's delivery check, before any parsing work. Returns a bounded
+ * refusal reason, or null when the declared delivery matches the Worker's
+ * actual port state. Shared with the Node Worker stand-in so the tests
+ * exercise the same rule the production entry applies.
+ *
+ *   frame declared, no port installed   -> frame-not-attached
+ *   host declared, a port is installed  -> delivery-mismatch
+ *   anything else declared              -> delivery-unspecified
+ */
+export function deliveryRefusal(message, hasFramePort) {
+  const delivery = message && message.delivery;
+  if (delivery === POLICY_DELIVERY.frame) {
+    return hasFramePort ? null : { code: "frame-not-attached", detail: "the request requires the private frame port, which this Worker does not hold yet" };
+  }
+  if (delivery === POLICY_DELIVERY.host) {
+    return hasFramePort ? { code: "delivery-mismatch", detail: "a Worker holding a frame port never returns a tree to the host" } : null;
+  }
+  return { code: "delivery-unspecified" };
+}
 
 export const PREPROCESS_LIMITS = Object.freeze({
   // ---- source text, checked before parse5 is invoked --------------------

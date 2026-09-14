@@ -9559,6 +9559,12 @@ var POLICY_PROTOCOL_VERSION = 1;
 var HOST_DOCUMENT_CODE_UNITS = 512e3;
 var POLICY_MESSAGE = Object.freeze({
   // host -> worker
+  //   preprocess    one bounded HTML string. Every request declares its
+  //                 `delivery` (POLICY_DELIVERY): a session with a frame says
+  //                 "frame" and the Worker refuses to serve it until it holds
+  //                 the port; a headless diagnostic session says "host" and the
+  //                 Worker refuses it while a port is installed. The Worker
+  //                 therefore never chooses where a tree goes by inference.
   preprocess: "policy/preprocess",
   //   attachFrame   hands the Worker its end of the private port to the frame
   //                 (src/frame-protocol.js); the MessagePort travels in the
@@ -9585,6 +9591,12 @@ var POLICY_MESSAGE = Object.freeze({
   result: "policy/result",
   // worker -> host, protocol-level refusal (bad envelope, unknown kind)
   refused: "policy/refused"
+});
+var POLICY_DELIVERY = Object.freeze({
+  /** Only over the private port to the frame; the host reply carries no tree. */
+  frame: "frame",
+  /** Back to the host as headless diagnostics; no frame may be attached. */
+  host: "host"
 });
 var PREPROCESS_LIMITS = Object.freeze({
   // ---- source text, checked before parse5 is invoked --------------------
@@ -11758,6 +11770,7 @@ function createPolicySession(options = {}) {
   let checkerIdentity = null;
   let frameAttached = false;
   const pending = /* @__PURE__ */ new Map();
+  const awaitingAttach = [];
   const stats = { requests: 0, accepted: 0, rendered: 0, rejected: 0, timeouts: 0, sessions: 0 };
   let checkerReadyPromise = null;
   let checkerReadySettled = false;
@@ -11858,6 +11871,7 @@ function createPolicySession(options = {}) {
     worker = null;
     sessionId = null;
     frameAttached = false;
+    awaitingAttach.length = 0;
     clearTimeout(handshakeTimer);
     handshakeTimer = null;
     clearTimeout(checkerTimer);
@@ -11888,7 +11902,7 @@ function createPolicySession(options = {}) {
       }
     }
     for (const [requestId, entry] of [...pending.entries()]) {
-      const body = requestId === timedOutRequestId ? { status: "rejected", reason: { code: "timeout", limit: "requestMs", limitValue: entry.budget } } : { status: "rejected", reason: { code: "session-terminated", detail: reason.code } };
+      const body = requestId === timedOutRequestId ? { status: "rejected", reason: { code: reason.code, limit: "requestMs", limitValue: entry.budget } } : { status: "rejected", reason: { code: "session-terminated", detail: reason.code } };
       settle(entry, requestId, body);
     }
     if (onTerminated) onTerminated({ ...reason, sessionId: dyingSession });
@@ -11917,7 +11931,9 @@ function createPolicySession(options = {}) {
       return;
     }
     if (message.kind === POLICY_MESSAGE.frameAttached) {
-      if (message.instanceId === instanceId && message.sessionId === sessionId) frameAttached = true;
+      if (message.instanceId !== instanceId || message.sessionId !== sessionId) return;
+      frameAttached = true;
+      while (awaitingAttach.length > 0 && worker !== null) postEnvelope(awaitingAttach.shift());
       return;
     }
     if (message.kind === POLICY_MESSAGE.checkerReady) {
@@ -11989,7 +12005,8 @@ function createPolicySession(options = {}) {
     }
     if (message.status === "accepted" && frame) {
       stats.rejected += 1;
-      return settle(entry, message.requestId, { status: "rejected", reason: { code: "authority-path-mismatch" } });
+      settle(entry, message.requestId, { status: "rejected", reason: { code: "authority-path-mismatch" } });
+      return terminate({ code: "authority-path-mismatch", detail: "an accepted reply carried a tree to a frame session" });
     }
     if (message.status === "accepted") {
       if (message.authority !== LEAN_AUTHORITY) {
@@ -12052,11 +12069,13 @@ function createPolicySession(options = {}) {
     const requestGeneration = requestOptions.generation ?? generation;
     stats.requests += 1;
     return new Promise((resolve) => {
-      const timer = setTimeout(() => {
+      const entry = { resolve, generation: requestGeneration, budget, posted: false, timer: null };
+      entry.timer = setTimeout(() => {
         stats.timeouts += 1;
-        terminate({ code: "timeout", detail: `request ${requestId} exceeded ${budget}ms` }, requestId);
+        const reason = entry.posted ? { code: "timeout", detail: `request ${requestId} exceeded ${budget}ms` } : { code: "frame-attach-timeout", detail: `the Worker did not confirm the frame port within ${budget}ms` };
+        terminate(reason, requestId);
       }, budget);
-      pending.set(requestId, { resolve, timer, generation: requestGeneration, budget });
+      pending.set(requestId, entry);
       const envelope = {
         protocol: POLICY_PROTOCOL_VERSION,
         kind: POLICY_MESSAGE.preprocess,
@@ -12064,6 +12083,9 @@ function createPolicySession(options = {}) {
         sessionId,
         generation: requestGeneration,
         requestId,
+        // Declared, never inferred: the Worker refuses a mismatch with its
+        // actual port state (src/policy-protocol.js#deliveryRefusal).
+        delivery: frame ? POLICY_DELIVERY.frame : POLICY_DELIVERY.host,
         html,
         ...requestOptions.preview === true ? { preview: true } : {}
       };
@@ -12071,13 +12093,20 @@ function createPolicySession(options = {}) {
         envelope.classes = classes;
         classAllowlistSent = true;
       }
-      try {
-        worker.postMessage(envelope);
-      } catch (error) {
-        const detail = error && typeof error.message === "string" ? error.message.slice(0, 200) : "postMessage failed";
-        terminate({ code: "post-failed", detail });
-      }
+      if (frame && !frameAttached) awaitingAttach.push(envelope);
+      else postEnvelope(envelope);
     });
+  }
+  function postEnvelope(envelope) {
+    const entry = pending.get(envelope.requestId);
+    if (!entry) return;
+    entry.posted = true;
+    try {
+      worker.postMessage(envelope);
+    } catch (error) {
+      const detail = error && typeof error.message === "string" ? error.message.slice(0, 200) : "postMessage failed";
+      terminate({ code: "post-failed", detail });
+    }
   }
   return {
     preprocess,
@@ -12148,9 +12177,14 @@ function createPolicySession(options = {}) {
       disposed = true;
       terminate({ code: "disposed" });
     },
-    /** True once the live Worker confirmed it holds the frame's port. */
+    /** True once the live Worker confirmed it holds the frame's port. Until
+     * then a frame session holds its requests; see `awaitingCount`. */
     get frameAttached() {
       return frameAttached;
+    },
+    /** Requests built but not yet posted because the port is unconfirmed. */
+    get awaitingCount() {
+      return awaitingAttach.length;
     },
     get instanceId() {
       return instanceId;
