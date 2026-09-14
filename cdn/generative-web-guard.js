@@ -11664,6 +11664,7 @@ var CAPABILITIES = Object.freeze({
 
 // src/lean-abi.js
 var LEAN_ABI_VERSION = 2;
+var LEAN_AUTHORITY = "lean-wasm";
 var LEAN_PROFILE = "default";
 var LEAN_CHECKER_VERSION = `guard-checker/${LEAN_ABI_VERSION}.${CAPABILITY_VERSION}`;
 var LEAN_MIN_LIMITS = Object.freeze({
@@ -11731,8 +11732,10 @@ function isAcceptanceToken(token) {
   return true;
 }
 
+// src/preview.js
+var PREVIEW_MAX_CHARS = 16e3;
+
 // src/policy-client.js
-var LEAN_AUTHORITY = "lean-wasm";
 var counter = 0;
 function newId(prefix) {
   counter += 1;
@@ -11980,7 +11983,7 @@ function createPolicySession(options = {}) {
         authority: message.authority,
         acceptance: token,
         diagnostics: message.diagnostics,
-        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, 16e3) } : {},
+        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, PREVIEW_MAX_CHARS) } : {},
         stats: message.stats
       });
     }
@@ -12020,7 +12023,7 @@ function createPolicySession(options = {}) {
         acceptance: token,
         tree: message.tree,
         diagnostics: message.diagnostics,
-        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, 16e3) } : {},
+        ...typeof message.preview === "string" ? { preview: message.preview.slice(0, PREVIEW_MAX_CHARS) } : {},
         stats: message.stats
       });
     }
@@ -12171,13 +12174,12 @@ function createPolicySession(options = {}) {
 }
 
 // src/cdn.js
-var LEAN_AUTHORITY2 = "lean-wasm";
 function createGuardFrame(options = {}) {
   return createSandboxFrame({ ...options, manifest: frame_manifest_default });
 }
 export {
   LEAN_ABI_VERSION,
-  LEAN_AUTHORITY2 as LEAN_AUTHORITY,
+  LEAN_AUTHORITY,
   LEAN_CHECKER_VERSION,
   LEAN_PROFILE,
   POLICY_PROTOCOL_VERSION,

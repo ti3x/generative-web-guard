@@ -172,8 +172,7 @@ def decodeRequest (input : String) : Except String Request := do
 def acceptedResponse (requestId : String) (tree : List Node) : String :=
   envelope "check" requestId
     [ ("status", .str "accepted")
-    , ("tree", .obj [("kind", .str "root"), ("children", .arr (tree.map Node.toJson))])
- ]
+    , ("tree", .obj [("kind", .str "root"), ("children", .arr (tree.map Node.toJson))]) ]
 
 def rejectedResponse (requestId : String) (reasons : List String) : String :=
   envelope "check" requestId

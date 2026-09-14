@@ -63,7 +63,7 @@ export function fakeFrame({ refuse = false } = {}) {
       ...ids,
       onRender: (tree) => {
         if (refuse) return { ok: false, reason: "frame declined" };
-        if (!isTreeShaped(tree)) return { ok: false, reason: "tree is not a validated fixed point" };
+        if (!isTreeShaped(tree)) return { ok: false, reason: "malformed renderer tree" };
         frame.rendered.push(tree);
         return { ok: true };
       },

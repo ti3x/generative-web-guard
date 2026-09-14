@@ -36,6 +36,9 @@ import { PREPROCESS_LIMITS, utf8ByteLength } from "./policy-protocol.js";
 /** ABI generation. Both sides check it; a mismatch is a startup failure. */
 export const LEAN_ABI_VERSION = 2;
 
+/** The only authority string an accepted reply may carry. */
+export const LEAN_AUTHORITY = "lean-wasm";
+
 /** The only profile a shipped build can apply. There is no profile loader. */
 export const LEAN_PROFILE = "default";
 

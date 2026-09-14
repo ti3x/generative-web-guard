@@ -84,7 +84,7 @@ mkdir -p wasm/dist
 IR=.lake/build/ir
 SOURCES=$(python3 wasm/import-closure.py)
 SOURCES="$SOURCES wasm/shim.c"
-for f in $SOURCES; do [ -f "$f" ] || { echo "missing IR file $f (run lake build Guard)"; exit 1; }; done
+for f in $SOURCES; do [ -f "$f" ] || { echo "missing IR file $f (run lake build Guard.Wasm)"; exit 1; }; done
 
 EXPORTS=_guard_init,_guard_info,_guard_configure_seal,_guard_is_configured,_guard_check
 EXPORTS=$EXPORTS,_guard_input_buffer,_guard_input_capacity,_guard_config_capacity,_guard_response_capacity

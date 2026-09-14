@@ -6,6 +6,7 @@ import { isTreeShaped } from "./tree.js";
 import { previewTree } from "./preview.js";
 import { preprocessHtml } from "./adapters/parse5.js";
 import { mintAcceptance } from "./acceptance.js";
+import { LEAN_AUTHORITY } from "./lean-abi.js";
 import {
   POLICY_MESSAGE,
   POLICY_PROTOCOL_VERSION,
@@ -17,8 +18,8 @@ import {
   utf8ByteLength,
 } from "./policy-protocol.js";
 
-/** The only authority string an accepted reply may carry. */
-export const LEAN_AUTHORITY = "lean-wasm";
+/** The only authority string an accepted reply may carry (defined in src/lean-abi.js). */
+export { LEAN_AUTHORITY };
 
 function countNodes(tree) {
   let count = 0;

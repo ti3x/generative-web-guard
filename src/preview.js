@@ -1,6 +1,9 @@
 // Diagnostic text only. The frame never receives or reparses this string.
 // Stop producing output at the cap instead of building an unbounded string.
-export function previewTree(tree, cap = 16000) {
+/** Upper bound on diagnostic preview characters, applied in the Worker and again by the client. */
+export const PREVIEW_MAX_CHARS = 16000;
+
+export function previewTree(tree, cap = PREVIEW_MAX_CHARS) {
   let out = "";
   let truncated = false;
   const append = (value) => {

@@ -19,7 +19,14 @@ test("[R-CHECK-ACCEPTANCE] the JS builder proposes once; the full reference chec
 
 test("[R-LIMIT-TREE] unwrapping is bounded on the actual candidate BEFORE calling Wasm", () => {
   let called = 0;
-  const checker = { check() { called++; return { status: "rejected", reasons: ["test authority"] }; } };
+  let accepting = false;
+  const checker = {
+    identity: { abi: 2, checkerVersion: "test-checker/2.0", capabilityVersion: 0, profile: "default" },
+    check(_id, tree) {
+      called++;
+      return accepting ? { status: "accepted", tree } : { status: "rejected", reasons: ["test authority"] };
+    },
+  };
   const core = createPolicyCore({ checker });
   const group = n => "<q>" + "<span></span>".repeat(n) + "</q>";
   const at = core.preprocess({ html: group(100).repeat(10) });
@@ -28,6 +35,13 @@ test("[R-LIMIT-TREE] unwrapping is bounded on the actual candidate BEFORE callin
   const past = core.preprocess({ html: group(100).repeat(10) + group(1) });
   assert.equal(past.reason.code, "candidate-path-nodes-exceeded");
   assert.equal(called, 1, "over-bound candidate never enters Wasm");
+  // The bound is a per-document refusal, not a poisoned instance: the next
+  // in-bound document reaches the authority and is accepted.
+  accepting = true;
+  const after = core.preprocess({ html: group(100).repeat(10), instanceId: "i", sessionId: "s", generation: 0, requestId: 3 });
+  assert.equal(after.status, "accepted");
+  assert.equal(after.stats.candidatePathNodes, 1000);
+  assert.equal(called, 2, "recovery after the refusal invokes the authority once");
 });
 
 test("[R-LIMIT-TREE] diagnostic previews are bounded text, never a commit capability", () => {

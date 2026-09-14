@@ -45,9 +45,9 @@ import {
   POLICY_TIMEOUTS,
   isPolicyEnvelope,
 } from "./policy-protocol.js";
-const LEAN_AUTHORITY = "lean-wasm";
-import { LEAN_CHECKER_VERSION } from "./lean-abi.js";
+import { LEAN_AUTHORITY, LEAN_CHECKER_VERSION } from "./lean-abi.js";
 import { isAcceptanceToken } from "./acceptance.js";
+import { PREVIEW_MAX_CHARS } from "./preview.js";
 import {
   STARTUP_ERRORS,
   STARTUP_STAGES,
@@ -368,7 +368,7 @@ export function createPolicySession(options = {}) {
         authority: message.authority,
         acceptance: token,
         diagnostics: message.diagnostics,
-        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, 16000) } : {}),
+        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, PREVIEW_MAX_CHARS) } : {}),
         stats: message.stats,
       });
     }
@@ -415,7 +415,7 @@ export function createPolicySession(options = {}) {
         acceptance: token,
         tree: message.tree,
         diagnostics: message.diagnostics,
-        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, 16000) } : {}),
+        ...(typeof message.preview === "string" ? { preview: message.preview.slice(0, PREVIEW_MAX_CHARS) } : {}),
         stats: message.stats,
       });
     }

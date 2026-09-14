@@ -15,6 +15,7 @@ def visit(module):
             visit(imported)
 
 visit('Guard.Wasm')
+# Keep this forbidden list in sync with the closure check in scripts/build.mjs.
 for module in seen:
     if module.startswith('Guard.Props') or module in {'Guard.Policy.Check', 'Guard.Io.Api', 'Guard'}:
         raise SystemExit(f'reference code in production closure: {module}')

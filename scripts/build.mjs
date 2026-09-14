@@ -68,6 +68,7 @@ for (const required of [checkerWasmPath, checkerGluePath]) {
     );
   }
 }
+// Forbidden reference modules; keep in sync with lean/wasm/import-closure.py.
 const checkerModules = readFileSync(resolve(rootDir, "lean/wasm/dist/import-closure.txt"), "utf8").trim().split("\n");
 if (!checkerModules.includes("Guard.Wasm") || checkerModules.some(m => /^Guard[.]Props(?:[.]|$)/.test(m) || ["Guard", "Guard.Policy.Check", "Guard.Io.Api"].includes(m))) {
   throw new Error("reference code in production checker import closure");

@@ -13,8 +13,7 @@ import { createSandboxFrame } from "./host.js";
 import { createRuntimeController } from "./runtime/controller.js";
 import { createPolicySession } from "./policy-client.js";
 import { PREPROCESS_LIMITS, POLICY_PROTOCOL_VERSION, POLICY_TIMEOUTS } from "./policy-protocol.js";
-import { LEAN_ABI_VERSION, LEAN_CHECKER_VERSION, LEAN_PROFILE } from "./lean-abi.js";
-const LEAN_AUTHORITY = "lean-wasm";
+import { LEAN_ABI_VERSION, LEAN_AUTHORITY, LEAN_CHECKER_VERSION, LEAN_PROFILE } from "./lean-abi.js";
 import {
   STARTUP_ERRORS,
   STARTUP_STAGES,

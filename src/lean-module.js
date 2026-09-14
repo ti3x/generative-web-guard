@@ -36,8 +36,10 @@ export const checkerAsset = Object.freeze({
 let decoded = null;
 
 /**
- * The checker bytes. Decoded once and cached: a second instance in the same
- * realm reuses the array rather than decoding 2.3 MB of base64 again.
+ * A promise for the checker bytes. Decoded once and cached: a second instance
+ * in the same realm reuses the settled promise rather than decoding the
+ * embedded base64 again. A rejected decode stays rejected; startup then fails
+ * closed and the host replaces the Worker.
  */
 export function checkerBinary() {
   if (decoded === null) decoded = decodeCheckerAsset(wasm);

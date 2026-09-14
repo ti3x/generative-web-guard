@@ -82,7 +82,8 @@ initializing the full reference library.
 The measured preprocessing ceilings are unchanged. The Worker also reapplies
 `maxRawPathNodes = 1000` to the actual candidate before serialization/Wasm:
 unwrapping can flatten a shallow raw tree into too many siblings. Tests cover
-the 1000/1001 boundary, refusal before invoking Wasm, and recovery afterwards.
+the 1000/1001 boundary, refusal before invoking Wasm, and an accepted in-bound
+document immediately after that refusal.
 Serialized candidates are bounded before the authority call. Startup sealing,
 version checks, trap poisoning, and failure refusal remain mandatory.
 
@@ -201,6 +202,15 @@ byte-identical.
 
 ## Final verification
 
+The property and differential harnesses compare two independent normalizers:
+the JavaScript checker and native Lean's reference `checkTree`. Native Lean also
+reports whether each reference output passes `acceptCandidate`, and the harness
+fails if it does not. The Wasm engine in `scripts/lib/engines.mjs` is not a
+third normalizer: it runs the production path, JS `buildCandidate` followed by
+Wasm `acceptCandidate`. Its reported changes and change kinds are the JS
+proposal's diagnostics, and a Wasm rejection is summarized as `output-policy`,
+so agreement there confirms the pipeline, not independent normalization.
+
 The repository policy/proof and distribution skill gates were followed. Final
 results on the working tree:
 
@@ -208,9 +218,9 @@ results on the working tree:
 |---|---|
 | `npm test` | Passed with fresh native Lean and Wasm builds; 233 unit tests, zero failures/skips; 176 BDD scenarios / 876 steps passed |
 | Axiom audit (within `npm test`) | 63 compiled theorems; only `propext`, `Classical.choice`, and `Quot.sound` |
-| Independent properties (within `npm test`) | 336 cases / 334 fixed points in each of JS, native Lean, and Wasm; unsafe-output and erase/reject-all negative controls passed |
+| Independent properties (within `npm test`) | 336 cases / 334 fixed points in JS and in native Lean's reference `checkTree`, which normalize independently; the Wasm engine runs the production path (JS proposal, then `acceptCandidate`) and agreed on the same 336 cases. Unsafe-output and erase/reject-all negative controls passed |
 | Generated policy/rules and traceability (within `npm test`) | Current; 46 rules covered |
-| `npm run check:lean` | 323 reference-comparison cases, zero mismatches |
+| `npm run check:lean` | 323 reference-comparison cases, zero mismatches (JS vs native Lean; see note below) |
 | `npm run build`, repeated | All committed CDN files, including the manifest, byte-identical across builds |
 | `npm run check:cdn` | Passed; eight asset hashes, embedded checker, self-contained payloads, removed APIs, and port-only frame verified |
 | `ENGINES=chromium DEMO_URL=http://localhost:8096/ npm run check:browser` | Passed on 140.0.7339.186; 109 assertions |
