@@ -29,6 +29,10 @@ if (!local) {
   run("docker", ["run", "--rm", "-v", `${leanDir}:/guard`, env.GUARD_LEAN_TOOLCHAIN_IMAGE || "guard-lean-toolchain", "sh", "-c", "lake build Guard guard Tests guard-tests && lake exe guard-tests"]);
   node("scripts/check-proofs.mjs");
   run("docker", ["run", "--rm", "-v", `${leanDir}:/guard`, env.GUARD_LEAN_WASM_IMAGE || "guard-lean-wasm"]);
+  // The public browser entry imports the generated frame manifest. Build it
+  // from the fresh checker before unit tests import that entry on a clean CI
+  // checkout; dist/ is intentionally not committed.
+  node("scripts/build.mjs");
 }
 node("--test", "test/*.test.js");
 run(process.platform === "win32" ? "npx.cmd" : "npx", ["--no-install", "cucumber-js"]);
