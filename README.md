@@ -238,7 +238,16 @@ including no CSP at all, because a dedicated worker's script is fetched
 same-origin. A `blob:` Worker also inherits the host document's policy, which a
 same-origin network Worker does not.
 
-So a host page using the full bundle needs the adopted profile
+### Host-page CSP integration
+
+The host page's CSP must include the frame bundle's script and stylesheet
+hashes from the exported `manifest`. A `srcdoc` frame inherits the embedding
+page's policy before applying its own, while every other capability in the
+frame policy is set to `'none'`. Browser tests verify the failure modes on all
+three pinned engines: without the script hash the frame does not start, and
+without the style hash it starts unstyled.
+
+A host page using the full bundle needs the adopted profile
 ([docs/csp.md](docs/csp.md)):
 
 ```
@@ -272,6 +281,11 @@ hash, which is invisible to the host and only shows up as a bootstrap timeout.
 `STARTUP_ERRORS`, `STARTUP_STAGES` and `STARTUP_TIMEOUTS` are exported from
 both bundles.
 
+The complete per-token rationale, pinned browser matrix, startup errors, and
+`blob:`-free fallback are in [docs/csp.md](docs/csp.md). `scripts/serve.mjs`
+uses the adopted profile for the demo; `?cspOmit=<token>` removes one required
+token so its startup failure can be reproduced.
+
 Hosts that cannot allow `blob:` at all can use Profile B in
 [docs/csp.md](docs/csp.md). It is not the default, there is no automatic
 fallback to it, and it **removes CSP as a containment layer around both
@@ -303,214 +317,12 @@ from the referenced tag or commit.
 Bundled runtime dependencies are MIT-licensed, but Generative Web Guard itself
 must not be treated as open-source licensed until the project adds one.
 
-## Layout
+## Technical references
 
-| Path | Purpose |
-|---|---|
-| `rules/catalog.json` | Security rules: id, class, statement, mechanisms, citing code, proofs, CVE references |
-| `rules/policy.json` | Editable shared HTML/SVG tables, validator descriptors, forced values, and limits |
-| `src/policy-data.js` | Generated JS policy tables and limits |
-| `src/rules.js`, `lean/Guard/Rules.lean` | Generated rule ids (do not edit) |
-| `features/` | Cucumber features tagged `@rule:`/`@cve:`, step definitions, engine hooks |
-| `red-team/corpus.json` | Reviewable hostile-input corpus with provenance, rule links, and preservation expectations |
-| `src/tree.js` | Tree format and structural limits |
-| `src/policy.js` | Validator algorithms and proposal builder; full `checkTree`/`isValidated` retained only for reference tests |
-| `src/adapters/parse5.js` | Production HTML frontend: bounded, iterative parse5 to raw tree |
-| `src/adapters/dom.js` | `DOMParser` adapter, kept only for parser-differential compatibility tests |
-| `src/policy-protocol.js` | Policy-Worker protocol version, message envelope, and preprocessing limits (units named) |
-| `src/policy-core.js` | Worker-side preprocessing, candidate construction and Lean/Wasm acceptance; no path accepts a document without the authority |
-| `src/lean-abi.js` | The versioned single-document ABI: request builders, strict response validation, version and bounds constants |
-| `src/lean-checker.js` | One WebAssembly instance, sealed at startup; poisons itself on a trap and never falls back |
-| `src/lean-module.js` | The checker as a self-contained module: Emscripten factory plus the embedded binary |
-| `src/acceptance.js` | Verdict identity records; retired registry retained only as a reference/test utility |
-| `lean/Guard/Policy/Candidate.lean` | Production output-policy and canonical-representation acceptance |
-| `lean/Guard/Props/CandidateReplay.lean` | Proof that candidate acceptance implies unchanged full reference acceptance |
-| `lean/Guard/Wasm.lean` | Minimal production import root, excluding normalization, batch IO and proofs |
-| `src/policy-worker.js` | Policy Worker entry; never executes generated JavaScript |
-| `src/policy-client.js` | Host-side session: identity, generation, request ids, timeouts, termination |
-| `src/render.js` | DOM construction and patching from a validated tree |
-| `src/frame.js` | Code inside the sandboxed frame |
-| `src/host.js` | Sandboxed frame creation, event schema, frame-bootstrap startup stage |
-| `src/startup.js` | Per-stage startup budgets, startup error codes, and `blob:` Worker creation |
-| `src/gate.js` | Optional development linter (diagnostic eligibility, never authorization); not on the execution path |
-| `src/runtime/` | QuickJS core, worker entry, host-side controller |
-| `scripts/build.mjs` | Bundles, CSP hash manifest, embedded checker binary, and the deterministic asset manifest |
-| `scripts/wasm-audit.mjs` | Measures the checker's heap, linear stack and memory growth so the build's ceilings are evidence, not inheritance |
-| `scripts/browser-check.mjs` | End-to-end browser verification |
-| `scripts/lib/engines.mjs` | The three engines (JS, Lean in Docker, Wasm) behind the differential and Cucumber |
-| `scripts/lean-differential.mjs` | Lean checker vs policy.js differential fuzzer |
-| `scripts/rule-coverage.mjs` | Traceability gate over catalog, features, unit titles, code citations |
-| `scripts/check-proofs.mjs` | Resolves advertised theorems in Lean and audits their transitive axioms |
-| `scripts/check-policy-properties.mjs` | Independent output assertions, positive examples, fixed points, and negative controls |
-| `scripts/security-scout.mjs` | Weekly GitHub Advisory Database filter and deduplicated triage issue report |
-| `docs/csp.md` | Host CSP profiles, tested browser matrix with pinned versions, startup error codes |
-| `docs/VERIFICATION.md` | Rule maintenance workflow, exact proof scope, and why Lean is useful |
-| `docs/RED_TEAMING.md` | Hostile-input intake, weekly advisory scout, and optional agent-review design |
-| `scripts/gen-rules.mjs` | Generates rule id files from the catalog; `--check` in `npm test` |
-| `lean/` | Lean 4 executable specification, proofs, Dockerfile |
-| `demo/` | Host page with benign and attack samples |
-
-## Lean 4 checker
-
-`lean/` holds a second implementation of the policy in Lean 4, built and run
-only inside Docker. Nothing is installed on the host. It is the executable
-specification: the same tables as `src/policy.js`, the same validators written
-as plain recursive functions over character lists, and a JSON batch interface
-shared by a native executable and a WebAssembly export.
-
-| Path | Contents |
-|---|---|
-| `lean/Guard/Rules.lean` | Generated rule ids (`Guard.R`) |
-| `lean/Guard/Core/` | Chars, ListUtil, Limits, Json (self-contained), Tree |
-| `lean/Guard/Validators/` | Number, Text, Ident, Color, Path, Transform. All total. |
-| `lean/Guard/Policy/` | Val descriptors, generated Tables/{Html,Svg,Attrs}, total Check, output predicate Accept |
-| `lean/Guard/Props/` | Proofs, one file per validator family; Checker holds `IsValidated` |
-| `lean/Guard/Io/Api.lean` | `processRequest` and the `@[export guard_check]` symbol |
-| `lean/Tests/` | `#guard` unit checks and the `guard-tests` executable |
-| `lean/wasm/` | Emscripten shim and build script |
-| `lean/README.md` | Layout, conventions, commands |
-
-**Toolchain pin.** `lean/lean-toolchain` pins `v4.15.0`. That is the last
-Lean release that publishes a prebuilt wasm32 runtime; later releases would
-require building Lean's own runtime under Emscripten. One pinned version
-serves proofs, the differential and the Wasm build.
-
-### What is proved
-
-Theorems cover validator results and accepted Lean output trees. The full test
-command checks that advertised names are compiled theorems and that their
-transitive axioms are limited to Lean's foundational axioms.
-
-- Ids: emitted ids carry the `g-` prefix; id rewriting is idempotent.
-- Numbers: every character of a canonical number is a digit, `.` or `-`; of a number list, those or a single space.
-- Path data: every character is a command letter, a digit, `.`, `-` or a space.
-- Transforms: the output is a space-joined list of groups, each `name(nums)` with a name from the fixed table and number-list characters inside.
-- Colors: the output is a named color, `currentColor`, `#` followed only by hex digits, or a string accepted by the `rgb()` recognizer.
-
-Whole-checker properties are now proved in `Guard.Props.Checker`: every accepted
-tree satisfies `policyOk`, its nodes and text are bounded, every nested element
-is allowlisted with canonical attributes, no script element or inline handler
-survives, and revalidation returns the identical tree with no changes.
-
-`Guard.Props.Profile` adds the capability-kernel properties. `rules/capabilities.json`
-is a separate reviewed kernel of closed element and attribute identities,
-context-appropriate value grammars, mandatory controls and absolute resource
-ceilings; a profile may only restrict it, and `npm run check:policy` rejects a
-profile that does not, from the profile data alone. `default_profile_valid`
-certifies the shipped profile against the generated inventory at build time.
-Independently of the profile table, every accepted tree is then proved free of
-the kernel's excluded identities (`src`, `href`, `style`, `name`, `iframe`,
-`img`, `form`, `use`, ...), its `fill`/`stroke` values are solid colors, and
-its ids carry the `g-` prefix. `restricts_permits` relates two profiles on
-permitted **output trees**; it does not claim that a tighter profile accepts
-fewer raw inputs. Widening the inventory is a kernel change, and neither the
-generator nor an arbitrarily edited inventory is proved safe.
-
-The production checker is `acceptCandidate`: output policy plus canonical
-representation checks, with no normalization or replay. The theorem
-`candidate_reference_fixed_point` proves that every accepted candidate would
-pass the full reference checker unchanged with no changes. Generic profile
-exclusions, validator canonicality, node/text bounds, attribute ordering and
-uniqueness, and output-profile restriction are proved separately.
-
-JS constructs a proposal and diagnostics once; Lean decides whether that
-candidate is acceptable. The Worker sends only Lean's returned tree over the
-private frame port. Missing, failing, rejecting, malformed or timed-out Lean
-never falls back to JavaScript acceptance.
-
-This is not a proof of JS equivalence, and differential tests never were one.
-What changed is which implementation the browser obeys. Parsing, JSON
-conversion, the C shim, the Emscripten runtime, the trusted glue, renderer
-behavior, QuickJS, compilation and browser semantics all remain outside the
-whole-checker theorems. See [verification scope and
-maintenance](docs/VERIFICATION.md).
-
-### Differential testing
-
-```
-npm run lean:build           # native checker image (target: checker)
-npm run check:lean           # corpus + random HTML through both checkers
-GUARD_LEAN_MOUNT=1 npm run check:lean   # use the binary in lean/.lake instead of the image
-NEGATIVE_CONTROL=1 npm run check:lean   # must report mismatches, or the comparison is broken
-```
-
-The differential feeds identical parse5 output to both checkers and compares
-status, tree and change count with key order normalized. To make exact
-agreement possible, the JavaScript validators use the same syntactic style:
-numbers are canonicalized by string rewriting rather than `Number()`, path
-data and transforms use sequential tokenizers, hex colors keep their case, and
-name lowercasing is ASCII only.
-
-### WebAssembly build
-
-```
-npm run wasm:build           # Emscripten SDK + Lean wasm32 runtime image, then link
-npm run check:wasm           # load lean/wasm/dist/guard.mjs in Node, compare to policy.js
-```
-
-The production build uses the minimal `Guard.Wasm` import root; the build rejects
-reference normalization, batch IO, and proof modules in its dependency closure.
-The binary remains embedded, not fetched, preserving `connect-src 'none'`.
-See [Phase 6 results](docs/phase6-results.md) for before/after startup, memory,
-latency, message copies, distribution sizes, and the compression experiment.
-
-Four things were needed to get there and are worth knowing:
-
-- Lean's runtime references four libuv functions for temp-file helpers. The wasm32 distribution ships no libuv, so `lean/wasm/shim.c` stubs them; the checker never touches the filesystem.
-- Initializing with `lean_initialize()` and linking `libLean` produced a 56 MB module. Using `lean_initialize_runtime_module()` and linking only `libInit` and `libleanrt` brought it to 1.4 MB. This is also why `Guard/Core/Json.lean` exists instead of `Lean.Data.Json`.
-- Emscripten's default 64 KB stack is far below what Lean assumes, but 16 MB turned out to be address space for nothing: `node scripts/wasm-audit.mjs` measures **104 bytes** of linear-memory stack for every case, because the recursion that matters compiles to wasm *call frames* on the engine's own stack, which `-sSTACK_SIZE` does not configure. The audited ceilings are now `INITIAL_MEMORY=80MB` (above the measured 52.43 MiB peak heap break, with no growth in the audit workloads), `MAXIMUM_MEMORY=128MB` (a real ceiling: growth with no maximum is not one) and `STACK_SIZE=1MB` with `STACK_OVERFLOW_CHECK=1`.
-- The engine call stack is bounded by the *input* instead, and that bound is a per-engine measurement: WebKit 26 overflowed at 2,500 siblings where V8 managed 9,000. See [docs/csp.md](docs/csp.md#the-path-bound-is-an-engine-measurement).
-
-**Iterating on Lean sources** without rebuilding images:
-
-```
-docker build --target toolchain -t guard-lean-toolchain lean/
-docker run --rm -v "$PWD/lean:/guard" guard-lean-toolchain lake build
-docker run --rm -v "$PWD/lean:/guard" guard-lean-wasm      # rebuild the .wasm from current sources
-```
-
-## Security rules, BDD scenarios and CVE regressions
-
-`rules/catalog.json` is the single source of truth for what the system
-defends against. Each rule has an id such as `R-EXEC-SCRIPT`, a class, a
-given/when/then statement, the mechanisms that enforce it, the code that cites
-it in both languages, the Lean theorems that cover it, and verified references
-(CVE ids with the advisory URL and the sanitizer configuration the original
-attack needed).
-
-**Rule ids are first-class in the checkers.** Every change record the policy
-emits carries `rule`, in JavaScript and in Lean, and the differential compares
-them. So a test can assert not just that `<script>` is gone but that the
-element-drop rule for scripts is what removed it.
-
-**Scenarios are Gherkin.** `features/*.feature` hold one file per rule class
-plus `cve-regressions.feature`, one scenario per CVE with its payload or a
-marked reconstruction. Tags `@rule:R-…` and `@cve:CVE-…` link scenarios to
-the catalog. Policy scenarios run `When every engine validates it` and end
-with `Then all engines agree`, so each one is also a three-way differential.
-Runtime, gate, frame and renderer rules have JavaScript-only scenarios with
-QuickJS and jsdom.
-
-```
-npm run test:bdd                                   # JavaScript checker
-GUARD_LEAN_MOUNT=1 ENGINES=js,lean,wasm npm run test:bdd   # all three checkers; a missing engine fails
-```
-
-**The coverage gate** (`npm run test:coverage`, part of `npm test`) prints a
-matrix of rule, class, engines, scenario count, unit tests, citations in each
-language, proofs and CVE references, and fails on: a rule with no scenario, a
-scenario with no rule tag, an unknown rule or CVE tag, a catalog CVE without a
-scenario, stale generated ids, a rule cited in only one language, or a cited
-file that does not exist. Unit test titles carry `[R-…]` prefixes so grep links
-them to rules as well.
-
-Modeled CVEs: DOMPurify (CVE-2019-16728, CVE-2020-26870, CVE-2024-45801,
-CVE-2024-47875, CVE-2024-48910, CVE-2025-26791), bleach (CVE-2020-6802,
-CVE-2020-6816, CVE-2020-6817, CVE-2021-23980), rails-html-sanitizer
-(CVE-2022-32209, CVE-2024-53985 through 53989), Loofah (CVE-2018-8048). Each
-was checked against the GitHub advisory before being recorded; rules that
-lack a CVE cite a writeup or browser behaviour instead, and nothing is tagged
-with an unverified id.
+- [Repository architecture and source ownership](docs/ARCHITECTURE.md)
+- [Lean checker, proofs, differential testing, and Wasm build](docs/LEAN_CHECKER.md)
+- [Security rules, BDD coverage, and CVE regressions](docs/SECURITY_RULES.md)
+- [QuickJS calculation runtime and host data](docs/QUICKJS_RUNTIME.md)
 
 ## How this compares to json-render and A2UI
 
@@ -573,7 +385,7 @@ of chart types from a design system, use a catalog. That is the better trade.
   takes a URL prop or renders rich text carries the same risk at smaller scale.
 - **Logic is weaker.** A calculator with model-written formulas or a sort
   comparator the model invents does not fit a binding language. See
-  [Real calculation logic](#real-calculation-logic) below.
+  [the QuickJS calculation runtime](docs/QUICKJS_RUNTIME.md).
 - **Isolation is usually weaker.** Catalog renderers run in the host page, so a
   bug in one component is a same-origin XSS. Nothing prevents a catalog renderer
   from using a sandboxed frame, but the reference implementations do not, and
@@ -603,50 +415,3 @@ cheapest part.
 Both json-render and A2UI are young (A2UI pre-1.0, json-render first released
 early 2026), so expect schema and API churn if adopting either directly rather
 than borrowing the idea.
-
-## Real calculation logic
-
-Calculation is ordinary JavaScript in `update` and `view`. It runs unmodified
-in QuickJS with the full language and standard library: numbers, BigInt, Math,
-strings, regular expressions, arrays, Map and Set, Date, JSON, closures,
-classes and recursion. The restrictions are about reach, not computation:
-fetch, timers, DOM, storage and imports are absent from the runtime rather than
-blocked. The optional linter can report them up front for regeneration, but it
-is a diagnostic: confinement does not depend on it.
-
-Defaults: 200 ms interrupt per step, 32 MiB memory, 512 KiB stack, 400k
-character view. All are configurable in `src/runtime/core.js`.
-
-**Host-supplied data.** The host keeps the dataset and passes it to
-`runtime.load(source, data)`. It is serialized once, injected into QuickJS as
-a deep-frozen global named `data` before the program runs, and never appears
-in model output. The model writes code that reads `data` and the host can
-label displayed numbers as coming from the real source. Without host data the
-global is `null`. Default size limit 4 MiB.
-
-Practical notes for writing or prompting this code:
-
-- Every event value is a string. Convert and validate; fall back on bad input
-  rather than rendering NaN.
-- State must survive JSON. Dates become strings, Map and Set vanish, functions
-  cannot be stored. Keep derived values out of state and recompute in `view`.
-- No `Intl`. QuickJS has no locale data, so format numbers and dates by hand.
-- `update` and `view` are pure, so the host can replay any event sequence
-  without a browser for debugging or tests.
-- A step that exceeds its budget is interrupted, the runtime is marked dead,
-  the last validated view stays on screen and the host shows the failure.
-
-## Integrating into a host page
-
-The host page's own CSP must include the frame bundle's script hash and the
-stylesheet hash from `dist/frame-manifest.json`, because a `srcdoc` frame
-inherits the embedding page's policy before applying its own. Everything else
-in the frame's policy is `'none'`. Verified negatively on all three pinned
-engines: remove the script hash and the frame never starts; remove the style
-hash and it starts unstyled.
-
-The full policy, the per-token justification, the tested browser matrix, the
-startup error codes and the `blob:`-free fallback profile are all in
-[docs/csp.md](docs/csp.md). `scripts/serve.mjs` emits the adopted profile for
-the demo, and `?cspOmit=<token>` there removes one required token so the
-corresponding startup error can be reproduced in a browser.
