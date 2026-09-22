@@ -122,7 +122,7 @@ Pin a release tag or, for the strongest immutability, a commit SHA:
 ```html
 <script type="module">
   import { createGuard }
-    from "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.full.min.js";
+    from "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@v0.0.1/cdn/generative-web-guard.full.min.js";
 
   // createGuard owns the whole boundary: the sandboxed frame, the policy
   // Worker with its embedded Lean/Wasm authority, the private port that
@@ -193,7 +193,7 @@ cross-origin Worker URL restrictions and any runtime asset fetch:
 
 ```js
 import { createGuardRuntime } from
-  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.full.min.js";
+  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@v0.0.1/cdn/generative-web-guard.full.min.js";
 
 const runtime = createGuardRuntime();
 ```
@@ -258,7 +258,7 @@ ships as its own entry point so Acorn is not in the default dependency path:
 
 ```js
 import { gateProgram } from
-  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.lint.js";
+  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@v0.0.1/cdn/generative-web-guard.lint.js";
 ```
 
 The GitHub workflow rebuilds and tests both distributions, rejects stale

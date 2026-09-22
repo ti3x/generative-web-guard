@@ -2,6 +2,8 @@ name: Build and test
 
 on:
   push:
+    branches: [main]
+    tags: ["v*"]
   pull_request:
   workflow_dispatch:
 
@@ -227,3 +229,35 @@ jobs:
           PORT=8096 npm run serve &
           for i in $(seq 1 40); do curl -sf -o /dev/null http://localhost:8096/ && break; sleep 0.5; done
       - run: DEMO_URL=http://localhost:8096/ npm run check:browser
+
+  # A release is created only after the same proof, distribution and browser
+  # gates have passed for an immutable v* tag. `dist/` is useful as a download
+  # for local demos; jsDelivr continues to serve the committed cdn/ files.
+  release:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [proofs-and-full-verification, browser-distribution, browser-matrix]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch the verified distribution artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: generative-web-guard-${{ github.sha }}
+      - name: Package the local demo distribution
+        shell: bash
+        run: |
+          set -euo pipefail
+          archive="generative-web-guard-${GITHUB_REF_NAME}-dist.zip"
+          (cd dist && zip -r "../$archive" .)
+          shasum -a 256 "$archive" > "$archive.sha256"
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "generative-web-guard-${GITHUB_REF_NAME}-dist.zip" \
+            "generative-web-guard-${GITHUB_REF_NAME}-dist.zip.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes
