@@ -50,11 +50,30 @@ The command exits nonzero and writes a structured refusal to stderr when a
 document exceeds a preprocessing limit or Lean does not accept the candidate.
 It never falls back to JavaScript acceptance.
 
-`<script>` elements inside an HTML input are removed by the markup policy.
-Separate generated JavaScript files are not rewritten into "safe JavaScript":
-they must run as programs in the QuickJS Worker, and each HTML view they
-produce is then accepted or refused by Lean/Wasm. The CLI filters HTML views;
-it does not execute or emit transformed JavaScript source.
+Try the included HTML fixture:
+
+```sh
+npm run guard:html -- examples/cli/untrusted-page.html > filtered-page.html
+```
+
+Generated JavaScript is not rewritten into "safe JavaScript." Instead,
+`guard:js` runs the program's initial view with the same QuickJS core and
+default limits as the runtime, then filters that HTML through Lean/Wasm. A
+program must define `initialState`, `update(state, event)`, and `view(state)`.
+`--data` is optional; when present, its JSON value becomes a deep-frozen
+`data` global inside QuickJS.
+
+```sh
+# No data: data is null in the program.
+npm run guard:js -- examples/cli/program.js > filtered-view.html
+
+# Optional input data. These three files are runnable examples.
+npm run guard:js -- examples/cli/program.js --data examples/cli/data.json > filtered-view-with-data.html
+```
+
+`guard:js` evaluates only the initial view; it does not emit transformed
+JavaScript. Browser interaction programs continue to run in the actual QuickJS
+Worker, and every view they produce is accepted or refused by Lean/Wasm.
 
 The browser check runs Chromium, Firefox and WebKit and **pins** the exact
 Playwright builds it tests against: Chromium `140.0.7339.186`
