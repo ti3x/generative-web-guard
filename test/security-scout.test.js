@@ -14,8 +14,19 @@ const advisory = (overrides = {}) => ({
   ...overrides,
 });
 
-test("security scout ranks sanitizer and XSS advisories but ignores unrelated reports", () => {
+test("security scout ranks HTML, JavaScript, and SVG security advisories but ignores unrelated reports", () => {
   assert.ok(rankAdvisory(advisory()) >= 2);
+  assert.ok(rankAdvisory(advisory({
+    summary: "QuickJS sandbox escape through dynamic code evaluation",
+    description: "A JavaScript sandbox boundary can be bypassed.",
+    cwe_ids: ["CWE-94"],
+    vulnerabilities: [{ package: { ecosystem: "npm", name: "quickjs-emscripten" } }],
+  })) >= 2);
+  assert.ok(rankAdvisory(advisory({
+    summary: "SVG sanitizer bypass permits script injection",
+    description: "An SVG namespace transition bypasses filtering.",
+    cwe_ids: ["CWE-79"],
+  })) >= 2);
   assert.equal(rankAdvisory(advisory({
     summary: "Incorrect calculation in a cryptographic protocol",
     description: "Signature verification can fail.",

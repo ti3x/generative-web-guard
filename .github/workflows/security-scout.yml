@@ -1,4 +1,4 @@
-name: Weekly HTML security scout
+name: Weekly HTML, JS, and SVG security scout
 
 on:
   schedule:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Find new HTML security candidates and open a triage issue
+      - name: Find new HTML, JS, and SVG security candidates and open a triage issue
         run: node scripts/security-scout.mjs
         env:
           GITHUB_TOKEN: ${{ github.token }}

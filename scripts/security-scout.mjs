@@ -2,11 +2,12 @@
 // the report uses only bounded, escaped summaries and links supplied by GitHub.
 import { pathToFileURL } from "node:url";
 
-const DIRECT_RE = /html sanit|sanitizer|mutation xss|\bmxss\b|dom clobber|mathml|svg|srcdoc|html parser|parser differential|trusted types|content security policy/i;
+const HTML_SVG_RE = /html sanit|sanitizer|mutation xss|\bmxss\b|dom clobber|mathml|svg|srcdoc|html parser|parser differential|trusted types|content security policy/i;
+const JS_RUNTIME_RE = /quickjs|javascript sandbox|ecmascript sandbox|javascript parser|ast parser|dynamic(?: |-)code|code injection|dom[- ]based xss|prototype pollution/i;
 const XSS_RE = /cross[- ]site scripting|\bxss\b|script injection/i;
 const DOS_RE = /denial of service|\bdos\b|resource exhaustion|stack overflow|deep(?:ly)? nested/i;
-const PACKAGE_RE = /dompurify|sanitize-html|html-sanitizer|rails-html-sanitizer|loofah|bleach|js-xss|htmlparser|parse5|rehype-sanitize|hast-util-sanitize/i;
-const RELEVANT_CWES = new Set(["CWE-20", "CWE-79", "CWE-80", "CWE-83", "CWE-84", "CWE-87", "CWE-91", "CWE-116", "CWE-184", "CWE-185", "CWE-400", "CWE-1321"]);
+const PACKAGE_RE = /dompurify|sanitize-html|html-sanitizer|rails-html-sanitizer|loofah|bleach|js-xss|htmlparser|parse5|rehype-sanitize|hast-util-sanitize|quickjs|quickjs-emscripten|acorn|esbuild/i;
+const RELEVANT_CWES = new Set(["CWE-20", "CWE-79", "CWE-80", "CWE-83", "CWE-84", "CWE-87", "CWE-91", "CWE-94", "CWE-95", "CWE-116", "CWE-184", "CWE-185", "CWE-400", "CWE-1321"]);
 
 function advisoryText(advisory) {
   const packages = (advisory.vulnerabilities ?? []).map((v) => v.package?.name ?? "").join(" ");
@@ -18,7 +19,8 @@ export function rankAdvisory(advisory) {
   const packages = (advisory.vulnerabilities ?? []).map((v) => v.package?.name ?? "").join(" ");
   const cwes = new Set(advisory.cwe_ids ?? advisory.cwes?.map((c) => c.cwe_id) ?? []);
   let score = 0;
-  if (DIRECT_RE.test(text)) score += 5;
+  if (HTML_SVG_RE.test(text)) score += 5;
+  if (JS_RUNTIME_RE.test(text)) score += 5;
   if (PACKAGE_RE.test(packages)) score += 5;
   if (XSS_RE.test(text)) score += 2;
   if (DOS_RE.test(text)) score += 2;
@@ -127,7 +129,7 @@ export async function main(env = process.env) {
     console.log(`security scout: no new relevant advisories since ${since}`);
     return null;
   }
-  const title = `Weekly HTML security scout — ${until}`;
+  const title = `Weekly HTML, JS, and SVG security scout — ${until}`;
   const body = buildIssueBody(candidates, { since, until });
   if (env.SCOUT_DRY_RUN === "1") {
     console.log(`${title}\n\n${body}`);
