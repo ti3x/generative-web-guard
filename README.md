@@ -50,10 +50,13 @@ The command exits nonzero and writes a structured refusal to stderr when a
 document exceeds a preprocessing limit or Lean does not accept the candidate.
 It never falls back to JavaScript acceptance.
 
-Try the included HTML fixture:
+The runnable fixtures are in
+[`examples/cli`](https://github.com/ti3x/generative-web-guard/tree/main/examples/cli).
+From any directory, download the HTML example and filter it:
 
 ```sh
-npm run guard:html -- examples/cli/untrusted-page.html > filtered-page.html
+curl -LO https://raw.githubusercontent.com/ti3x/generative-web-guard/main/examples/cli/untrusted-page.html
+npm run guard:html -- untrusted-page.html > filtered-page.html
 ```
 
 Generated JavaScript is not rewritten into "safe JavaScript." Instead,
@@ -64,11 +67,14 @@ program must define `initialState`, `update(state, event)`, and `view(state)`.
 `data` global inside QuickJS.
 
 ```sh
-# No data: data is null in the program.
-npm run guard:js -- examples/cli/program.js > filtered-view.html
+curl -LO https://raw.githubusercontent.com/ti3x/generative-web-guard/main/examples/cli/program.js
+curl -LO https://raw.githubusercontent.com/ti3x/generative-web-guard/main/examples/cli/data.json
 
-# Optional input data. These three files are runnable examples.
-npm run guard:js -- examples/cli/program.js --data examples/cli/data.json > filtered-view-with-data.html
+# No data: `data` is null in the program.
+npm run guard:js -- program.js > filtered-view.html
+
+# Optional input data.
+npm run guard:js -- program.js --data data.json > filtered-view-with-data.html
 ```
 
 `guard:js` evaluates only the initial view; it does not emit transformed
@@ -116,7 +122,7 @@ Pin a release tag or, for the strongest immutability, a commit SHA:
 ```html
 <script type="module">
   import { createGuard }
-    from "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.full.min.js";
+    from "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.full.min.js";
 
   // createGuard owns the whole boundary: the sandboxed frame, the policy
   // Worker with its embedded Lean/Wasm authority, the private port that
@@ -187,7 +193,7 @@ cross-origin Worker URL restrictions and any runtime asset fetch:
 
 ```js
 import { createGuardRuntime } from
-  "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.full.min.js";
+  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.full.min.js";
 
 const runtime = createGuardRuntime();
 ```
@@ -252,7 +258,7 @@ ships as its own entry point so Acorn is not in the default dependency path:
 
 ```js
 import { gateProgram } from
-  "https://cdn.jsdelivr.net/gh/OWNER/generative-web-guard@v0.1.0/cdn/generative-web-guard.lint.js";
+  "https://cdn.jsdelivr.net/gh/ti3x/generative-web-guard@94a04274c19e803863e78a422d92af5a7aaae4de/cdn/generative-web-guard.lint.js";
 ```
 
 The GitHub workflow rebuilds and tests both distributions, rejects stale
