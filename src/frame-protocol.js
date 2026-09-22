@@ -67,7 +67,7 @@ export function isFrameRender(message, expect = {}) {
 export function isFrameAck(message, expect = {}) {
   if (!isFrameIdentity(message, expect)) return false;
   if (message.kind !== FRAME_MESSAGE.rendered && message.kind !== FRAME_MESSAGE.refused) return false;
-  if (!isCount(message.seq)) return false;
+  if (!isCount(message.seq) || !isCount(message.generation) || !isCount(message.requestId)) return false;
   return true;
 }
 

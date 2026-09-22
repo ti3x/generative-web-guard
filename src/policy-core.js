@@ -155,6 +155,7 @@ export function createPolicyCore(options = {}) {
     if (!verdict || typeof verdict !== "object") {
       return policyRejection("authority-malformed", { detail: "the checker returned no verdict" });
     }
+    if (checker.poisoned) return policyRejection("checker-poisoned", { detail: "the checker trapped; replace this Worker before checking another document" });
     if (verdict.status === "rejected") {
       return policyRejection("lean-rejected", {
         detail: (verdict.reasons ?? []).slice(0, 8).join(","),

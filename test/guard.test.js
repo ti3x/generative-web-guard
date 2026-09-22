@@ -147,6 +147,32 @@ async function harness({ frameMode = {}, workerMode = {}, timeouts = {} } = {}) 
 
 // --- static documents ---------------------------------------------------------
 
+test("[R-RT-LIMITS] phase7 manual-frame-reload: pending and subsequent renders fail closed and release the guard resources", { skip }, async () => {
+  const h = await harness({ workerMode: { hang: true } });
+  const pending = h.guard.render({ html: "<p>pending</p>" });
+  h.frame.hostStatus({ kind: "frame-reloaded", detail: { code: "frame-reloaded" } });
+  assert.equal((await pending).reason.code, "frame-reloaded");
+  assert.equal((await h.guard.render({ html: "<p>later</p>" })).reason.code, "frame-reloaded");
+  assert.equal(h.frame.destroyed, true);
+  assert.ok(h.created.workers.every(w => w.terminated));
+  h.guard.dispose();
+});
+
+test("[R-RT-LIMITS] phase7 manual-starting-runtime: dispose terminates a program still loading", async () => {
+  let rejectLoad, terminated = false;
+  const make = createGuardWith({ manifest: {},
+    createFrame: () => ({ ready: Promise.resolve({}), whenBound: async () => true, destroy() {} }),
+    createPolicySession: () => ({ start: async () => {}, nextGeneration: () => 1, dispose() {} }),
+    createRuntime: () => ({ load: () => new Promise((_, reject) => { rejectLoad = reject; }),
+      dispose() { terminated = true; rejectLoad(new Error("disposed")); } }),
+  });
+  const guard = await make({ container: CONTAINER });
+  const loading = guard.render({ program: "fixture" });
+  guard.dispose();
+  assert.equal(terminated, true, "initializing runtime was not owned by teardown");
+  assert.equal((await loading).status, "superseded");
+});
+
 test("[R-CHECK-ACCEPTANCE] createGuard resolves only with the authority ready, and a static render is acknowledged by the frame", { skip }, async () => {
   const h = await harness();
   assert.deepEqual(h.kinds(), ["ready"]);

@@ -21,7 +21,7 @@
 // instance is therefore POISONED permanently: every later call refuses with
 // `lean-checker-poisoned`. Resetting and continuing would mean answering from
 // a module whose invariants may no longer hold. The policy Worker reports the
-// refusal, the host's request budget terminates the Worker, and the next
+// fatal refusal, the host terminates the Worker, and the next
 // request gets a new Worker with a new instance.
 //
 // WHAT THIS MODULE DOES NOT CLAIM

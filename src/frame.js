@@ -78,6 +78,7 @@ export function startFrame(win) {
   // A later bootstrap replaces the port without reopening a parent route.
   let receiver = null;
   let bound = null;
+  win.addEventListener("pagehide", () => receiver?.dispose(), { once: true });
 
   function bootstrap(msg, ports) {
     const port = ports && ports[0];

@@ -351,7 +351,7 @@ test("[R-RT-LIMITS] a worker error settles pending work without waiting for the 
 
 test("[R-RT-ISOLATION] no module reachable from the policy Worker can execute generated JavaScript", () => {
   const files = [
-    "src/policy-worker.js", "src/policy-core.js", "src/policy-protocol.js",
+    "src/policy-worker.js", "src/policy-dispatcher.js", "src/policy-core.js", "src/policy-protocol.js",
     "src/policy-client.js", "src/adapters/parse5.js",
     // The Lean authority path is inside the policy Worker too, so it is held
     // to the same rule.
@@ -372,7 +372,8 @@ test("[R-RT-ISOLATION] no module reachable from the policy Worker can execute ge
 
 test("[R-RT-ISOLATION] the Worker entry only answers the policy protocol", () => {
   const source = readFileSync(new URL("../src/policy-worker.js", import.meta.url), "utf8");
-  assert.ok(source.includes("handlePolicyRequest"));
+  assert.ok(source.includes("createPolicyDispatcher"));
+  assert.ok(source.includes("dispatcher.receive(event.data, event.ports)"));
   // No other message handler and no capability plumbing.
   assert.equal(source.match(/addEventListener/g).length, 1);
 });

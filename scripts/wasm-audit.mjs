@@ -31,6 +31,11 @@ import { readFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { configureRequest, checkRequest, readCheckResponse, readInfoResponse } from "../src/lean-abi.js";
 import { PREPROCESS_LIMITS } from "../src/policy-protocol.js";
+import assert from "node:assert/strict";
+import { options, provenance, report, rng, hash } from "./lib/fuzz-support.mjs";
+
+const soak = process.argv.includes("--soak");
+const cli = soak ? options({}, { soak: { type: "boolean" }, iterations: { type: "string", default: "500" }, corpus: { type: "string" } }) : null;
 
 const WASM_MJS = new URL("../lean/wasm/dist/guard.mjs", import.meta.url);
 const WASM_BIN = new URL("../lean/wasm/dist/guard.wasm", import.meta.url);
@@ -62,6 +67,7 @@ const inputPtr = api.inputBuffer();
 
 function call(fnToCall, text) {
   const bytes = encoder.encode(text);
+  if (bytes.length > api.inputCapacity()) throw new Error("audit request exceeds staging capacity");
   Module.HEAPU8.set(bytes, inputPtr);
   const status = fnToCall(bytes.length);
   if (status !== 0) return { status, text: "" };
@@ -175,6 +181,7 @@ for (const [label, document] of cases) {
     // A host call-stack overflow inside the module surfaces here as a
     // RangeError. It is a genuine finding, not a harness bug: the wasm call
     // stack is the engine's and is NOT what -sSTACK_SIZE configures.
+    if (soak) throw error; // a poisoned instance cannot supply soak evidence
     rows.push([label, `THREW ${String(error && error.message).slice(0, 60)}`, `${requestBytes}`, "", ""]);
     continue;
   }
@@ -201,3 +208,42 @@ console.log(`PEAK heap break:      ${mib(peakBreak)} MiB`);
 console.log(`PEAK memory size:     ${mib(peakMemory)} MiB (INITIAL_MEMORY is ${mib(afterInitMemory)} MiB)`);
 console.log(`PEAK stack use:       ${deepestStack} bytes (${mib(deepestStack)} MiB) of ${mib(stackSize)} MiB configured`);
 console.log(`memory growth events: ${peakMemory > afterInitMemory ? "YES -- INITIAL_MEMORY is below the worst legal document" : "none"}`);
+
+if (soak) {
+  const workload = cases.map(([label, tree]) => ({ label, request: checkRequest("soak", tree) }))
+    .filter(c => encoder.encode(c.request).length <= api.inputCapacity());
+  let corpusHash = null;
+  if (cli.corpus) {
+    const contents = readFileSync(cli.corpus, "utf8");
+    corpusHash = hash(contents);
+    for (const line of contents.trim().split("\n").filter(Boolean).slice(0, 64)) {
+      const c = JSON.parse(line);
+      workload.push({ label: c.input.label, request: checkRequest("soak", c.tree) });
+    }
+  }
+  const sample = () => ({ heapBreak: api.heapBreak(), memoryBytes: Module.HEAPU8.length });
+  const run = c => {
+    const result = call(api.check, c.request);
+    assert.equal(result.status, 0, `${c.label}: shim failure`);
+    assert.ok(["accepted", "rejected", "error"].includes(readCheckResponse(result.text, "soak").status));
+    assert.equal(Module.HEAPU8.length, afterInitMemory, "linear memory grew during soak");
+  };
+  for (let warm = 0; warm < 2; warm++) for (const c of workload) run(c);
+  const baseline = sample(), samples = [{ index: 0, ...baseline }], random = rng(cli.seed);
+  const started = performance.now();
+  let completed = 0;
+  try {
+    for (; completed < cli.iterations && (!cli.minutes || performance.now() - started < cli.minutes * 60000); completed++) {
+      run(workload[Math.floor(random() * workload.length)]);
+      if ((completed + 1) % 100 === 0) samples.push({ index: completed + 1, ...sample() });
+    }
+    samples.push({ index: completed, ...sample() });
+    assert.equal(api.heapBreak(), baseline.heapBreak, "heap break increased after full-workload warmup");
+    report(cli.report ?? "phase7-output/wasm-soak.json", { ...provenance("wasm-soak"), status: "passed", seed: cli.seed,
+      completed, warmupDocuments: workload.length * 2, corpusHash, baseline, samples, elapsedMs: performance.now() - started });
+    console.log(`soak: ${completed} calls, ${workload.length * 2} warmups, heap plateau ${mib(baseline.heapBreak)} MiB, no growth`);
+  } catch (error) {
+    report(cli.report ?? "phase7-output/wasm-soak.json", { ...provenance("wasm-soak"), status: "failed", seed: cli.seed, completed, baseline, samples, error: error.stack });
+    throw error;
+  }
+}

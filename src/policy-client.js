@@ -265,7 +265,7 @@ export function createPolicySession(options = {}) {
         : { status: "rejected", reason: { code: "session-terminated", detail: reason.code } };
       settle(entry, requestId, body);
     }
-    if (onTerminated) onTerminated({ ...reason, sessionId: dyingSession });
+    if (onTerminated) { try { onTerminated({ ...reason, sessionId: dyingSession }); } catch { /* host callback */ } }
   }
 
   function onWorkerError(event) {
@@ -287,10 +287,12 @@ export function createPolicySession(options = {}) {
   }
 
   function onMessage(event) {
+    if (disposed || worker === null) return;
     const message = event.data;
     if (!message || typeof message !== "object") return;
     if (message.protocol !== POLICY_PROTOCOL_VERSION) return;
     if (message.kind === POLICY_MESSAGE.ready) {
+      if (handshakeDone) return; // duplicate ready must not replace a live port
       // channel-handshake stage complete.
       handshakeDone = true;
       clearTimeout(handshakeTimer);
@@ -351,6 +353,11 @@ export function createPolicySession(options = {}) {
       return settle(entry, message.requestId, { status: "rejected", reason: message.reason ?? { code: "refused" } });
     }
     if (message.kind !== POLICY_MESSAGE.result) return;
+    if (message.status === "rejected" && message.reason?.code === "checker-poisoned") {
+      stats.rejected += 1;
+      settle(entry, message.requestId, { status: "rejected", reason: message.reason });
+      return terminate({ code: "checker-poisoned", detail: "the Lean instance is unusable" });
+    }
     if (entry.generation !== generation) {
       return settle(entry, message.requestId, { status: "superseded" });
     }

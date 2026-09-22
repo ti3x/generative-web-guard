@@ -11,6 +11,26 @@ const IDS = { instanceId: "inst-1", sessionId: "sess-1" };
 const TREE = { kind: "root", children: [] };
 const tick = () => new Promise((resolve) => setTimeout(resolve, 10));
 
+test("[R-FRAME-MESSAGE-SCHEMA] phase7 manual-ack-identity: matching seq cannot acknowledge another request or generation", async () => {
+  const { port1, port2 } = new MessageChannel();
+  const sender = createFrameSender(port1, { ...IDS, timeoutMs: 500 });
+  const received = new Promise(resolve => { port2.onmessage = ({ data }) => resolve(data); });
+  try {
+    let settled = false;
+    const pending = sender.render(TREE, { generation: 3, requestId: 7 }).then(r => { settled = true; return r; });
+    const command = await received;
+    for (const fields of [{ generation: 4, requestId: 7 }, { generation: 3, requestId: 8 }, {}]) {
+      port2.postMessage(frameEnvelope(IDS, FRAME_MESSAGE.rendered, { seq: command.seq, ...fields }));
+    }
+    await tick();
+    assert.equal(settled, false, "a mismatched acknowledgement settled the render");
+    assert.equal(sender.pendingCount, 1);
+    port2.postMessage(frameEnvelope(IDS, FRAME_MESSAGE.rendered, { seq: command.seq, generation: 3, requestId: 7 }));
+    assert.deepEqual(await pending, { ok: true });
+    assert.equal(sender.stats.ignored, 3);
+  } finally { sender.dispose(); port2.close(); }
+});
+
 function pair({ onRender = () => ({ ok: true }), receiverIds = IDS, senderIds = IDS, timeoutMs = null } = {}) {
   const channel = new MessageChannel();
   const receiver = createFrameReceiver(channel.port2, { ...receiverIds, onRender });

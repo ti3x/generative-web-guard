@@ -42,32 +42,32 @@
     "fetched": false
   },
   "frame": {
-    "scriptBytes": 41614,
-    "scriptHash": "0RBXc9G5DF1PNBJljYj7nR384Bn7GK1DKE22GTXXgOY=",
+    "scriptBytes": 41695,
+    "scriptHash": "55FosAF4kQjwQvuynTUQJobDHwzZ1GsnCduMqgO4+7A=",
     "cssBytes": 2689,
     "cssHash": "Krlr2KhFjDPgFQ2Ffw87pI93sYzNjgUfAteJBYhgzCM=",
     "classes": 25
   },
   "assets": {
     "cdn/generative-web-guard.full.min.js": {
-      "bytes": 3493476,
-      "sha256": "c3bdfb622b31639459d5bcf69f8b4acd6761f5faeffa4c472c82b9a10532d8f8"
+      "bytes": 3495015,
+      "sha256": "c5bae0571b3176c4b8248a574f105c741b192d39d8158127cd36327251335eaa"
     },
     "cdn/generative-web-guard.js": {
-      "bytes": 452499,
-      "sha256": "bef0c3c6e57f420d2205faf6febe4420328b208f1e23a2d599fb3c2f5bf04817"
+      "bytes": 453859,
+      "sha256": "577be88583bdfee91ced52f2056e03a19bb1e948d91ad59d912a0848349e704c"
     },
     "cdn/generative-web-guard.lint.js": {
       "bytes": 201855,
       "sha256": "0f0e81561503eabdbd593dc09b9f85259d60286d58435e2424bcc6d322513004"
     },
     "cdn/generative-web-guard.min.js": {
-      "bytes": 278293,
-      "sha256": "39dc6ac1a51fc375264722e004faa029fdecbbcf84e9a1ea97751180ba9b3707"
+      "bytes": 279036,
+      "sha256": "cff606f946ec8d450f4cd6bc2025fc6d0bbdd3b124439e36c3b99ed25e928df7"
     },
     "cdn/policy-worker.min.js": {
-      "bytes": 2450044,
-      "sha256": "41ea86195d3c931435a618c929959c039ccabbc801235626d9d5741b45cdd428"
+      "bytes": 2450406,
+      "sha256": "38c252e86be7532990c60c33ec151b6133ea2b5ffca3537f26855ca50c0ab790"
     },
     "cdn/worker.min.js": {
       "bytes": 752247,

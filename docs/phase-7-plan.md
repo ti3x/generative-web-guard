@@ -7,7 +7,11 @@ host pages the way the design says it does? The evidence today is strong on
 policy correctness and thin on three things: message-ordering races, sustained
 adversarial load, and the embedding application around the guard.
 
-Status: planned. Nothing in this document is implemented or verified. Each
+Status: implementation in progress. Deliverables 1 and 2 are implemented;
+the Wasm half of deliverable 3 has found unresolved sustained memory growth.
+See the [implementation handoff](phase-7-implementation-plan.md) and
+[results](phase7-results.md).
+This design document is not verification evidence. Each
 item states what exists now, what is missing, the oracle that would catch a
 failure, and where the work lands. Results go in a separate
 `phase7-results.md` when there are results; this file is not evidence.

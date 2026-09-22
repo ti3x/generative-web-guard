@@ -16,7 +16,7 @@ const root = children => ({ kind: "root", children });
 const el = (tag, attrs = [], children = [], ns = "html") => ({ kind: "el", ns, tag, attrs, children });
 const text = s => ({ kind: "text", text: s });
 
-export function assertSafeTree(tree) {
+export function assertSafeTree(tree, { classes = DEFAULT_CLASSES } = {}) {
   assert.equal(tree.kind, "root");
   let count = 0, total = 0;
   function walk(nodes, parent, depth) {
@@ -43,7 +43,7 @@ export function assertSafeTree(tree) {
         assert.ok(!forbiddenAttr.test(name), `forbidden attribute ${name}`);
         assert.ok(!controls.test(value), "attribute control characters");
         if (name === "id") assert.match(value, /^g-[A-Za-z][A-Za-z0-9_-]{0,63}$/);
-        if (name === "class") assert.ok(value.split(" ").every(v => DEFAULT_CLASSES.includes(v)), "class membership");
+        if (name === "class") assert.ok(value.split(" ").every(v => classes.includes(v)), "class membership");
         if (name === "fill" || name === "stroke") assert.ok(!/url\s*\(|expression|[;{}]/i.test(value), "paint resource or code");
       }
       if (node.ns === "html") {

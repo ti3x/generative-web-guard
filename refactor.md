@@ -455,7 +455,9 @@ documented obligations, never weakened just to make verification pass.
 
 ### Phase 7 — Verify the tool itself
 
-Planned, not implemented: [docs/phase-7-plan.md](docs/phase-7-plan.md).
+Implementation in progress: [design](docs/phase-7-plan.md),
+[implementation plan](docs/phase-7-implementation-plan.md), and
+[results](docs/phase7-results.md).
 Model-based fuzzing of the session state machine, mutation fuzzing of the
 untrusted-input path with fixed-point and no-trap oracles, Wasm and browser
 resource soaks, a browser round-trip oracle and host-integration matrix,

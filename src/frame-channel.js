@@ -32,7 +32,7 @@ function detach(port) {
  */
 export function createFrameSender(port, { instanceId, sessionId, timeoutMs = null }) {
   const ids = { instanceId, sessionId };
-  const pending = new Map(); // seq -> { resolve, timer }
+  const pending = new Map(); // seq -> { resolve, timer, generation, requestId }
   let seq = 0;
   let closed = false;
   const stats = { sent: 0, rendered: 0, refused: 0, ignored: 0 };
@@ -48,6 +48,8 @@ export function createFrameSender(port, { instanceId, sessionId, timeoutMs = nul
   port.onmessage = (event) => {
     const message = event.data;
     if (!isFrameAck(message, ids) || !pending.has(message.seq)) { stats.ignored += 1; return; }
+    const entry = pending.get(message.seq);
+    if (message.generation !== entry.generation || message.requestId !== entry.requestId) { stats.ignored += 1; return; }
     if (message.kind === FRAME_MESSAGE.rendered) { stats.rendered += 1; settle(message.seq, { ok: true }); return; }
     stats.refused += 1;
     settle(message.seq, { ok: false, reason: { code: "frame-refused", detail: boundedReason(message.reason) } });
@@ -64,7 +66,7 @@ export function createFrameSender(port, { instanceId, sessionId, timeoutMs = nul
         const timer = timeoutMs === null ? null : setTimeout(() => {
           settle(mySeq, { ok: false, reason: { code: "frame-ack-timeout", limit: "timeoutMs", limitValue: timeoutMs } });
         }, timeoutMs);
-        pending.set(mySeq, { resolve, timer });
+        pending.set(mySeq, { resolve, timer, generation, requestId });
         try {
           port.postMessage(frameEnvelope(ids, FRAME_MESSAGE.render, { generation, requestId, seq: mySeq, tree }));
         } catch (error) {

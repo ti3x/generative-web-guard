@@ -118,6 +118,7 @@ export function createSandboxFrame({
 
   let ready = false;
   let destroyed = false;
+  let loads = 0;
   // Private-port state (src/frame-protocol.js). Once the frame reports
   // `bound`, the host only wires ports, and trees
   // reach the frame from the policy Worker.
@@ -127,7 +128,14 @@ export function createSandboxFrame({
   let settleBound = null;
   const boundPromise = new Promise((resolve) => { settleBound = resolve; });
 
-  const status = (kind, detail) => onStatus && onStatus({ kind, detail });
+  const status = (kind, detail) => { try { onStatus?.({ kind, detail }); } catch { /* host callback */ } };
+
+  function reloaded() {
+    if (destroyed) return;
+    api.destroy();
+    status("frame-reloaded", { code: "frame-reloaded", detail: "the frame navigated; recreate the guard" });
+  }
+  function onLoad() { if (++loads > 1) reloaded(); }
 
   // ---- frame-bootstrap stage -------------------------------------------
   // This stage has its own budget and its own code because it is the one
@@ -159,6 +167,7 @@ export function createSandboxFrame({
       iframe.contentWindow.postMessage(message, "*", [port]);
       return true;
     } catch (error) {
+      try { port.close(); } catch { /* detached */ }
       status("bootstrap-failed", String(error && error.message).slice(0, 200));
       return false;
     }
@@ -172,6 +181,7 @@ export function createSandboxFrame({
     if (!msg || typeof msg !== "object") return;
     switch (msg.type) {
       case "ready": {
+        if (ready) { reloaded(); return; }
         ready = true;
         clearTimeout(bootstrapTimer);
         const info = {
@@ -216,7 +226,7 @@ export function createSandboxFrame({
       }
       case "event": {
         const ev = sanitizeEvent(msg.event);
-        if (ev && onEvent) onEvent(ev);
+        if (ev && onEvent) { try { onEvent(ev); } catch { /* host callback */ } }
         break;
       }
       default:
@@ -225,6 +235,7 @@ export function createSandboxFrame({
   }
 
   win.addEventListener("message", onMessage);
+  iframe.addEventListener("load", onLoad);
   container.appendChild(iframe);
 
   const api = {
@@ -237,11 +248,11 @@ export function createSandboxFrame({
      * the policy Worker.
      */
     attachPort(port, { instanceId, sessionId }) {
-      if (destroyed) return Promise.resolve(false);
+      if (destroyed) { port.close(); return Promise.resolve(false); }
       const message = { type: "bootstrap", protocol: FRAME_PROTOCOL_VERSION, instanceId, sessionId };
       return new Promise((resolve) => {
         if (bootstrapResolve) { bootstrapResolve(false); bootstrapResolve = null; }
-        if (pendingBootstrap) { pendingBootstrap.resolve(false); pendingBootstrap = null; }
+        if (pendingBootstrap) { pendingBootstrap.port.close(); pendingBootstrap.resolve(false); pendingBootstrap = null; }
         if (!ready) { pendingBootstrap = { message, port, resolve }; return; }
         bootstrapResolve = resolve;
         if (!postBootstrap({ message, port })) { bootstrapResolve = null; resolve(false); }
@@ -265,12 +276,16 @@ export function createSandboxFrame({
      */
     ready: readyPromise,
     destroy() {
+      if (destroyed) return;
       destroyed = true;
+      if (!ready) failReady(new Error("frame destroyed before startup completed"));
+      portBound = false;
       clearTimeout(bootstrapTimer);
       if (bootstrapResolve) { bootstrapResolve(false); bootstrapResolve = null; }
-      if (pendingBootstrap) { pendingBootstrap.resolve(false); pendingBootstrap = null; }
+      if (pendingBootstrap) { pendingBootstrap.port.close(); pendingBootstrap.resolve(false); pendingBootstrap = null; }
       if (settleBound) { settleBound(false); settleBound = null; }
       win.removeEventListener("message", onMessage);
+      iframe.removeEventListener("load", onLoad);
       iframe.remove();
     },
     get element() {

@@ -81,6 +81,8 @@ export function createGuardWith(factories) {
     let disposed = false;
     let generation = 0;
     let runtime = null;
+    const initializingRuntimes = new Set();
+    let terminalReason = null;
     let runtimeGeneration = -1;
     let eventChain = Promise.resolve();
     let eventsPending = 0;
@@ -95,7 +97,13 @@ export function createGuardWith(factories) {
       manifest,
       onEvent: handleEvent,
       onStatus: ({ kind, detail }) => {
-        if (kind === "startup-warning") status("startup-warning", detail);
+        if (kind === "frame-reloaded") {
+          if (disposed || terminalReason) return;
+          terminalReason = { code: "frame-reloaded" };
+          generation = session.nextGeneration();
+          teardown();
+          status("frame-reloaded", terminalReason);
+        } else if (kind === "startup-warning") status("startup-warning", detail);
         else if (kind === "refused") status("frame-refused", { detail: bounded(String(detail)) });
       },
     });
@@ -113,6 +121,8 @@ export function createGuardWith(factories) {
     // with its own StartupError code (src/startup.js); nothing here ever
     // resolves a guard that could not render.
     function teardown() {
+      for (const rt of initializingRuntimes) { try { rt.dispose(); } catch { /* already gone */ } }
+      initializingRuntimes.clear();
       if (runtime) { try { runtime.dispose(); } catch { /* already gone */ } runtime = null; }
       try { session.dispose(); } catch { /* already gone */ }
       try { frame.destroy(); } catch { /* already gone */ }
@@ -146,6 +156,7 @@ export function createGuardWith(factories) {
     // acknowledged this exact request and generation.
     async function commitView(view, gen, label) {
       const result = await session.preprocess(view, { generation: gen });
+      if (terminalReason) return { status: "rejected", generation: gen, reason: terminalReason };
       if (disposed) return { status: "superseded", generation: gen, reason: { code: "disposed" } };
       if (gen !== generation || result.status === "superseded") return { status: "superseded", generation: gen };
       if (result.status === "rendered") {
@@ -231,6 +242,7 @@ export function createGuardWith(factories) {
        */
       async render(input) {
         if (disposed) throw new Error("guard: disposed");
+        if (terminalReason) return { status: "rejected", generation, reason: terminalReason };
         if (!input || typeof input !== "object") throw new TypeError("render: expected { html, program?, data? }");
         const { html, program, data } = input;
         const hasProgram = program !== undefined && program !== null;
@@ -240,11 +252,14 @@ export function createGuardWith(factories) {
         if (!hasProgram) return commitView(html, gen, "document");
 
         const rt = createRuntime({ onDead: (reason) => onRuntimeDead(gen, reason) });
+        initializingRuntimes.add(rt);
         let view;
         try {
           ({ view } = await rt.load(program, data));
         } catch (error) {
+          initializingRuntimes.delete(rt);
           try { rt.dispose(); } catch { /* already gone */ }
+          if (terminalReason) return { status: "rejected", generation: gen, reason: terminalReason };
           if (disposed || gen !== generation) return { status: "superseded", generation: gen };
           // Infrastructure (a refused Worker, a missing directive) is an
           // exception with a stage and a code; a program QuickJS refuses is a
@@ -254,6 +269,7 @@ export function createGuardWith(factories) {
           status("rejected", { generation: gen, label: "program", reason });
           return { status: "rejected", generation: gen, reason };
         }
+        initializingRuntimes.delete(rt);
         if (disposed || gen !== generation) {
           try { rt.dispose(); } catch { /* already gone */ }
           return { status: "superseded", generation: gen };
@@ -272,6 +288,7 @@ export function createGuardWith(factories) {
        */
       async clear() {
         if (disposed) throw new Error("guard: disposed");
+        if (terminalReason) return { status: "rejected", generation, reason: terminalReason };
         const gen = supersede();
         const result = await commitView("", gen, "clear");
         if (result.status === "rendered") status("cleared", { generation: gen });
