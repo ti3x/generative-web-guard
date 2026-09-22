@@ -11,16 +11,7 @@ DOMPurify, and how we respond to new exploits and CVEs.
 
 ## Data flow and boundary
 
-```text
-Generated HTML ───────────────────────────────┐
-                                                 ▼
-QuickJS Worker (generated JS, bounded) -> view string -> policy Worker
-                                                        bounded parse5 -> JS candidate proposal
-                                                        -> Lean/Wasm acceptCandidate
-                                                        -> exact accepted tree -> private port -> frame DOM constructors
-
-frame events -> host event-schema check -> QuickJS Worker update -> next view
-```
+![Generative Web Guard data flow and trust boundary](docs/assets/data-flow.svg)
 
 HTML preprocessing is bounded before parse5: source length, raw-node count and
 depth, attributes, bytes, names, text, and candidate bytes all have limits.
