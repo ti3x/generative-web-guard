@@ -9,6 +9,44 @@ QuickJS (WebAssembly) in a Web Worker with memory, stack and time limits.
 Read the [FAQ](docs/faq.md) for why we use Lean, how the scope differs from
 DOMPurify, and how we respond to new exploits and CVEs.
 
+## Data flow and boundary
+
+```text
+Generated HTML ───────────────────────────────┐
+                                                 ▼
+QuickJS Worker (generated JS, bounded) -> view string -> policy Worker
+                                                        bounded parse5 -> JS candidate proposal
+                                                        -> Lean/Wasm acceptCandidate
+                                                        -> exact accepted tree -> private port -> frame DOM constructors
+
+frame events -> host event-schema check -> QuickJS Worker update -> next view
+```
+
+HTML preprocessing is bounded before parse5: source length, raw-node count and
+depth, attributes, bytes, names, text, and candidate bytes all have limits.
+An over-limit document is refused; exhausting the request budget terminates the
+policy Worker, which is the only parser interruption mechanism.
+
+The JavaScript candidate is a proposal, never an authorization. Lean/Wasm
+accepts or refuses that exact canonical candidate without repairing it; only
+Lean's returned tree can cross the private Worker-to-frame port. There is no
+JavaScript acceptance fallback, no host tree/token commit API, and the frame
+does not reparse HTML. This is the Phase 6 production boundary; its
+fixed-point guarantee is proved for accepted candidates, not replayed at
+runtime. Parsing, codecs, C/Emscripten, trusted glue, QuickJS, rendering, and
+browser behavior remain outside those theorems.
+
+Generated JavaScript runs with QuickJS memory, stack, and time limits. It has
+no DOM, network, storage, timers, host objects, or module loader. The optional
+AST linter is authoring feedback only; the QuickJS boundary and Lean/Wasm
+markup acceptance enforce the runtime path.
+
+Phase 7 adds seeded session-model and policy/ABI fuzz smoke tests to the
+verification suite. It has also found an unresolved sustained-Wasm-memory-growth
+finding; the browser soak, browser round-trip/host matrix, hostile QuickJS
+campaign, and distribution mutation scan remain incomplete. See
+[Phase 7 results](docs/phase7-results.md) for evidence and current limits.
+
 ```
 npm install
 npm run setup:verification   # once: prepare Lean and Emscripten toolchain images
@@ -266,36 +304,9 @@ committed `cdn/` files, and uploads `dist/` plus `cdn/` for inspection. GitHub
 Actions artifacts are not served by jsDelivr; jsDelivr reads committed files
 from the referenced tag or commit.
 
-Before public distribution, add a project `LICENSE`. Bundled runtime
-dependencies are MIT-licensed, but the repository currently does not declare
-the license for Generative Web Guard itself.
-
-## Data flow
-
-```text
-HTML / QuickJS view -> policy Worker: parse5 -> JS proposal -> Lean acceptCandidate
-                                                        -> private port -> frame DOM
-QuickJS update <- host event schema check <- frame events
-```
-
-Preprocessing is bounded before the policy runs: the source length is checked
-before parse5 is invoked, and conversion is iterative under limits on raw node
-count, depth, attribute count and bytes, names, text, and candidate bytes.
-Exceeding a limit returns a structured rejection; exceeding the request budget
-terminates the policy Worker, which is the only way to interrupt the parser.
-
-There is no mandatory JavaScript AST denylist. QuickJS compiles the program
-under memory, stack and time limits and checks the synchronous
-`initialState`/`update`/`view` interface; the sandbox has no DOM, network,
-storage, timers, host objects or module loader, so computed access and built-in
-dynamic evaluation reach nothing (`test/confinement.test.js`). The optional
-linter is a development diagnostic, shipped separately.
-
-The rendering path never reparses HTML. The frame receives Lean's accepted tree
-only over its private Worker port; sequence and identity checks reject replay
-and foreign messages. The host wires the port but has no tree/token commit API.
-Optional diagnostic preview strings are not rendered. Renderer construction
-assertions remain, while repeated host/frame policy normalization is removed.
+**Licensing:** this repository currently declares no project `LICENSE`.
+Bundled runtime dependencies are MIT-licensed, but Generative Web Guard itself
+must not be treated as open-source licensed until the project adds one.
 
 ## Layout
 
