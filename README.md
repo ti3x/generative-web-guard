@@ -18,14 +18,18 @@ depth, attributes, bytes, names, text, and candidate bytes all have limits.
 An over-limit document is refused; exhausting the request budget terminates the
 policy Worker, which is the only parser interruption mechanism.
 
-The JavaScript candidate is a proposal, never an authorization. Lean/Wasm
-accepts or refuses that exact canonical candidate without repairing it; only
-Lean's returned tree can cross the private Worker-to-frame port. There is no
-JavaScript acceptance fallback, no host tree/token commit API, and the frame
-does not reparse HTML. This is the Phase 6 production boundary; its
-fixed-point guarantee is proved for accepted candidates, not replayed at
-runtime. Parsing, codecs, C/Emscripten, trusted glue, QuickJS, rendering, and
-browser behavior remain outside those theorems.
+The JavaScript candidate is a proposal, never an authorization. JavaScript is
+used for practical browser-facing work—bounded parsing and normalization—but
+this project does not claim a proof that this code is equivalent to the
+policy. Lean provides something different: a mechanically checked proof about
+the executable acceptance algorithm, including its fixed-point guarantee for
+accepted candidates. The compiled Lean/Wasm checker therefore accepts or
+refuses the exact canonical proposal without repairing it; only its returned
+tree can cross the private Worker-to-frame port. There is no JavaScript
+acceptance fallback, host tree/token commit API, or frame HTML reparse that
+could bypass that checked decision. This is the Phase 6 production boundary.
+Parsing, codecs, C/Emscripten, trusted glue, QuickJS, rendering, and browser
+behavior remain outside those theorems.
 
 Generated JavaScript runs with QuickJS memory, stack, and time limits. It has
 no DOM, network, storage, timers, host objects, or module loader. The optional
