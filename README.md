@@ -26,6 +26,36 @@ npm run lean:build           # Lean 4 checker image (Docker; nothing installed o
 npm run check:lean           # differential: Lean checker vs policy.js on corpus + random inputs
 ```
 
+## Check and filter HTML from the command line
+
+Build the Lean/Wasm checker once, then pass a file or standard input through
+the same candidate and Lean acceptance path used by the policy Worker. The
+command writes canonical markup from Lean's accepted tree, so it is convenient
+to redirect into a new file:
+
+```sh
+npm run wasm:build
+npm run guard:html -- untrusted-page.html > filtered-page.html
+printf '<h1>Hello</h1><script>alert(1)</script>' | npm run guard:html -- - > filtered.html
+```
+
+For a directory, process every `.html` and `.htm` file recursively and retain
+its relative path beneath a separate output directory:
+
+```sh
+npm run guard:html -- untrusted-pages --out-dir filtered-pages
+```
+
+The command exits nonzero and writes a structured refusal to stderr when a
+document exceeds a preprocessing limit or Lean does not accept the candidate.
+It never falls back to JavaScript acceptance.
+
+`<script>` elements inside an HTML input are removed by the markup policy.
+Separate generated JavaScript files are not rewritten into "safe JavaScript":
+they must run as programs in the QuickJS Worker, and each HTML view they
+produce is then accepted or refused by Lean/Wasm. The CLI filters HTML views;
+it does not execute or emit transformed JavaScript source.
+
 The browser check runs Chromium, Firefox and WebKit and **pins** the exact
 Playwright builds it tests against: Chromium `140.0.7339.186`
 (`chromium-1193`), Firefox `141.0` (`firefox-1490`), WebKit `26.0`

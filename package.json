@@ -22,6 +22,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "check:cdn": "node scripts/check-cdn.mjs",
+    "guard:html": "node scripts/guard-html.mjs",
     "security:scout": "node scripts/security-scout.mjs",
     "test": "node scripts/verify.mjs",
     "test:js": "node scripts/verify.mjs --js-only",
