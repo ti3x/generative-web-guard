@@ -3,7 +3,7 @@
 import { pathToFileURL } from "node:url";
 
 const HTML_SVG_RE = /html sanit|sanitizer|mutation xss|\bmxss\b|dom clobber|mathml|svg|srcdoc|html parser|parser differential|trusted types|content security policy/i;
-const JS_RUNTIME_RE = /quickjs|javascript sandbox|ecmascript sandbox|javascript parser|ast parser|dynamic(?: |-)code|code injection|dom[- ]based xss|prototype pollution/i;
+const JS_RUNTIME_RE = /quickjs|javascript sandbox|ecmascript sandbox|javascript parser|ast parser|dom[- ]based xss/i;
 const XSS_RE = /cross[- ]site scripting|\bxss\b|script injection/i;
 const DOS_RE = /denial of service|\bdos\b|resource exhaustion|stack overflow|deep(?:ly)? nested/i;
 const PACKAGE_RE = /dompurify|sanitize-html|html-sanitizer|rails-html-sanitizer|loofah|bleach|js-xss|htmlparser|parse5|rehype-sanitize|hast-util-sanitize|quickjs|quickjs-emscripten|acorn|esbuild/i;
@@ -18,10 +18,18 @@ export function rankAdvisory(advisory) {
   const text = advisoryText(advisory);
   const packages = (advisory.vulnerabilities ?? []).map((v) => v.package?.name ?? "").join(" ");
   const cwes = new Set(advisory.cwe_ids ?? advisory.cwes?.map((c) => c.cwe_id) ?? []);
+  // CWE-20/CWE-400 and words such as "resource" occur in a vast range of
+  // unrelated software. They can refine a candidate already connected to this
+  // guard's HTML/SVG or JavaScript boundary; they never create one by
+  // themselves.
+  const directHtmlSvg = HTML_SVG_RE.test(text);
+  const directJsRuntime = JS_RUNTIME_RE.test(text);
+  const relevantPackage = PACKAGE_RE.test(packages);
+  if (!directHtmlSvg && !directJsRuntime && !relevantPackage) return 0;
   let score = 0;
-  if (HTML_SVG_RE.test(text)) score += 5;
-  if (JS_RUNTIME_RE.test(text)) score += 5;
-  if (PACKAGE_RE.test(packages)) score += 5;
+  if (directHtmlSvg) score += 5;
+  if (directJsRuntime) score += 5;
+  if (relevantPackage) score += 5;
   if (XSS_RE.test(text)) score += 2;
   if (DOS_RE.test(text)) score += 2;
   if ([...cwes].some((cwe) => RELEVANT_CWES.has(cwe))) score += 1;

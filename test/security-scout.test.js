@@ -33,6 +33,12 @@ test("security scout ranks HTML, JavaScript, and SVG security advisories but ign
     cwe_ids: ["CWE-682"],
     vulnerabilities: [{ package: { ecosystem: "npm", name: "crypto-example" } }],
   })), 0);
+  assert.equal(rankAdvisory(advisory({
+    summary: "GPU decode bypasses static VRAM reservation",
+    description: "A request-selected decoder causes resource exhaustion.",
+    cwe_ids: ["CWE-400"],
+    vulnerabilities: [{ package: { ecosystem: "pip", name: "vllm" } }],
+  })), 0);
 });
 
 test("security scout report bounds and escapes untrusted advisory summaries", () => {
